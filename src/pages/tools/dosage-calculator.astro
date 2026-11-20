@@ -489,9 +489,22 @@ const faqs = [
         outProtocol.textContent = cfg.protocol;
       }
 
+      var gtmTimer = null;
+      function trackDosage() {
+        clearTimeout(gtmTimer);
+        gtmTimer = setTimeout(function () {
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: 'humic_tool_interaction',
+            tool_name: 'dosage_calculator',
+            action_detail: elProduct.value + ':' + elMethod.value + ':' + elUnit.value + ':' + elSoil.value,
+          });
+        }, 450);
+      }
+
       [elProduct, elMethod, elArea, elUnit, elSoil, elSeedRate].forEach(function (el) {
-        el.addEventListener('input', update);
-        el.addEventListener('change', update);
+        el.addEventListener('input', function () { update(); trackDosage(); });
+        el.addEventListener('change', function () { update(); trackDosage(); });
       });
 
       update();

@@ -8,6 +8,7 @@ export interface Props {
   canonicalAnswer: string;
   canonicalPath: string;
   englishAlternateUrl: string;
+  gujaratiAlternateUrl?: string;
   categoryLabel: string;
   pubDate: Date;
   updatedDate?: Date;
@@ -23,6 +24,7 @@ const {
   canonicalAnswer,
   canonicalPath,
   englishAlternateUrl,
+  gujaratiAlternateUrl,
   categoryLabel,
   pubDate,
   updatedDate,
@@ -50,6 +52,7 @@ const breadcrumbs = [
   alternateUrls={{
     en: englishAlternateUrl,
     hi: fullUrl,
+    ...(gujaratiAlternateUrl ? { gu: gujaratiAlternateUrl } : {}),
     xDefault: englishAlternateUrl,
   }}
   schemaType="article"

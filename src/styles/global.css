@@ -107,3 +107,22 @@
   border-radius: 0 0.5rem 0.5rem 0;
   font-style: normal;
 }
+
+/* RTL (Arabic) prose & table alignment polish */
+[dir="rtl"] .prose thead th,
+[dir="rtl"] .prose tbody td {
+  text-align: right;
+}
+
+[dir="rtl"] .prose blockquote {
+  border-left-width: 0;
+  border-right-width: 4px;
+  border-right-color: #f59e0b;
+  border-radius: 0.5rem 0 0 0.5rem;
+}
+
+[dir="rtl"] .prose ul,
+[dir="rtl"] .prose ol {
+  padding-left: 0;
+  padding-right: 1.5rem;
+}

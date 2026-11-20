@@ -419,9 +419,21 @@ const faqs = [
           .join('');
       }
 
+      var gtmTimer = null;
+      function trackCoa() {
+        clearTimeout(gtmTimer);
+        gtmTimer = setTimeout(function () {
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: 'humic_tool_interaction',
+            tool_name: 'coa_verifier',
+            action_detail: elMethod.value + '->' + pill.textContent,
+          });
+        }, 450);
+      }
       [elHa, elMethod, elSulfur, elSodium, elWim].forEach(function (el) {
-        el.addEventListener('input', evaluate);
-        el.addEventListener('change', evaluate);
+        el.addEventListener('input', function () { evaluate(); trackCoa(); });
+        el.addEventListener('change', function () { evaluate(); trackCoa(); });
       });
 
       document.querySelectorAll('.coa-sample-btn').forEach(function (btn) {

@@ -40,12 +40,27 @@ const {
 } = Astro.props;
 
 const canonicalPath = `/${slug}`;
-const PAIRED_HI: Record<string, string> = {
-  'agronomy/complete-application-and-tank-mix-guide': 'https://humic.blog/hi/humic-acid-kya-hai-aur-upyog',
-  'quality-and-testing/farm-level-adulteration-field-test': 'https://humic.blog/hi/asli-nakli-potassium-humate-ki-pehchan',
-  'crops/humic-acid-for-sugarcane': 'https://humic.blog/hi/ganne-ki-kheti-mein-humic-acid',
+const PAIRED_ALTS: Record<string, { hi?: string; gu?: string; ar?: string }> = {
+  'agronomy/complete-application-and-tank-mix-guide': {
+    hi: 'https://humic.blog/hi/humic-acid-kya-hai-aur-upyog',
+    gu: 'https://humic.blog/gu/humic-acid-shu-che-ane-upyog',
+  },
+  'quality-and-testing/farm-level-adulteration-field-test': {
+    hi: 'https://humic.blog/hi/asli-nakli-potassium-humate-ki-pehchan',
+    gu: 'https://humic.blog/gu/asli-nakli-potassium-humate-olakh',
+  },
+  'crops/humic-acid-for-sugarcane': {
+    hi: 'https://humic.blog/hi/ganne-ki-kheti-mein-humic-acid',
+    gu: 'https://humic.blog/gu/sherdi-ni-kheti-ma-humic-acid',
+  },
+  'problem-soils/calcareous-and-high-ph-soils': {
+    ar: 'https://humic.blog/ar/humic-acid-saline-calcareous-soils',
+  },
+  'raw-materials/raw-materials-and-extraction': {
+    ar: 'https://humic.blog/ar/potassium-humate-vs-sodium-humate-guide',
+  },
 };
-const hiAlt = PAIRED_HI[slug];
+const alts = PAIRED_ALTS[slug];
 const siteUrl = 'https://humic.blog';
 const pillarDef = PILLAR_BY_NAME[pillar];
 const pillarPath = `/${pillarDef.slug}`;
@@ -72,7 +87,7 @@ const formatDate = (date: Date) =>
   description={description}
   canonicalPath={canonicalPath}
   lang="en"
-  alternateUrls={hiAlt ? { en: `${siteUrl}${canonicalPath}`, hi: hiAlt, xDefault: `${siteUrl}${canonicalPath}` } : undefined}
+  alternateUrls={alts ? { en: `${siteUrl}${canonicalPath}`, ...alts, xDefault: `${siteUrl}${canonicalPath}` } : undefined}
   ogImage={`${siteUrl}/og/${slug}.svg`}
   schemaType="article"
   pillar={pillar}
@@ -308,7 +323,7 @@ const formatDate = (date: Date) =>
             <a href="/tools/coa-verifier" class="block rounded-lg bg-emerald-900 hover:bg-emerald-800 px-3.5 py-2 text-xs font-semibold text-white border border-emerald-800 transition-colors">
               COA Red-Flag Checker &rarr;
             </a>
-            <a href="/tools/formulation-ph-estimator" class="block rounded-lg bg-emerald-900 hover:bg-emerald-800 px-3.5 py-2 text-xs font-semibold text-white border border-emerald-800 transition-colors">
+            <a href="/tools/blend-ph-estimator" class="block rounded-lg bg-emerald-900 hover:bg-emerald-800 px-3.5 py-2 text-xs font-semibold text-white border border-emerald-800 transition-colors">
               Blend pH Estimator (B2B) &rarr;
             </a>
             <a href="/glossary" class="block rounded-lg bg-amber-500 hover:bg-amber-400 px-3.5 py-2 text-xs font-bold text-emerald-950 transition-colors">

@@ -12,8 +12,8 @@ export interface Props {
   description: string;
   canonicalPath?: string;
   noindex?: boolean;
-  lang?: 'en' | 'hi';
-  alternateUrls?: { en?: string; hi?: string; xDefault?: string };
+  lang?: 'en' | 'hi' | 'gu' | 'ar';
+  alternateUrls?: { en?: string; hi?: string; gu?: string; ar?: string; xDefault?: string };
   ogImage?: string;
   schemaType?: 'website' | 'article' | 'tool' | 'glossary' | 'collection' | 'about';
   pillar?: string;
@@ -52,6 +52,8 @@ const canonicalUrl = normalizedPath ? `${siteOrigin}${normalizedPath}` : siteOri
 const fullTitle = title.includes('Humic.blog') ? title : `${title} | Humic.blog`;
 const resolvedOgImage = ogImage ?? `${siteOrigin}/og-default.svg`;
 
+const dir = lang === 'ar' ? 'rtl' : 'ltr';
+
 const navLinks =
   lang === 'hi'
     ? [
@@ -61,15 +63,30 @@ const navLinks =
         { href: '/hi/ganne-ki-kheti-mein-humic-acid', label: 'गन्ना गाइड' },
         { href: '/tools/dosage-calculator', label: 'कैलकुलेटर' },
       ]
-    : [
-        { href: '/#encyclopedia', label: 'Pillars' },
-        { href: '/crops', label: 'Crops' },
-        { href: '/manufacturing', label: 'B2B' },
-        { href: '/tools/dosage-calculator', label: 'Tools' },
-        { href: '/research-library', label: 'Research' },
-        { href: '/glossary', label: 'Glossary' },
-        { href: '/about', label: 'About' },
-      ];
+    : lang === 'gu'
+      ? [
+          { href: '/gu', label: 'ગુજરાતી હબ' },
+          { href: '/gu/humic-acid-shu-che-ane-upyog', label: 'ઉપયોગ અને પ્રમાણ' },
+          { href: '/gu/asli-nakli-potassium-humate-olakh', label: '3-મિનિટ ટેસ્ટ' },
+          { href: '/gu/sherdi-ni-kheti-ma-humic-acid', label: 'શેરડી ગાઇડ' },
+          { href: '/tools/dosage-calculator', label: 'કેલ્ક્યુલેટર' },
+        ]
+      : lang === 'ar'
+        ? [
+            { href: '/ar', label: 'المركز العربي' },
+            { href: '/ar/humic-acid-saline-calcareous-soils', label: 'التربة المالحة والجيرية' },
+            { href: '/ar/potassium-humate-vs-sodium-humate-guide', label: 'هيومات البوتاسيوم والصوديوم' },
+            { href: '/tools/coa-verifier', label: 'فحص COA' },
+          ]
+        : [
+            { href: '/#encyclopedia', label: 'Pillars' },
+            { href: '/crops', label: 'Crops' },
+            { href: '/manufacturing', label: 'B2B' },
+            { href: '/tools/blend-ph-estimator', label: 'Tools' },
+            { href: '/research-library', label: 'Research' },
+            { href: '/glossary', label: 'Glossary' },
+            { href: '/about', label: 'About' },
+          ];
 
 const enSwitchHref = alternateUrls?.en
   ? alternateUrls.en.replace(siteOrigin, '') || '/'
@@ -77,10 +94,16 @@ const enSwitchHref = alternateUrls?.en
 const hiSwitchHref = alternateUrls?.hi
   ? alternateUrls.hi.replace(siteOrigin, '') || '/hi'
   : '/hi';
+const guSwitchHref = alternateUrls?.gu
+  ? alternateUrls.gu.replace(siteOrigin, '') || '/gu'
+  : '/gu';
+const arSwitchHref = alternateUrls?.ar
+  ? alternateUrls.ar.replace(siteOrigin, '') || '/ar'
+  : '/ar';
 ---
 
 <!doctype html>
-<html lang={lang}>
+<html lang={lang} dir={dir}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -101,6 +124,8 @@ const hiSwitchHref = alternateUrls?.hi
     <link rel="canonical" href={canonicalUrl} />
     {alternateUrls?.en && <link rel="alternate" hreflang="en" href={alternateUrls.en} />}
     {alternateUrls?.hi && <link rel="alternate" hreflang="hi" href={alternateUrls.hi} />}
+    {alternateUrls?.gu && <link rel="alternate" hreflang="gu" href={alternateUrls.gu} />}
+    {alternateUrls?.ar && <link rel="alternate" hreflang="ar" href={alternateUrls.ar} />}
     {(alternateUrls?.xDefault || alternateUrls?.en) && (
       <link rel="alternate" hreflang="x-default" href={alternateUrls?.xDefault ?? alternateUrls?.en} />
     )}
@@ -190,26 +215,10 @@ const hiSwitchHref = alternateUrls?.hi
           <!-- Language Toggle + Search Trigger + Mobile Toggle -->
           <div class="flex items-center gap-2">
             <div class="inline-flex items-center rounded-lg bg-emerald-900/90 border border-emerald-700/80 p-0.5 text-[11px] font-bold" aria-label="Language switcher">
-              <a
-                href={enSwitchHref}
-                hreflang="en"
-                class:list={[
-                  'rounded-md px-2 py-1 transition-colors',
-                  lang === 'en' ? 'bg-amber-500 text-emerald-950' : 'text-emerald-200 hover:text-white',
-                ]}
-              >
-                EN
-              </a>
-              <a
-                href={hiSwitchHref}
-                hreflang="hi"
-                class:list={[
-                  'rounded-md px-2 py-1 transition-colors',
-                  lang === 'hi' ? 'bg-amber-500 text-emerald-950' : 'text-emerald-200 hover:text-white',
-                ]}
-              >
-                हिन्दी
-              </a>
+              <a href={enSwitchHref} hreflang="en" class:list={['rounded-md px-1.5 sm:px-2 py-1 transition-colors', lang === 'en' ? 'bg-amber-500 text-emerald-950' : 'text-emerald-200 hover:text-white']}>EN</a>
+              <a href={hiSwitchHref} hreflang="hi" class:list={['rounded-md px-1.5 sm:px-2 py-1 transition-colors', lang === 'hi' ? 'bg-amber-500 text-emerald-950' : 'text-emerald-200 hover:text-white']}>हिन्दी</a>
+              <a href={guSwitchHref} hreflang="gu" class:list={['hidden sm:inline-block rounded-md px-1.5 sm:px-2 py-1 transition-colors', lang === 'gu' ? 'bg-amber-500 text-emerald-950' : 'text-emerald-200 hover:text-white']}>ગુજરાતી</a>
+              <a href={arSwitchHref} hreflang="ar" class:list={['hidden sm:inline-block rounded-md px-1.5 sm:px-2 py-1 transition-colors', lang === 'ar' ? 'bg-amber-500 text-emerald-950' : 'text-emerald-200 hover:text-white']}>العربية</a>
             </div>
             <button
               id="open-search-btn"
@@ -257,7 +266,10 @@ const hiSwitchHref = alternateUrls?.hi
         <a href="/tools/formulation-ph-estimator" class="block rounded-lg px-3 py-2 text-sm font-medium text-emerald-100 hover:bg-emerald-900 hover:text-amber-400">Blend pH Estimator</a>
         <a href="/research-library" class="block rounded-lg px-3 py-2 text-sm font-medium text-emerald-100 hover:bg-emerald-900 hover:text-amber-400">Research Library</a>
         <a href="/glossary" class="block rounded-lg px-3 py-2 text-sm font-medium text-emerald-100 hover:bg-emerald-900 hover:text-amber-400">A–Z Glossary</a>
+        <a href="/tools/blend-ph-estimator" class="block rounded-lg px-3 py-2 text-sm font-medium text-emerald-100 hover:bg-emerald-900 hover:text-amber-400">Blend pH Estimator (B2B)</a>
         <a href="/hi" class="block rounded-lg px-3 py-2 text-sm font-semibold text-amber-300 hover:bg-emerald-900">हिन्दी किसान हब (/hi)</a>
+        <a href="/gu" class="block rounded-lg px-3 py-2 text-sm font-semibold text-amber-300 hover:bg-emerald-900">ગુજરાતી ખેડૂત હબ (/gu)</a>
+        <a href="/ar" class="block rounded-lg px-3 py-2 text-sm font-semibold text-amber-300 hover:bg-emerald-900">المركز العربي للزراعة (/ar)</a>
         <a href="/about" class="block rounded-lg px-3 py-2 text-sm font-medium text-emerald-100 hover:bg-emerald-900 hover:text-amber-400">About &amp; Editorial Policy</a>
       </nav>
     </header>
@@ -348,10 +360,13 @@ const hiSwitchHref = alternateUrls?.hi
               <li><a href="/tools/tank-mix-checker" class="hover:text-amber-400 transition-colors">Tank-Mix Compatibility Checker</a></li>
               <li><a href="/tools/coa-verifier" class="hover:text-amber-400 transition-colors">Humic COA Verifier</a></li>
               <li><a href="/tools/coa-red-flag-checker" class="hover:text-amber-400 transition-colors">Full ICP-OES COA Auditor</a></li>
-              <li><a href="/tools/formulation-ph-estimator" class="hover:text-amber-400 transition-colors">Manufacturer Blend pH Estimator</a></li>
+              <li><a href="/tools/blend-ph-estimator" class="hover:text-amber-400 transition-colors">Blend pH &amp; Stability Estimator</a></li>
+              <li><a href="/tools/formulation-ph-estimator" class="hover:text-amber-400 transition-colors">Multi-Formula pH Simulator</a></li>
               <li><a href="/research-library" class="hover:text-amber-400 transition-colors">Peer-Reviewed Research Library</a></li>
               <li><a href="/glossary" class="hover:text-amber-400 transition-colors">A–Z Humic Science Glossary</a></li>
-              <li><a href="/hi" class="hover:text-amber-400 transition-colors">हिन्दी किसान ज्ञान केंद्र (/hi)</a></li>
+              <li><a href="/hi" class="hover:text-amber-400 transition-colors">हिन्दी किसान केंद्र (/hi)</a></li>
+              <li><a href="/gu" class="hover:text-amber-400 transition-colors">ગુજરાતી ખેડૂત કેન્દ્ર (/gu)</a></li>
+              <li><a href="/ar" class="hover:text-amber-400 transition-colors">المركز العربي (/ar)</a></li>
               <li><a href="/search" class="hover:text-amber-400 transition-colors">Full-Text Search (Pagefind)</a></li>
             </ul>
           </div>

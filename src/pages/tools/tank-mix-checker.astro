@@ -460,8 +460,18 @@ const faqs = [
         });
       });
 
-      elPartner.addEventListener('change', render);
-      elWater.addEventListener('change', render);
+      function trackMix() {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: 'humic_tool_interaction',
+          tool_name: 'tank_mix_checker',
+          action_detail: activeBase + '+' + elPartner.value + ':' + elWater.value + '->' + elPill.textContent,
+        });
+      }
+      baseBtns.forEach(function (b) { b.addEventListener('click', trackMix); });
+      quickBtns.forEach(function (b) { b.addEventListener('click', trackMix); });
+      elPartner.addEventListener('change', function () { render(); trackMix(); });
+      elWater.addEventListener('change', function () { render(); trackMix(); });
 
       render();
     })();

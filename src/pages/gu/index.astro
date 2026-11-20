@@ -1,0 +1,119 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const siteUrl = 'https://humic.blog';
+const breadcrumbs = [
+  { name: 'Home', url: siteUrl },
+  { name: 'ગુજરાતી ખેડૂત જ્ઞાન કેન્દ્ર', url: `${siteUrl}/gu` },
+];
+
+const guides = [
+  {
+    href: '/gu/humic-acid-shu-che-ane-upyog',
+    badge: 'પાયાની કૃષિ માર્ગદર્શિકા',
+    title: 'હ્યુમિક એસિડ શું છે? ખેતીમાં સાચો ઉપયોગ, પ્રમાણ અને સાવચેતી',
+    summary:
+      'જમીનની ફળદ્રુપતા, સફેદ મૂળનો વિકાસ અને ખાતરની કાર્યક્ષમતા વધારવા માટે ડ્રિપ, જમીન, છંટકાવ અને બીજ માવજતનું ચોક્કસ પ્રમાણ તથા કેલ્શિયમ નાઇટ્રેટ અને એસિડ સાથે ભેળવવાની સાવચેતી.',
+  },
+  {
+    href: '/gu/asli-nakli-potassium-humate-olakh',
+    badge: 'ગુણવત્તા અને ભેળસેળ તપાસ',
+    title: 'અસલી અને નકલી પોટેશિયમ હ્યુમેટની ઓળખ: ખેતર પર 3 મિનિટનો સરળ ટેસ્ટ',
+    summary:
+      'લેબોરેટરી વગર માત્ર ચોખ્ખા પાણી, સફેદ વિનેગર (કે લીંબુ) અને ગંધ-ફીણ તપાસથી કોલસાનો ભૂકો, સોડિયમ હ્યુમેટ અને સોડિયમ લિગ્નોસલ્ફોનેટની ભેળસેળ તરત ઓળખો.',
+  },
+  {
+    href: '/gu/sherdi-ni-kheti-ma-humic-acid',
+    badge: 'પાક વિશેષ ગાઇડ • શેરડી',
+    title: 'શેરડીની ખેતીમાં હ્યુમિક એસિડ: મૂળનો વિકાસ, ફૂટ અને શેરડીના સાંઠાની જાડાઈ',
+    summary:
+      'દક્ષિણ ગુજરાત અને સૌરાષ્ટ્રના શેરડી પકવતા ખેડૂતો માટે રોપણીથી લઈને 20–30 દિવસના છંટકાવ, ફૂટ, સાંઠાની જાડાઈ અને લામ (Ratoon) વ્યવસ્થાપનનું સંપૂર્ણ વૈજ્ઞાનિક સમયપત્રક.',
+  },
+];
+---
+
+<BaseLayout
+  title="ગુજરાતી ખેડૂત જ્ઞાન કેન્દ્ર — હ્યુમિક એસિડ અને જમીન વિજ્ઞાન | Humic.blog"
+  description="ગુજરાતના ખેડૂતો અને કૃષિ નિષ્ણાતો માટે નિષ્પક્ષ વૈજ્ઞાનિક માર્ગદર્શિકા: હ્યુમિક એસિડનું પ્રમાણ, ખેતર પર 3 મિનિટનો શુદ્ધતા ટેસ્ટ, ટેંક-મિક્સ નિયમો અને શેરડીની ખેતીનું સંપૂર્ણ સમયપત્રક."
+  canonicalPath="/gu"
+  lang="gu"
+  alternateUrls={{
+    en: 'https://humic.blog',
+    hi: 'https://humic.blog/hi',
+    gu: 'https://humic.blog/gu',
+    ar: 'https://humic.blog/ar',
+    xDefault: 'https://humic.blog',
+  }}
+  schemaType="collection"
+  breadcrumbs={breadcrumbs}
+>
+  <section class="bg-emerald-950 text-white border-b-4 border-amber-500">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+      <div class="inline-flex items-center gap-2 rounded-full bg-emerald-900 border border-emerald-700 px-3.5 py-1 text-xs font-semibold text-amber-400 mb-5">
+        <span class="h-2 w-2 rounded-full bg-amber-400" aria-hidden="true"></span>
+        નિષ્પક્ષ કૃષિ વિજ્ઞાન &bull; કોઈ કંપની પ્રચાર વગર &bull; ISO 19822 આધારિત
+      </div>
+      <h1 class="font-serif text-3xl sm:text-5xl font-bold text-white leading-tight max-w-4xl">
+        હ્યુમિક એસિડ <span class="text-amber-400">ગુજરાતી ખેડૂત જ્ઞાન કેન્દ્ર</span>
+      </h1>
+      <p class="mt-4 text-base sm:text-lg text-emerald-100/90 leading-relaxed max-w-3xl">
+        જમીન સુધારણા, યુરિયા અને ડીએપી ખાતરની કાર્યક્ષમતા, ખેતર પર અસલી-નકલી પોટેશિયમ હ્યુમેટની ઓળખ અને પાક મુજબનું ચોક્કસ પ્રમાણ—સરળ અને વ્યાવહારિક ગુજરાતી ભાષામાં.
+      </p>
+      <div class="mt-7 flex flex-wrap gap-3">
+        <a href="/gu/humic-acid-shu-che-ane-upyog" class="rounded-xl bg-amber-500 hover:bg-amber-400 px-5 py-3 text-sm font-bold text-emerald-950 transition-colors">
+          સાચો ઉપયોગ અને પ્રમાણ વાંચો &rarr;
+        </a>
+        <a href="/gu/asli-nakli-potassium-humate-olakh" class="rounded-xl bg-emerald-900 hover:bg-emerald-800 border border-emerald-700 px-5 py-3 text-sm font-semibold text-white transition-colors">
+          3-મિનિટ શુદ્ધતા ટેસ્ટ
+        </a>
+        <a href="/gu/sherdi-ni-kheti-ma-humic-acid" class="rounded-xl bg-transparent hover:bg-emerald-900/60 border border-emerald-600 px-5 py-3 text-sm font-semibold text-emerald-100 transition-colors">
+          શેરડીની ખેતી ગાઇડ
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div data-pagefind-body class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-10 space-y-10">
+    <section class="space-y-5">
+      <div>
+        <span class="text-xs font-bold uppercase tracking-wider text-amber-600">મુખ્ય ખેડૂત માર્ગદર્શિકાઓ</span>
+        <h2 class="font-serif text-2xl sm:text-3xl font-bold text-emerald-950 mt-1">
+          વ્યાવહારિક ગુજરાતી કૃષિ ગાઇડ
+        </h2>
+      </div>
+      <div class="grid grid-cols-1 gap-5">
+        {guides.map((g) => (
+          <article class="rounded-2xl bg-white border border-slate-200 hover:border-amber-500 p-6 sm:p-7 shadow-xs transition-colors">
+            <span class="inline-flex items-center rounded-full bg-emerald-950/5 border border-emerald-900/15 px-3 py-0.5 text-xs font-semibold text-emerald-900 mb-2.5">
+              {g.badge}
+            </span>
+            <h3 class="font-serif text-xl sm:text-2xl font-bold text-emerald-950 leading-snug">
+              <a href={g.href} class="hover:text-emerald-700 underline decoration-transparent hover:decoration-amber-500 underline-offset-4">
+                {g.title}
+              </a>
+            </h3>
+            <p class="mt-2.5 text-sm sm:text-base text-slate-700 leading-relaxed">{g.summary}</p>
+            <div class="mt-4">
+              <a href={g.href} class="inline-flex items-center gap-1.5 rounded-lg bg-emerald-900 hover:bg-emerald-950 px-4 py-2 text-xs font-bold text-white transition-colors">
+                સંપૂર્ણ ગાઇડ વાંચો &rarr;
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="rounded-2xl bg-emerald-950 text-white p-6 sm:p-8 space-y-4">
+      <div class="text-xs font-bold uppercase tracking-wider text-amber-400">મફત કૃષિ કેલ્ક્યુલેટર અને તપાસ ટૂલ</div>
+      <h2 class="font-serif text-2xl font-bold text-white m-0">ખાતર કે દવા ભેળવતા પહેલા તરત ચકાસો</h2>
+      <p class="text-sm text-emerald-100/90 leading-relaxed max-w-2xl">
+        અમારા કેલ્ક્યુલેટર વડે એકર/હેક્ટર મુજબનું ચોક્કસ પ્રમાણ જાણો, કેલ્શિયમ નાઇટ્રેટ અને એસિડ સાથે ટેંક-મિક્સ સુરક્ષા તપાસો અને સપ્લાયરની COA લેબ રિપોર્ટ ચકાસો.
+      </p>
+      <div class="flex flex-wrap gap-2.5 pt-1">
+        <a href="/tools/dosage-calculator" class="rounded-lg bg-amber-500 hover:bg-amber-400 px-4 py-2.5 text-xs font-bold text-emerald-950">માત્રા કેલ્ક્યુલેટર &rarr;</a>
+        <a href="/tools/tank-mix-checker" class="rounded-lg bg-emerald-900 hover:bg-emerald-800 border border-emerald-700 px-4 py-2.5 text-xs font-semibold text-white">ટેંક-મિક્સ તપાસ &rarr;</a>
+        <a href="/tools/coa-verifier" class="rounded-lg bg-emerald-900 hover:bg-emerald-800 border border-emerald-700 px-4 py-2.5 text-xs font-semibold text-white">COA શુદ્ધતા તપાસ &rarr;</a>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

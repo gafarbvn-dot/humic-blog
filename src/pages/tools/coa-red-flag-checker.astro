@@ -340,9 +340,21 @@ const faqs = [
           .join('');
       }
 
+      var gtmTimer = null;
+      function trackCoaExt() {
+        clearTimeout(gtmTimer);
+        gtmTimer = setTimeout(function () {
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: 'humic_tool_interaction',
+            tool_name: 'coa_red_flag_checker',
+            action_detail: els['coa-method'].value + ':score=' + scoreEl.textContent,
+          });
+        }, 450);
+      }
       Object.values(els).forEach((el) => {
-        el.addEventListener('input', audit);
-        el.addEventListener('change', audit);
+        el.addEventListener('input', function () { audit(); trackCoaExt(); });
+        el.addEventListener('change', function () { audit(); trackCoaExt(); });
       });
 
       document.querySelectorAll('.preset-btn').forEach((btn) => {

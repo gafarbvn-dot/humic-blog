@@ -365,9 +365,21 @@ const faqs = [
           .join('');
       }
 
+      var gtmTimer = null;
+      function trackForm() {
+        clearTimeout(gtmTimer);
+        gtmTimer = setTimeout(function () {
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: 'humic_tool_interaction',
+            tool_name: 'formulation_ph_estimator',
+            action_detail: elHumic.value + '+' + elMicro.value + ':pH' + phOut.textContent + '->' + pill.textContent,
+          });
+        }, 450);
+      }
       [elHumic, elHumicPct, elSeaweed, elSeaweedPct, elAmino, elAminoPct, elMicro, elPres].forEach((el) => {
-        el.addEventListener('input', estimate);
-        el.addEventListener('change', estimate);
+        el.addEventListener('input', function () { estimate(); trackForm(); });
+        el.addEventListener('change', function () { estimate(); trackForm(); });
       });
 
       estimate();

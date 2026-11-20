@@ -29,7 +29,8 @@ export const GET: APIRoute = async () => {
     `- [Potassium Humate Tank-Mix Compatibility Checker](${site}/tools/tank-mix-checker): Instant Green/Amber/Red compatibility screening for mixing Potassium Humate or Fulvic Acid with Calcium Nitrate, Low-pH Acids, Urea/NPK, Seaweed Extract, L-Amino Acids, and Magnesium Sulfate.`,
     `- [Humic COA Red-Flag Checker & Verifier](${site}/tools/coa-verifier): Instant COA diagnostic checker flagging sulfur >0.75% (sodium lignosulfonate), sodium >1.5% (NaOH substitution), colorimetric inflation >85%, and water insolubles >2%.`,
     `- [Extended ICP-OES & Heavy-Metal COA Auditor](${site}/tools/coa-red-flag-checker): Instant Certificate of Analysis auditor flagging sodium lignosulfonate sulfur (>0.75% S), NaOH sodium spikes, colorimetric assay inflation, ash bias, and EU FPR heavy-metal breaches.`,
-    `- [Manufacturer Blend pH & Compatibility Estimator](${site}/tools/formulation-ph-estimator): B2B liquid concentrate simulator estimating blended pH, precipitation/gelation risk, bottle-swelling microbial gas risk, and Humate-to-Fulvate switch thresholds.`,
+    `- [Manufacturer Blend pH & Stability Estimator](${site}/tools/blend-ph-estimator): Interactive B2B liquid formulation stability tool modeling humic source, partner biostimulant, target pH slider (3.0–10.0), and water hardness.`,
+    `- [Multi-Component Liquid Formula Simulator](${site}/tools/formulation-ph-estimator): B2B liquid concentrate simulator estimating blended pH, precipitation/gelation risk, bottle-swelling microbial gas risk, and Humate-to-Fulvate switch thresholds.`,
     `- [Instant Static Search (Pagefind)](${site}/search): Full-text static search across all guides, crop schedules, tools, and glossary definitions.`,
     `- [Peer-Reviewed Humic Research Library](${site}/research-library): Curated, filterable index of 18 landmark peer-reviewed papers and international analytical/regulatory standards (Achard 1786 to ISO 19822 & EU FPR 2019/1009).`,
     `- [A–Z Humic Science Glossary](${site}/glossary): 18 standardized IHSS and ISO 19822 definitions encoded in DefinedTermSet JSON-LD.`,
@@ -66,6 +67,17 @@ export const GET: APIRoute = async () => {
     `- [ह्यूमिक एसिड क्या है? खेती में सही उपयोग, मात्रा और सावधानियां](${site}/hi/humic-acid-kya-hai-aur-upyog): Complete Hindi guide to humic acid soil conditioning, drip/soil/foliar dosage, and Calcium Nitrate / acid tank-mix precautions.`,
     `- [असली और नकली पोटैशियम ह्यूमेट की पहचान: खेत पर 3 मिनट का आसान टेस्ट](${site}/hi/asli-nakli-potassium-humate-ki-pehchan): Practical Hindi 3-minute farm test using cold water, vinegar/lemon, and odor/foam clues to spot coal dust, sodium humate, and lignosulfonate.`,
     `- [गन्ने की खेती में ह्यूमिक एसिड: जड़ विकास, कल्ले (Tillering) और पेड़ी (Ratoon) प्रबंधन](${site}/hi/ganne-ki-kheti-mein-humic-acid): Stage-by-stage Hindi sugarcane guide from basal DAP/urea co-application and 20–30 day root flush to tillering and ratoon rejuvenation.`,
+    '',
+    '## Gujarati Farmer Hub (/gu — ગુજરાતી ખેડૂત જ્ઞાન કેન્દ્ર)',
+    `- [ગુજરાતી ખેડૂત જ્ઞાન કેન્દ્ર (Gujarati Farmer Hub)](${site}/gu): Practical natural-Gujarati farmer encyclopedia for humic acid dosage, purity testing, and sugarcane agronomy.`,
+    `- [હ્યુમિક એસિડ શું છે? ખેતીમાં સાચો ઉપયોગ, પ્રમાણ અને સાવચેતી](${site}/gu/humic-acid-shu-che-ane-upyog): Complete Gujarati guide covering drip, soil, foliar, and seed dosage plus calcium nitrate and acid tank-mix precautions.`,
+    `- [અસલી અને નકલી પોટેશિયમ હ્યુમેટની ઓળખ: ખેતર પર 3 મિનિટનો સરળ ટેસ્ટ](${site}/gu/asli-nakli-potassium-humate-olakh): Practical 3-minute Gujarati farm test to detect coal dust, sodium humate, and lignosulfonate.`,
+    `- [શેરડીની ખેતીમાં હ્યુમિક એસિડ: મૂળનો વિકાસ, ફૂટ અને શેરડીના સાંઠાની જાડાઈ](${site}/gu/sherdi-ni-kheti-ma-humic-acid): Stage-by-stage Gujarati sugarcane guide covering basal application, early root establishment, 20–30 day foliar spray, tillering, cane girth, and ratoon management.`,
+    '',
+    '## Arabic MENA/GCC Hub (/ar — المركز العربي لأحماض الهيوميك)',
+    `- [المركز العربي للزراعة (Arabic GCC & MENA Hub)](${site}/ar): Authoritative Modern Standard Arabic RTL hub focused on arid calcareous/saline soil management and ISO 19822 import quality.`,
+    `- [حمض الهيوميك في التربة المالحة والجيرية: تحسين الخصوبة وكفاءة الري بالتنقيط](${site}/ar/humic-acid-saline-calcareous-soils): Arabic guide to managing high-pH calcareous soils, salinity/EC buffering, and preventing hard-water drip emitter clogging.`,
+    `- [هيومات البوتاسيوم مقابل هيومات الصوديوم: دليل المزارع والمستورد لاختيار الجودة وفحص ISO 19822](${site}/ar/potassium-humate-vs-sodium-humate-guide): Arabic farmer and GCC importer guide contrasting potassium vs. sodium humate, COA inspection, and detecting lignosulfonate adulteration.`,
     ''
   );
 

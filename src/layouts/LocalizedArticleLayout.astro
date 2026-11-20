@@ -1,0 +1,221 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import type { CitationItem, FaqItem, HowToData } from '../components/SchemaMarkup.astro';
+
+export interface Props {
+  lang: 'gu' | 'ar';
+  title: string;
+  description: string;
+  canonicalAnswer: string;
+  canonicalPath: string;
+  alternateUrls: { en?: string; hi?: string; gu?: string; ar?: string; xDefault?: string };
+  categoryLabel: string;
+  pubDate: Date;
+  updatedDate?: Date;
+  readingMinutes: number;
+  faqs: FaqItem[];
+  citations: CitationItem[];
+  howTo?: HowToData;
+}
+
+const {
+  lang,
+  title,
+  description,
+  canonicalAnswer,
+  canonicalPath,
+  alternateUrls,
+  categoryLabel,
+  pubDate,
+  updatedDate,
+  readingMinutes,
+  faqs,
+  citations,
+  howTo,
+} = Astro.props;
+
+const siteUrl = 'https://humic.blog';
+const fullUrl = `${siteUrl}${canonicalPath}`;
+
+const ui =
+  lang === 'gu'
+    ? {
+        hubHref: '/gu',
+        hubLabel: 'ગુજરાતી ખેડૂત જ્ઞાન કેન્દ્ર',
+        badge: 'ગુજરાતી કૃષિ માર્ગદર્શિકા (IHSS અને ISO 19822 આધારિત)',
+        readTime: `વાંચન સમય: ${readingMinutes} મિનિટ`,
+        neutral: 'નિષ્પક્ષ અને વૈજ્ઞાનિક માહિતી',
+        enLinkLabel: 'Read in English →',
+        summaryTitle: 'સંક્ષિપ્ત વૈજ્ઞાનિક ઉત્તર (ઝડપી સારાંશ)',
+        faqHeading: 'ખેડૂતો દ્વારા વારંવાર પૂછાતા પ્રશ્નો (FAQ)',
+        refHeading: 'વૈજ્ઞાનિક સંદર્ભો અને આંતરરાષ્ટ્રીય ધોરણો',
+        sourceLabel: 'સ્રોત / DOI ↗',
+        footerLabel: 'ખેડૂત ઉપયોગી કેલ્ક્યુલેટર અને અન્ય ગુજરાતી ગાઇડ',
+        links: [
+          { href: '/gu', label: 'ગુજરાતી હબ' },
+          { href: '/gu/humic-acid-shu-che-ane-upyog', label: 'ઉપયોગ અને પ્રમાણ' },
+          { href: '/gu/asli-nakli-potassium-humate-olakh', label: '3-મિનિટ શુદ્ધતા ટેસ્ટ' },
+          { href: '/gu/sherdi-ni-kheti-ma-humic-acid', label: 'શેરડી ગાઇડ' },
+          { href: '/tools/dosage-calculator', label: 'માત્રા કેલ્ક્યુલેટર →', accent: true },
+          { href: '/tools/tank-mix-checker', label: 'ટેંક-મિક્સ તપાસ →', accent: true },
+        ],
+      }
+    : {
+        hubHref: '/ar',
+        hubLabel: 'المركز العربي لأحماض الهيوميك',
+        badge: 'دليل زراعي علمي (متوافق مع IHSS و ISO 19822)',
+        readTime: `وقت القراءة: ${readingMinutes} دقائق`,
+        neutral: 'محتوى علمي محايد بدون إعلانات تجارية',
+        enLinkLabel: 'Read in English →',
+        summaryTitle: 'الخلاصة العلمية المباشرة',
+        faqHeading: 'الأسئلة الشائعة للمزارعين والمهندسين الزراعيين',
+        refHeading: 'المراجع العلمية والمعايير الدولية',
+        sourceLabel: 'المصدر / DOI ↗',
+        footerLabel: 'أدوات الحقل وأدلة المركز العربي',
+        links: [
+          { href: '/ar', label: 'المركز العربي' },
+          { href: '/ar/humic-acid-saline-calcareous-soils', label: 'التربة المالحة والجيرية' },
+          { href: '/ar/potassium-humate-vs-sodium-humate-guide', label: 'هيومات البوتاسيوم والصوديوم' },
+          { href: '/tools/coa-verifier', label: 'فحص شهادة التحليل COA ←', accent: true },
+          { href: '/tools/tank-mix-checker', label: 'فحص التوافق والخلط ←', accent: true },
+          { href: '/tools/dosage-calculator', label: 'حاسبة الجرعات ←', accent: true },
+        ],
+      };
+
+const breadcrumbs = [
+  { name: 'Humic.blog', url: siteUrl },
+  { name: ui.hubLabel, url: `${siteUrl}${ui.hubHref}` },
+  { name: title, url: fullUrl },
+];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalPath={canonicalPath}
+  lang={lang}
+  alternateUrls={alternateUrls}
+  schemaType="article"
+  pillar={categoryLabel}
+  pubDate={pubDate}
+  updatedDate={updatedDate}
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+  citations={citations}
+  howTo={howTo}
+>
+  <div class="bg-emerald-950 text-white border-b-4 border-amber-500">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-9 sm:py-11">
+      <nav aria-label="Breadcrumb" class="mb-4 text-xs text-emerald-300 flex flex-wrap items-center gap-1.5">
+        <a href={ui.hubHref} class="hover:text-amber-400">{ui.hubLabel}</a>
+        <span>/</span>
+        <span class="text-emerald-100">{categoryLabel}</span>
+      </nav>
+
+      <div class="flex flex-wrap items-center gap-2 mb-3">
+        <span class="inline-flex items-center rounded-full bg-amber-500/20 border border-amber-500/40 px-3 py-0.5 text-xs font-semibold text-amber-300">
+          {ui.badge}
+        </span>
+        <span class="inline-flex items-center rounded-full bg-emerald-900 border border-emerald-700 px-3 py-0.5 text-xs font-medium text-emerald-100">
+          {categoryLabel}
+        </span>
+      </div>
+
+      <h1 class="font-serif text-3xl sm:text-4xl font-bold text-white leading-snug">
+        {title}
+      </h1>
+
+      <div class="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs sm:text-sm text-emerald-200/90">
+        <span>{ui.readTime}</span>
+        <span>{ui.neutral}</span>
+        {alternateUrls.en && (
+          <a href={alternateUrls.en.replace(siteUrl, '') || '/'} hreflang="en" class="underline decoration-amber-500 underline-offset-2 hover:text-amber-300">
+            {ui.enLinkLabel}
+          </a>
+        )}
+      </div>
+    </div>
+  </div>
+
+  <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+    <article data-pagefind-body class="bg-white rounded-2xl border border-slate-200 shadow-xs p-6 sm:p-10">
+      <aside
+        aria-label={ui.summaryTitle}
+        class="mb-8 rounded-xl border border-emerald-900/15 border-s-4 border-s-amber-500 bg-emerald-950/[0.03] p-5 sm:p-6"
+      >
+        <div class="mb-2 flex items-center gap-2">
+          <span class="inline-flex h-2 w-2 rounded-full bg-amber-500" aria-hidden="true"></span>
+          <span class="text-xs font-bold tracking-wider text-emerald-900">
+            {ui.summaryTitle}
+          </span>
+        </div>
+        <p class="text-[1.03rem] leading-relaxed text-slate-800 m-0">
+          {canonicalAnswer}
+        </p>
+      </aside>
+
+      <div class="prose prose-slate max-w-none prose-headings:font-serif prose-headings:text-emerald-950 prose-strong:text-slate-900 leading-relaxed">
+        <slot />
+      </div>
+
+      {faqs.length > 0 && (
+        <section id="faqs" class="mt-12 pt-8 border-t border-slate-200">
+          <div class="flex items-center gap-2 mb-5">
+            <span class="h-5 w-1.5 rounded-full bg-amber-500" aria-hidden="true"></span>
+            <h2 class="font-serif text-2xl font-bold text-emerald-950 m-0">{ui.faqHeading}</h2>
+          </div>
+          <div class="space-y-4">
+            {faqs.map((faq) => (
+              <div class="rounded-xl border border-slate-200 bg-slate-50/70 p-5">
+                <h3 class="font-serif text-lg font-bold text-emerald-950 mb-2">{faq.question}</h3>
+                <p class="text-sm sm:text-[0.96rem] leading-relaxed text-slate-700 m-0">{faq.answer}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {citations.length > 0 && (
+        <section id="references" class="mt-12 pt-8 border-t border-slate-200">
+          <div class="flex items-center gap-2 mb-4">
+            <span class="h-5 w-1.5 rounded-full bg-emerald-900" aria-hidden="true"></span>
+            <h2 class="font-serif text-2xl font-bold text-emerald-950 m-0">{ui.refHeading}</h2>
+          </div>
+          <ol class="space-y-2.5 ps-5 list-decimal text-sm text-slate-700 leading-relaxed">
+            {citations.map((cite) => (
+              <li>
+                <span class="font-semibold text-slate-900">{cite.title}.</span>{' '}
+                <span class="italic">{cite.source}.</span>{' '}
+                {cite.url && (
+                  <a href={cite.url} target="_blank" rel="noopener noreferrer" class="text-emerald-800 underline decoration-amber-500">
+                    {ui.sourceLabel}
+                  </a>
+                )}
+              </li>
+            ))}
+          </ol>
+        </section>
+      )}
+
+      <aside data-pagefind-ignore class="mt-10 rounded-xl bg-emerald-950 text-white p-6 space-y-3">
+        <div class="text-xs font-bold uppercase tracking-wider text-amber-400">
+          {ui.footerLabel}
+        </div>
+        <div class="flex flex-wrap gap-2">
+          {ui.links.map((item) => (
+            <a
+              href={item.href}
+              class={
+                item.accent
+                  ? 'rounded-lg bg-amber-500 hover:bg-amber-400 px-3.5 py-2 text-xs font-bold text-emerald-950'
+                  : 'rounded-lg bg-emerald-900 hover:bg-emerald-800 px-3.5 py-2 text-xs font-semibold text-white'
+              }
+            >
+              {item.label}
+            </a>
+          ))}
+        </div>
+      </aside>
+    </article>
+  </div>
+</BaseLayout>
