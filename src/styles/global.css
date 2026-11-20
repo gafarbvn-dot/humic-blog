@@ -1,0 +1,109 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --font-serif: Georgia, "Cambria", "Times New Roman", Times, serif;
+  --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: var(--font-sans);
+    color: #0f172a;
+    background-color: #f8fafc;
+  }
+
+  h1, h2, h3 {
+    font-family: var(--font-serif);
+    letter-spacing: -0.015em;
+  }
+}
+
+/* Academic prose refinements */
+.prose {
+  --tw-prose-body: #1e293b;
+  --tw-prose-headings: #022c22;
+  --tw-prose-links: #065f46;
+  --tw-prose-bold: #0f172a;
+  --tw-prose-counters: #047857;
+  --tw-prose-bullets: #d97706;
+  --tw-prose-hr: #e2e8f0;
+  --tw-prose-quotes: #064e3b;
+  --tw-prose-quote-borders: #f59e0b;
+  --tw-prose-th-borders: #cbd5e1;
+  --tw-prose-td-borders: #e2e8f0;
+}
+
+.prose h2 {
+  margin-top: 2.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #e2e8f0;
+  scroll-margin-top: 6rem;
+}
+
+.prose h3 {
+  margin-top: 1.75rem;
+  scroll-margin-top: 6rem;
+}
+
+.prose a {
+  text-decoration-color: #f59e0b;
+  text-underline-offset: 3px;
+  font-weight: 500;
+}
+
+.prose a:hover {
+  color: #022c22;
+  text-decoration-color: #065f46;
+}
+
+.prose table {
+  width: 100%;
+  display: block;
+  overflow-x: auto;
+  border-collapse: collapse;
+  font-size: 0.925rem;
+  margin-top: 1.75rem;
+  margin-bottom: 1.75rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.5rem;
+}
+
+.prose thead {
+  background-color: #022c22;
+  color: #f8fafc;
+}
+
+.prose thead th {
+  color: #f8fafc;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  text-align: left;
+  padding: 0.75rem 1rem;
+  border-bottom: 2px solid #f59e0b;
+  white-space: nowrap;
+}
+
+.prose tbody td {
+  padding: 0.75rem 1rem;
+  vertical-align: top;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.prose tbody tr:nth-child(even) {
+  background-color: #f8fafc;
+}
+
+.prose tbody tr:hover {
+  background-color: #ecfdf5;
+}
+
+.prose blockquote {
+  background-color: #fffbeb;
+  border-left-width: 4px;
+  border-left-color: #f59e0b;
+  padding: 1rem 1.25rem;
+  border-radius: 0 0.5rem 0.5rem 0;
+  font-style: normal;
+}

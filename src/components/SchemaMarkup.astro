@@ -1,0 +1,166 @@
+---
+export interface BreadcrumbItem {
+  name: string;
+  url: string;
+}
+
+export interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+export interface CitationItem {
+  title: string;
+  source: string;
+  url?: string;
+}
+
+export interface Props {
+  type?: 'website' | 'article' | 'tool' | 'glossary';
+  title: string;
+  description: string;
+  canonicalUrl: string;
+  pillar?: string;
+  pubDate?: Date;
+  updatedDate?: Date;
+  breadcrumbs?: BreadcrumbItem[];
+  faqs?: FaqItem[];
+  citations?: CitationItem[];
+  extraNodes?: Record<string, unknown>[];
+}
+
+const {
+  type = 'website',
+  title,
+  description,
+  canonicalUrl,
+  pillar,
+  pubDate,
+  updatedDate,
+  breadcrumbs = [],
+  faqs = [],
+  citations = [],
+  extraNodes = [],
+} = Astro.props;
+
+const siteUrl = 'https://humic.blog';
+
+const organizationNode = {
+  '@type': 'Organization',
+  '@id': `${siteUrl}/#organization`,
+  name: 'Humic.blog',
+  url: siteUrl,
+  description:
+    'A vendor-neutral, peer-reviewed educational encyclopedia dedicated to humic substances, soil chemistry, ISO 19822 analytical testing, and sustainable agronomy.',
+  logo: {
+    '@type': 'ImageObject',
+    url: `${siteUrl}/favicon.svg`,
+  },
+  sameAs: ['https://github.com/gafarbvn-dot/humic-blog'],
+};
+
+const websiteNode = {
+  '@type': 'WebSite',
+  '@id': `${siteUrl}/#website`,
+  url: siteUrl,
+  name: 'Humic.blog — Encyclopedia of Humic Substances',
+  publisher: { '@id': `${siteUrl}/#organization` },
+  inLanguage: 'en',
+};
+
+const graph: Record<string, unknown>[] = [organizationNode, websiteNode];
+
+if (type === 'article') {
+  const articleNode: Record<string, unknown> = {
+    '@type': 'Article',
+    '@id': `${canonicalUrl}#article`,
+    headline: title,
+    description,
+    url: canonicalUrl,
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': canonicalUrl,
+    },
+    author: {
+      '@type': 'Organization',
+      name: 'Humic.blog Editorial Board',
+      '@id': `${siteUrl}/#organization`,
+    },
+    publisher: { '@id': `${siteUrl}/#organization` },
+    inLanguage: 'en',
+    isAccessibleForFree: true,
+  };
+
+  if (pillar) {
+    articleNode.articleSection = pillar;
+  }
+  if (pubDate) {
+    articleNode.datePublished = pubDate.toISOString();
+  }
+  if (updatedDate || pubDate) {
+    articleNode.dateModified = (updatedDate ?? pubDate)!.toISOString();
+  }
+  if (citations.length > 0) {
+    articleNode.citation = citations.map((c) =>
+      c.url ? `${c.title}. ${c.source}. ${c.url}` : `${c.title}. ${c.source}.`
+    );
+  }
+
+  graph.push(articleNode);
+} else if (type === 'tool') {
+  graph.push({
+    '@type': 'WebApplication',
+    '@id': `${canonicalUrl}#webapp`,
+    name: title,
+    description,
+    url: canonicalUrl,
+    applicationCategory: 'EducationalApplication',
+    operatingSystem: 'All',
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'USD',
+    },
+    publisher: { '@id': `${siteUrl}/#organization` },
+  });
+}
+
+if (breadcrumbs.length > 0) {
+  graph.push({
+    '@type': 'BreadcrumbList',
+    '@id': `${canonicalUrl}#breadcrumb`,
+    itemListElement: breadcrumbs.map((crumb, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: crumb.name,
+      item: crumb.url,
+    })),
+  });
+}
+
+if (faqs.length > 0) {
+  graph.push({
+    '@type': 'FAQPage',
+    '@id': `${canonicalUrl}#faq`,
+    mainEntity: faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    })),
+  });
+}
+
+if (extraNodes.length > 0) {
+  graph.push(...extraNodes);
+}
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': graph,
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />

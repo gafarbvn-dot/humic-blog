@@ -1,0 +1,25 @@
+# Humic.blog — Open Educational Encyclopedia on Humic Substances
+# All search engines and AI research crawlers are welcome.
+
+User-agent: *
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+Sitemap: https://humic.blog/sitemap-index.xml

@@ -1,0 +1,22 @@
+---
+export interface Props {
+  answer: string;
+}
+
+const { answer } = Astro.props;
+---
+
+<aside
+  aria-label="Canonical Scientific Summary"
+  class="my-7 rounded-xl border border-emerald-900/15 border-l-4 border-l-amber-500 bg-emerald-950/[0.03] p-5 sm:p-6 shadow-xs"
+>
+  <div class="mb-2.5 flex items-center gap-2">
+    <span class="inline-flex h-2 w-2 rounded-full bg-amber-500" aria-hidden="true"></span>
+    <span class="text-xs font-bold tracking-wider uppercase text-emerald-900">
+      Canonical Technical Summary
+    </span>
+  </div>
+  <p class="text-[1.03rem] leading-relaxed font-normal text-slate-800 m-0">
+    {answer}
+  </p>
+</aside>
