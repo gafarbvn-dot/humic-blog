@@ -1,0 +1,139 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const siteUrl = 'https://humic.blog';
+const breadcrumbs = [
+  { name: 'Humic.blog', url: siteUrl },
+  { name: 'Pusat Pengetahuan Asam Humat Indonesia', url: `${siteUrl}/id` },
+];
+
+const guides = [
+  {
+    href: '/id/asam-humat-tanah-masam-kelapa-sawit-padi',
+    badge: 'Tanah Masam Tropis & Efisiensi NPK',
+    title: 'Asam Humat untuk Tanah Masam Tropis: Meningkatkan Efisiensi Pupuk pada Padi, Kelapa Sawit & Hortikultura',
+    summary:
+      'Panduan ilmiah untuk tanah Ultisol, Oxisol, dan laterit masam (pH 4,2–5,5) di Indonesia: cara asam humat mengikat Al³⁺ dan Fe³⁺ untuk melepaskan fosfor (P) terikat, meningkatkan KTK tanah, serta tabel dosis praktis untuk kelapa sawit, padi sawah, dan cabai.',
+  },
+  {
+    href: '/id/cara-membedakan-kalium-humat-asli-palsu',
+    badge: 'Uji Kualitas ISO 19822 & Tes Lapangan 3 Menit',
+    title: 'Kalium Humat vs. Natrium Humat: Standar ISO 19822 dan Tes Lapangan 3 Menit untuk Mendeteksi Pemalsuan',
+    summary:
+      'Cara praktis membedakan kalium humat (KOH) murni dari natrium humat (NaOH), batu bara mentah, dan natrium lignosulfonat menggunakan tes air bersih, cuka dapur, dan audit Certificate of Analysis (COA) berbasis standar ISO 19822.',
+  },
+];
+---
+
+<BaseLayout
+  title="Pusat Pengetahuan Asam Humat Indonesia — Tanah Masam & Standar ISO 19822 | Humic.blog"
+  description="Ensiklopedia agronomi independen berbahasa Indonesia tentang asam humat, asam fulvat, dan kalium humat: solusi tanah masam tropis untuk kelapa sawit, padi, hortikultura, dan uji kualitas ISO 19822."
+  canonicalPath="/id"
+  lang="id"
+  alternateUrls={{
+    en: 'https://humic.blog',
+    hi: 'https://humic.blog/hi',
+    gu: 'https://humic.blog/gu',
+    ar: 'https://humic.blog/ar',
+    es: 'https://humic.blog/es',
+    id: 'https://humic.blog/id',
+    xDefault: 'https://humic.blog',
+  }}
+  schemaType="collection"
+  breadcrumbs={breadcrumbs}
+>
+  <section class="bg-emerald-950 text-white border-b-4 border-amber-500">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+      <div class="inline-flex items-center gap-2 rounded-full bg-emerald-900 border border-emerald-700 px-3.5 py-1 text-xs font-semibold text-amber-400 mb-5">
+        <span class="h-2 w-2 rounded-full bg-amber-400" aria-hidden="true"></span>
+        Ensiklopedia Agronomi Independen &bull; IHSS &amp; ISO 19822 &bull; Tropis Indonesia
+      </div>
+      <h1 class="font-serif text-3xl sm:text-5xl font-bold tracking-tight text-white leading-tight max-w-4xl">
+        Pusat Pengetahuan Asam Humat &amp; Fulvat untuk Pertanian Indonesia
+      </h1>
+      <p class="mt-4 text-base sm:text-lg text-emerald-100/90 leading-relaxed max-w-3xl">
+        Referensi ilmiah yang netral —tanpa promosi merek— bagi pekebun kelapa sawit, petani padi dan hortikultura, agronomis perkebunan, serta importir bahan baku pupuk di seluruh Indonesia.
+      </p>
+      <div class="mt-6 flex flex-wrap gap-3">
+        <a
+          href="/id/asam-humat-tanah-masam-kelapa-sawit-padi"
+          class="inline-flex items-center rounded-lg bg-amber-500 hover:bg-amber-400 px-5 py-2.5 text-sm font-bold text-emerald-950 shadow-sm transition-colors"
+        >
+          Panduan Tanah Masam &rarr;
+        </a>
+        <a
+          href="/id/cara-membedakan-kalium-humat-asli-palsu"
+          class="inline-flex items-center rounded-lg bg-emerald-900 hover:bg-emerald-800 border border-emerald-700 px-5 py-2.5 text-sm font-semibold text-white transition-colors"
+        >
+          Tes Lapangan 3 Menit &amp; ISO 19822 &rarr;
+        </a>
+        <a
+          href="/tools/coa-verifier"
+          class="inline-flex items-center rounded-lg bg-white/10 hover:bg-white/15 border border-white/20 px-4 py-2.5 text-sm font-semibold text-emerald-100 transition-colors"
+        >
+          Verifikasi COA (EN)
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-12 space-y-12" data-pagefind-body>
+    <!-- Canonical Answer Box -->
+    <section class="rounded-2xl border-l-4 border-amber-500 bg-amber-50/70 p-6 shadow-xs">
+      <div class="text-xs font-bold uppercase tracking-wider text-amber-900 mb-2">
+        Ringkasan Prinsip Agronomi
+      </div>
+      <p class="text-sm sm:text-base leading-relaxed text-slate-800 m-0">
+        Asam humat dari leonardit teroksidasi bukan pengganti pupuk makro NPK, melainkan pembenah tanah organik berkonsentrasi tinggi. Pada tanah masam tropis Indonesia (Ultisol dan Oxisol), <strong>kalium humat (KOH)</strong> meningkatkan Kapasitas Tukar Kation (KTK), mengkelat aluminium (Al³⁺) dan besi (Fe³⁺) bebas agar fosfor lebih tersedia, serta mengurangi pencucian hara saat curah hujan tinggi.
+      </p>
+    </section>
+
+    <!-- Featured Guides -->
+    <section class="space-y-5">
+      <div>
+        <h2 class="font-serif text-2xl sm:text-3xl font-bold text-emerald-950">
+          Panduan Utama Berbahasa Indonesia
+        </h2>
+        <p class="mt-1 text-sm text-slate-600">
+          Disusun merujuk pada standar internasional IHSS, metode Lamar/HPTA, dan ISO 19822:2018.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 gap-5">
+        {guides.map((g) => (
+          <article class="rounded-2xl bg-white border border-slate-200 hover:border-amber-500 p-6 sm:p-7 shadow-xs transition-colors">
+            <span class="inline-flex items-center rounded-full bg-emerald-950/5 border border-emerald-900/15 px-3 py-0.5 text-xs font-semibold text-emerald-900 mb-2.5">
+              {g.badge}
+            </span>
+            <h3 class="font-serif text-xl sm:text-2xl font-bold text-emerald-950 leading-snug">
+              <a href={g.href} class="hover:text-emerald-700 underline decoration-transparent hover:decoration-amber-500 underline-offset-4">
+                {g.title}
+              </a>
+            </h3>
+            <p class="mt-2.5 text-sm sm:text-base text-slate-700 leading-relaxed">{g.summary}</p>
+            <div class="mt-4">
+              <a href={g.href} class="inline-flex items-center gap-1.5 rounded-lg bg-emerald-900 hover:bg-emerald-950 px-4 py-2 text-xs font-bold text-white transition-colors">
+                Baca panduan lengkap &rarr;
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- Interactive Tools CTA -->
+    <section class="rounded-2xl bg-emerald-950 text-white p-6 sm:p-8 space-y-4">
+      <div class="text-xs font-bold uppercase tracking-wider text-amber-400">Kalkulator Lapangan &amp; Audit Kualitas Gratis</div>
+      <h2 class="font-serif text-2xl font-bold text-white m-0">Hitung dosis, kompatibilitas tangki, dan verifikasi COA</h2>
+      <p class="text-sm text-emerald-100/90 leading-relaxed max-w-2xl">
+        Gunakan alat bantu interaktif kami (antarmuka ringkas bahasa Inggris) untuk menghitung dosis per hektare atau per pohon sawit, mengecek pencampuran pupuk di tangki kocor, serta mengaudit COA sebelum pembelian partai besar.
+      </p>
+      <div class="flex flex-wrap gap-2.5 pt-1">
+        <a href="/tools/dosage-calculator" class="rounded-lg bg-amber-500 hover:bg-amber-400 px-4 py-2.5 text-xs font-bold text-emerald-950">Kalkulator Dosis &rarr;</a>
+        <a href="/tools/tank-mix-checker" class="rounded-lg bg-emerald-900 hover:bg-emerald-800 border border-emerald-700 px-4 py-2.5 text-xs font-semibold text-white">Cek Campuran Tangki &rarr;</a>
+        <a href="/tools/coa-verifier" class="rounded-lg bg-emerald-900 hover:bg-emerald-800 border border-emerald-700 px-4 py-2.5 text-xs font-semibold text-white">Audit COA &amp; Red-Flag &rarr;</a>
+        <a href="/tools/blend-ph-estimator" class="rounded-lg bg-emerald-900 hover:bg-emerald-800 border border-emerald-700 px-4 py-2.5 text-xs font-semibold text-white">Estimator pH Formulasi (B2B) &rarr;</a>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

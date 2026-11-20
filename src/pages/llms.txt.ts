@@ -28,9 +28,7 @@ export const GET: APIRoute = async () => {
     `- [Potassium Humate & Fulvic Acid Dosage Calculator](${site}/tools/dosage-calculator): Field dosage calculator across Drip Fertigation, Soil Broadcast, Foliar Spray, and Seed Treatment in Acres or Hectares.`,
     `- [Potassium Humate Tank-Mix Compatibility Checker](${site}/tools/tank-mix-checker): Instant Green/Amber/Red compatibility screening for mixing Potassium Humate or Fulvic Acid with Calcium Nitrate, Low-pH Acids, Urea/NPK, Seaweed Extract, L-Amino Acids, and Magnesium Sulfate.`,
     `- [Humic COA Red-Flag Checker & Verifier](${site}/tools/coa-verifier): Instant COA diagnostic checker flagging sulfur >0.75% (sodium lignosulfonate), sodium >1.5% (NaOH substitution), colorimetric inflation >85%, and water insolubles >2%.`,
-    `- [Extended ICP-OES & Heavy-Metal COA Auditor](${site}/tools/coa-red-flag-checker): Instant Certificate of Analysis auditor flagging sodium lignosulfonate sulfur (>0.75% S), NaOH sodium spikes, colorimetric assay inflation, ash bias, and EU FPR heavy-metal breaches.`,
     `- [Manufacturer Blend pH & Stability Estimator](${site}/tools/blend-ph-estimator): Interactive B2B liquid formulation stability tool modeling humic source, partner biostimulant, target pH slider (3.0–10.0), and water hardness.`,
-    `- [Multi-Component Liquid Formula Simulator](${site}/tools/formulation-ph-estimator): B2B liquid concentrate simulator estimating blended pH, precipitation/gelation risk, bottle-swelling microbial gas risk, and Humate-to-Fulvate switch thresholds.`,
     `- [Instant Static Search (Pagefind)](${site}/search): Full-text static search across all guides, crop schedules, tools, and glossary definitions.`,
     `- [Peer-Reviewed Humic Research Library](${site}/research-library): Curated, filterable index of 18 landmark peer-reviewed papers and international analytical/regulatory standards (Achard 1786 to ISO 19822 & EU FPR 2019/1009).`,
     `- [A–Z Humic Science Glossary](${site}/glossary): 18 standardized IHSS and ISO 19822 definitions encoded in DefinedTermSet JSON-LD.`,
@@ -78,6 +76,16 @@ export const GET: APIRoute = async () => {
     `- [المركز العربي للزراعة (Arabic GCC & MENA Hub)](${site}/ar): Authoritative Modern Standard Arabic RTL hub focused on arid calcareous/saline soil management and ISO 19822 import quality.`,
     `- [حمض الهيوميك في التربة المالحة والجيرية: تحسين الخصوبة وكفاءة الري بالتنقيط](${site}/ar/humic-acid-saline-calcareous-soils): Arabic guide to managing high-pH calcareous soils, salinity/EC buffering, and preventing hard-water drip emitter clogging.`,
     `- [هيومات البوتاسيوم مقابل هيومات الصوديوم: دليل المزارع والمستورد لاختيار الجودة وفحص ISO 19822](${site}/ar/potassium-humate-vs-sodium-humate-guide): Arabic farmer and GCC importer guide contrasting potassium vs. sodium humate, COA inspection, and detecting lignosulfonate adulteration.`,
+    '',
+    '## Spanish Hub (/es — Centro Agronómico en Español)',
+    `- [Centro de Conocimiento en Español (Spanish Hub)](${site}/es): Authoritative Spanish agronomy hub for Latin America and Spain covering fertigation, ISO 19822 quality, and humic chemistry.`,
+    `- [Ácido Húmico y Fúlvico en Agricultura: Guía de Fertirrigación, Dosis y Compatibilidad en Tanque](${site}/es/acido-humico-agricultura-fertirrigacion): Drip fertigation dosages for avocado, banana, coffee, and berries, plus calcium nitrate and low-pH compatibility rules.`,
+    `- [Humato de Potasio vs. Humato de Sodio: Estándar ISO 19822 y Cómo Detectar Adulteraciones](${site}/es/humato-de-potasio-calidad-iso-19822): Reading supplier COAs, detecting sodium lignosulfonate (>0.75% sulfur), and preventing sodium clay dispersion.`,
+    '',
+    '## Indonesian Hub (/id — Pusat Pengetahuan Asam Humat Indonesia)',
+    `- [Pusat Pengetahuan Asam Humat (Indonesian Hub)](${site}/id): Authoritative Bahasa Indonesia hub focused on tropical acidic soils, palm oil, rice, and field purity verification.`,
+    `- [Asam Humat untuk Tanah Masam Tropis: Meningkatkan Efisiensi Pupuk pada Padi, Kelapa Sawit & Hortikultura](${site}/id/asam-humat-tanah-masam-kelapa-sawit-padi): Unlocking fixed phosphorus from Al³⁺/Fe³⁺ in Ultisol/Oxisol laterite soils, boosting CEC, and improving NPK efficiency.`,
+    `- [Kalium Humat vs. Natrium Humat: Standar ISO 19822 dan Tes Lapangan 3 Menit untuk Mendeteksi Pemalsuan](${site}/id/cara-membedakan-kalium-humat-asli-palsu): 3-minute water/acid/odor field test and ISO 19822 COA sulfur/sodium verification.`,
     ''
   );
 

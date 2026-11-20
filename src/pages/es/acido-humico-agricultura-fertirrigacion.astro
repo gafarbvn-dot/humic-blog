@@ -1,0 +1,235 @@
+---
+import LocalizedArticleLayout from '../../layouts/LocalizedArticleLayout.astro';
+
+const faqs = [
+  {
+    question: '¿Se puede mezclar humato de potasio con nitrato de calcio o nitrato de magnesio en el mismo tanque de fertirrigación?',
+    answer:
+      'No. El humato de potasio tiene grupos carboxilo con carga negativa que reaccionan de inmediato con cationes divalentes libres (Ca²⁺ y Mg²⁺), formando humatos de calcio insolubles que taponan filtros de malla y goteros. Inyecta siempre el humato desde un tanque separado o al final del riego, después de lavar la línea con agua limpia durante 15–20 minutos.',
+  },
+  {
+    question: '¿Por qué el ácido húmico se precipita cuando lo combino con ácido fosfórico o ácido nítrico?',
+    answer:
+      'Por definición química (IHSS), el ácido húmico es soluble en medio alcalino o neutro y precipita en forma de lodo negro cuando el pH de la solución madre desciende por debajo de 4,5–5,0. Si tu programa de fertirrigación requiere soluciones ácidas (pH 2,0–4,5), utiliza exclusivamente ácido fúlvico soluble en ácido o inyecta el humato en un pulso independiente sin acidificar.',
+  },
+  {
+    question: '¿Cuál es la diferencia práctica entre ácido húmico y ácido fúlvico para aguacate, banano, café y berries?',
+    answer:
+      'El ácido húmico (peso molecular alto, 2.000–50.000 Da) trabaja principalmente en el suelo: mejora la estructura del bulbo húmedo, eleva la capacidad de intercambio catiónico (CIC) y reduce la lixiviación de fertilizantes. El ácido fúlvico (peso molecular bajo, <2.000 Da) es ideal para fertirrigación en aguas duras o ácidas y para aplicaciones foliares como coadyuvante quelatante de micronutrientes.',
+  },
+  {
+    question: '¿Qué dosis de humato de potasio soluble se recomienda por hectárea en riego por goteo?',
+    answer:
+      'Con un humato de potasio concentrado en polvo o escamas (70–80 % de sustancias húmicas totales por ISO 19822), la dosis técnica estándar por aplicación en fertirrigación es de 1 a 2 kg/ha cada 15–21 días, acumulando 8 a 15 kg/ha por ciclo en cultivos de alto valor como aguacate, banano o arándanos. En suelos arenosos conviene fraccionar dosis más bajas con mayor frecuencia.',
+  },
+  {
+    question: '¿Cómo influye la dureza del agua de pozo en la inyección de sustancias húmicas?',
+    answer:
+      'Aguas con dureza superior a 250–300 mg/L de CaCO₃ o conductividad eléctrica alta pueden provocar floculación prematura del humato de potasio si se prepara una solución madre muy concentrada. Para evitar obstrucciones, realiza siempre una prueba de jarra con el agua real del pozo, pre-diluye en relación mínima 1:20 (50 g/L) y considera cambiar a fulvato de potasio cuando el agua sea muy calcárea.',
+  },
+];
+
+const citations = [
+  {
+    title: 'Humic Substances and Plant Growth: A Meta-Analysis of Crop Response Across Soil Types',
+    source: 'Rose, M. T., Patti, A. F., Little, K. R., Brown, A. L., Jackson, W. R., & Cavagnaro, T. R. (2014). Advances in Agronomy, 124, 37–89',
+    url: 'https://doi.org/10.1016/B978-0-12-800138-7.00002-4',
+  },
+  {
+    title: 'Humic and Fulvic Acids as Biostimulants in Horticulture',
+    source: 'Canellas, L. P., Olivares, F. L., Aguiar, N. O., et al. (2015). Scientia Horticulturae, 196, 15–27',
+    url: 'https://doi.org/10.1016/j.scienta.2015.09.013',
+  },
+  {
+    title: 'Fertilizers and Soil Conditioners — Determination of Humic and Hydrophobic Fulvic Acids (ISO 19822:2018)',
+    source: 'International Organization for Standardization (2018)',
+    url: 'https://www.iso.org/standard/66353.html',
+  },
+];
+---
+
+<LocalizedArticleLayout
+  lang="es"
+  title="Ácido Húmico y Fúlvico en Agricultura: Guía de Fertirrigación, Dosis y Compatibilidad en Tanque"
+  description="Guía agronómica completa para fertirrigación en Latinoamérica y España: dosis por hectárea en aguacate, banano, café y berries, manejo del pH del agua y prevención de precipitación con nitrato de calcio."
+  canonicalAnswer="En fertirrigación por goteo, el humato de potasio (1–2 kg/ha por aplicación) mejora la capacidad de intercambio catiónico y la eficiencia nutricional en cultivos como aguacate, banano, café y berries. Para evitar taponamientos de goteros, nunca lo mezcles en el mismo tanque con nitrato de calcio ni ácidos de pH inferior a 4,5; emplea ácido fúlvico para soluciones ácidas o foliares."
+  canonicalPath="/es/acido-humico-agricultura-fertirrigacion"
+  alternateUrls={{
+    en: 'https://humic.blog/agronomy/complete-application-and-tank-mix-guide',
+    hi: 'https://humic.blog/hi/humic-acid-kya-hai-aur-upyog',
+    gu: 'https://humic.blog/gu/humic-acid-shu-che-ane-upyog',
+    es: 'https://humic.blog/es/acido-humico-agricultura-fertirrigacion',
+    xDefault: 'https://humic.blog/agronomy/complete-application-and-tank-mix-guide',
+  }}
+  categoryLabel="Fertirrigación y Compatibilidad en Tanque"
+  pubDate={new Date('2026-11-20')}
+  updatedDate={new Date('2026-11-20')}
+  readingMinutes={7}
+  faqs={faqs}
+  citations={citations}
+>
+  <h2>1. Qué hacen realmente las sustancias húmicas en el bulbo húmedo</h2>
+  <p>
+    En la agricultura tecnificada de Latinoamérica y España —desde los huertos de aguacate en Michoacán y Perú hasta las plantaciones de banano en Ecuador, café en Colombia y berries en Jalisco, Chile o Huelva— el rendimiento depende de la eficiencia del <strong>bulbo húmedo</strong>. Bajo riego por goteo intensivo, la aplicación continua de sales minerales suele compactar el suelo, desplazar cationes y lixiviar nitratos o bloquear fósforo y micronutrientes.
+  </p>
+  <p>
+    Las sustancias húmicas extraídas de <strong>leonardita oxidada</strong> (lignito altamente humificado) no son fertilizantes NPK completos ni productos fitosanitarios. Su valor agronómico reside en tres mecanismos físico-químicos bien documentados en la literatura científica:
+  </p>
+  <ul>
+    <li><strong>Aumento de la Capacidad de Intercambio Catiónico (CIC):</strong> Los grupos carboxílicos y fenólicos cargados negativamente retienen temporalmente potasio (K⁺), amonio (NH₄⁺), magnesio (Mg²⁺) y oligoelementos cerca de la raíz, reduciendo pérdidas por lavado en suelos arenosos o de textura gruesa.</li>
+    <li><strong>Complejación natural y disponibilidad de fósforo:</strong> En suelos calcáreos (pH &gt; 7,8) las moléculas húmicas compiten con el fosfato por los sitios de adsorción del calcio; en suelos ácidos volcánicos o tropicales (pH &lt; 5,5) acomplejan parte del aluminio (Al³⁺) y hierro (Fe³⁺) intercambiables, mejorando la eficiencia del fertilizante fosforado.</li>
+    <li><strong>Estímulo fisiológico de la arquitectura radicular:</strong> Las fracciones de bajo peso molecular (especialmente ácidos fúlvicos y humatos solubles) activan las bombas de protones H⁺-ATPasa en la membrana radicular, favoreciendo la emisión de pelos absorbentes y la tolerancia a estrés abiótico (salinidad o déficit hídrico).</li>
+  </ul>
+
+  <h2>2. Ácido húmico vs. ácido fúlvico: cuándo usar cada fracción</h2>
+  <p>
+    Elegir la fracción equivocada es la causa número uno de taponamientos en cintas de goteo y resultados inconsistentes en campo. Aunque ambas provienen del mismo proceso de humificación, su comportamiento frente al pH y la dureza del agua es completamente opuesto:
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Propiedad Técnica</th>
+        <th>Ácido Húmico (Humato de Potasio KOH)</th>
+        <th>Ácido Fúlvico / Fulvato de Potasio</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Solubilidad según pH</strong></td>
+        <td>Soluble solo a pH &gt; 5,5; precipita en lodo debajo de pH 4,5</td>
+        <td>Soluble en todo el rango de pH (pH 1 a 14)</td>
+      </tr>
+      <tr>
+        <td><strong>Peso molecular y tamaño</strong></td>
+        <td>Alto (2.000 – 50.000 Da); actúa en la rizosfera</td>
+        <td>Bajo (&lt; 2.000 Da); penetra estomas y cutícula foliar</td>
+      </tr>
+      <tr>
+        <td><strong>Sensibilidad a Ca²⁺ y agua dura</strong></td>
+        <td>Alta: flocula con nitrato de calcio y aguas &gt; 300 ppm CaCO₃</td>
+        <td>Muy baja: tolera mejor aguas duras y mezclas ácidas</td>
+      </tr>
+      <tr>
+        <td><strong>Uso principal recomendado</strong></td>
+        <td>Fertirrigación en tanque independiente, drench y acondicionamiento de suelo</td>
+        <td>Mezclas en soluciones nutritivas ácidas, hidroponía y aplicación foliar</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>3. Dosis orientativas en fertirrigación para cultivos de alto valor</h2>
+  <p>
+    Las dosis deben calcularse siempre sobre el <strong>contenido real de sustancias húmicas solubles</strong> certificado bajo el método ISO 19822 (no sobre el peso bruto de un formulado líquido diluido). La siguiente tabla resume rangos de referencia para <strong>humato de potasio soluble concentrado (70–80 % sustancias húmicas)</strong> y <strong>ácido fúlvico concentrado (50–70 %)</strong>:
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Cultivo</th>
+        <th>Momentos Clave de Aplicación</th>
+        <th>Dosis por Evento (Goteo / Drench)</th>
+        <th>Total por Ciclo / Año</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Aguacate (Palta)</strong></td>
+        <td>Inicio de flujo radicular, cuajado y llenado de fruto</td>
+        <td>1,5 – 2,0 kg/ha (humato K) cada 20–30 días</td>
+        <td>10 – 15 kg/ha/año</td>
+      </tr>
+      <tr>
+        <td><strong>Banano y Plátano</strong></td>
+        <td>Emisión de hijos, diferenciación floral y llenado de racimo</td>
+        <td>1,5 – 2,5 kg/ha cada 21–30 días vía drench o goteo</td>
+        <td>12 – 18 kg/ha/año</td>
+      </tr>
+      <tr>
+        <td><strong>Café</strong></td>
+        <td>Post-cosecha, pre-floración y llenado de grano (suelos ácidos)</td>
+        <td>1,0 – 2,0 kg/ha en drench dirigido al plato radicular</td>
+        <td>6 – 10 kg/ha/año</td>
+      </tr>
+      <tr>
+        <td><strong>Berries (Arándano, Fresa, Frambuesa)</strong></td>
+        <td>Trasplante, inducción floral y cosecha continua en sustrato o suelo</td>
+        <td>0,5 – 1,0 kg/ha (preferir fúlvico si el riego usa pH 4,5–5,5)</td>
+        <td>6 – 10 kg/ha/ciclo</td>
+      </tr>
+      <tr>
+        <td><strong>Hortalizas bajo invernadero</strong></td>
+        <td>Establecimiento radicular y picos de demanda de fruto</td>
+        <td>1,0 – 1,5 kg/ha cada 14 días en pulso separado</td>
+        <td>8 – 12 kg/ha/ciclo</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>
+    En cultivos acidófilos como el <strong>arándano</strong> —donde la solución nutritiva se acidifica habitualmente a pH 4,5–5,2 con ácido sulfúrico o fosfórico— inyectar humato de potasio alcalino junto con el ácido provocará floculación instantánea en el cabezal. En ese escenario, utiliza <strong>ácido fúlvico puro</strong> (0,5–1,0 kg/ha) o aplica el humato en un riego breve sin acidificar. Para cálculos exactos por hectárea o por 1.000 L de agua, consulta nuestra <a href="/tools/dosage-calculator">Calculadora Interactiva de Dosis</a>.
+  </p>
+
+  <h2>4. Reglas de oro de compatibilidad en tanque para evitar taponamiento de goteros</h2>
+  <p>
+    Más del 80 % de los problemas de obstrucción atribuidos a "malos ácidos húmicos" son en realidad reacciones ácido-base o de precipitación catiónica evitables dentro del tanque madre. Sigue estrictamente esta matriz antes de mezclar:
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Insumo Compañero</th>
+        <th>Con Humato de Potasio</th>
+        <th>Con Ácido Fúlvico</th>
+        <th>Protocolo Técnico Seguro</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Nitrato de Calcio / Cloruro de Calcio</strong></td>
+        <td>Incompatible (precipita humato de Ca)</td>
+        <td>Precaución (probar en jarra a dosis diluida)</td>
+        <td>Tanques separados obligatorios; lavar líneas 15–20 min entre inyecciones</td>
+      </tr>
+      <tr>
+        <td><strong>Ácido Fosfórico / Nítrico / Sulfúrico</strong></td>
+        <td>Incompatible (flocula a pH &lt; 4,5)</td>
+        <td>Compatible (estable en medio ácido)</td>
+        <td>Nunca acidificar el tanque que contiene humato de potasio</td>
+      </tr>
+      <tr>
+        <td><strong>Urea, Nitrato de Potasio, MAP (diluido)</strong></td>
+        <td>Compatible (a pH solución &gt; 6,0)</td>
+        <td>Compatible</td>
+        <td>Disolver primero el fertilizante mineral y añadir el humato pre-diluido al final</td>
+      </tr>
+      <tr>
+        <td><strong>Sulfato de Magnesio / Sulfatos de Zn, Fe, Cu</strong></td>
+        <td>Incompatible en tanque concentrado</td>
+        <td>Compatible (forma complejos fúlvicos estables)</td>
+        <td>Usar ácido fúlvico o quelatos EDTA/EDDHA si se co-inyectan micronutrientes</td>
+      </tr>
+      <tr>
+        <td><strong>Extracto de Algas (Ascophyllum)</strong></td>
+        <td>Compatible (ambos alcalinos/neutros)</td>
+        <td>Compatible</td>
+        <td>Sinergia comprobada en desarrollo radicular y tolerancia a estrés abiótico</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>5. Procedimiento paso a paso para una inyección sin obstrucciones</h2>
+  <ol>
+    <li><strong>Prueba de jarra previa (Jar Test):</strong> Mezcla 5 g del humato en 1 litro del agua real del cabezal de riego y déjalo reposar 30 minutos. Si aparece sedimento arenoso en el fondo, el producto contiene insolubles altos o el agua excede la dureza tolerable.</li>
+    <li><strong>Pre-dilución sin grumos:</strong> Llena el tanque madre con al menos 70 % de agua limpia antes de agregar el polvo o las escamas lentamente bajo agitación continua. Mantén la concentración madre por debajo de <strong>50 g/L (5 % p/v)</strong> para garantizar una disolución completa.</li>
+    <li><strong>Inyección en el tercio final del riego:</strong> Aplica el humato durante los últimos 20–30 minutos de la lámina de riego y finaliza con 10–15 minutos de agua limpia. Así la molécula queda retenida en los primeros 15–30 cm de profundidad donde se concentran las raíces activas, sin arrastrarse hacia capas profundas.</li>
+    <li><strong>Limpieza de filtros y líneas:</strong> Verifica el diferencial de presión en filtros de discos o anillas (120 mesh / 130 micras). Puedes verificar cualquier combinación específica de fertilizantes en nuestro <a href="/tools/tank-mix-checker">Verificador de Compatibilidad en Tanque</a>.</li>
+  </ol>
+
+  <h2>6. Errores comunes que reducen el retorno económico</h2>
+  <ul>
+    <li><strong>Aplicar una sola megadosis anual:</strong> Los suelos agrícolas mineralizan y fijan parcialmente los aportes orgánicos; fraccionar 1–2 kg/ha en 5 a 8 eventos críticos genera una respuesta radicular superior a una sola descarga de 10 kg/ha.</li>
+    <li><strong>Confundir color oscuro con concentración real:</strong> Un concentrado líquido al 12 % o un polvo adulterado con colorante o lignosulfonato tiñe el agua igual de negro que un humato de potasio puro al 80 %. Exige siempre un certificado bajo <a href="/es/humato-de-potasio-calidad-iso-19822">estándar ISO 19822</a> antes de comparar precios por kilogramo.</li>
+    <li><strong>Usar humato de sodio en suelos salinos o arcillosos:</strong> El sodio dispersa los agregados del suelo y agrava el encostramiento superficial. En agricultura de riego, exige siempre extracción con hidróxido de potasio (KOH).</li>
+  </ul>
+</LocalizedArticleLayout>

@@ -1,0 +1,193 @@
+---
+import LocalizedArticleLayout from '../../layouts/LocalizedArticleLayout.astro';
+
+const howTo = {
+  name: 'Tes Lapangan 3 Menit untuk Membedakan Kalium Humat Asli dan Palsu',
+  description:
+    'Prosedur praktis tanpa laboratorium menggunakan air bersih, cuka dapur, dan uji busa-aroma untuk mendeteksi pemalsuan batu bara mentah, natrium lignosulfonat, atau molase pada kalium humat.',
+  totalTime: 'PT3M',
+  supplies: [
+    '2 gelas bening atau botol plastik transparan',
+    'Air bersih rendah mineral (air minum kemasan/RO atau air hujan, bukan air sumur sadah)',
+    '3 sendok makan cuka dapur putih (asam asetat ~5 %, pH ~2,5)',
+    '1/2 sendok teh sampel kalium humat yang akan diuji',
+  ],
+  steps: [
+    {
+      name: 'Langkah 1 — Uji Kelarutan Air Bersih (Deteksi Batu Bara Mentah & Filler)',
+      text: 'Masukkan setengah sendok teh sampel ke dalam 200 ml air bersih bersuhu ruang lalu aduk 30 detik. Kalium humat berkualitas (≥98 % larut air) larut merata dan menyisakan sedikit sekali atau tanpa endapan berpasir di dasar gelas. Endapan hitam kasar seperti pasir atau serpihan mengambang menandakan bubuk batu bara/leonardit mentah yang belum diekstraksi.',
+    },
+    {
+      name: 'Langkah 2 — Uji Presipitasi Asam dengan Cuka Dapur (Deteksi Lignosulfonat & Pewarna)',
+      text: 'Tuangkan 3 sendok makan cuka dapur putih ke dalam larutan sampel lalu diamkan 60 detik. Berdasarkan definisi ilmiah IHSS, asam humat asli tidak larut di bawah pH 4,5 sehingga akan segera menggumpal (flokulasi) membentuk partikel hitam yang turun ke dasar gelas dan meninggalkan cairan bagian atas lebih jernih. Jika larutan tetap hitam pekat tanpa gumpalan, produk kemungkinan besar dipalsukan dengan natrium lignosulfonat, molase, atau pewarna hitam.',
+    },
+    {
+      name: 'Langkah 3 — Uji Busa dan Aroma (Konfirmasi Lignosulfonat Limbah Kertas)',
+      text: 'Kocok kuat larutan hangat dalam botol tertutup selama 10 detik lalu cium aromanya. Kalium humat asli dari leonardit hanya menghasilkan busa tipis yang cepat hilang dalam hitungan detik dan beraroma mineral tanah yang sangat samar. Sebaliknya, lignosulfonat menghasilkan busa tebal mirip sabun yang bertahan lama serta berbau manis seperti kayu basah, kertas, atau vanila.',
+    },
+    {
+      name: 'Langkah 4 — Audit COA untuk Membedakan Kalium (KOH) vs. Natrium (NaOH)',
+      text: 'Karena tes cuka tidak bisa membedakan kalium humat dari natrium humat, selalu periksa Certificate of Analysis (COA) laboratorium: pastikan metode uji ISO 19822, kadar K₂O larut 8–12 %, Natrium (Na) < 1,5 %, dan Sulfur (S) < 0,75 %.',
+    },
+  ],
+};
+
+const faqs = [
+  {
+    question: 'Apakah setiap bubuk yang membuat air langsung hitam pekat pasti kalium humat asli?',
+    answer:
+      'Tidak. Limbah pabrik kertas (natrium lignosulfonat), tetes tebu (molase), pewarna hitam industri, hingga debu karbon halus juga langsung menghitamkan air, tetapi tidak memiliki struktur makromolekul asam humat maupun kapasitas pembenah tanah jangka panjang.',
+  },
+  {
+    question: 'Bagaimana jika produk diberi cuka tetapi tidak menggumpal sama sekali?',
+    answer:
+      'Jika kemasan tertulis "Kalium Humat" atau "Asam Humat" tetapi larutan tidak membentuk gumpalan hitam saat diberi cuka (pH < 3), kemungkinan besar produk tersebut dicampur natrium lignosulfonat, molase, atau pewarna. Pengecualian tunggal: asam fulvat murni memang larut pada semua pH dan tidak menggumpal dalam cuka, namun warnanya kuning keemasan hingga cokelat madu bening — bukan hitam pekat.',
+  },
+  {
+    question: 'Bisakah tes air dan cuka di kebun membedakan kalium humat (KOH) dari natrium humat (NaOH)?',
+    answer:
+      'Tidak bisa. Keduanya sama-sama larut sempurna dalam air bersih dan sama-sama menggumpal saat diberi cuka karena gugus humatnya identik. Untuk menghindari natrium humat yang merusak tanah, Anda wajib meminta COA dari pemasok dan memverifikasi kadar Natrium (Na) < 1,5 % serta Kalium (K₂O) 8–12 %.',
+  },
+  {
+    question: 'Mengapa kadar Sulfur (S) lebih dari 0,75 % pada COA menjadi tanda bahaya pemalsuan?',
+    answer:
+      'Leonardit alami berkualitas umumnya hanya mengandung 0,2–0,6 % sulfur. Sebaliknya, natrium lignosulfonat —bahan pencampur paling umum di pasar— mengandung gugus sulfonat dengan kadar sulfur mencapai 4–8 %. Oleh karena itu, angka Sulfur > 0,75 % pada COA merupakan indikator kimia paling kuat adanya pencampuran lignosulfonat.',
+  },
+  {
+    question: 'Mengapa tidak boleh memakai air sumur bor untuk tes kelarutan di lapangan?',
+    answer:
+      'Air sumur bor yang sadah (tinggi kalsium/magnesium) atau payau dapat menyebabkan kalium humat asli pun ikut menggumpal sebagian, sehingga menghasilkan kesimpulan keliru. Gunakan selalu air minum kemasan, air RO, atau air hujan bersih saat melakukan uji kelarutan.',
+  },
+];
+
+const citations = [
+  {
+    title: 'Fertilizers and Soil Conditioners — Determination of Humic and Hydrophobic Fulvic Acids (ISO 19822:2018)',
+    source: 'International Organization for Standardization (2018)',
+    url: 'https://www.iso.org/standard/66353.html',
+  },
+  {
+    title: 'Critical Comparison of Humic Acid Test Methods and Detection of Lignosulfonate Adulteration',
+    source: 'Lamar, R. T., & Talbot, K. H. (2009). Communications in Soil Science and Plant Analysis, 40(15–16), 2309–2322',
+    url: 'https://doi.org/10.1080/00103620903111251',
+  },
+  {
+    title: 'A New Standardized Method for Quantification of Humic and Fulvic Acids (HPTA / Lamar Method)',
+    source: 'Lamar, R. T., Olk, D. C., Mayhew, L., & Bloom, P. R. (2014). Journal of AOAC International, 97(3), 721–730',
+    url: 'https://doi.org/10.5740/jaoacint.13-393',
+  },
+];
+---
+
+<LocalizedArticleLayout
+  lang="id"
+  title="Kalium Humat vs. Natrium Humat: Standar ISO 19822 dan Tes Lapangan 3 Menit untuk Mendeteksi Pemalsuan"
+  description="Panduan praktis petani, manajer kebun, dan importir Indonesia: membedakan kalium humat (KOH) asli dari natrium humat (NaOH) dan lignosulfonat melalui tes air-cuka 3 menit serta audit COA ISO 19822."
+  canonicalAnswer="Untuk mendeteksi kalium humat palsu dalam 3 menit, larutkan sampel di air bersih lalu tambahkan cuka dapur: kalium humat asli akan larut tanpa pasir dan segera menggumpal hitam di larutan asam, sedangkan lignosulfonat tetap cair dan berbusa seperti sabun. Untuk menyingkirkan natrium humat (NaOH), selalu audit COA ISO 19822 dengan syarat Na < 1,5 %, K₂O 8–12 %, dan Sulfur < 0,75 %."
+  canonicalPath="/id/cara-membedakan-kalium-humat-asli-palsu"
+  alternateUrls={{
+    en: 'https://humic.blog/quality-and-testing/farm-level-adulteration-field-test',
+    hi: 'https://humic.blog/hi/asli-nakli-potassium-humate-ki-pehchan',
+    gu: 'https://humic.blog/gu/asli-nakli-potassium-humate-olakh',
+    id: 'https://humic.blog/id/cara-membedakan-kalium-humat-asli-palsu',
+    xDefault: 'https://humic.blog/quality-and-testing/farm-level-adulteration-field-test',
+  }}
+  categoryLabel="Uji Kualitas, COA & Standar ISO 19822"
+  pubDate={new Date('2026-11-20')}
+  updatedDate={new Date('2026-11-20')}
+  readingMinutes={7}
+  faqs={faqs}
+  citations={citations}
+  howTo={howTo}
+>
+  <h2>1. Mengapa Pasar Asam Humat Rawan Pemalsuan dan Klaim Berlebihan?</h2>
+  <p>
+    Permintaan kalium humat di sektor perkebunan kelapa sawit, padi, dan hortikultura Indonesia tumbuh sangat cepat. Sayangnya, karena mata telanjang sulit membedakan berbagai bubuk hitam larut air, pasar kerap dibanjiri empat jenis produk bermasalah: <strong>natrium humat (NaOH)</strong> yang dijual dengan label kalium humat, <strong>natrium lignosulfonat</strong> (limbah pabrik kertas), <strong>bubuk batu bara lignit mentah</strong> yang belum diekstraksi, serta produk yang kadarnya digelembungkan oleh uji laboratorium kolorimetri lawas.
+  </p>
+  <p>
+    Dampaknya tidak sekadar pemborosan biaya pembelian: penggunaan natrium humat secara berulang memasukkan kadar natrium (Na⁺) berlebih ke lahan, yang menyebabkan dispersi partikel liat, pemadatan tanah, dan penghambatan serapan air akar.
+  </p>
+
+  <h2>2. Perbedaan Mendasar: Kalium Humat (KOH) vs. Natrium Humat (NaOH)</h2>
+  <p>
+    Leonardit alami tidak larut air sehingga produsen wajib mengekstraksinya dengan larutan alkali. Pilihan bahan alkali di pabrik menentukan apakah produk tersebut layak untuk pertanian atau seharusnya hanya dipakai di industri pengeboran minyak dan keramik:
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Parameter Kualitas</th>
+        <th>Kalium Humat (Ekstraksi KOH)</th>
+        <th>Natrium Humat (Ekstraksi NaOH)</th>
+        <th>Natrium Lignosulfonat (Adulteran)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Dampak pada Tanah</strong></td>
+        <td>Memperbaiki agregat, KTK, &amp; efisiensi NPK</td>
+        <td>Mendispersi liat, mengeraskan tanah, risiko salinitas</td>
+        <td>Hanya pengikat/pendispersi sementara; mudah terurai</td>
+      </tr>
+      <tr>
+        <td><strong>Kadar K₂O Larut</strong></td>
+        <td>8 % – 12 % (alami dari KOH)</td>
+        <td>&lt; 1 % (kecuali ditambah KCl terpisah)</td>
+        <td>&lt; 0,5 %</td>
+      </tr>
+      <tr>
+        <td><strong>Kadar Natrium (Na)</strong></td>
+        <td>&lt; 1,0 % – 1,5 %</td>
+        <td>5 % – 12 % (berbahaya bagi tanah)</td>
+        <td>4 % – 9 %</td>
+      </tr>
+      <tr>
+        <td><strong>Kadar Sulfur (S)</strong></td>
+        <td>0,2 % – 0,6 % (&lt; 0,75 %)</td>
+        <td>0,2 % – 0,6 %</td>
+        <td>4 % – 8 % (penanda utama pemalsuan)</td>
+      </tr>
+      <tr>
+        <td><strong>Reaksi dengan Cuka (pH &lt; 3)</strong></td>
+        <td>Menggumpal (presipitasi hitam jelas)</td>
+        <td>Menggumpal (mirip kalium humat)</td>
+        <td>Tetap cair hitam, tidak menggumpal</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>3. Prosedur Tes Lapangan 3 Menit (Tanpa Laboratorium)</h2>
+  <p>
+    Sebelum melarutkan karung baru ke tangki kocor atau menandatangani penerimaan barang di gudang kebun, lakukan uji cepat berikut menggunakan <strong>air minum kemasan/RO atau air hujan</strong> (jangan memakai air sumur bor sadah):
+  </p>
+
+  <h3>Langkah 1: Uji Kelarutan Air Bersih (Deteksi Batu Bara Mentah &amp; Filler)</h3>
+  <p>
+    Masukkan 1/2 sendok teh sampel ke dalam gelas bening berisi 200 ml air bersih lalu aduk 30 detik dan diamkan 1 menit. <strong>Kalium humat grade fertigrasi (kelarutan ≥ 98 %)</strong> akan larut merata hampir tanpa endapan kasar. Jika dasar gelas dipenuhi endapan hitam berpasir atau serpihan yang tetap mengambang, sampel mengandung batu bara/leonardit mentah, abu silika tinggi, atau hasil sentrifugasi yang buruk.
+  </p>
+
+  <h3>Langkah 2: Uji Presipitasi Asam dengan Cuka Dapur (Deteksi Lignosulfonat &amp; Molase)</h3>
+  <p>
+    Tambahkan 3 sendok makan cuka dapur putih (pH sekitar 2,5) ke dalam larutan tadi, aduk sebentar, lalu amati selama 60 detik. Menurut prinsip kimia <em>International Humic Substances Society (IHSS)</em>, molekul asam humat <strong>wajib mengendap di bawah pH 4,5</strong>. Kalium humat asli akan segera pecah membentuk gumpalan (flok) hitam yang mengendap ke dasar, sementara cairan di atasnya tampak lebih bening/kecokelatan. Jika larutan tetap pekat seragam tanpa gumpalan apa pun, hampir dapat dipastikan produk didominasi lignosulfonat, molase, atau pewarna (catatan: asam fulvat murni memang tidak mengendap di cuka, tetapi warnanya kuning keemasan transparan, bukan hitam pekat).
+  </p>
+
+  <h3>Langkah 3: Uji Busa &amp; Aroma di Air Hangat</h3>
+  <p>
+    Kocok sampel dalam botol tertutup berisi air hangat selama 10 detik. Ekstrak leonardit murni hanya memunculkan sedikit buih yang pecah dalam beberapa detik dan hampir tidak berbau (sedikit aroma mineral tanah). Lignosulfonat menghasilkan busa tebal menyerupai deterjen yang awet beberapa menit disertai aroma manis kayu rebus, kertas, atau vanilin.
+  </p>
+
+  <h2>4. Standar ISO 19822:2018 &amp; 4 Tanda Bahaya pada COA</h2>
+  <p>
+    Tes lapangan sangat ampuh menyingkirkan batu bara mentah dan lignosulfonat, tetapi <strong>tidak dapat membedakan kalium humat (KOH) dari natrium humat (NaOH)</strong>. Untuk pembelian perkebunan atau impor kontainer, verifikasi Certificate of Analysis (COA) merupakan langkah wajib. Anda juga dapat mengecek angka COA secara otomatis menggunakan <a href="/tools/coa-verifier">Alat Verifikasi COA &amp; Red-Flag</a>:
+  </p>
+  <ol>
+    <li><strong>Wajib Mencantumkan Metode ISO 19822:2018 (atau Lamar / HPTA):</strong> Hindari COA yang hanya menulis "Humic Acid 85 %" tanpa menyebut metode, atau masih memakai metode <em>Colorimetric</em>. Uji kolorimetri hanya mengukur gelapnya warna larutan sehingga angka kadarnya bisa menggelembung 20–40 % akibat lignosulfonat atau abu. ISO 19822 memisahkan fraksi humat dan fulvat secara gravimetri dengan resin DAX-8 serta mengurangi kadar abu (ash-free basis).</li>
+    <li><strong>Cek Kadar Sulfur (S) &lt; 0,75 %:</strong> Angka sulfur di atas 0,75 % (apalagi 2–6 %) adalah bukti kimia paling akurat adanya pencampuran natrium/kalsium lignosulfonat.</li>
+    <li><strong>Cek Rasio Kalium vs. Natrium:</strong> Untuk serpihan/bubuk kalium humat murni, pastikan K₂O berada di kisaran <strong>8–12 %</strong> dan Natrium (Na) <strong>di bawah 1,5 %</strong> (ideal &lt; 1,0 %).</li>
+    <li><strong>Periksa Keseimbangan Massa (Mass Balance ≤ 100 %):</strong> Jumlahkan kadar Asam Humat + Asam Fulvat + K₂O + Kadar Air (Moisture 8–12 %) + Abu/Insoluble. Jika totalnya melebihi 100 % (misalnya klaim "95 % Asam Humat + 12 % K₂O"), klaim label tersebut secara fisik mustahil.</li>
+  </ol>
+
+  <p>
+    Setelah memastikan pasokan kalium humat Anda murni berstandar ISO 19822, pelajari cara memaksimalkan efisiensi pemupukannya pada lahan masam tropis melalui panduan <a href="/id/asam-humat-tanah-masam-kelapa-sawit-padi">Asam Humat untuk Tanah Masam, Kelapa Sawit &amp; Padi</a>.
+  </p>
+</LocalizedArticleLayout>

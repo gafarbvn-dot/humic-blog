@@ -40,14 +40,16 @@ const {
 } = Astro.props;
 
 const canonicalPath = `/${slug}`;
-const PAIRED_ALTS: Record<string, { hi?: string; gu?: string; ar?: string }> = {
+const PAIRED_ALTS: Record<string, { hi?: string; gu?: string; ar?: string; es?: string; id?: string }> = {
   'agronomy/complete-application-and-tank-mix-guide': {
     hi: 'https://humic.blog/hi/humic-acid-kya-hai-aur-upyog',
     gu: 'https://humic.blog/gu/humic-acid-shu-che-ane-upyog',
+    es: 'https://humic.blog/es/acido-humico-agricultura-fertirrigacion',
   },
   'quality-and-testing/farm-level-adulteration-field-test': {
     hi: 'https://humic.blog/hi/asli-nakli-potassium-humate-ki-pehchan',
     gu: 'https://humic.blog/gu/asli-nakli-potassium-humate-olakh',
+    id: 'https://humic.blog/id/cara-membedakan-kalium-humat-asli-palsu',
   },
   'crops/humic-acid-for-sugarcane': {
     hi: 'https://humic.blog/hi/ganne-ki-kheti-mein-humic-acid',
@@ -58,6 +60,10 @@ const PAIRED_ALTS: Record<string, { hi?: string; gu?: string; ar?: string }> = {
   },
   'raw-materials/raw-materials-and-extraction': {
     ar: 'https://humic.blog/ar/potassium-humate-vs-sodium-humate-guide',
+    es: 'https://humic.blog/es/humato-de-potasio-calidad-iso-19822',
+  },
+  'soil-and-sustainability/sustainability-biodiversity-food-security': {
+    id: 'https://humic.blog/id/asam-humat-tanah-masam-kelapa-sawit-padi',
   },
 };
 const alts = PAIRED_ALTS[slug];

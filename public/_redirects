@@ -6,3 +6,9 @@
 /farming-guide/ /crops 301
 /about-us /about 301
 /about-us/ /about 301
+
+# Canonical Interactive Tool URL Consolidation
+/tools/coa-red-flag-checker /tools/coa-verifier 301
+/tools/coa-red-flag-checker/ /tools/coa-verifier 301
+/tools/formulation-ph-estimator /tools/blend-ph-estimator 301
+/tools/formulation-ph-estimator/ /tools/blend-ph-estimator 301

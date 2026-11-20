@@ -1,0 +1,139 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const siteUrl = 'https://humic.blog';
+const breadcrumbs = [
+  { name: 'Humic.blog', url: siteUrl },
+  { name: 'Centro Agronómico en Español', url: `${siteUrl}/es` },
+];
+
+const guides = [
+  {
+    href: '/es/acido-humico-agricultura-fertirrigacion',
+    badge: 'Fertirrigación y Manejo en Campo',
+    title: 'Ácido Húmico y Fúlvico en Agricultura: Guía de Fertirrigación, Dosis y Compatibilidad en Tanque',
+    summary:
+      'Guía técnica para productores e ingenieros agrónomos de Latinoamérica y España: dosis por hectárea en riego por goteo para aguacate, banano, café y berries, orden de mezcla y cómo evitar la precipitación con nitrato de calcio y ácidos de bajo pH.',
+  },
+  {
+    href: '/es/humato-de-potasio-calidad-iso-19822',
+    badge: 'Calidad, Extracción e ISO 19822',
+    title: 'Humato de Potasio vs. Humato de Sodio: Estándar ISO 19822 y Cómo Detectar Adulteraciones',
+    summary:
+      'Cómo interpretar un Certificado de Análisis (COA) antes de comprar o importar, por qué el azufre superior al 0,75 % delata la adulteración con lignosulfonato de sodio y cómo evitar la dispersión de arcillas por humato de sodio.',
+  },
+];
+---
+
+<BaseLayout
+  title="Centro Agronómico de Ácidos Húmicos en Español — Fertirrigación e ISO 19822 | Humic.blog"
+  description="Enciclopedia agronómica independiente en español sobre ácido húmico, ácido fúlvico y humato de potasio: fertirrigación por goteo, compatibilidad en tanque y control de calidad ISO 19822."
+  canonicalPath="/es"
+  lang="es"
+  alternateUrls={{
+    en: 'https://humic.blog',
+    hi: 'https://humic.blog/hi',
+    gu: 'https://humic.blog/gu',
+    ar: 'https://humic.blog/ar',
+    es: 'https://humic.blog/es',
+    id: 'https://humic.blog/id',
+    xDefault: 'https://humic.blog',
+  }}
+  schemaType="collection"
+  breadcrumbs={breadcrumbs}
+>
+  <section class="bg-emerald-950 text-white border-b-4 border-amber-500">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+      <div class="inline-flex items-center gap-2 rounded-full bg-emerald-900 border border-emerald-700 px-3.5 py-1 text-xs font-semibold text-amber-400 mb-5">
+        <span class="h-2 w-2 rounded-full bg-amber-400" aria-hidden="true"></span>
+        Enciclopedia Científica Independiente &bull; IHSS e ISO 19822 &bull; Latinoamérica y España
+      </div>
+      <h1 class="font-serif text-3xl sm:text-5xl font-bold tracking-tight text-white leading-tight max-w-4xl">
+        Centro Agronómico en Español sobre Ácidos Húmicos y Fúlvicos
+      </h1>
+      <p class="mt-4 text-base sm:text-lg text-emerald-100/90 leading-relaxed max-w-3xl">
+        Referencias técnicas neutrales —sin marcas ni patrocinios comerciales— diseñadas para agricultores tecnificados, asesores de fertirrigación e importadores de bioestimulantes en México, Perú, Chile, Colombia, Ecuador, Centroamérica y España.
+      </p>
+      <div class="mt-6 flex flex-wrap gap-3">
+        <a
+          href="/es/acido-humico-agricultura-fertirrigacion"
+          class="inline-flex items-center rounded-lg bg-amber-500 hover:bg-amber-400 px-5 py-2.5 text-sm font-bold text-emerald-950 shadow-sm transition-colors"
+        >
+          Guía de Fertirrigación &rarr;
+        </a>
+        <a
+          href="/es/humato-de-potasio-calidad-iso-19822"
+          class="inline-flex items-center rounded-lg bg-emerald-900 hover:bg-emerald-800 border border-emerald-700 px-5 py-2.5 text-sm font-semibold text-white transition-colors"
+        >
+          Calidad ISO 19822 y COA &rarr;
+        </a>
+        <a
+          href="/tools/coa-verifier"
+          class="inline-flex items-center rounded-lg bg-white/10 hover:bg-white/15 border border-white/20 px-4 py-2.5 text-sm font-semibold text-emerald-100 transition-colors"
+        >
+          Verificador de COA (EN)
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-12 space-y-12" data-pagefind-body>
+    <!-- Canonical Answer Box -->
+    <section class="rounded-2xl border-l-4 border-amber-500 bg-amber-50/70 p-6 shadow-xs">
+      <div class="text-xs font-bold uppercase tracking-wider text-amber-900 mb-2">
+        Principio Agronómico Fundamental
+      </div>
+      <p class="text-sm sm:text-base leading-relaxed text-slate-800 m-0">
+        Las sustancias húmicas derivadas de leonardita oxidada no sustituyen a la fertilización mineral NPK, sino que actúan como acondicionadores orgánicos de alta capacidad de intercambio catiónico (CIC). En sistemas de riego por goteo, el <strong>humato de potasio (KOH)</strong> optimiza la estructura del bulbo húmedo y la eficiencia nutricional, mientras que el <strong>ácido fúlvico</strong> permanece soluble en soluciones ácidas y aplicaciones foliares.
+      </p>
+    </section>
+
+    <!-- Featured Guides -->
+    <section class="space-y-5">
+      <div>
+        <h2 class="font-serif text-2xl sm:text-3xl font-bold text-emerald-950">
+          Guías Técnicas Destacadas en Español
+        </h2>
+        <p class="mt-1 text-sm text-slate-600">
+          Basadas en metodologías internacionales IHSS, HPTA/Lamar e ISO 19822:2018.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 gap-5">
+        {guides.map((g) => (
+          <article class="rounded-2xl bg-white border border-slate-200 hover:border-amber-500 p-6 sm:p-7 shadow-xs transition-colors">
+            <span class="inline-flex items-center rounded-full bg-emerald-950/5 border border-emerald-900/15 px-3 py-0.5 text-xs font-semibold text-emerald-900 mb-2.5">
+              {g.badge}
+            </span>
+            <h3 class="font-serif text-xl sm:text-2xl font-bold text-emerald-950 leading-snug">
+              <a href={g.href} class="hover:text-emerald-700 underline decoration-transparent hover:decoration-amber-500 underline-offset-4">
+                {g.title}
+              </a>
+            </h3>
+            <p class="mt-2.5 text-sm sm:text-base text-slate-700 leading-relaxed">{g.summary}</p>
+            <div class="mt-4">
+              <a href={g.href} class="inline-flex items-center gap-1.5 rounded-lg bg-emerald-900 hover:bg-emerald-950 px-4 py-2 text-xs font-bold text-white transition-colors">
+                Leer guía completa &rarr;
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- Interactive Tools CTA -->
+    <section class="rounded-2xl bg-emerald-950 text-white p-6 sm:p-8 space-y-4">
+      <div class="text-xs font-bold uppercase tracking-wider text-amber-400">Herramientas Gratuitas de Campo y Laboratorio</div>
+      <h2 class="font-serif text-2xl font-bold text-white m-0">Calcula dosis, compatibilidad en tanque y calidad de COA</h2>
+      <p class="text-sm text-emerald-100/90 leading-relaxed max-w-2xl">
+        Utiliza nuestras calculadoras técnicas (en interfaz rápida en inglés) para estimar dosis de fertirrigación, prevenir obstrucciones de goteros con fertilizantes cálcicos o ácidos, y auditar certificados de análisis ISO 19822 antes de importar.
+      </p>
+      <div class="flex flex-wrap gap-2.5 pt-1">
+        <a href="/tools/dosage-calculator" class="rounded-lg bg-amber-500 hover:bg-amber-400 px-4 py-2.5 text-xs font-bold text-emerald-950">Calculadora de Dosis &rarr;</a>
+        <a href="/tools/tank-mix-checker" class="rounded-lg bg-emerald-900 hover:bg-emerald-800 border border-emerald-700 px-4 py-2.5 text-xs font-semibold text-white">Compatibilidad en Tanque &rarr;</a>
+        <a href="/tools/coa-verifier" class="rounded-lg bg-emerald-900 hover:bg-emerald-800 border border-emerald-700 px-4 py-2.5 text-xs font-semibold text-white">Auditoría de COA &rarr;</a>
+        <a href="/tools/blend-ph-estimator" class="rounded-lg bg-emerald-900 hover:bg-emerald-800 border border-emerald-700 px-4 py-2.5 text-xs font-semibold text-white">Estimador de pH B2B &rarr;</a>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

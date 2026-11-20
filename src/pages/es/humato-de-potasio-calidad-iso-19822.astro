@@ -1,0 +1,185 @@
+---
+import LocalizedArticleLayout from '../../layouts/LocalizedArticleLayout.astro';
+
+const faqs = [
+  {
+    question: '¿Por qué es peligroso aplicar humato de sodio en lugar de humato de potasio en agricultura?',
+    answer:
+      'El humato de sodio se fabrica usando hidróxido de sodio (sosa cáustica, NaOH), más barato que el hidróxido de potasio (KOH). Aunque ambos disuelven la leonardita y oscurecen el agua, el sodio (Na⁺) desplaza al calcio de las arcillas, provocando dispersión de agregados, sellado superficial, menor infiltración y toxicidad foliar en cultivos sensibles como aguacate, cítricos y berries.',
+  },
+  {
+    question: '¿Por qué un contenido de azufre superior al 0,75 % en el COA es una señal de alerta de adulteración?',
+    answer:
+      'La leonardita natural de alta calidad rara vez supera 0,3–0,6 % de azufre total. En cambio, el lignosulfonato de sodio —un subproducto barato de la industria papelera usado frecuentemente para adulterar humatos— contiene entre 4 % y 8 % de azufre ligado a grupos sulfonato. Por ello, un valor de azufre superior a 0,75 % en un Certificado de Análisis indica casi siempre adulteración con lignosulfonatos.',
+  },
+  {
+    question: '¿Qué diferencia existe entre el método ISO 19822 (Lamar/HPTA) y el método colorimétrico tradicional?',
+    answer:
+      'El método colorimétrico mide únicamente cuánto oscurece la luz una solución; no distingue entre ácido húmico genuino, lignosulfonato, melaza ni colorantes negros, inflando los resultados entre un 15 % y un 40 %. El estándar ISO 19822:2018 (basado en el método Lamar/HPTA) separa gravimétricamente las fracciones húmica y fúlvica hidrofóbica mediante resina DAX-8 y descuenta las cenizas inorgánicas, reflejando el contenido real.',
+  },
+  {
+    question: '¿Cómo puedo saber en un COA si el producto realmente se extrajo con KOH (potasio) y no con NaOH (sodio)?',
+    answer:
+      'Revisa simultáneamente tres parámetros en el Certificado de Análisis: el óxido de potasio soluble (K₂O) debe ubicarse entre 8 % y 12 % en polvos o escamas estándar (sin añadir KCl aparte), el sodio total (Na) debe ser inferior al 1,5 % (idealmente < 1,0 %), y el pH de una solución al 1 % suele situarse entre 9,0 y 10,5.',
+  },
+  {
+    question: '¿Un producto etiquetado como "95 % ácido húmico" es físicamente posible?',
+    answer:
+      'No en un humato de potasio comercial extraído de leonardita. Para solubilizar el ácido húmico se requiere incorporar entre 8 % y 12 % de K₂O, además de contener inevitablemente 8–12 % de humedad residual y 5–15 % de cenizas minerales. Por balance de masas, un humato de potasio de grado premium rara vez supera el 65–75 % de ácido húmico real medido por ISO 19822.',
+  },
+];
+
+const citations = [
+  {
+    title: 'Fertilizers and Soil Conditioners — Determination of Humic and Hydrophobic Fulvic Acids (ISO 19822:2018)',
+    source: 'International Organization for Standardization (2018)',
+    url: 'https://www.iso.org/standard/66353.html',
+  },
+  {
+    title: 'A New Standardized Method for Quantification of Humic and Fulvic Acids (HPTA / Lamar Method)',
+    source: 'Lamar, R. T., Olk, D. C., Mayhew, L., & Bloom, P. R. (2014). Journal of AOAC International, 97(3), 721–730',
+    url: 'https://doi.org/10.5740/jaoacint.13-393',
+  },
+  {
+    title: 'Critical Comparison of Humic Acid Test Methods and Detection of Lignosulfonate Adulteration',
+    source: 'Lamar, R. T., & Talbot, K. H. (2009). Communications in Soil Science and Plant Analysis, 40(15–16), 2309–2322',
+    url: 'https://doi.org/10.1080/00103620903111251',
+  },
+];
+---
+
+<LocalizedArticleLayout
+  lang="es"
+  title="Humato de Potasio vs. Humato de Sodio: Estándar ISO 19822 y Cómo Detectar Adulteraciones"
+  description="Guía de auditoría técnica para agricultores, distribuidores e importadores: diferencias agronómicas entre humato de potasio (KOH) y humato de sodio (NaOH), lectura de COA e ISO 19822."
+  canonicalAnswer="Para uso agrícola exige siempre humato de potasio extraído con KOH (sodio < 1,5 %, K₂O 8–12 %) y certificado bajo ISO 19822:2018, nunca humato de sodio (NaOH), que dispersa las arcillas y degrada la infiltración del suelo. Al auditar un Certificado de Análisis (COA), rechaza lotes con azufre superior al 0,75 % o ensayos puramente colorimétricos, señales clásicas de adulteración con lignosulfonato de sodio."
+  canonicalPath="/es/humato-de-potasio-calidad-iso-19822"
+  alternateUrls={{
+    en: 'https://humic.blog/raw-materials/raw-materials-and-extraction',
+    ar: 'https://humic.blog/ar/potassium-humate-vs-sodium-humate-guide',
+    es: 'https://humic.blog/es/humato-de-potasio-calidad-iso-19822',
+    xDefault: 'https://humic.blog/raw-materials/raw-materials-and-extraction',
+  }}
+  categoryLabel="Control de Calidad, Extracción e ISO 19822"
+  pubDate={new Date('2026-11-20')}
+  updatedDate={new Date('2026-11-20')}
+  readingMinutes={7}
+  faqs={faqs}
+  citations={citations}
+>
+  <h2>1. Por qué la base de extracción (KOH vs. NaOH) define el impacto en el suelo</h2>
+  <p>
+    La leonardita cruda en su estado mineral es prácticamente insoluble en agua. Para transformarla en escamas, cristales o polvo soluble apto para fertirrigación, los fabricantes la someten a una digestión alcalina que convierte los ácidos húmicos insolubles en sales solubles (humatos). El agente alcalino elegido en esa reacción industrial cambia por completo el costo de producción y el efecto agronómico en el campo.
+  </p>
+  <p>
+    El <strong>hidróxido de potasio (KOH)</strong> produce <strong>humato de potasio</strong>, aportando potasio asimilable (K₂O) y preservando la floculación natural de las partículas del suelo. En contraste, el <strong>hidróxido de sodio (NaOH, sosa cáustica)</strong> cuesta una fracción del precio del KOH y produce <strong>humato de sodio</strong> —un producto diseñado originalmente para lodos de perforación petrolera y cerámica, no para suelos agrícolas—.
+  </p>
+  <p>
+    Cuando el humato de sodio se aplica repetidamente en suelos agrícolas, el ion sodio (Na⁺) posee un gran radio hidratado que desplaza a los cationes divalentes (Ca²⁺ y Mg²⁺) del complejo arcillo-húmico. El resultado es la <strong>dispersión de las arcillas</strong>: los poros del suelo colapsan, se forman costras superficiales duras, el agua de riego se encharca en lugar de infiltrar y las raíces sufren asfixia y estrés osmótico.
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Parámetro Técnico</th>
+        <th>Humato de Potasio (Extracción KOH)</th>
+        <th>Humato de Sodio (Extracción NaOH)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Efecto sobre la estructura del suelo</strong></td>
+        <td>Promueve agregación estable e infiltración</td>
+        <td>Dispersa arcillas, compacta y genera costra superficial</td>
+      </tr>
+      <tr>
+        <td><strong>Contenido típico de K₂O soluble</strong></td>
+        <td>8 % – 12 % (natural de la extracción)</td>
+        <td>&lt; 1 % (salvo adulteración posterior con KCl)</td>
+      </tr>
+      <tr>
+        <td><strong>Contenido de Sodio (Na)</strong></td>
+        <td>&lt; 1,0 % – 1,5 %</td>
+        <td>5 % – 12 % (riesgo severo de sodificación)</td>
+      </tr>
+      <tr>
+        <td><strong>Seguridad en cultivos sensibles a sales</strong></td>
+        <td>Alta (aguacate, berries, cítricos, café)</td>
+        <td>Inaceptable; provoca necrosis marginal en hojas</td>
+      </tr>
+      <tr>
+        <td><strong>Uso industrial legítimo</strong></td>
+        <td>Agricultura, fertirrigación y bioestimulantes</td>
+        <td>Lodos de perforación petrolera, tintes y cerámica</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>2. Estándar ISO 19822:2018 frente a la inflación colorimétrica</h2>
+  <p>
+    Uno de los mayores problemas del comercio internacional de sustancias húmicas en Latinoamérica y Europa es la comparación engañosa de etiquetas. Un proveedor puede cotizar un "Humato de Potasio 85 %" a mitad de precio que un lote certificado "68 % ISO 19822", y sin embargo contener menos de la mitad de ácido húmico genuino.
+  </p>
+  <p>
+    La diferencia radica en el método analítico utilizado en el laboratorio:
+  </p>
+  <ul>
+    <li><strong>Método Colorimétrico (espectrofotometría sin purificación):</strong> Mide únicamente la intensidad del color marrón/negro de la muestra disuelta. Cualquier sustancia oscura —lignosulfonato de sodio, melaza caramelizada o carbón fino— absorbe luz y se contabiliza falsamente como "ácido húmico", inflando la cifra entre un 15 % y un 45 %.</li>
+    <li><strong>Método Gravimétrico Clásico (CDFA / antiguo estándar sin corrección de cenizas):</strong> Precipita el ácido húmico con ácido clorhídrico, pero a menudo omite la calcinación en mufla para descontar arcillas, sílice y sales co-precipitadas, sobreestimando la pureza real.</li>
+    <li><strong>Estándar ISO 19822:2018 (Método Lamar / HPTA):</strong> Es el referente internacional moderno adoptado por la industria regulada. Separa la fracción de ácido húmico por precipitación ácida (pH 1), descuenta rigurosamente las cenizas inorgánicas (base libre de cenizas) y utiliza resina hidrofóbica DAX-8 para aislar el ácido fúlvico verdadero, excluyendo azúcares, melazas y lignosulfonatos.</li>
+  </ul>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Método de Análisis</th>
+        <th>Detecta Lignosulfonato / Melaza</th>
+        <th>Descuenta Cenizas Minerales</th>
+        <th>Confiabilidad en Compra B2B</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>ISO 19822:2018 (HPTA / Lamar)</strong></td>
+        <td>Sí (resina DAX-8 + gravimetría)</td>
+        <td>Sí (libre de humedad y cenizas)</td>
+        <td>Estándar de oro internacional</td>
+      </tr>
+      <tr>
+        <td><strong>CDFA (California)</strong></td>
+        <td>Parcial (solo mide fracción húmica)</td>
+        <td>Sí en ácido húmico</td>
+        <td>Alta para ácido húmico; no cuantifica fúlvico</td>
+      </tr>
+      <tr>
+        <td><strong>Colorimétrico / Titulación antigua</strong></td>
+        <td>No (cuenta aditivos oscuros como húmico)</td>
+        <td>No</td>
+        <td>Baja; propenso a inflación de etiquetas</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>3. Cómo auditar un Certificado de Análisis (COA) en 5 minutos</h2>
+  <p>
+    Antes de aprobar un contenedor importado o seleccionar un proveedor de materia prima para formulación de bioestimulantes, revisa estas cinco banderas rojas directamente en el COA. También puedes ingresar los datos del lote en nuestra herramienta gratuita <a href="/tools/coa-verifier">Auditor de COA y Detector de Señales de Alerta</a>:
+  </p>
+  <ol>
+    <li><strong>Azufre total (S) &gt; 0,75 %:</strong> Es el marcador químico más confiable contra la adulteración con <strong>lignosulfonato de sodio o calcio</strong> (residuo de pulpa de papel). La leonardita genuina suele reportar entre 0,2 % y 0,6 % de azufre; cualquier valor superior a 0,75 % —y especialmente entre 2 % y 6 %— delata mezcla con lignosulfonatos.</li>
+    <li><strong>Sodio (Na) &gt; 1,5 %:</strong> Confirma que la extracción se realizó con NaOH (humato de sodio) o con una mezcla barata KOH/NaOH, o que se incorporó lignosulfonato sódico.</li>
+    <li><strong>Ausencia del método analítico declarado:</strong> Si el COA simplemente dice "Ácido Húmico: 80 %" sin citar <em>ISO 19822</em>, <em>IHSS</em> o <em>CDFA</em>, exige el reporte original de un laboratorio acreditado (ISO/IEC 17025).</li>
+    <li><strong>Balance de masas imposible (&gt; 100 %):</strong> Suma el % de ácido húmico + % de ácido fúlvico + % de K₂O + % de humedad + % de cenizas/insolubles. Si la suma supera 100 % (por ejemplo, 85 % húmico + 12 % K₂O + 10 % humedad + 10 % cenizas = 117 %), el análisis está inflado o fabricado.</li>
+    <li><strong>Insolubles en agua &gt; 2 % para grados de fertirrigación:</strong> Los polvos de baja centrifugación conservan sílice fina y partículas de carbón que obstruyen rápidamente goteros autocompensados. Para riego por goteo exige solubilidad en agua ≥ 98–99 %.</li>
+  </ol>
+
+  <h2>4. Pruebas rápidas de verificación antes de llevar el lote a campo</h2>
+  <p>
+    Aunque la cuantificación exacta requiere laboratorio, cualquier técnico agrícola puede descartar falsificaciones evidentes con dos pruebas sencillas usando agua limpia (preferiblemente purificada o de lluvia, nunca agua de pozo dura):
+  </p>
+  <ul>
+    <li><strong>Prueba de precipitación ácida (vinagre blanco):</strong> Disuelve media cucharadita del producto en un vaso transparente con agua limpia y añade 3 cucharadas de vinagre blanco (pH ~2,5). Un <strong>humato de potasio auténtico</strong> perderá su estabilidad de inmediato y formará grumos o flóculos negros visibles que decantan hacia el fondo, dejando un líquido superior más claro. Si la solución permanece completamente líquida y oscura sin precipitar, el producto probablemente contiene lignosulfonato, melaza o colorante (o es ácido fúlvico puro, cuyo color es ámbar dorado, no negro opaco).</li>
+    <li><strong>Prueba de espuma y olor en agua tibia:</strong> Agita vigorosamente la mezcla en un frasco cerrado. La leonardita genuina desprende un olor mineral terroso muy tenue y su espuma se disipa en segundos. El lignosulfonato genera espuma densa tipo jabón que persiste varios minutos y despide un olor dulce a madera cocida, papel o vainillina.</li>
+  </ul>
+  <p>
+    Recuerda una limitación clave: la prueba del vinagre detecta lignosulfonatos y carbón insoluble, pero <strong>no distingue entre humato de potasio y humato de sodio</strong> (ambos precipitan igual en ácido). Por eso, la única defensa definitiva contra el sodio es exigir el análisis elemental (Na &lt; 1,5 % y K₂O 8–12 %) y el ensayo ISO 19822 en cada compra. Si ya verificaste la calidad de tu lote, revisa nuestra <a href="/es/acido-humico-agricultura-fertirrigacion">Guía de Fertirrigación y Compatibilidad en Tanque</a> para aplicarlo de forma segura en campo.
+  </p>
+</LocalizedArticleLayout>

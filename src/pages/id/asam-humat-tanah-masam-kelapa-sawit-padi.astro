@@ -1,0 +1,185 @@
+---
+import LocalizedArticleLayout from '../../layouts/LocalizedArticleLayout.astro';
+
+const faqs = [
+  {
+    question: 'Apakah asam humat bisa menggantikan kapur dolomit pada tanah masam Ultisol atau Oxisol?',
+    answer:
+      'Tidak sepenuhnya. Kapur pertanian (dolomit atau kalsit) tetap diperlukan untuk menetralkan kemasaman massal tanah dalam tonase besar (1–3 ton/ha) dan memasok Ca²⁺/Mg²⁺. Namun, asam humat bekerja sinergis bersama dolomit: gugus karboksilatnya langsung mengkelat aluminium bebas (Al³⁺) di sekitar rizosfer, mempercepat pemulihan perakaran, dan meningkatkan daya serap pupuk NPK.',
+  },
+  {
+    question: 'Mengapa pupuk fosfat (SP-36, TSP, Rock Phosphate) sering kurang efektif pada tanah masam tropis?',
+    answer:
+      'Pada pH tanah di bawah 5,5, kelarutan ion aluminium (Al³⁺) dan besi (Fe³⁺) melonjak tajam. Kedua kation tersebut segera bereaksi dengan ion fosfat (H₂PO₄⁻) membentuk endapan Al-fosfat dan Fe-fosfat yang tidak larut, sehingga hingga 60–80 % pupuk fosfor terikat di tanah. Asam humat bersaing menempati situs pengikatan oksida Al/Fe tersebut sehingga porsi fosfor tersedia bagi akar meningkat.',
+  },
+  {
+    question: 'Berapa dosis kalium humat yang tepat untuk kelapa sawit menghasilkan (TM) dan padi sawah?',
+    answer:
+      'Untuk kalium humat konsentrat larut air (kadar substansi humat 70–80 % standar ISO 19822), dosis acuan pada kelapa sawit TM adalah 15–30 gram per pokok per aplikasi (2–3 kali/tahun melalui piringan atau dicampur/dilapis tipis pada pupuk granular), sedangkan pada padi sawah 1,5–2,5 kg/ha pada persiapan lahan/pemupukan dasar dan diulang 1 kg/ha saat anakan aktif.',
+  },
+  {
+    question: 'Bolehkah kalium humat dicampur langsung dengan pupuk NPK atau urea sebelum ditabur?',
+    answer:
+      'Ya, kalium humat berbentuk bubuk atau serpihan kering dapat dicampur fisik (dry coating) dengan urea, NPK majemuk, atau SP-36 sesaat sebelum ditebar (sebaiknya diaplikasikan pada hari yang sama agar tidak menggumpal oleh kelembapan udara). Untuk larutan kocor, hindari mencampur kalium humat dalam satu tangki dengan kalsium nitrat atau larutan asam ber-pH di bawah 4,5.',
+  },
+  {
+    question: 'Apakah asam humat mampu mengurangi pencucian pupuk di daerah bercurah hujan tinggi seperti Sumatra dan Kalimantan?',
+    answer:
+      'Ya. Tanah mineral masam tropis (Ultisol/Oxisol) umumnya didominasi liat kaolinit ber-KTK rendah (&lt; 10 cmol(+)/kg), sehingga kalium (K⁺) dan amonium (NH₄⁺) mudah tercuci oleh hujan lebat. Asam humat memiliki KTK sangat tinggi (200–500 cmol(+)/kg) sehingga membantu menahan kation hara di lapisan olah akar lebih lama.',
+  },
+];
+
+const citations = [
+  {
+    title: 'Humic Substances and Plant Growth: A Meta-Analysis of Soil Type and Crop Response',
+    source: 'Rose, M. T., Patti, A. F., Little, K. R., Brown, A. L., Jackson, W. R., & Cavagnaro, T. R. (2014). Advances in Agronomy, 124, 37–89',
+    url: 'https://doi.org/10.1016/B978-0-12-800138-7.00002-4',
+  },
+  {
+    title: 'Alleviation of Aluminum Toxicity and Phosphorus Fixation in Acid Tropical Soils by Humic Acids',
+    source: 'Hue, N. V., Craddock, G. R., & Adams, F. (1986). Soil Science Society of America Journal, 50(1), 28–34',
+    url: 'https://doi.org/10.2136/sssaj1986.03615995005000010006x',
+  },
+  {
+    title: 'Soil Organic Matter and Nutrient Use Efficiency in Humid Tropical Agroecosystems',
+    source: 'Canellas, L. P., Olivares, F. L., Aguiar, N. O., et al. (2015). Scientia Horticulturae, 196, 15–27',
+    url: 'https://doi.org/10.1016/j.scienta.2015.09.013',
+  },
+];
+---
+
+<LocalizedArticleLayout
+  lang="id"
+  title="Asam Humat untuk Tanah Masam Tropis: Meningkatkan Efisiensi Pupuk pada Padi, Kelapa Sawit & Hortikultura"
+  description="Panduan agronomi lengkap untuk tanah masam tropis (Ultisol, Oxisol, laterit) di Indonesia: membebaskan fosfor terikat Al³⁺/Fe³⁺, meningkatkan KTK tanah, dan dosis praktis kelapa sawit, padi, serta cabai."
+  canonicalAnswer="Pada tanah masam tropis (Ultisol/Oxisol, pH 4,2–5,5), kalium humat dari leonardit meningkatkan efisiensi pupuk NPK dengan mengkelat aluminium (Al³⁺) dan besi (Fe³⁺) bebas yang memfiksasi fosfor, sekaligus menaikkan Kapasitas Tukar Kation (KTK) agar kalium dan amonium tidak mudah tercuci hujan. Gunakan 15–30 g/pokok pada kelapa sawit atau 1,5–2,5 kg/ha pada padi dan hortikultura."
+  canonicalPath="/id/asam-humat-tanah-masam-kelapa-sawit-padi"
+  alternateUrls={{
+    en: 'https://humic.blog/soil-and-sustainability/sustainability-biodiversity-food-security',
+    id: 'https://humic.blog/id/asam-humat-tanah-masam-kelapa-sawit-padi',
+    xDefault: 'https://humic.blog/soil-and-sustainability/sustainability-biodiversity-food-security',
+  }}
+  categoryLabel="Tanah Masam Tropis & Efisiensi Pemupukan"
+  pubDate={new Date('2026-11-20')}
+  updatedDate={new Date('2026-11-20')}
+  readingMinutes={7}
+  faqs={faqs}
+  citations={citations}
+>
+  <h2>1. Tantangan Utama Tanah Masam Tropis Indonesia (Ultisol, Oxisol &amp; Laterit)</h2>
+  <p>
+    Lebih dari separuh lahan pertanian kering dan perkebunan di Sumatra, Kalimantan, Sulawesi, dan sebagian Jawa Barat didominasi tanah masam tropis jenis <strong>Ultisol (Podsolik Merah Kuning)</strong> dan <strong>Oxisol (Laterit)</strong> dengan pH berkisar antara 4,2 hingga 5,5. Curah hujan tahunan yang melampaui 2.000–3.500 mm menyebabkan pencucian intensif kation basa (Ca²⁺, Mg²⁺, K⁺) dan pelapukan mineral yang menyisakan liat kaolinit bermuatan rendah.
+  </p>
+  <p>
+    Dalam kondisi tersebut, pekebun dan petani menghadapi tiga kebocoran biaya pupuk yang sangat mahal:
+  </p>
+  <ul>
+    <li><strong>Fiksasi Fosfor oleh Al³⁺ dan Fe³⁺:</strong> Oksida aluminium dan besi yang sangat reaktif pada pH rendah langsung mengikat pupuk fosfat (SP-36, TSP, DAP, maupun NPK) menjadi senyawa tak larut sebelum sempat diserap rambut akar.</li>
+    <li><strong>Keracunan Aluminium pada Ujung Akar:</strong> Konsentrasi Al³⁺ terlarut menghambat pembelahan sel ujung akar, membuat perakaran dangkal, menebal, dan tidak mampu menjangkau air maupun hara saat musim kemarau.</li>
+    <li><strong>KTK Sangat Rendah (4–10 cmol(+)/kg):</strong> Tanah tidak memiliki cukup "situs parkir" bermuatan negatif untuk menahan pupuk Urea (NH₄⁺) dan KCl/MOP (K⁺), sehingga sebagian besar hara larut hanyut terbawa aliran permukaan dan perkolasi hujan.</li>
+  </ul>
+
+  <h2>2. Mekanisme Ilmiah Asam Humat dalam Membuka Kunci Hara</h2>
+  <p>
+    Asam humat (biasanya diaplikasikan dalam bentuk <strong>kalium humat</strong> yang diekstrak dari leonardit menggunakan KOH) bekerja sebagai <strong>pembenah tanah organik (soil conditioner)</strong> berdensitas gugus fungsi tinggi —bukan sebagai pengganti pupuk NPK dan bukan pestisida. Tiga proses kimia-biologis utama terjadi di zona perakaran:
+  </p>
+  <ol>
+    <li><strong>Kompleksasi Al³⁺ &amp; Fe³⁺ untuk Melepaskan Fosfor:</strong> Gugus karboksilat (–COOH) dan fenolat (–OH) pada makromolekul asam humat membentuk ikatan kelat organo-logam dengan ion Al³⁺ dan Fe³⁺ bebas serta melapisi permukaan mineral oksida besi/aluminium. Akibatnya, laju pengikatan fosfor menurun drastis dan efisiensi pemupukan fosfat meningkat nyata.</li>
+    <li><strong>Lonjakan KTK di Rizosfer:</strong> Dengan nilai KTK alami antara 200 hingga 500 cmol(+)/kg, aplikasi rutin kalium humat di piringan sawit atau bedengan hortikultura menciptakan penyangga bermuatan negatif yang menahan NH₄⁺, K⁺, Ca²⁺, dan Mg²⁺ tetap berada di dekat akar aktif.</li>
+    <li><strong>Stimulasi Akar Serabut &amp; Mikroba Tanah:</strong> Fraksi humat terlarut dan asam fulvat merangsang aktivitas enzim H⁺-ATPase membran akar, memperbanyak akar serabut halus serta memperbaiki struktur agregat tanah sehingga aerasi dan daya simpan air meningkat saat kemarau (El Niño).</li>
+  </ol>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Kendala Tanah Masam (pH 4,2–5,5)</th>
+        <th>Tanpa Pembenah Humat</th>
+        <th>Dengan Kalium Humat (KOH) + Pengapuran Berimbang</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Ketersediaan Fosfor (P)</strong></td>
+        <td>60–80 % pupuk P terfiksasi oleh Al³⁺ &amp; Fe³⁺</td>
+        <td>Situs Al/Fe terblokir gugus humat; serapan P lebih tinggi</td>
+      </tr>
+      <tr>
+        <td><strong>Pencucian N (NH₄⁺) &amp; K (K⁺)</strong></td>
+        <td>Tinggi saat hujan lebat karena KTK kaolinit rendah</td>
+        <td>Kation tertahan sementara di situs KTK humat (200–500 cmol/kg)</td>
+      </tr>
+      <tr>
+        <td><strong>Perkembangan Akar</strong></td>
+        <td>Pendek dan terhambat stres Al³⁺</td>
+        <td>Akar serabut lebih lebat; toleransi kekeringan meningkat</td>
+      </tr>
+      <tr>
+        <td><strong>Efisiensi Biaya Pupuk NPK</strong></td>
+        <td>Memerlukan dosis tinggi dengan respons stagnan</td>
+        <td>Efisiensi Serapan Hara (NUE) meningkat 10–25 % dalam uji lapang</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>3. Panduan Dosis &amp; Waktu Aplikasi: Kelapa Sawit, Padi &amp; Hortikultura</h2>
+  <p>
+    Semua dosis di bawah ini mengacu pada <strong>kalium humat murni larut air (bubuk/serpihan, kadar substansi humat 70–80 % metode ISO 19822)</strong>. Jika menggunakan konsentrat cair (umumnya 12–15 % asam humat), kalikan dosis berat sekitar 5–6 kali sesuai kadar bahan aktif di label. Untuk hitungan spesifik luasan lahan, gunakan <a href="/tools/dosage-calculator">Kalkulator Dosis Interaktif</a> kami.
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Komoditas</th>
+        <th>Fase &amp; Cara Aplikasi</th>
+        <th>Dosis Kalium Humat (70–80 %)</th>
+        <th>Catatan Agronomi Kunci</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Kelapa Sawit — Pembibitan (Pre/Main Nursery)</strong></td>
+        <td>Kocor ke polibag setiap 2–3 minggu</td>
+        <td>1–2 g/liter air (100–200 ml larutan/polibag)</td>
+        <td>Mempercepat pembentukan akar primer &amp; serabut sebelum tanam lapang</td>
+      </tr>
+      <tr>
+        <td><strong>Kelapa Sawit — TBM (1–3 Tahun)</strong></td>
+        <td>Tabur piringan (campur pupuk dasar) atau kocor</td>
+        <td>10–15 g/pokok, 2–3 kali/tahun</td>
+        <td>Aplikasikan setelah dolomit (beri jeda 2 minggu dari dolomit)</td>
+      </tr>
+      <tr>
+        <td><strong>Kelapa Sawit — TM (&gt;3 Tahun)</strong></td>
+        <td>Piringan &amp; gawangan mati (dicampur/dilapis ke NPK/RP)</td>
+        <td>15–30 g/pokok, 2–3 kali/tahun (2–4 kg/ha/aplikasi)</td>
+        <td>Sangat efektif dipadukan dengan Rock Phosphate atau NPK pada tanah Ultisol</td>
+      </tr>
+      <tr>
+        <td><strong>Padi Sawah</strong></td>
+        <td>Olah tanah / 7–10 HST &amp; anakan aktif (25–30 HST)</td>
+        <td>1,5–2,5 kg/ha (dasar) + 1,0 kg/ha (susulan)</td>
+        <td>Dapat dicampur merata dengan Urea/NPK sesaat sebelum ditebar</td>
+      </tr>
+      <tr>
+        <td><strong>Cabai, Tomat &amp; Hortikultura</strong></td>
+        <td>Kocor lubang tanam 7 HST, ulang tiap 14 hari</td>
+        <td>1–2 g/liter air (150–200 ml/tanaman; ~1–1,5 kg/ha)</td>
+        <td>Jangan dicampur satu tangki dengan Kalsium Nitrat (CNG)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>4. Integrasi dengan Dolomit dan Aturan Pencampuran yang Aman</h2>
+  <p>
+    Di lapangan, dua kesalahan teknis paling sering menurunkan manfaat asam humat pada tanah masam:
+  </p>
+  <ul>
+    <li><strong>Mencampur langsung dengan kapur atau kalsium terlarut dalam tangki kocor:</strong> Ion Ca²⁺ dari kalsium nitrat (Ca(NO₃)₂) atau larutan kapur akan segera menggumpalkan kalium humat menjadi endapan kalsium humat yang tidak larut dan menyumbat sprayer atau selang drip. Beri jarak 7–14 hari antara aplikasi dolomit di lahan dan kocor asam humat, atau cek kompatibilitasnya terlebih dahulu di <a href="/tools/tank-mix-checker">Alat Cek Campuran Tangki</a>.</li>
+    <li><strong>Membeli produk murah berbahan natrium humat (NaOH) atau batu bara mentah:</strong> Batu bara lignit yang belum diekstraksi (tidak larut air) membutuhkan waktu bertahun-tahun untuk aktif di tanah, sedangkan natrium humat justru membawa kadar natrium (Na) tinggi yang merusak struktur tanah liat. Pastikan Anda memeriksa kualitas produk dengan panduan <a href="/id/cara-membedakan-kalium-humat-asli-palsu">Tes Lapangan 3 Menit &amp; Standar ISO 19822</a> sebelum membeli.</li>
+  </ul>
+
+  <h2>5. Ringkasan Praktis untuk Musim Tanam Berikutnya</h2>
+  <p>
+    Asam humat memberikan imbal hasil terbaik ketika diposisikan sebagai <strong>pengungkit efisiensi pemupukan (Nutrient Use Efficiency)</strong> pada tanah masam miskin bahan organik (C-organik &lt; 1,5 %). Kombinasikan pengapuran dolomit sesuai uji pH tanah, bahan organik lokal (janjang kosong sawit atau jerami padi), pupuk NPK berimbang, dan 2–4 kg/ha kalium humat terstandar ISO 19822 per musim untuk menjaga kesehatan akar serta memaksimalkan setiap rupiah biaya pupuk.
+  </p>
+</LocalizedArticleLayout>

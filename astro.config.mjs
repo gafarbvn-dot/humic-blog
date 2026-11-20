@@ -10,7 +10,7 @@ export default defineConfig({
   compressHTML: true,
   i18n: {
     defaultLocale: 'en',
-    locales: ['en', 'hi', 'gu', 'ar'],
+    locales: ['en', 'hi', 'gu', 'ar', 'es', 'id'],
     routing: {
       prefixDefaultLocale: false,
     },

@@ -7,13 +7,23 @@ import SchemaMarkup, {
   type HowToData,
 } from '../components/SchemaMarkup.astro';
 
+export type SupportedLocale = 'en' | 'hi' | 'gu' | 'ar' | 'es' | 'id';
+
 export interface Props {
   title: string;
   description: string;
   canonicalPath?: string;
   noindex?: boolean;
-  lang?: 'en' | 'hi' | 'gu' | 'ar';
-  alternateUrls?: { en?: string; hi?: string; gu?: string; ar?: string; xDefault?: string };
+  lang?: SupportedLocale;
+  alternateUrls?: {
+    en?: string;
+    hi?: string;
+    gu?: string;
+    ar?: string;
+    es?: string;
+    id?: string;
+    xDefault?: string;
+  };
   ogImage?: string;
   schemaType?: 'website' | 'article' | 'tool' | 'glossary' | 'collection' | 'about';
   pillar?: string;
@@ -51,7 +61,6 @@ const normalizedPath = rawPath === '/' ? '' : rawPath.replace(/\/+$/, '');
 const canonicalUrl = normalizedPath ? `${siteOrigin}${normalizedPath}` : siteOrigin;
 const fullTitle = title.includes('Humic.blog') ? title : `${title} | Humic.blog`;
 const resolvedOgImage = ogImage ?? `${siteOrigin}/og-default.svg`;
-
 const dir = lang === 'ar' ? 'rtl' : 'ltr';
 
 const navLinks =
@@ -78,28 +87,45 @@ const navLinks =
             { href: '/ar/potassium-humate-vs-sodium-humate-guide', label: 'هيومات البوتاسيوم والصوديوم' },
             { href: '/tools/coa-verifier', label: 'فحص COA' },
           ]
-        : [
-            { href: '/#encyclopedia', label: 'Pillars' },
-            { href: '/crops', label: 'Crops' },
-            { href: '/manufacturing', label: 'B2B' },
-            { href: '/tools/blend-ph-estimator', label: 'Tools' },
-            { href: '/research-library', label: 'Research' },
-            { href: '/glossary', label: 'Glossary' },
-            { href: '/about', label: 'About' },
-          ];
+        : lang === 'es'
+          ? [
+              { href: '/es', label: 'Hub Español' },
+              { href: '/es/acido-humico-agricultura-fertirrigacion', label: 'Fertirrigación' },
+              { href: '/es/humato-de-potasio-calidad-iso-19822', label: 'ISO 19822' },
+              { href: '/tools/dosage-calculator', label: 'Calculadora' },
+              { href: '/tools/coa-verifier', label: 'Verificar COA' },
+            ]
+          : lang === 'id'
+            ? [
+                { href: '/id', label: 'Hub Indonesia' },
+                { href: '/id/asam-humat-tanah-masam-kelapa-sawit-padi', label: 'Tanah Masam' },
+                { href: '/id/cara-membedakan-kalium-humat-asli-palsu', label: 'Tes Asli/Palsu' },
+                { href: '/tools/dosage-calculator', label: 'Kalkulator' },
+                { href: '/tools/coa-verifier', label: 'Cek COA' },
+              ]
+            : [
+                { href: '/#encyclopedia', label: 'Pillars' },
+                { href: '/crops', label: 'Crops' },
+                { href: '/manufacturing', label: 'B2B' },
+                { href: '/tools/dosage-calculator', label: 'Tools' },
+                { href: '/research-library', label: 'Research' },
+                { href: '/glossary', label: 'Glossary' },
+                { href: '/about', label: 'About' },
+              ];
 
-const enSwitchHref = alternateUrls?.en
-  ? alternateUrls.en.replace(siteOrigin, '') || '/'
-  : '/';
-const hiSwitchHref = alternateUrls?.hi
-  ? alternateUrls.hi.replace(siteOrigin, '') || '/hi'
-  : '/hi';
-const guSwitchHref = alternateUrls?.gu
-  ? alternateUrls.gu.replace(siteOrigin, '') || '/gu'
-  : '/gu';
-const arSwitchHref = alternateUrls?.ar
-  ? alternateUrls.ar.replace(siteOrigin, '') || '/ar'
-  : '/ar';
+const toLocalHref = (url: string | undefined, fallback: string) =>
+  url ? url.replace(siteOrigin, '') || '/' : fallback;
+
+const localeOptions: Array<{ code: SupportedLocale; short: string; label: string; href: string }> = [
+  { code: 'en', short: 'EN', label: 'English', href: toLocalHref(alternateUrls?.en, '/') },
+  { code: 'hi', short: 'हिन्दी', label: 'हिन्दी (Hindi)', href: toLocalHref(alternateUrls?.hi, '/hi') },
+  { code: 'gu', short: 'ગુજરાતી', label: 'ગુજરાતી (Gujarati)', href: toLocalHref(alternateUrls?.gu, '/gu') },
+  { code: 'ar', short: 'العربية', label: 'العربية (Arabic)', href: toLocalHref(alternateUrls?.ar, '/ar') },
+  { code: 'es', short: 'ES', label: 'Español (Spanish)', href: toLocalHref(alternateUrls?.es, '/es') },
+  { code: 'id', short: 'ID', label: 'Bahasa Indonesia', href: toLocalHref(alternateUrls?.id, '/id') },
+];
+
+const currentLocale = localeOptions.find((l) => l.code === lang) ?? localeOptions[0];
 ---
 
 <!doctype html>
@@ -126,6 +152,8 @@ const arSwitchHref = alternateUrls?.ar
     {alternateUrls?.hi && <link rel="alternate" hreflang="hi" href={alternateUrls.hi} />}
     {alternateUrls?.gu && <link rel="alternate" hreflang="gu" href={alternateUrls.gu} />}
     {alternateUrls?.ar && <link rel="alternate" hreflang="ar" href={alternateUrls.ar} />}
+    {alternateUrls?.es && <link rel="alternate" hreflang="es" href={alternateUrls.es} />}
+    {alternateUrls?.id && <link rel="alternate" hreflang="id" href={alternateUrls.id} />}
     {(alternateUrls?.xDefault || alternateUrls?.en) && (
       <link rel="alternate" hreflang="x-default" href={alternateUrls?.xDefault ?? alternateUrls?.en} />
     )}
@@ -173,11 +201,12 @@ const arSwitchHref = alternateUrls?.ar
   <body class="min-h-screen flex flex-col bg-slate-50 text-slate-900 antialiased selection:bg-amber-200 selection:text-emerald-950">
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TD3Z82T6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
     <!-- Top Header -->
     <header class="sticky top-0 z-40 bg-emerald-950 text-white border-b border-emerald-900/80 shadow-sm">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="flex h-16 items-center justify-between gap-3">
-          <a href="/" class="flex items-center gap-2.5 group focus:outline-none shrink-0">
+          <a href={lang === 'en' ? '/' : `/${lang}`} class="flex items-center gap-2.5 group focus:outline-none shrink-0">
             <img src="/favicon.svg" alt="" width="30" height="30" class="rounded-md" />
             <div class="flex flex-col leading-none">
               <span class="font-serif text-lg font-bold tracking-tight text-white group-hover:text-amber-400 transition-colors">
@@ -195,12 +224,12 @@ const arSwitchHref = alternateUrls?.ar
               const isActive =
                 item.href !== '/#encyclopedia' &&
                 (normalizedPath === item.href ||
-                  (item.href === '/tools/dosage-calculator' && normalizedPath.startsWith('/tools')));
+                  (item.href.startsWith('/tools') && normalizedPath.startsWith('/tools')));
               return (
                 <a
                   href={item.href}
                   class:list={[
-                    'px-3 py-2 rounded-lg text-sm font-medium transition-colors',
+                    'px-3 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap',
                     isActive
                       ? 'bg-emerald-900 text-amber-400'
                       : 'text-emerald-100 hover:bg-emerald-900/70 hover:text-white',
@@ -212,19 +241,57 @@ const arSwitchHref = alternateUrls?.ar
             })}
           </nav>
 
-          <!-- Language Toggle + Search Trigger + Mobile Toggle -->
+          <!-- Compact 6-Language Dropdown + Search Trigger + Mobile Toggle -->
           <div class="flex items-center gap-2">
-            <div class="inline-flex items-center rounded-lg bg-emerald-900/90 border border-emerald-700/80 p-0.5 text-[11px] font-bold" aria-label="Language switcher">
-              <a href={enSwitchHref} hreflang="en" class:list={['rounded-md px-1.5 sm:px-2 py-1 transition-colors', lang === 'en' ? 'bg-amber-500 text-emerald-950' : 'text-emerald-200 hover:text-white']}>EN</a>
-              <a href={hiSwitchHref} hreflang="hi" class:list={['rounded-md px-1.5 sm:px-2 py-1 transition-colors', lang === 'hi' ? 'bg-amber-500 text-emerald-950' : 'text-emerald-200 hover:text-white']}>हिन्दी</a>
-              <a href={guSwitchHref} hreflang="gu" class:list={['hidden sm:inline-block rounded-md px-1.5 sm:px-2 py-1 transition-colors', lang === 'gu' ? 'bg-amber-500 text-emerald-950' : 'text-emerald-200 hover:text-white']}>ગુજરાતી</a>
-              <a href={arSwitchHref} hreflang="ar" class:list={['hidden sm:inline-block rounded-md px-1.5 sm:px-2 py-1 transition-colors', lang === 'ar' ? 'bg-amber-500 text-emerald-950' : 'text-emerald-200 hover:text-white']}>العربية</a>
+            <div class="relative" id="lang-dropdown-wrapper">
+              <button
+                id="lang-dropdown-btn"
+                type="button"
+                aria-haspopup="menu"
+                aria-expanded="false"
+                aria-label="Select language"
+                class="inline-flex items-center gap-1.5 rounded-lg bg-emerald-900/90 hover:bg-emerald-800 border border-emerald-700/80 px-2.5 py-1.5 text-xs font-bold text-amber-300 transition-colors cursor-pointer"
+              >
+                <svg class="h-3.5 w-3.5 text-emerald-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9 9 0 100-18 9 9 0 000 18zM3.6 9h16.8M3.6 15h16.8M12 3a15 15 0 010 18M12 3a15 15 0 000 18" />
+                </svg>
+                <span>{currentLocale.short}</span>
+                <svg class="h-3 w-3 text-emerald-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+
+              <div
+                id="lang-dropdown-menu"
+                role="menu"
+                class="hidden absolute end-0 mt-2 w-48 rounded-xl bg-white text-slate-900 border border-slate-200 shadow-xl py-1.5 z-50"
+              >
+                {localeOptions.map((opt) => (
+                  <a
+                    href={opt.href}
+                    hreflang={opt.code}
+                    role="menuitem"
+                    class:list={[
+                      'flex items-center justify-between px-3.5 py-2 text-xs font-semibold transition-colors',
+                      opt.code === lang
+                        ? 'bg-emerald-50 text-emerald-950 font-bold'
+                        : 'text-slate-700 hover:bg-slate-100 hover:text-emerald-950',
+                    ]}
+                  >
+                    <span>{opt.label}</span>
+                    {opt.code === lang && (
+                      <span class="inline-flex h-2 w-2 rounded-full bg-amber-500" aria-hidden="true"></span>
+                    )}
+                  </a>
+                ))}
+              </div>
             </div>
+
             <button
               id="open-search-btn"
               type="button"
               aria-label="Search encyclopedia"
-              class="inline-flex items-center gap-2 rounded-lg bg-emerald-900/90 hover:bg-emerald-800 border border-emerald-700/80 px-3 py-1.5 text-xs font-medium text-emerald-100 transition-colors cursor-pointer"
+              class="inline-flex items-center gap-2 rounded-lg bg-emerald-900/90 hover:bg-emerald-800 border border-emerald-700/80 px-2.5 sm:px-3 py-1.5 text-xs font-medium text-emerald-100 transition-colors cursor-pointer"
             >
               <svg class="h-4 w-4 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 105.5 5.5a7.5 7.5 0 0011.15 11.15z" />
@@ -256,20 +323,15 @@ const arSwitchHref = alternateUrls?.ar
         class="hidden md:hidden border-t border-emerald-900 bg-emerald-950 px-4 py-3 space-y-1"
       >
         <a href="/#encyclopedia" class="block rounded-lg px-3 py-2 text-sm font-medium text-emerald-100 hover:bg-emerald-900 hover:text-amber-400">Knowledge Pillars</a>
+        <a href="/crops" class="block rounded-lg px-3 py-2 text-sm font-medium text-emerald-100 hover:bg-emerald-900 hover:text-amber-400">Crop Guides</a>
         <a href="/manufacturing" class="block rounded-lg px-3 py-2 text-sm font-medium text-emerald-100 hover:bg-emerald-900 hover:text-amber-400">For Manufacturers (B2B)</a>
-        <a href="/problem-soils" class="block rounded-lg px-3 py-2 text-sm font-medium text-emerald-100 hover:bg-emerald-900 hover:text-amber-400">Problem Soils</a>
         <a href="/tools/dosage-calculator" class="block rounded-lg px-3 py-2 text-sm font-medium text-emerald-100 hover:bg-emerald-900 hover:text-amber-400">Dosage Calculator</a>
         <a href="/tools/tank-mix-checker" class="block rounded-lg px-3 py-2 text-sm font-medium text-emerald-100 hover:bg-emerald-900 hover:text-amber-400">Tank-Mix Checker</a>
         <a href="/tools/coa-verifier" class="block rounded-lg px-3 py-2 text-sm font-medium text-emerald-100 hover:bg-emerald-900 hover:text-amber-400">Humic COA Verifier</a>
-        <a href="/crops" class="block rounded-lg px-3 py-2 text-sm font-medium text-emerald-100 hover:bg-emerald-900 hover:text-amber-400">Crop Guides</a>
-        <a href="/search" class="block rounded-lg px-3 py-2 text-sm font-medium text-emerald-100 hover:bg-emerald-900 hover:text-amber-400">Search</a>
-        <a href="/tools/formulation-ph-estimator" class="block rounded-lg px-3 py-2 text-sm font-medium text-emerald-100 hover:bg-emerald-900 hover:text-amber-400">Blend pH Estimator</a>
+        <a href="/tools/blend-ph-estimator" class="block rounded-lg px-3 py-2 text-sm font-medium text-emerald-100 hover:bg-emerald-900 hover:text-amber-400">Blend pH Estimator (B2B)</a>
         <a href="/research-library" class="block rounded-lg px-3 py-2 text-sm font-medium text-emerald-100 hover:bg-emerald-900 hover:text-amber-400">Research Library</a>
         <a href="/glossary" class="block rounded-lg px-3 py-2 text-sm font-medium text-emerald-100 hover:bg-emerald-900 hover:text-amber-400">A–Z Glossary</a>
-        <a href="/tools/blend-ph-estimator" class="block rounded-lg px-3 py-2 text-sm font-medium text-emerald-100 hover:bg-emerald-900 hover:text-amber-400">Blend pH Estimator (B2B)</a>
-        <a href="/hi" class="block rounded-lg px-3 py-2 text-sm font-semibold text-amber-300 hover:bg-emerald-900">हिन्दी किसान हब (/hi)</a>
-        <a href="/gu" class="block rounded-lg px-3 py-2 text-sm font-semibold text-amber-300 hover:bg-emerald-900">ગુજરાતી ખેડૂત હબ (/gu)</a>
-        <a href="/ar" class="block rounded-lg px-3 py-2 text-sm font-semibold text-amber-300 hover:bg-emerald-900">المركز العربي للزراعة (/ar)</a>
+        <a href="/search" class="block rounded-lg px-3 py-2 text-sm font-medium text-emerald-100 hover:bg-emerald-900 hover:text-amber-400">Search</a>
         <a href="/about" class="block rounded-lg px-3 py-2 text-sm font-medium text-emerald-100 hover:bg-emerald-900 hover:text-amber-400">About &amp; Editorial Policy</a>
       </nav>
     </header>
@@ -291,7 +353,7 @@ const arSwitchHref = alternateUrls?.ar
             id="pagefind-input"
             type="search"
             autocomplete="off"
-            placeholder="Search calcium nitrate, ISO 19822, lignosulfonate, calcareous, bottle swelling..."
+            placeholder="Search calcium nitrate, ISO 19822, lignosulfonate, calcareous, sawit, aguacate..."
             class="w-full bg-transparent text-sm sm:text-base text-white placeholder:text-emerald-300/75 focus:outline-none"
           />
           <button
@@ -305,7 +367,7 @@ const arSwitchHref = alternateUrls?.ar
         </div>
         <div id="pagefind-results" class="max-h-[65vh] overflow-y-auto divide-y divide-slate-100 p-2">
           <div class="p-6 text-center text-xs text-slate-500">
-            Type any agronomic, analytical, or formulation term to search all guides, tools, and glossary definitions instantaneously.
+            Search all guides, interactive tools, and glossary definitions across English, Hindi, Gujarati, Arabic, Spanish, and Indonesian.
           </div>
         </div>
       </div>
@@ -325,7 +387,7 @@ const arSwitchHref = alternateUrls?.ar
               Humic<span class="text-amber-500">.blog</span>
             </a>
             <p class="text-sm text-emerald-200/90 leading-relaxed">
-              An independent, vendor-neutral educational encyclopedia serving farmers, agronomists, researchers, and biostimulant manufacturers worldwide.
+              An independent, vendor-neutral educational encyclopedia serving farmers, agronomists, researchers, and biostimulant manufacturers worldwide in 6 languages.
             </p>
             <p class="text-xs text-emerald-300/80 leading-relaxed">
               Editorial Independence: Zero product sponsorships, zero pesticidal or medicinal claims. All protocols align with IHSS and ISO 19822:2018 standards.
@@ -342,44 +404,42 @@ const arSwitchHref = alternateUrls?.ar
               <li><a href="/quality-and-testing" class="hover:text-amber-400 transition-colors">Quality &amp; Testing</a></li>
               <li><a href="/agronomy" class="hover:text-amber-400 transition-colors">Agronomy &amp; Application</a></li>
               <li><a href="/crops" class="hover:text-amber-400 transition-colors">Crops &amp; Field Guides</a></li>
-              <li><a href="/gardening" class="hover:text-amber-400 transition-colors">Home Gardening</a></li>
-              <li><a href="/synergies" class="hover:text-amber-400 transition-colors">Biostimulant Synergies</a></li>
               <li><a href="/manufacturing" class="hover:text-amber-400 transition-colors">Formulation &amp; Manufacturing (B2B)</a></li>
               <li><a href="/problem-soils" class="hover:text-amber-400 transition-colors">Problem Soils &amp; Climate</a></li>
               <li><a href="/regulations" class="hover:text-amber-400 transition-colors">Regulations &amp; Organic Standards</a></li>
               <li><a href="/soil-and-sustainability" class="hover:text-amber-400 transition-colors">Soil Health &amp; Sustainability</a></li>
+              <li><a href="/gardening" class="hover:text-amber-400 transition-colors">Home Gardening</a></li>
             </ul>
           </div>
 
           <div class="md:col-span-3 space-y-2.5">
             <h3 class="font-sans text-xs font-bold uppercase tracking-wider text-amber-400">
-              Interactive Tools &amp; Reference
+              Tools, Research &amp; Languages
             </h3>
             <ul class="space-y-1.5 text-sm">
               <li><a href="/tools/dosage-calculator" class="hover:text-amber-400 transition-colors">Humate &amp; Fulvic Dosage Calculator</a></li>
               <li><a href="/tools/tank-mix-checker" class="hover:text-amber-400 transition-colors">Tank-Mix Compatibility Checker</a></li>
-              <li><a href="/tools/coa-verifier" class="hover:text-amber-400 transition-colors">Humic COA Verifier</a></li>
-              <li><a href="/tools/coa-red-flag-checker" class="hover:text-amber-400 transition-colors">Full ICP-OES COA Auditor</a></li>
-              <li><a href="/tools/blend-ph-estimator" class="hover:text-amber-400 transition-colors">Blend pH &amp; Stability Estimator</a></li>
-              <li><a href="/tools/formulation-ph-estimator" class="hover:text-amber-400 transition-colors">Multi-Formula pH Simulator</a></li>
+              <li><a href="/tools/coa-verifier" class="hover:text-amber-400 transition-colors">Humic COA Red-Flag Checker</a></li>
+              <li><a href="/tools/blend-ph-estimator" class="hover:text-amber-400 transition-colors">Manufacturer Blend pH Estimator</a></li>
               <li><a href="/research-library" class="hover:text-amber-400 transition-colors">Peer-Reviewed Research Library</a></li>
               <li><a href="/glossary" class="hover:text-amber-400 transition-colors">A–Z Humic Science Glossary</a></li>
-              <li><a href="/hi" class="hover:text-amber-400 transition-colors">हिन्दी किसान केंद्र (/hi)</a></li>
-              <li><a href="/gu" class="hover:text-amber-400 transition-colors">ગુજરાતી ખેડૂત કેન્દ્ર (/gu)</a></li>
-              <li><a href="/ar" class="hover:text-amber-400 transition-colors">المركز العربي (/ar)</a></li>
-              <li><a href="/search" class="hover:text-amber-400 transition-colors">Full-Text Search (Pagefind)</a></li>
+              <li><a href="/search" class="hover:text-amber-400 transition-colors">Instant Static Search</a></li>
             </ul>
           </div>
 
           <div class="md:col-span-2 space-y-2.5">
             <h3 class="font-sans text-xs font-bold uppercase tracking-wider text-amber-400">
-              Governance &amp; Crawlers
+              Global Hubs &amp; Policy
             </h3>
             <ul class="space-y-1.5 text-sm">
-              <li><a href="/about" class="hover:text-amber-400 transition-colors">About &amp; Editorial Policy</a></li>
-              <li><a href="/methodology" class="hover:text-amber-400 transition-colors">Testing Methodology</a></li>
-              <li><a href="/llms.txt" class="hover:text-amber-400 transition-colors">AI Directory (llms.txt)</a></li>
-              <li><a href="/sitemap-index.xml" class="hover:text-amber-400 transition-colors">XML Sitemap</a></li>
+              <li><a href="/hi" class="hover:text-amber-400 transition-colors">हिन्दी (/hi)</a></li>
+              <li><a href="/gu" class="hover:text-amber-400 transition-colors">ગુજરાતી (/gu)</a></li>
+              <li><a href="/ar" class="hover:text-amber-400 transition-colors">العربية (/ar)</a></li>
+              <li><a href="/es" class="hover:text-amber-400 transition-colors">Español (/es)</a></li>
+              <li><a href="/id" class="hover:text-amber-400 transition-colors">Bahasa Indonesia (/id)</a></li>
+              <li><a href="/about" class="hover:text-amber-400 transition-colors">About &amp; Editorial</a></li>
+              <li><a href="/methodology" class="hover:text-amber-400 transition-colors">Methodology</a></li>
+              <li><a href="/llms.txt" class="hover:text-amber-400 transition-colors">llms.txt</a></li>
             </ul>
           </div>
         </div>
@@ -393,7 +453,7 @@ const arSwitchHref = alternateUrls?.ar
 
     <script is:inline>
       (function () {
-        // Mobile menu
+        // Mobile nav
         const btn = document.getElementById('mobile-nav-toggle');
         const menu = document.getElementById('mobile-nav-menu');
         if (btn && menu) {
@@ -401,6 +461,25 @@ const arSwitchHref = alternateUrls?.ar
             const isOpen = !menu.classList.contains('hidden');
             menu.classList.toggle('hidden');
             btn.setAttribute('aria-expanded', String(!isOpen));
+          });
+        }
+
+        // Compact 6-language dropdown
+        const langBtn = document.getElementById('lang-dropdown-btn');
+        const langMenu = document.getElementById('lang-dropdown-menu');
+        const langWrap = document.getElementById('lang-dropdown-wrapper');
+        if (langBtn && langMenu && langWrap) {
+          langBtn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            const open = !langMenu.classList.contains('hidden');
+            langMenu.classList.toggle('hidden');
+            langBtn.setAttribute('aria-expanded', String(!open));
+          });
+          document.addEventListener('click', function (e) {
+            if (!langWrap.contains(e.target)) {
+              langMenu.classList.add('hidden');
+              langBtn.setAttribute('aria-expanded', 'false');
+            }
           });
         }
 
@@ -444,7 +523,11 @@ const arSwitchHref = alternateUrls?.ar
         }
 
         document.addEventListener('keydown', function (e) {
-          if (e.key === 'Escape') closeSearch();
+          if (e.key === 'Escape') {
+            closeSearch();
+            if (langMenu) langMenu.classList.add('hidden');
+            if (langBtn) langBtn.setAttribute('aria-expanded', 'false');
+          }
           if (
             e.key === '/' &&
             document.activeElement &&
@@ -462,7 +545,7 @@ const arSwitchHref = alternateUrls?.ar
             const q = input.value.trim();
             if (!q) {
               resultsEl.innerHTML =
-                '<div class="p-6 text-center text-xs text-slate-500">Type any agronomic, analytical, or formulation term to search all guides, tools, and glossary definitions instantaneously.</div>';
+                '<div class="p-6 text-center text-xs text-slate-500">Search all guides, interactive tools, and glossary definitions across English, Hindi, Gujarati, Arabic, Spanish, and Indonesian.</div>';
               return;
             }
             timer = setTimeout(async function () {

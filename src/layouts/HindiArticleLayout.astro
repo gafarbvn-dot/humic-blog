@@ -9,6 +9,8 @@ export interface Props {
   canonicalPath: string;
   englishAlternateUrl: string;
   gujaratiAlternateUrl?: string;
+  spanishAlternateUrl?: string;
+  indonesianAlternateUrl?: string;
   categoryLabel: string;
   pubDate: Date;
   updatedDate?: Date;
@@ -25,6 +27,8 @@ const {
   canonicalPath,
   englishAlternateUrl,
   gujaratiAlternateUrl,
+  spanishAlternateUrl,
+  indonesianAlternateUrl,
   categoryLabel,
   pubDate,
   updatedDate,
@@ -53,6 +57,8 @@ const breadcrumbs = [
     en: englishAlternateUrl,
     hi: fullUrl,
     ...(gujaratiAlternateUrl ? { gu: gujaratiAlternateUrl } : {}),
+    ...(spanishAlternateUrl ? { es: spanishAlternateUrl } : {}),
+    ...(indonesianAlternateUrl ? { id: indonesianAlternateUrl } : {}),
     xDefault: englishAlternateUrl,
   }}
   schemaType="article"

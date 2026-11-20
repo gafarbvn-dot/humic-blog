@@ -3,12 +3,20 @@ import BaseLayout from './BaseLayout.astro';
 import type { CitationItem, FaqItem, HowToData } from '../components/SchemaMarkup.astro';
 
 export interface Props {
-  lang: 'gu' | 'ar';
+  lang: 'gu' | 'ar' | 'es' | 'id';
   title: string;
   description: string;
   canonicalAnswer: string;
   canonicalPath: string;
-  alternateUrls: { en?: string; hi?: string; gu?: string; ar?: string; xDefault?: string };
+  alternateUrls: {
+    en?: string;
+    hi?: string;
+    gu?: string;
+    ar?: string;
+    es?: string;
+    id?: string;
+    xDefault?: string;
+  };
   categoryLabel: string;
   pubDate: Date;
   updatedDate?: Date;
@@ -37,50 +45,94 @@ const {
 const siteUrl = 'https://humic.blog';
 const fullUrl = `${siteUrl}${canonicalPath}`;
 
-const ui =
-  lang === 'gu'
-    ? {
-        hubHref: '/gu',
-        hubLabel: 'ગુજરાતી ખેડૂત જ્ઞાન કેન્દ્ર',
-        badge: 'ગુજરાતી કૃષિ માર્ગદર્શિકા (IHSS અને ISO 19822 આધારિત)',
-        readTime: `વાંચન સમય: ${readingMinutes} મિનિટ`,
-        neutral: 'નિષ્પક્ષ અને વૈજ્ઞાનિક માહિતી',
-        enLinkLabel: 'Read in English →',
-        summaryTitle: 'સંક્ષિપ્ત વૈજ્ઞાનિક ઉત્તર (ઝડપી સારાંશ)',
-        faqHeading: 'ખેડૂતો દ્વારા વારંવાર પૂછાતા પ્રશ્નો (FAQ)',
-        refHeading: 'વૈજ્ઞાનિક સંદર્ભો અને આંતરરાષ્ટ્રીય ધોરણો',
-        sourceLabel: 'સ્રોત / DOI ↗',
-        footerLabel: 'ખેડૂત ઉપયોગી કેલ્ક્યુલેટર અને અન્ય ગુજરાતી ગાઇડ',
-        links: [
-          { href: '/gu', label: 'ગુજરાતી હબ' },
-          { href: '/gu/humic-acid-shu-che-ane-upyog', label: 'ઉપયોગ અને પ્રમાણ' },
-          { href: '/gu/asli-nakli-potassium-humate-olakh', label: '3-મિનિટ શુદ્ધતા ટેસ્ટ' },
-          { href: '/gu/sherdi-ni-kheti-ma-humic-acid', label: 'શેરડી ગાઇડ' },
-          { href: '/tools/dosage-calculator', label: 'માત્રા કેલ્ક્યુલેટર →', accent: true },
-          { href: '/tools/tank-mix-checker', label: 'ટેંક-મિક્સ તપાસ →', accent: true },
-        ],
-      }
-    : {
-        hubHref: '/ar',
-        hubLabel: 'المركز العربي لأحماض الهيوميك',
-        badge: 'دليل زراعي علمي (متوافق مع IHSS و ISO 19822)',
-        readTime: `وقت القراءة: ${readingMinutes} دقائق`,
-        neutral: 'محتوى علمي محايد بدون إعلانات تجارية',
-        enLinkLabel: 'Read in English →',
-        summaryTitle: 'الخلاصة العلمية المباشرة',
-        faqHeading: 'الأسئلة الشائعة للمزارعين والمهندسين الزراعيين',
-        refHeading: 'المراجع العلمية والمعايير الدولية',
-        sourceLabel: 'المصدر / DOI ↗',
-        footerLabel: 'أدوات الحقل وأدلة المركز العربي',
-        links: [
-          { href: '/ar', label: 'المركز العربي' },
-          { href: '/ar/humic-acid-saline-calcareous-soils', label: 'التربة المالحة والجيرية' },
-          { href: '/ar/potassium-humate-vs-sodium-humate-guide', label: 'هيومات البوتاسيوم والصوديوم' },
-          { href: '/tools/coa-verifier', label: 'فحص شهادة التحليل COA ←', accent: true },
-          { href: '/tools/tank-mix-checker', label: 'فحص التوافق والخلط ←', accent: true },
-          { href: '/tools/dosage-calculator', label: 'حاسبة الجرعات ←', accent: true },
-        ],
-      };
+const uiMap = {
+  gu: {
+    hubHref: '/gu',
+    hubLabel: 'ગુજરાતી ખેડૂત જ્ઞાન કેન્દ્ર',
+    badge: 'ગુજરાતી કૃષિ માર્ગદર્શિકા (IHSS અને ISO 19822 આધારિત)',
+    readTime: `વાંચન સમય: ${readingMinutes} મિનિટ`,
+    neutral: 'નિષ્પક્ષ અને વૈજ્ઞાનિક માહિતી',
+    enLinkLabel: 'Read in English →',
+    summaryTitle: 'સંક્ષિપ્ત વૈજ્ઞાનિક ઉત્તર (ઝડપી સારાંશ)',
+    faqHeading: 'ખેડૂતો દ્વારા વારંવાર પૂછાતા પ્રશ્નો (FAQ)',
+    refHeading: 'વૈજ્ઞાનિક સંદર્ભો અને આંતરરાષ્ટ્રીય ધોરણો',
+    sourceLabel: 'સ્રોત / DOI ↗',
+    footerLabel: 'ખેડૂત ઉપયોગી કેલ્ક્યુલેટર અને અન્ય ગુજરાતી ગાઇડ',
+    links: [
+      { href: '/gu', label: 'ગુજરાતી હબ' },
+      { href: '/gu/humic-acid-shu-che-ane-upyog', label: 'ઉપયોગ અને પ્રમાણ' },
+      { href: '/gu/asli-nakli-potassium-humate-olakh', label: '3-મિનિટ શુદ્ધતા ટેસ્ટ' },
+      { href: '/gu/sherdi-ni-kheti-ma-humic-acid', label: 'શેરડી ગાઇડ' },
+      { href: '/tools/dosage-calculator', label: 'માત્રા કેલ્ક્યુલેટર →', accent: true },
+      { href: '/tools/tank-mix-checker', label: 'ટેંક-મિક્સ તપાસ →', accent: true },
+    ],
+  },
+  ar: {
+    hubHref: '/ar',
+    hubLabel: 'المركز العربي لأحماض الهيوميك',
+    badge: 'دليل زراعي علمي (متوافق مع IHSS و ISO 19822)',
+    readTime: `وقت القراءة: ${readingMinutes} دقائق`,
+    neutral: 'محتوى علمي محايد بدون إعلانات تجارية',
+    enLinkLabel: 'Read in English →',
+    summaryTitle: 'الخلاصة العلمية المباشرة',
+    faqHeading: 'الأسئلة الشائعة للمزارعين والمهندسين الزراعيين',
+    refHeading: 'المراجع العلمية والمعايير الدولية',
+    sourceLabel: 'المصدر / DOI ↗',
+    footerLabel: 'أدوات الحقل وأدلة المركز العربي',
+    links: [
+      { href: '/ar', label: 'المركز العربي' },
+      { href: '/ar/humic-acid-saline-calcareous-soils', label: 'التربة المالحة والجيرية' },
+      { href: '/ar/potassium-humate-vs-sodium-humate-guide', label: 'هيومات البوتاسيوم والصوديوم' },
+      { href: '/tools/coa-verifier', label: 'فحص شهادة التحليل COA ←', accent: true },
+      { href: '/tools/tank-mix-checker', label: 'فحص التوافق والخلط ←', accent: true },
+      { href: '/tools/dosage-calculator', label: 'حاسبة الجرعات ←', accent: true },
+    ],
+  },
+  es: {
+    hubHref: '/es',
+    hubLabel: 'Centro Agronómico en Español',
+    badge: 'Guía Agronómica Independiente (IHSS e ISO 19822)',
+    readTime: `Lectura: ${readingMinutes} min`,
+    neutral: 'Contenido científico neutral sin patrocinios',
+    enLinkLabel: 'Read in English →',
+    summaryTitle: 'Resumen Técnico Canónico',
+    faqHeading: 'Preguntas Frecuentes (FAQ)',
+    refHeading: 'Referencias Científicas y Normas Internacionales',
+    sourceLabel: 'Fuente / DOI ↗',
+    footerLabel: 'Calculadoras y Guías en Español',
+    links: [
+      { href: '/es', label: 'Hub Español' },
+      { href: '/es/acido-humico-agricultura-fertirrigacion', label: 'Guía de Fertirrigación' },
+      { href: '/es/humato-de-potasio-calidad-iso-19822', label: 'Calidad ISO 19822' },
+      { href: '/tools/dosage-calculator', label: 'Calculadora de Dosis →', accent: true },
+      { href: '/tools/tank-mix-checker', label: 'Compatibilidad en Tanque →', accent: true },
+      { href: '/tools/coa-verifier', label: 'Verificador de COA →', accent: true },
+    ],
+  },
+  id: {
+    hubHref: '/id',
+    hubLabel: 'Pusat Pengetahuan Asam Humat Indonesia',
+    badge: 'Panduan Agronomi Independen (Standar IHSS & ISO 19822)',
+    readTime: `Waktu baca: ${readingMinutes} menit`,
+    neutral: 'Ilmu tanah netral tanpa promosi merek',
+    enLinkLabel: 'Read in English →',
+    summaryTitle: 'Ringkasan Ilmiah Kanonik',
+    faqHeading: 'Pertanyaan yang Sering Diajukan (FAQ)',
+    refHeading: 'Referensi Ilmiah & Standar Internasional',
+    sourceLabel: 'Sumber / DOI ↗',
+    footerLabel: 'Kalkulator Lapangan & Panduan Bahasa Indonesia',
+    links: [
+      { href: '/id', label: 'Hub Indonesia' },
+      { href: '/id/asam-humat-tanah-masam-kelapa-sawit-padi', label: 'Tanah Masam, Sawit & Padi' },
+      { href: '/id/cara-membedakan-kalium-humat-asli-palsu', label: 'Tes Asli/Palsu 3 Menit' },
+      { href: '/tools/dosage-calculator', label: 'Kalkulator Dosis →', accent: true },
+      { href: '/tools/tank-mix-checker', label: 'Cek Kompatibilitas Tangki →', accent: true },
+      { href: '/tools/coa-verifier', label: 'Verifikasi COA →', accent: true },
+    ],
+  },
+};
+
+const ui = uiMap[lang];
 
 const breadcrumbs = [
   { name: 'Humic.blog', url: siteUrl },
