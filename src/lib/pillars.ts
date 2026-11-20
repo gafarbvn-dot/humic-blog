@@ -100,9 +100,9 @@ export const PILLAR_LIST: PillarDefinition[] = [
     code: 'PILLAR 08',
     audience: 'Farmers & Agronomists',
     subtitle:
-      'Targeted soil-specific remediation guides for high-pH calcareous soils, sodic/saline irrigated belts, and low-organic-matter sandy desert soils.',
+      'Targeted soil-conditioning and abiotic stress guides for high-pH calcareous soils, acidic laterites, sandy deserts, compacted heavy clays, sodic/saline belts, and extreme weather.',
     canonicalSummary:
-      'Problem Soils & Climate translates colloid and rhizosphere chemistry into targeted field strategies for challenging environments—including iron and phosphorus lockup in high-pH calcareous soils, clay dispersion in sodic/saline belts, and extreme moisture and cation leaching in sandy arid soils.',
+      'Problem Soils & Climate translates soil colloid and rhizosphere chemistry into targeted agronomic strategies for difficult soils and extreme weather—covering calcareous iron/phosphorus lockup, acidic laterite aluminum toxicity, low-CEC sandy desert leaching, compacted heavy clay aeration, sodic/saline reclamation, and heatwave, drought, and frost stress physiology.',
   },
   {
     slug: 'regulations',
