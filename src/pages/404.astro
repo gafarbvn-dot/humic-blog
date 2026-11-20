@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Page Not Found (404)"
+  description="The requested URL no longer exists on Humic.blog. Explore our newly rebuilt peer-reviewed soil science encyclopedia, crop guides, and agronomic calculators."
+  canonicalPath="/404"
+  noindex={true}
+>
+  <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-16 sm:py-24 text-center">
+    <div class="rounded-2xl bg-white border border-slate-200 p-8 sm:p-12 shadow-xs space-y-5">
+      <span class="inline-flex items-center rounded-full bg-amber-500/15 border border-amber-500/40 px-3 py-1 text-xs font-bold uppercase tracking-wider text-amber-900">
+        HTTP 404 &bull; Page Removed or Moved
+      </span>
+      <h1 class="font-serif text-3xl sm:text-4xl font-bold text-emerald-950">
+        This Page Is No Longer Available
+      </h1>
+      <p class="text-sm sm:text-base text-slate-600 leading-relaxed max-w-xl mx-auto">
+        Humic.blog has been rebuilt as a fast, vendor-neutral soil science encyclopedia. Legacy URLs from older site versions have been retired—use the links below or search to find the updated technical guide.
+      </p>
+      <div class="pt-3 flex flex-wrap justify-center gap-3">
+        <a href="/" class="rounded-xl bg-emerald-950 hover:bg-emerald-900 px-5 py-2.5 text-sm font-semibold text-white transition-colors">
+          Encyclopedia Home
+        </a>
+        <a href="/search" class="rounded-xl bg-amber-500 hover:bg-amber-400 px-5 py-2.5 text-sm font-bold text-emerald-950 transition-colors">
+          Search Guides
+        </a>
+        <a href="/crops" class="rounded-xl bg-slate-100 hover:bg-slate-200 px-5 py-2.5 text-sm font-semibold text-emerald-950 transition-colors">
+          Crop Guides
+        </a>
+        <a href="/tools/dosage-calculator" class="rounded-xl bg-slate-100 hover:bg-slate-200 px-5 py-2.5 text-sm font-semibold text-emerald-950 transition-colors">
+          Dosage Calculator
+        </a>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

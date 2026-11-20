@@ -1,0 +1,8 @@
+# Legacy WordPress sitemap & hub redirects to new Astro 5 architecture
+/wp-sitemap.xml /sitemap-index.xml 301
+/sitemap_index.xml /sitemap-index.xml 301
+/sitemap.xml /sitemap-index.xml 301
+/farming-guide /crops 301
+/farming-guide/ /crops 301
+/about-us /about 301
+/about-us/ /about 301
