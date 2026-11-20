@@ -18,6 +18,7 @@ export default defineConfig({
   integrations: [
     mdx(),
     sitemap({
+      filter: (page) => !page.includes('/embed/'),
       changefreq: 'monthly',
       priority: 0.7,
       lastmod: new Date(),

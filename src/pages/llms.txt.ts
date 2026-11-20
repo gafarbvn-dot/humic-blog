@@ -29,6 +29,7 @@ export const GET: APIRoute = async () => {
     `- [Potassium Humate Tank-Mix Compatibility Checker](${site}/tools/tank-mix-checker): Instant Green/Amber/Red compatibility screening for mixing Potassium Humate or Fulvic Acid with Calcium Nitrate, Low-pH Acids, Urea/NPK, Seaweed Extract, L-Amino Acids, and Magnesium Sulfate.`,
     `- [Humic COA Red-Flag Checker & Verifier](${site}/tools/coa-verifier): Instant COA diagnostic checker flagging sulfur >0.75% (sodium lignosulfonate), sodium >1.5% (NaOH substitution), colorimetric inflation >85%, and water insolubles >2%.`,
     `- [Manufacturer Blend pH & Stability Estimator](${site}/tools/blend-ph-estimator): Interactive B2B liquid formulation stability tool modeling humic source, partner biostimulant, target pH slider (3.0–10.0), and water hardness.`,
+    `- [Free Embeddable Humic Science Calculators Directory](${site}/tools/embed): Open widget directory providing responsive iframe embed codes for all 4 calculators for universities, agronomy blogs, and farm portals.`,
     `- [Instant Static Search (Pagefind)](${site}/search): Full-text static search across all guides, crop schedules, tools, and glossary definitions.`,
     `- [Peer-Reviewed Humic Research Library](${site}/research-library): Curated, filterable index of 18 landmark peer-reviewed papers and international analytical/regulatory standards (Achard 1786 to ISO 19822 & EU FPR 2019/1009).`,
     `- [A–Z Humic Science Glossary](${site}/glossary): 18 standardized IHSS and ISO 19822 definitions encoded in DefinedTermSet JSON-LD.`,

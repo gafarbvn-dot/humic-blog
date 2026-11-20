@@ -1,0 +1,94 @@
+---
+import '../styles/global.css';
+
+export interface Props {
+  title: string;
+  description: string;
+  canonicalToolPath: string;
+  badge?: string;
+}
+
+const { title, description, canonicalToolPath, badge = 'Interactive Humic Science Tool' } = Astro.props;
+const siteOrigin = 'https://humic.blog';
+const normalizedPath = canonicalToolPath.startsWith('/')
+  ? canonicalToolPath.replace(/\/+$/, '')
+  : `/${canonicalToolPath.replace(/\/+$/, '')}`;
+const canonicalUrl = `${siteOrigin}${normalizedPath}`;
+---
+
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Tag Manager (GTM-TD3Z82T6) -->
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){window.dataLayer.push(arguments);}
+      gtag('js', new Date());
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-TD3Z82T6');
+    </script>
+    <title>{title} — Embeddable Widget | Humic.blog</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="noindex, follow" />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body class="bg-transparent text-slate-900 antialiased p-2 sm:p-3 selection:bg-amber-200 selection:text-emerald-950">
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TD3Z82T6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <div class="mx-auto w-full max-w-[800px] rounded-2xl border border-slate-200 bg-slate-50 shadow-xs overflow-hidden">
+      <!-- Compact Widget Title Bar -->
+      <div class="bg-emerald-950 text-white px-4 py-3 border-b-2 border-amber-500 flex flex-wrap items-center justify-between gap-2">
+        <div class="min-w-0">
+          <div class="text-[10px] font-bold uppercase tracking-wider text-amber-400 leading-none mb-1">
+            {badge}
+          </div>
+          <h1 class="font-serif text-base sm:text-lg font-bold text-white leading-snug m-0">
+            {title}
+          </h1>
+        </div>
+        <a
+          href={canonicalUrl}
+          target="_blank"
+          rel="noopener"
+          class="shrink-0 inline-flex items-center gap-1 rounded-md bg-emerald-900 hover:bg-emerald-800 border border-emerald-700/80 px-2.5 py-1 text-[11px] font-semibold text-emerald-100 transition-colors"
+        >
+          Full Guide &#8599;
+        </a>
+      </div>
+
+      <!-- Widget Body -->
+      <main class="p-3 sm:p-4">
+        <slot />
+      </main>
+
+      <!-- Clean Attribution Footer -->
+      <footer class="bg-white border-t border-slate-200 px-4 py-2.5 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-600">
+        <a
+          href={canonicalUrl}
+          target="_blank"
+          rel="noopener"
+          class="inline-flex items-center gap-1.5 font-medium text-slate-700 hover:text-emerald-900 transition-colors"
+        >
+          <span class="inline-block h-2 w-2 rounded-full bg-amber-500" aria-hidden="true"></span>
+          <span>
+            Powered by <strong class="font-bold text-emerald-950">humic.blog</strong> &mdash; Independent Humic Science Encyclopedia
+          </span>
+        </a>
+        <a
+          href={`${siteOrigin}/tools/embed`}
+          target="_blank"
+          rel="noopener"
+          class="text-[11px] font-semibold text-emerald-800 hover:text-emerald-950 underline decoration-amber-500/70 underline-offset-2"
+        >
+          Embed free tool &rarr;
+        </a>
+      </footer>
+    </div>
+  </body>
+</html>

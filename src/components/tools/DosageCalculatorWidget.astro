@@ -1,0 +1,410 @@
+---
+export interface Props {
+  isEmbed?: boolean;
+}
+
+const { isEmbed = false } = Astro.props;
+const linkTarget = isEmbed ? '_blank' : undefined;
+const linkRel = isEmbed ? 'noopener' : undefined;
+---
+
+<div data-humic-widget="dosage-calculator" data-is-embed={isEmbed ? 'true' : 'false'} class={isEmbed ? 'space-y-4' : 'space-y-6'}>
+    <div class={isEmbed ? "grid grid-cols-1 md:grid-cols-12 gap-4 items-start" : "grid grid-cols-1 lg:grid-cols-12 gap-8 items-start"}>
+      <!-- Inputs -->
+      <section aria-label="Calculator Inputs" class={isEmbed ? "md:col-span-6 rounded-2xl bg-white border border-slate-200 p-4 sm:p-5 shadow-xs space-y-5" : "lg:col-span-6 rounded-2xl bg-white border border-slate-200 p-6 sm:p-7 shadow-xs space-y-5"}>
+        <h2 class="font-serif text-xl font-bold text-emerald-950 pb-3 border-b border-slate-200">
+          1. Field &amp; Product Parameters
+        </h2>
+
+        <div>
+          <label for="product-type" class="block text-sm font-semibold text-slate-800 mb-1.5">
+            Humic / Fulvic Formulation
+          </label>
+          <select
+            id="product-type"
+            class="w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 py-2.5 text-sm text-slate-900 focus:border-emerald-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-800/20"
+          >
+            <option value="khumate_powder">Potassium Humate Soluble Powder / Flake (70–85% HA)</option>
+            <option value="fulvic_powder">Fulvic Acid Concentrated Powder (70–80% FA)</option>
+            <option value="khumate_liquid">Liquid Potassium Humate Concentrate (12% w/v HA)</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="app-method" class="block text-sm font-semibold text-slate-800 mb-1.5">
+            Application Method
+          </label>
+          <select
+            id="app-method"
+            class="w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 py-2.5 text-sm text-slate-900 focus:border-emerald-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-800/20"
+          >
+            <option value="drip">Drip Fertigation (Split Soil Injection)</option>
+            <option value="broadcast">Soil Broadcast / Basal Incorporation</option>
+            <option value="foliar">Foliar Spray (Leaf Canopy Application)</option>
+            <option value="seed">Seed Treatment (Slurry Coating)</option>
+          </select>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label for="field-area" id="area-label" class="block text-sm font-semibold text-slate-800 mb-1.5">
+              Field Area
+            </label>
+            <input
+              id="field-area"
+              type="number"
+              min="0.1"
+              step="0.5"
+              value="10"
+              class="w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 py-2.5 text-sm font-medium text-slate-900 focus:border-emerald-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-800/20"
+            />
+          </div>
+
+          <div>
+            <label for="area-unit" class="block text-sm font-semibold text-slate-800 mb-1.5">
+              Area Unit
+            </label>
+            <select
+              id="area-unit"
+              class="w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 py-2.5 text-sm text-slate-900 focus:border-emerald-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-800/20"
+            >
+              <option value="acres">Acres (ac)</option>
+              <option value="hectares">Hectares (ha)</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="seed-rate-wrapper" class="hidden rounded-xl bg-amber-50 border border-amber-200 p-4">
+          <label for="seed-rate" class="block text-xs font-bold uppercase tracking-wider text-amber-900 mb-1">
+            Estimated Seed Quantity per Hectare (kg/ha)
+          </label>
+          <input
+            id="seed-rate"
+            type="number"
+            min="1"
+            step="5"
+            value="100"
+            class="w-full rounded-lg border border-amber-300 bg-white px-3 py-2 text-sm font-medium text-slate-900 focus:border-emerald-800 focus:outline-none"
+          />
+          <p class="mt-1.5 text-xs text-amber-800">
+            Cereals typically use 100–140 kg/ha; pulses 40–80 kg/ha; small-seeded vegetables 2–10 kg/ha.
+          </p>
+        </div>
+
+        <div>
+          <label for="soil-om" class="block text-sm font-semibold text-slate-800 mb-1.5">
+            Soil Texture &amp; Native Organic Matter
+          </label>
+          <select
+            id="soil-om"
+            class="w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 py-2.5 text-sm text-slate-900 focus:border-emerald-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-800/20"
+          >
+            <option value="low">Sandy / Degraded Soil (&lt;1.5% OM) — +20% adjustment</option>
+            <option value="medium" selected>Loam / Balanced Soil (1.5–3.0% OM) — Standard rate</option>
+            <option value="high">Heavy Clay / High-OM Soil (&gt;3.0% OM) — -15% adjustment</option>
+          </select>
+        </div>
+      </section>
+
+      <!-- Live Output -->
+      <section aria-live="polite" aria-label="Recommended Dosage Output" class={isEmbed ? "md:col-span-6 rounded-2xl bg-emerald-950 text-white p-4 sm:p-5 shadow-md space-y-5" : "lg:col-span-6 rounded-2xl bg-emerald-950 text-white p-6 sm:p-7 shadow-md space-y-5"}>
+        <div class="flex items-center justify-between border-b border-emerald-800 pb-3">
+          <h2 class="font-serif text-xl font-bold text-white">
+            2. Recommended Application Rate
+          </h2>
+          <span id="out-badge" class="rounded-full bg-amber-500/20 border border-amber-500/40 px-2.5 py-0.5 text-xs font-semibold text-amber-300">
+            Drip Fertigation
+          </span>
+        </div>
+
+        <div class="rounded-xl bg-emerald-900/80 border border-emerald-800 p-5">
+          <div class="text-xs font-bold uppercase tracking-wider text-emerald-300">
+            Total Product Required (Optimal Target)
+          </div>
+          <div id="out-optimal" class="font-serif text-3xl sm:text-4xl font-bold text-amber-400 mt-1">
+            —
+          </div>
+          <div id="out-imperial" class="text-sm text-emerald-200 mt-1">
+            —
+          </div>
+          <div class="mt-4 pt-3 border-t border-emerald-800/90 grid grid-cols-2 gap-3 text-xs">
+            <div>
+              <span class="text-emerald-300 block">Conservative Min</span>
+              <strong id="out-min" class="text-white text-sm">—</strong>
+            </div>
+            <div>
+              <span class="text-emerald-300 block">Upper Limit Max</span>
+              <strong id="out-max" class="text-white text-sm">—</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 text-xs">
+          <div class="rounded-xl bg-emerald-900/50 border border-emerald-800/80 p-3.5">
+            <span class="uppercase tracking-wider font-bold text-amber-400 block mb-1">Per-Unit Rate</span>
+            <p id="out-per-unit" class="text-emerald-100 text-sm font-medium m-0">—</p>
+          </div>
+          <div class="rounded-xl bg-emerald-900/50 border border-emerald-800/80 p-3.5">
+            <span class="uppercase tracking-wider font-bold text-amber-400 block mb-1">Carrier Water / Dilution</span>
+            <p id="out-dilution" class="text-emerald-100 text-sm font-medium m-0">—</p>
+          </div>
+        </div>
+
+        <div class="rounded-xl bg-white/5 border border-emerald-800 p-4 space-y-2 text-xs text-emerald-100 leading-relaxed">
+          <div class="font-bold uppercase tracking-wider text-amber-400">Agronomic Protocol &amp; Precautions</div>
+          <p id="out-protocol" class="m-0">—</p>
+        </div>
+
+        <div class="flex flex-wrap gap-2.5 pt-1">
+          <a
+            href="/tools/tank-mix-checker" target={linkTarget} rel={linkRel}
+            class="inline-flex items-center rounded-lg bg-amber-500 hover:bg-amber-400 px-4 py-2 text-xs font-bold text-emerald-950 transition-colors"
+          >
+            Verify Tank-Mix Safety &rarr;
+          </a>
+          <a
+            href="/agronomy/complete-application-and-tank-mix-guide" target={linkTarget} rel={linkRel}
+            class="inline-flex items-center rounded-lg bg-emerald-900 hover:bg-emerald-800 border border-emerald-700 px-4 py-2 text-xs font-semibold text-white transition-colors"
+          >
+            Read Application Guide
+          </a>
+        </div>
+      </section>
+    </div>
+</div>
+
+  <script is:inline>
+    (function () {
+      // Rates per hectare (for drip/broadcast/foliar) or per 100 kg seed (for seed)
+      const DATA = {
+        khumate_powder: {
+          unit: 'kg',
+          imperialUnit: 'lbs',
+          toImperial: 2.20462,
+          drip: {
+            label: 'Drip Fertigation',
+            min: 1.0,
+            opt: 1.75,
+            max: 2.5,
+            dilution: 'Pre-dissolve 1 kg per 20 L clean water; inject across 15–20 min; 120-mesh filtration.',
+            protocol:
+              'Split across 2–4 vegetative and early reproductive cycles. Never inject simultaneously with Calcium Nitrate or strong acids; flush drip lines with clean water for 10–15 minutes afterward.',
+          },
+          broadcast: {
+            label: 'Soil Broadcast / Basal',
+            min: 4.0,
+            opt: 6.5,
+            max: 10.0,
+            dilution: 'Blend evenly with dry NPK/compost or drench in 400–600 L/ha water.',
+            protocol:
+              'Incorporate into the top 5–15 cm root zone prior to sowing or transplanting. Pairing with granular phosphorus or urea reduces localized fixation and volatilization losses.',
+          },
+          foliar: {
+            label: 'Foliar Spray',
+            min: 0.3,
+            opt: 0.45,
+            max: 0.6,
+            dilution: 'Dissolve in 350–500 L/ha water (keep spray concentration ≤ 0.15% w/v).',
+            protocol:
+              'Apply in early morning or late evening when stomata are active and temperatures are below 28 °C. Avoid spraying on open blossoms or fruit close to harvest to prevent dark humic staining.',
+          },
+          seed: {
+            label: 'Seed Treatment',
+            min: 0.15,
+            opt: 0.22,
+            max: 0.30,
+            dilution: 'Dissolve in 1.0–1.5 L water per 100 kg seed to form an even slurry.',
+            protocol:
+              'Coat seeds uniformly, shade-dry on a clean tarp until free-flowing, and sow within 24 hours. Keep concentrations conservative to prevent osmotic inhibition of radicle emergence.',
+          },
+        },
+        fulvic_powder: {
+          unit: 'kg',
+          imperialUnit: 'lbs',
+          toImperial: 2.20462,
+          drip: {
+            label: 'Drip Fertigation',
+            min: 0.5,
+            opt: 1.0,
+            max: 1.5,
+            dilution: 'Dissolve at 1 kg per 15–20 L stock water; remains soluble across pH 1–14.',
+            protocol:
+              'True fulvic acid stays soluble even in mildly acidic fertigation tanks and hard borewell water, making it ideal for micronutrient complexation in high-pH calcareous soils.',
+          },
+          broadcast: {
+            label: 'Soil Broadcast / Basal',
+            min: 1.5,
+            opt: 2.25,
+            max: 3.0,
+            dilution: 'Apply via soil drench in 300–500 L/ha water or coat onto dry basal fertilizers.',
+            protocol:
+              'Because fulvic molecules are lower molecular weight and highly mobile, combine with humic acid for long-term soil structure while fulvic accelerates immediate root-zone uptake.',
+          },
+          foliar: {
+            label: 'Foliar Spray',
+            min: 0.15,
+            opt: 0.25,
+            max: 0.40,
+            dilution: 'Dilute in 300–500 L/ha water (0.05–0.10% w/v spray concentration).',
+            protocol:
+              'Low molecular weight allows superior cuticular penetration compared to humic acid, with minimal risk of dark residue. Ideal partner for chelated iron, zinc, and manganese foliar sprays.',
+          },
+          seed: {
+            label: 'Seed Treatment',
+            min: 0.05,
+            opt: 0.085,
+            max: 0.12,
+            dilution: 'Mix into 0.8–1.2 L water per 100 kg seed.',
+            protocol:
+              'Lower rates are essential for fulvic acid due to high biological activity. Shade-dry treated seed gently before mechanical drilling.',
+          },
+        },
+        khumate_liquid: {
+          unit: 'L',
+          imperialUnit: 'US gal',
+          toImperial: 0.264172,
+          drip: {
+            label: 'Drip Fertigation',
+            min: 5.0,
+            opt: 8.0,
+            max: 12.0,
+            dilution: 'Dilute 1:10 in stock tank prior to Venturi/dosatron injection.',
+            protocol:
+              'Agitate container thoroughly before measuring. Verify 120-mesh screen filters are clean and maintain separate injection lines from calcium and acid stock tanks.',
+          },
+          broadcast: {
+            label: 'Soil Broadcast / Basal',
+            min: 15.0,
+            opt: 22.0,
+            max: 30.0,
+            dilution: 'Dilute in 300–600 L/ha carrier water for boom soil-drench or flood irrigation.',
+            protocol:
+              'Apply onto moist soil ahead of light irrigation so humic colloids move into the active 5–15 cm root zone rather than crusting on dry surface clods.',
+          },
+          foliar: {
+            label: 'Foliar Spray',
+            min: 1.5,
+            opt: 2.25,
+            max: 3.0,
+            dilution: 'Dilute in 350–500 L/ha spray volume (approx. 4–6 mL per L water).',
+            protocol:
+              'Test jar compatibility before adding micronutrients or L-amino acids. Apply during cool morning or dusk windows.',
+          },
+          seed: {
+            label: 'Seed Treatment',
+            min: 0.30,
+            opt: 0.45,
+            max: 0.60,
+            dilution: 'Add 0.5–1.0 L additional clean water per 100 kg seed for uniform coverage.',
+            protocol:
+              'Ensure seed moisture does not cause clumping in seed drills; dry in shade out of direct sunlight before planting.',
+          },
+        },
+      };
+
+      const SOIL_MULT = { low: 1.2, medium: 1.0, high: 0.85 };
+      const HA_PER_ACRE = 0.404686;
+
+      const elProduct = document.getElementById('product-type');
+      const elMethod = document.getElementById('app-method');
+      const elArea = document.getElementById('field-area');
+      const elUnit = document.getElementById('area-unit');
+      const elSoil = document.getElementById('soil-om');
+      const elSeedWrap = document.getElementById('seed-rate-wrapper');
+      const elSeedRate = document.getElementById('seed-rate');
+
+      const outBadge = document.getElementById('out-badge');
+      const outOpt = document.getElementById('out-optimal');
+      const outImp = document.getElementById('out-imperial');
+      const outMin = document.getElementById('out-min');
+      const outMax = document.getElementById('out-max');
+      const outPerUnit = document.getElementById('out-per-unit');
+      const outDilution = document.getElementById('out-dilution');
+      const outProtocol = document.getElementById('out-protocol');
+
+      function fmt(val, unit) {
+        if (val < 1 && unit === 'kg') {
+          return Math.round(val * 1000) + ' g';
+        }
+        if (val < 1 && unit === 'L') {
+          return Math.round(val * 1000) + ' mL';
+        }
+        return val.toFixed(2) + ' ' + unit;
+      }
+
+      function update() {
+        const prodKey = elProduct.value;
+        const methodKey = elMethod.value;
+        const area = Math.max(0.05, parseFloat(elArea.value) || 0);
+        const unit = elUnit.value;
+        const soilMult = methodKey === 'seed' || methodKey === 'foliar' ? 1.0 : SOIL_MULT[elSoil.value];
+
+        elSeedWrap.classList.toggle('hidden', methodKey !== 'seed');
+
+        const prod = DATA[prodKey];
+        const cfg = prod[methodKey];
+        const hectares = unit === 'acres' ? area * HA_PER_ACRE : area;
+
+        let minTotal, optTotal, maxTotal, perUnitText;
+
+        if (methodKey === 'seed') {
+          const seedKgPerHa = Math.max(1, parseFloat(elSeedRate.value) || 100);
+          const totalSeedKg = hectares * seedKgPerHa;
+          const factor = totalSeedKg / 100;
+          minTotal = cfg.min * factor;
+          optTotal = cfg.opt * factor;
+          maxTotal = cfg.max * factor;
+          perUnitText =
+            fmt(cfg.opt, prod.unit) +
+            ' / 100 kg seed (' +
+            Math.round(totalSeedKg) +
+            ' kg total seed)';
+        } else {
+          minTotal = cfg.min * hectares * soilMult;
+          optTotal = cfg.opt * hectares * soilMult;
+          maxTotal = cfg.max * hectares * soilMult;
+          const perSelectedUnit = optTotal / area;
+          perUnitText = fmt(perSelectedUnit, prod.unit) + ' per ' + (unit === 'acres' ? 'acre' : 'hectare');
+        }
+
+        const impOpt = optTotal * prod.toImperial;
+        const impMin = minTotal * prod.toImperial;
+        const impMax = maxTotal * prod.toImperial;
+
+        outBadge.textContent = cfg.label;
+        outOpt.textContent = fmt(optTotal, prod.unit);
+        outImp.textContent =
+          '≈ ' + impOpt.toFixed(2) + ' ' + prod.imperialUnit + ' (' + impMin.toFixed(2) + '–' + impMax.toFixed(2) + ' ' + prod.imperialUnit + ')';
+        outMin.textContent = fmt(minTotal, prod.unit);
+        outMax.textContent = fmt(maxTotal, prod.unit);
+        outPerUnit.textContent = perUnitText;
+        outDilution.textContent = cfg.dilution;
+        outProtocol.textContent = cfg.protocol;
+      }
+
+      var gtmTimer = null;
+      function trackDosage() {
+        clearTimeout(gtmTimer);
+        gtmTimer = setTimeout(function () {
+          window.dataLayer = window.dataLayer || [];
+          var _root = document.querySelector('[data-humic-widget="dosage-calculator"]');
+          var _payload = {
+            event: 'humic_tool_interaction',
+            tool_name: 'dosage_calculator',
+            action_detail: elProduct.value + ':' + elMethod.value + ':' + elUnit.value + ':' + elSoil.value,
+          };
+          if (_root && _root.getAttribute('data-is-embed') === 'true') {
+            _payload.is_embed = true;
+          }
+          window.dataLayer.push(_payload);
+        }, 450);
+      }
+
+      [elProduct, elMethod, elArea, elUnit, elSoil, elSeedRate].forEach(function (el) {
+        el.addEventListener('input', function () { update(); trackDosage(); });
+        el.addEventListener('change', function () { update(); trackDosage(); });
+      });
+
+      update();
+    })();
+  </script>

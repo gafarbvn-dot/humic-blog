@@ -1,0 +1,188 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import EmbedCodeBox from '../../components/EmbedCodeBox.astro';
+
+const siteUrl = 'https://humic.blog';
+const breadcrumbs = [
+  { name: 'Home', url: siteUrl },
+  { name: 'Embeddable Humic Science Calculators', url: `${siteUrl}/tools/embed` },
+];
+
+const widgets = [
+  {
+    slug: 'dosage-calculator',
+    badge: 'Field Application Calculator',
+    title: 'Potassium Humate & Fulvic Acid Dosage Calculator',
+    summary:
+      'Calculates practical Potassium Humate (70–80%) and Fulvic Acid application rates across Drip Fertigation, Soil Broadcast, Foliar Spray, and Seed Treatment in Acres or Hectares.',
+    iframeHeight: 740,
+  },
+  {
+    slug: 'tank-mix-checker',
+    badge: 'Fertigation & Spray Safety',
+    title: 'Potassium Humate Tank-Mix Compatibility Checker',
+    summary:
+      'Instant Green / Amber / Red precipitation screening for combining Potassium Humate or Fulvic Acid with Calcium Nitrate, low-pH acids, Urea/NPK, Magnesium Sulfate, Seaweed Extract, and L-Amino Acids.',
+    iframeHeight: 720,
+  },
+  {
+    slug: 'coa-verifier',
+    badge: 'ISO 19822 Quality Audit',
+    title: 'Humic Acid COA Red-Flag Checker & Verifier',
+    summary:
+      'Audits supplier Certificate of Analysis numbers to flag sodium lignosulfonate adulteration (Sulfur > 0.75%), NaOH sodium humate substitution (Sodium > 1.5%), colorimetric inflation, and drip-clogging insolubles.',
+    iframeHeight: 760,
+  },
+  {
+    slug: 'blend-ph-estimator',
+    badge: 'B2B Formulation Engineering',
+    title: 'Manufacturer Blend pH & Stability Estimator',
+    summary:
+      'Models precipitation, gelation, and shelf-life sedimentation risks when blending Potassium Humate or Acid-Soluble Potassium Fulvate with partner biostimulants across pH 3.0–10.0 and varying factory water hardness.',
+    iframeHeight: 740,
+  },
+];
+
+const faqs = [
+  {
+    question: 'Are these humic acid calculators completely free to embed on commercial and university websites?',
+    answer:
+      'Yes. All four calculators are 100% free to embed on university extension pages, agronomy blogs, farm-input dealer sites, grower cooperatives, and B2B biostimulant portals, provided the visible attribution link back to humic.blog remains intact and unmodified.',
+  },
+  {
+    question: 'Do the embedded widgets work on WordPress, Shopify, Webflow, Wix, and custom HTML sites?',
+    answer:
+      'Yes. Each widget uses a standard, zero-dependency responsive HTML iframe that works cleanly across widths from 320px (mobile) to 800px (desktop) on any CMS or static website without JavaScript conflicts or API keys.',
+  },
+  {
+    question: 'Are the embedded calculators vendor-neutral with no competing brand ads?',
+    answer:
+      'Strictly yes. Humic.blog is an independent educational encyclopedia with zero product sponsorships, zero banner ads, and zero competing brand promotions inside any widget.',
+  },
+];
+---
+
+<BaseLayout
+  title="Free Embeddable Humic Science Calculators for Agronomy Sites & Universities"
+  description="Embed free, vendor-neutral humic and fulvic acid calculators—Dosage Calculator, Tank-Mix Checker, COA Verifier, and Blend pH Estimator—on your agronomy blog, university extension, or agri-portal."
+  canonicalPath="/tools/embed"
+  schemaType="tool"
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <div class="bg-emerald-950 text-white border-b-4 border-amber-500">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-12">
+      <nav aria-label="Breadcrumb" class="mb-3 text-xs text-emerald-300 flex items-center gap-1.5">
+        <a href="/" class="hover:text-amber-400">Home</a>
+        <span>/</span>
+        <span class="text-emerald-100">Embeddable Calculators</span>
+      </nav>
+      <span class="inline-flex items-center rounded-full bg-amber-500/20 border border-amber-500/40 px-3 py-0.5 text-xs font-semibold text-amber-300 mb-3">
+        Open Agronomy Widget Directory &bull; Zero Brand Ads
+      </span>
+      <h1 class="font-serif text-3xl sm:text-4xl font-bold text-white leading-tight max-w-4xl">
+        Free Embeddable Humic Science Calculators for Agronomy Sites &amp; Universities
+      </h1>
+      <p class="mt-3 text-sm sm:text-base text-emerald-100/90 max-w-3xl leading-relaxed">
+        Add interactive, IHSS- and ISO 19822-aligned agronomy calculators directly to your crop guides, university extension resources, or dealer portals in 10 seconds. Copy any responsive iframe snippet below&mdash;no API keys, no maintenance, and no competing brand advertisements.
+      </p>
+      <div class="mt-5 flex flex-wrap gap-2">
+        {widgets.map((w) => (
+          <a
+            href={`#widget-${w.slug}`}
+            class="rounded-lg bg-emerald-900 hover:bg-emerald-800 border border-emerald-700 px-3 py-1.5 text-xs font-semibold text-emerald-100 transition-colors"
+          >
+            {w.badge} &darr;
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <div data-pagefind-body class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-10 space-y-12">
+    <!-- Usage Terms Card -->
+    <section class="rounded-2xl border-l-4 border-amber-500 bg-amber-50/70 p-6 shadow-xs space-y-2">
+      <h2 class="font-serif text-lg font-bold text-emerald-950 m-0">
+        Simple, Transparent Usage Terms
+      </h2>
+      <ul class="text-sm text-slate-800 space-y-1.5 list-disc pl-5 m-0">
+        <li><strong>Free for commercial &amp; educational use:</strong> Agronomy blogs, agricultural universities, farm advisory portals, cooperative websites, and B2B distributors may embed any or all four widgets free of charge.</li>
+        <li><strong>Keep attribution intact:</strong> Leave the included <code class="text-xs bg-white px-1.5 py-0.5 rounded border border-amber-200">Powered by humic.blog</code> attribution link visible beneath or inside the widget.</li>
+        <li><strong>Responsive &amp; lightweight:</strong> Built with zero external UI frameworks; scales cleanly from <strong>320px to 800px</strong> width and automatically receives scientific updates whenever standards evolve.</li>
+      </ul>
+    </section>
+
+    <!-- 4 Live Widget Showcases -->
+    {widgets.map((w, idx) => (
+      <section id={`widget-${w.slug}`} class="scroll-mt-24 space-y-5 pt-2 border-t border-slate-200 first:border-t-0">
+        <div class="flex flex-wrap items-start justify-between gap-3">
+          <div>
+            <span class="inline-flex items-center rounded-full bg-emerald-950/5 border border-emerald-900/15 px-3 py-0.5 text-xs font-semibold text-emerald-900 mb-2">
+              Widget {idx + 1} &bull; {w.badge}
+            </span>
+            <h2 class="font-serif text-2xl sm:text-3xl font-bold text-emerald-950 leading-snug">
+              {w.title}
+            </h2>
+            <p class="mt-1.5 text-sm text-slate-600 max-w-3xl leading-relaxed">
+              {w.summary}
+            </p>
+          </div>
+          <a
+            href={`/tools/${w.slug}`}
+            class="shrink-0 inline-flex items-center rounded-lg border border-emerald-800 bg-white hover:bg-emerald-50 px-3.5 py-2 text-xs font-bold text-emerald-950 transition-colors"
+          >
+            Open Full Tool Page &rarr;
+          </a>
+        </div>
+
+        <!-- Live Responsive Iframe Preview -->
+        <div class="rounded-2xl bg-slate-100 border border-slate-200 p-3 sm:p-5">
+          <div class="flex items-center justify-between gap-2 mb-3 px-1">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-500">
+              Live Interactive Embed Preview (<code class="font-mono text-emerald-900">/embed/{w.slug}</code>)
+            </span>
+            <a
+              href={`/embed/${w.slug}`}
+              target="_blank"
+              rel="noopener"
+              class="text-xs font-semibold text-emerald-800 hover:text-emerald-950 underline decoration-amber-500 underline-offset-2"
+            >
+              Open Standalone Widget &#8599;
+            </a>
+          </div>
+          <div class="mx-auto max-w-[800px]">
+            <iframe
+              src={`/embed/${w.slug}`}
+              title={`${w.title} — Live Embed Preview`}
+              width="100%"
+              height={w.iframeHeight}
+              style={`width:100%;max-width:800px;min-height:${w.iframeHeight}px;border:0;border-radius:16px;overflow:hidden;`}
+              loading="lazy"
+            ></iframe>
+          </div>
+        </div>
+
+        <!-- One-Click Copy Embed Box -->
+        <EmbedCodeBox
+          slug={w.slug}
+          toolTitle={w.title}
+          iframeHeight={w.iframeHeight}
+          defaultOpen={true}
+        />
+      </section>
+    ))}
+
+    <!-- FAQs -->
+    <section class="rounded-2xl bg-white border border-slate-200 p-6 sm:p-8 shadow-xs">
+      <h2 class="font-serif text-2xl font-bold text-emerald-950 mb-4">Embedding FAQs</h2>
+      <div class="space-y-4">
+        {faqs.map((faq) => (
+          <details class="rounded-xl border border-slate-200 p-4 open:bg-slate-50">
+            <summary class="font-semibold text-slate-900 cursor-pointer text-sm sm:text-base">{faq.question}</summary>
+            <p class="mt-2.5 text-sm text-slate-700 leading-relaxed">{faq.answer}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+  </div>
+</BaseLayout>

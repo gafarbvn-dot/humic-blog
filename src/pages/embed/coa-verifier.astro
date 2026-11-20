@@ -1,0 +1,13 @@
+---
+import EmbedLayout from '../../layouts/EmbedLayout.astro';
+import CoaVerifierWidget from '../../components/tools/CoaVerifierWidget.astro';
+---
+
+<EmbedLayout
+  title="Humic COA Red-Flag Checker"
+  description="Free embeddable ISO 19822 Certificate of Analysis red-flag checker for humic substances by humic.blog."
+  canonicalToolPath="/tools/coa-verifier"
+  badge="ISO 19822 Quality Audit Tool"
+>
+  <CoaVerifierWidget isEmbed={true} />
+</EmbedLayout>
