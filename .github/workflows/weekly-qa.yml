@@ -1,0 +1,48 @@
+name: Weekly Broken-Link & Build Health Audit
+
+on:
+  schedule:
+    # Every Monday at 03:00 UTC
+    - cron: '0 3 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  weekly-health-audit:
+    name: Build Verification & Lychee Link Audit
+    runs-on: ubuntu-latest
+    env:
+      ASTRO_TELEMETRY_DISABLED: '1'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Astro & TypeScript diagnostics
+        run: npm run check
+
+      - name: Build static site & Pagefind search index
+        run: npm run build
+
+      - name: Audit internal & external links with Lychee
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --root-dir ./dist
+            --accept 200,206,301,302,403,429
+            --exclude '^https://www\.googletagmanager\.com'
+            --no-progress
+            --verbose
+            'dist/**/*.html'
+          fail: true
