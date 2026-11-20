@@ -19,6 +19,7 @@ export const PILLARS = [
   'Regulations & Organic Standards',
   'Soil Health & Sustainability',
   'Home Gardening & Horticulture',
+  'Humic vs. X Comparisons',
 ] as const;
 
 export type PillarName = (typeof PILLARS)[number];
@@ -133,6 +134,16 @@ export const PILLAR_LIST: PillarDefinition[] = [
       'Safe small-scale dosing for kitchen gardens, raised beds, container ornamentals, turfgrass, and seedling trays using verified potassium humate and fulvic acid.',
     canonicalSummary:
       'Home Gardening & Horticulture translates field-scale humic soil science into safe, non-staining small-batch dilutions for raised vegetable beds, container ornamentals, seedling propagation trays, and compost enrichment—emphasizing strict low-concentration hormetic limits and hard tap-water care.',
+  },
+  {
+    slug: 'comparisons',
+    name: 'Humic vs. X Comparisons',
+    code: 'PILLAR 12',
+    audience: 'All Audiences',
+    subtitle:
+      'Evidence-based, head-to-head agronomic comparisons pitting humic and fulvic acids against compost, biochar, seaweed extract, mycorrhizal fungi, gypsum, and synthetic chelates (EDTA/DTPA/EDDHA).',
+    canonicalSummary:
+      'Humic vs. X Comparisons provides vendor-neutral, head-to-head scientific benchmarks comparing humic and fulvic substances against compost and vermicompost, biochar, Ascophyllum seaweed extract, arbuscular mycorrhizal fungi (AMF), agricultural gypsum, and synthetic chelates (EDTA, DTPA, EDDHA)—clarifying cost per acre, speed of action, soil suitability, and optimal synergy combinations.',
   },
 ];
 
