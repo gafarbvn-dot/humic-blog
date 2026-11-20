@@ -31,8 +31,6 @@ citations:
     source: "Rose, M. T., Patti, A. F., Little, K. R., Brown, A. L., Jackson, W. R., & Cavagnaro, T. R. (2014). Advances in Agronomy, 124, 37–89"
     url: "https://doi.org/10.1016/B978-0-12-800138-7.00002-4"
 ---
-import PhSolubilityDiagram from '../../../components/diagrams/PhSolubilityDiagram.astro';
-
 
 ## Geological Origins: The 70-Million-Year Making of Leonardite
 
@@ -65,7 +63,10 @@ This solubility divergence explains why agriculturalists rely on [potassium huma
 
 ---
 
-<PhSolubilityDiagram />
+<figure class="my-8 rounded-2xl border border-slate-200 bg-slate-50 p-4 sm:p-5 not-prose">
+  <img src="/diagrams/humic-vs-fulvic-solubility.svg" alt="Humic Acid vs. Fulvic Acid vs. Humin pH 1 to 14 solubility spectrum and molecular weight comparison" loading="lazy" decoding="async" class="w-full h-auto rounded-xl" />
+  <figcaption class="mt-3 text-xs text-slate-600 leading-relaxed">Figure 1: Operational pH 1–14 solubility spectrum and relative apparent molecular sizes for Fulvic Acid, Humic Acid, and Humin (IHSS & ISO 19822 basis).</figcaption>
+</figure>
 
 ## 10 Remarkable, Lesser-Known Properties of Humic Substances
 

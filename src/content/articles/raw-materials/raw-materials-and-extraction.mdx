@@ -28,8 +28,6 @@ citations:
     source: "International Organization for Standardization (2018). ISO 19822:2018"
     url: "https://www.iso.org/standard/66353.html"
 ---
-import AlkalineExtractionDiagram from '../../../components/diagrams/AlkalineExtractionDiagram.astro';
-
 
 ## Comparing Global Humic Feedstocks: Not All Organic Carbon Is Equal
 
@@ -72,7 +70,10 @@ To unlock immediate water solubility, manufacturers convert insoluble humic acid
 
 ---
 
-<AlkalineExtractionDiagram />
+<figure class="my-8 rounded-2xl border border-slate-200 bg-slate-50 p-4 sm:p-5 not-prose">
+  <img src="/diagrams/alkaline-extraction-flowchart.svg" alt="4-stage industrial alkaline extraction flowchart from raw oxidized leonardite to potassium humate comparing KOH versus NaOH" loading="lazy" decoding="async" class="w-full h-auto rounded-xl" />
+  <figcaption class="mt-3 text-xs text-slate-600 leading-relaxed">Figure 1: Four-stage industrial alkaline extraction workflow contrasting KOH (agronomic potassium humate) versus NaOH (clay-dispersing sodium humate) and decanter ash removal.</figcaption>
+</figure>
 
 ## Potassium Hydroxide (KOH) vs. Sodium Hydroxide (NaOH)
 
