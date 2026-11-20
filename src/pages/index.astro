@@ -1,48 +1,16 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { PILLARS } from '../content/config';
+import { PILLAR_LIST } from '../lib/pillars';
 
 const allArticles = await getCollection('articles');
 
-const pillarMeta: Record<string, { subtitle: string; code: string }> = {
-  'Origins & Chemistry': {
-    code: 'PILLAR 01',
-    subtitle: 'Geological formation of leonardite, supramolecular soil chemistry, and the distinction between humic acid, fulvic acid, and humin.',
-  },
-  'Raw Materials & Extraction': {
-    code: 'PILLAR 02',
-    subtitle: 'Source comparison from leonardite to peat and compost, alkaline KOH vs. NaOH chemistry, and salinity implications.',
-  },
-  'Quality & Testing': {
-    code: 'PILLAR 03',
-    subtitle: 'Analytical verification under ISO 19822 and IHSS protocols, spotting sodium lignosulfonate adulteration, and avoiding colorimetric inflation.',
-  },
-  'Agronomy & Application': {
-    code: 'PILLAR 04',
-    subtitle: 'Precision field protocols across drip fertigation, soil broadcast, foliar sprays, seed treatments, crop calendars, and critical precautions.',
-  },
-  'Biostimulant Synergies': {
-    code: 'PILLAR 05',
-    subtitle: 'Physiological and rhizosphere interactions between humic substances, Ascophyllum nodosum kelp extracts, and enzymatic L-amino acids.',
-  },
-  'Regulations & Organic Standards': {
-    code: 'PILLAR 06',
-    subtitle: 'Worldwide agricultural compliance frameworks including USDA NOP/OMRI, EU FPR 2019/1009, US AAPFCO/CDFA, and India FCO/NPOP.',
-  },
-  'Soil Health & Sustainability': {
-    code: 'PILLAR 07',
-    subtitle: 'Nutrient use efficiency, waterway protection, mycorrhizal biodiversity, and degraded-land restoration for long-term food security.',
-  },
-};
-
-const grouped = PILLARS.map((pillar) => {
+const grouped = PILLAR_LIST.map((pillar) => {
   const items = allArticles
-    .filter((a) => a.data.pillar === pillar)
+    .filter((a) => a.data.pillar === pillar.name)
     .sort((a, b) => Number(b.data.isPillarPage) - Number(a.data.isPillarPage));
   return {
     pillar,
-    meta: pillarMeta[pillar],
     articles: items,
   };
 }).filter((g) => g.articles.length > 0);
@@ -50,46 +18,46 @@ const grouped = PILLARS.map((pillar) => {
 
 <BaseLayout
   title="Humic.blog — The Authoritative Educational Encyclopedia on Humic Substances"
-  description="A vendor-neutral, peer-reviewed soil science encyclopedia covering humic acid, fulvic acid, leonardite extraction, ISO 19822 testing, agronomy calculators, and global organic regulations."
+  description="Vendor-neutral, peer-reviewed encyclopedia on humic substances for farmers, agronomists, and biostimulant manufacturers—featuring ISO 19822 quality guides, B2B formulation science, and 4 interactive calculators."
   canonicalPath="/"
   schemaType="website"
   breadcrumbs={[{ name: 'Home', url: 'https://humic.blog' }]}
 >
   <!-- Editorial Hero -->
   <section class="bg-emerald-950 text-white border-b-4 border-amber-500">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14 sm:py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14 sm:py-18">
       <div class="max-w-4xl">
         <div class="inline-flex items-center gap-2 rounded-full bg-emerald-900/90 border border-emerald-700/70 px-3.5 py-1 text-xs font-semibold tracking-wide text-amber-400 mb-5">
           <span class="h-2 w-2 rounded-full bg-amber-400" aria-hidden="true"></span>
           Independent &bull; Vendor-Neutral &bull; IHSS &amp; ISO 19822 Aligned
         </div>
 
-        <h1 class="font-serif text-4xl sm:text-5xl lg:text-[3.35rem] font-bold tracking-tight text-white leading-[1.12]">
+        <h1 class="font-serif text-4xl sm:text-5xl lg:text-[3.3rem] font-bold tracking-tight text-white leading-[1.12]">
           The Global Encyclopedia of <span class="text-amber-400">Humic Substances</span>
         </h1>
 
         <p class="mt-5 text-base sm:text-lg text-emerald-100/90 leading-relaxed max-w-3xl">
-          Evidence-based soil chemistry, analytical testing standards, and precision agronomic protocols for humic acid, fulvic acid, and humin—authored without commercial bias for agronomists, researchers, growers, and agricultural policymakers.
+          Peer-reviewed soil chemistry, ISO 19822 quality audits, field agronomy, and B2B biostimulant formulation engineering—built without commercial bias for both <strong>farmers &amp; crop advisors</strong> and <strong>biostimulant manufacturers</strong>.
         </p>
 
-        <div class="mt-8 flex flex-wrap gap-3.5">
+        <div class="mt-8 flex flex-wrap gap-3">
           <a
             href="#encyclopedia"
             class="inline-flex items-center justify-center rounded-xl bg-amber-500 hover:bg-amber-400 px-5 py-3 text-sm font-bold text-emerald-950 shadow-sm transition-colors"
           >
-            Explore Knowledge Pillars &darr;
+            Explore 9 Pillars &darr;
           </a>
           <a
-            href="/tools/dosage-calculator"
+            href="/manufacturing"
             class="inline-flex items-center justify-center rounded-xl bg-emerald-900 hover:bg-emerald-800 border border-emerald-700 px-5 py-3 text-sm font-semibold text-white transition-colors"
           >
-            Dosage Calculator
+            For Manufacturers (B2B)
           </a>
           <a
-            href="/tools/tank-mix-checker"
+            href="/problem-soils"
             class="inline-flex items-center justify-center rounded-xl bg-emerald-900 hover:bg-emerald-800 border border-emerald-700 px-5 py-3 text-sm font-semibold text-white transition-colors"
           >
-            Tank-Mix Checker
+            Problem Soils Hub
           </a>
           <a
             href="/glossary"
@@ -104,86 +72,139 @@ const grouped = PILLARS.map((pillar) => {
       <div class="mt-12 pt-8 border-t border-emerald-900 grid grid-cols-2 sm:grid-cols-4 gap-6">
         <div>
           <div class="font-serif text-2xl sm:text-3xl font-bold text-amber-400">{allArticles.length}</div>
-          <div class="text-xs sm:text-sm text-emerald-200 mt-0.5">Cornerstone Technical Guides</div>
+          <div class="text-xs sm:text-sm text-emerald-200 mt-0.5">Peer-Reviewed Guides</div>
+        </div>
+        <div>
+          <div class="font-serif text-2xl sm:text-3xl font-bold text-amber-400">{grouped.length} Pillars</div>
+          <div class="text-xs sm:text-sm text-emerald-200 mt-0.5">Farmer + B2B Knowledge Hubs</div>
+        </div>
+        <div>
+          <div class="font-serif text-2xl sm:text-3xl font-bold text-amber-400">4 Utilities</div>
+          <div class="text-xs sm:text-sm text-emerald-200 mt-0.5">Dosage, Tank-Mix, COA &amp; pH Tools</div>
         </div>
         <div>
           <div class="font-serif text-2xl sm:text-3xl font-bold text-amber-400">ISO 19822</div>
-          <div class="text-xs sm:text-sm text-emerald-200 mt-0.5">Lamar &amp; IHSS Referenced</div>
-        </div>
-        <div>
-          <div class="font-serif text-2xl sm:text-3xl font-bold text-amber-400">2 Tools</div>
-          <div class="text-xs sm:text-sm text-emerald-200 mt-0.5">Zero-Latency Field Calculators</div>
-        </div>
-        <div>
-          <div class="font-serif text-2xl sm:text-3xl font-bold text-amber-400">18 Terms</div>
-          <div class="text-xs sm:text-sm text-emerald-200 mt-0.5">Standardized A–Z Definitions</div>
+          <div class="text-xs sm:text-sm text-emerald-200 mt-0.5">IHSS &amp; Lamar Standardized</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Interactive Tools & Reference Strip -->
-  <section aria-label="Interactive Agronomic Tools and Glossary" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 -mt-7 relative z-10">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+  <!-- 4 Interactive Utility Moat Cards -->
+  <section aria-label="Interactive Agronomic and B2B Tools" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 -mt-7 relative z-10">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
       <a
         href="/tools/dosage-calculator"
-        class="group rounded-2xl bg-white border border-slate-200 hover:border-amber-500 p-6 shadow-sm hover:shadow-md transition-all flex flex-col justify-between"
+        class="group rounded-2xl bg-white border border-slate-200 hover:border-amber-500 p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between"
       >
         <div>
-          <div class="flex items-center justify-between mb-3">
-            <span class="inline-flex items-center rounded-md bg-emerald-950 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-amber-400">
-              Interactive Tool
+          <div class="flex items-center justify-between mb-2.5">
+            <span class="rounded-md bg-emerald-950 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-amber-400">
+              Field Tool
             </span>
             <span class="text-emerald-900 group-hover:translate-x-1 transition-transform font-bold">&rarr;</span>
           </div>
-          <h2 class="font-serif text-xl font-bold text-emerald-950 group-hover:text-emerald-800">
-            Humate &amp; Fulvic Dosage Calculator
+          <h2 class="font-serif text-lg font-bold text-emerald-950 group-hover:text-emerald-800">
+            Dosage Calculator
           </h2>
-          <p class="mt-2 text-sm text-slate-600 leading-relaxed">
-            Calculate field application rates for drip fertigation, soil broadcast, foliar spray, and seed treatment in acres or hectares.
+          <p class="mt-1.5 text-xs text-slate-600 leading-relaxed">
+            Potassium Humate &amp; Fulvic rates for drip, soil broadcast, foliar, and seed treatment in acres or hectares.
           </p>
         </div>
       </a>
 
       <a
         href="/tools/tank-mix-checker"
-        class="group rounded-2xl bg-white border border-slate-200 hover:border-amber-500 p-6 shadow-sm hover:shadow-md transition-all flex flex-col justify-between"
+        class="group rounded-2xl bg-white border border-slate-200 hover:border-amber-500 p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between"
       >
         <div>
-          <div class="flex items-center justify-between mb-3">
-            <span class="inline-flex items-center rounded-md bg-emerald-950 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-amber-400">
+          <div class="flex items-center justify-between mb-2.5">
+            <span class="rounded-md bg-emerald-950 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-amber-400">
               Chemistry Safety
             </span>
             <span class="text-emerald-900 group-hover:translate-x-1 transition-transform font-bold">&rarr;</span>
           </div>
-          <h2 class="font-serif text-xl font-bold text-emerald-950 group-hover:text-emerald-800">
-            Tank-Mix Compatibility Checker
+          <h2 class="font-serif text-lg font-bold text-emerald-950 group-hover:text-emerald-800">
+            Tank-Mix Checker
           </h2>
-          <p class="mt-2 text-sm text-slate-600 leading-relaxed">
-            Instant Green/Amber/Red screening for mixing Potassium Humate with Calcium Nitrate, acids, NPK, seaweed, L-amino acids, and MgSO₄.
+          <p class="mt-1.5 text-xs text-slate-600 leading-relaxed">
+            Green/Amber/Red screening for Calcium Nitrate, acids, NPK, seaweed, L-amino acids, MgSO₄ &amp; hard water.
           </p>
         </div>
       </a>
 
       <a
-        href="/glossary"
-        class="group rounded-2xl bg-white border border-slate-200 hover:border-amber-500 p-6 shadow-sm hover:shadow-md transition-all flex flex-col justify-between"
+        href="/tools/coa-red-flag-checker"
+        class="group rounded-2xl bg-white border border-slate-200 hover:border-amber-500 p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between"
       >
         <div>
-          <div class="flex items-center justify-between mb-3">
-            <span class="inline-flex items-center rounded-md bg-amber-500/15 border border-amber-500/30 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-amber-800">
-              Reference Index
+          <div class="flex items-center justify-between mb-2.5">
+            <span class="rounded-md bg-amber-500/20 border border-amber-500/40 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-amber-900">
+              New &bull; Quality Audit
             </span>
             <span class="text-emerald-900 group-hover:translate-x-1 transition-transform font-bold">&rarr;</span>
           </div>
-          <h2 class="font-serif text-xl font-bold text-emerald-950 group-hover:text-emerald-800">
-            A–Z Humic Science Glossary
+          <h2 class="font-serif text-lg font-bold text-emerald-950 group-hover:text-emerald-800">
+            COA Red-Flag Checker
           </h2>
-          <p class="mt-2 text-sm text-slate-600 leading-relaxed">
-            Standardized IHSS and ISO 19822 definitions covering CEC, chelation, DAX-8 resin, leonardite, sodium lignosulfonate, and supramolecular assembly.
+          <p class="mt-1.5 text-xs text-slate-600 leading-relaxed">
+            Flag lignosulfonate sulfur (&gt;0.75% S), NaOH sodium spikes, colorimetric inflation, and EU heavy-metal breaches.
           </p>
         </div>
       </a>
+
+      <a
+        href="/tools/formulation-ph-estimator"
+        class="group rounded-2xl bg-white border border-slate-200 hover:border-amber-500 p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between"
+      >
+        <div>
+          <div class="flex items-center justify-between mb-2.5">
+            <span class="rounded-md bg-amber-500/20 border border-amber-500/40 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-amber-900">
+              New &bull; B2B Formula
+            </span>
+            <span class="text-emerald-900 group-hover:translate-x-1 transition-transform font-bold">&rarr;</span>
+          </div>
+          <h2 class="font-serif text-lg font-bold text-emerald-950 group-hover:text-emerald-800">
+            Blend pH Estimator
+          </h2>
+          <p class="mt-1.5 text-xs text-slate-600 leading-relaxed">
+            Estimate liquid concentrate pH, gelation risk, bottle-swelling gas risk, and when to switch to Potassium Fulvate.
+          </p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Dual Audience Quick Pathways -->
+  <section class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="rounded-2xl bg-white border border-slate-200 p-6 sm:p-7 shadow-xs">
+        <span class="text-[11px] font-bold uppercase tracking-widest text-amber-600">Pathway 01 &bull; Field Reality</span>
+        <h2 class="font-serif text-2xl font-bold text-emerald-950 mt-1">For Farmers &amp; Field Agronomists</h2>
+        <p class="mt-2 text-sm text-slate-600 leading-relaxed">
+          Prevent emitter clogging, run 3-minute on-farm purity tests, manage hard borewell water, calculate urea/DAP nutrient savings, and treat calcareous or saline problem soils.
+        </p>
+        <div class="mt-4 flex flex-wrap gap-2">
+          <a href="/quality-and-testing/farm-level-adulteration-tests" class="rounded-lg bg-slate-100 hover:bg-emerald-900 hover:text-white px-3 py-1.5 text-xs font-semibold text-emerald-950 transition-colors">3-Min Farm Purity Test</a>
+          <a href="/agronomy/hard-borewell-water-and-humates" class="rounded-lg bg-slate-100 hover:bg-emerald-900 hover:text-white px-3 py-1.5 text-xs font-semibold text-emerald-950 transition-colors">Hard Borewell Water</a>
+          <a href="/agronomy/fertilizer-cost-saving-nue-math" class="rounded-lg bg-slate-100 hover:bg-emerald-900 hover:text-white px-3 py-1.5 text-xs font-semibold text-emerald-950 transition-colors">Fertilizer NUE Math</a>
+          <a href="/problem-soils" class="rounded-lg bg-slate-100 hover:bg-emerald-900 hover:text-white px-3 py-1.5 text-xs font-semibold text-emerald-950 transition-colors">Problem Soils Hub</a>
+        </div>
+      </div>
+
+      <div class="rounded-2xl bg-emerald-950 text-white border border-emerald-900 p-6 sm:p-7 shadow-xs">
+        <span class="text-[11px] font-bold uppercase tracking-widest text-amber-400">Pathway 02 &bull; B2B Engineering</span>
+        <h2 class="font-serif text-2xl font-bold text-white mt-1">For Biostimulant Manufacturers</h2>
+        <p class="mt-2 text-sm text-emerald-100/90 leading-relaxed">
+          Vendor-neutral formulation science: stop liquid bottle swelling and gelation, solve the humic-acid pH conflict, audit raw leonardite COAs, and pass EU FPR / OMRI / FCO compliance.
+        </p>
+        <div class="mt-4 flex flex-wrap gap-2">
+          <a href="/manufacturing/liquid-formulation-stability-and-shelf-life" class="rounded-lg bg-emerald-900 hover:bg-amber-500 hover:text-emerald-950 px-3 py-1.5 text-xs font-semibold text-emerald-100 transition-colors">Shelf-Life &amp; Bottle Swelling</a>
+          <a href="/manufacturing/solving-the-ph-conflict-humate-vs-fulvate" class="rounded-lg bg-emerald-900 hover:bg-amber-500 hover:text-emerald-950 px-3 py-1.5 text-xs font-semibold text-emerald-100 transition-colors">Solving the pH Conflict</a>
+          <a href="/manufacturing/leonardite-procurement-and-coa-audits" class="rounded-lg bg-emerald-900 hover:bg-amber-500 hover:text-emerald-950 px-3 py-1.5 text-xs font-semibold text-emerald-100 transition-colors">Procurement &amp; COA Audits</a>
+          <a href="/tools/formulation-ph-estimator" class="rounded-lg bg-amber-500 hover:bg-amber-400 px-3 py-1.5 text-xs font-bold text-emerald-950 transition-colors">Blend pH Estimator &rarr;</a>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -197,26 +218,35 @@ const grouped = PILLARS.map((pillar) => {
         Encyclopedia by Scientific Pillar
       </h2>
       <p class="mt-3 text-slate-600 leading-relaxed">
-        Every guide includes a canonical 45–60 word technical summary, comparative data tables, structured field FAQs, and citations to peer-reviewed soil science journals and international analytical standards.
+        Every guide includes a 45–60 word canonical technical summary, structured comparison tables, peer-reviewed citations, and technical review governance. Click any pillar title to open its dedicated Hub page.
       </p>
     </div>
 
-    <div class="space-y-10">
-      {grouped.map(({ pillar, meta, articles }) => (
+    <div class="space-y-9">
+      {grouped.map(({ pillar, articles }) => (
         <div class="rounded-2xl border border-slate-200 bg-white overflow-hidden shadow-xs">
           <div class="bg-slate-50 border-b border-slate-200 px-6 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
             <div>
-              <span class="text-[11px] font-bold uppercase tracking-widest text-amber-600">
-                {meta.code}
-              </span>
+              <div class="flex items-center gap-2">
+                <span class="text-[11px] font-bold uppercase tracking-widest text-amber-600">
+                  {pillar.code}
+                </span>
+                <span class="text-slate-300">&bull;</span>
+                <span class="text-[11px] font-semibold text-slate-500">{pillar.audience}</span>
+              </div>
               <h3 class="font-serif text-2xl font-bold text-emerald-950 mt-0.5">
-                {pillar}
+                <a href={`/${pillar.slug}`} class="hover:text-emerald-700 underline decoration-transparent hover:decoration-amber-500 underline-offset-4 transition-colors">
+                  {pillar.name}
+                </a>
               </h3>
-              <p class="text-sm text-slate-600 mt-1 max-w-3xl">{meta.subtitle}</p>
+              <p class="text-sm text-slate-600 mt-1 max-w-3xl">{pillar.subtitle}</p>
             </div>
-            <span class="self-start sm:self-center inline-flex items-center rounded-full bg-emerald-950/5 border border-emerald-900/15 px-3 py-1 text-xs font-semibold text-emerald-900 whitespace-nowrap">
-              {articles.length} {articles.length === 1 ? 'Guide' : 'Guides'}
-            </span>
+            <a
+              href={`/${pillar.slug}`}
+              class="self-start sm:self-center inline-flex items-center gap-1 rounded-full bg-emerald-950/5 hover:bg-emerald-900 hover:text-white border border-emerald-900/15 px-3.5 py-1.5 text-xs font-semibold text-emerald-900 whitespace-nowrap transition-colors"
+            >
+              {articles.length} {articles.length === 1 ? 'Guide' : 'Guides'} &rarr;
+            </a>
           </div>
 
           <div class="divide-y divide-slate-200">
@@ -235,7 +265,7 @@ const grouped = PILLARS.map((pillar) => {
                         )}
                         <span class="text-slate-500 font-medium">{readMin} min read</span>
                         <span class="text-slate-300">&bull;</span>
-                        <span class="text-slate-500">{article.data.citations.length} Scientific Citations</span>
+                        <span class="text-slate-500">{article.data.citations.length} Citations</span>
                       </div>
 
                       <h4 class="font-serif text-xl sm:text-2xl font-bold text-emerald-950 leading-snug">
@@ -257,7 +287,7 @@ const grouped = PILLARS.map((pillar) => {
                         href={`/${article.slug}`}
                         class="inline-flex items-center gap-1.5 rounded-lg bg-emerald-900 hover:bg-emerald-950 px-4 py-2.5 text-xs font-semibold text-white transition-colors"
                       >
-                        Read Full Guide <span aria-hidden="true">&rarr;</span>
+                        Read Guide <span aria-hidden="true">&rarr;</span>
                       </a>
                     </div>
                   </div>
@@ -274,25 +304,33 @@ const grouped = PILLARS.map((pillar) => {
   <section class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-6">
     <div class="rounded-2xl bg-emerald-950 text-white p-8 sm:p-10 border border-emerald-900">
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-        <div class="lg:col-span-1">
+        <div class="lg:col-span-1 space-y-3">
           <span class="text-xs font-bold uppercase tracking-widest text-amber-400">
-            Editorial Methodology
+            E-E-A-T Governance
           </span>
-          <h2 class="font-serif text-2xl sm:text-3xl font-bold text-white mt-1.5">
+          <h2 class="font-serif text-2xl sm:text-3xl font-bold text-white">
             Rigorous, Diplomatic, Vendor-Neutral Soil Science
           </h2>
+          <div class="flex flex-wrap gap-2 pt-1">
+            <a href="/about" class="rounded-lg bg-amber-500 hover:bg-amber-400 px-3.5 py-2 text-xs font-bold text-emerald-950 transition-colors">
+              Editorial Standards &rarr;
+            </a>
+            <a href="/methodology" class="rounded-lg bg-emerald-900 hover:bg-emerald-800 border border-emerald-700 px-3.5 py-2 text-xs font-semibold text-white transition-colors">
+              Testing Methodology
+            </a>
+          </div>
         </div>
         <div class="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-6 text-sm text-emerald-100/90 leading-relaxed">
           <div class="space-y-1.5">
             <h3 class="font-sans text-sm font-bold text-amber-400">Standardized Analytical Grounding</h3>
             <p>
-              All concentration metrics, extraction comparisons, and adulteration checks reference ISO 19822:2018 (Lamar), IHSS fractionation protocols, and peer-reviewed soil chemistry literature rather than unverified commercial assays.
+              All purity metrics, extraction comparisons, and COA checks trace directly to ISO 19822:2018 (Lamar), IHSS fractionation protocols, and peer-reviewed soil chemistry literature.
             </p>
           </div>
           <div class="space-y-1.5">
             <h3 class="font-sans text-sm font-bold text-amber-400">Legally Compliant Agronomic Scope</h3>
             <p>
-              Guidance focuses strictly on documented soil conditioning, cation exchange capacity, nutrient use efficiency, and plant tolerance to abiotic stress—never unverified pesticidal or medicinal claims.
+              Guidance covers soil conditioning, cation exchange capacity, nutrient use efficiency, abiotic stress physiology, and liquid formulation stability—never unverified pesticidal or medicinal claims.
             </p>
           </div>
         </div>

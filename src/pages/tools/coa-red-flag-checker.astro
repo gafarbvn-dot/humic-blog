@@ -1,0 +1,361 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const siteUrl = 'https://humic.blog';
+const breadcrumbs = [
+  { name: 'Home', url: siteUrl },
+  { name: 'COA Red-Flag Checker', url: `${siteUrl}/tools/coa-red-flag-checker` },
+];
+
+const faqs = [
+  {
+    question: 'Why does elemental sulfur above 0.75% raise a red flag on a humic acid COA?',
+    answer:
+      'Naturally oxidized leonardite typically yields potassium humate with 0.2% to 0.65% elemental sulfur. When a Certificate of Analysis reports sulfur above 2.5%–3.0% (or even 1%–2% in blended lots), it is a primary chemical signature of paper-mill sodium lignosulfonate adulteration, which contains sulfonate groups.',
+  },
+  {
+    question: 'Why is a "98% Humic Acid" COA claim flagged as physically unrealistic?',
+    answer:
+      'Water-soluble potassium humate requires 8%–12% potassium (K₂O) counterions to stay soluble, plus 5%–10% bound moisture and trace ash. Under ash-free ISO 19822 gravimetric testing, even ultra-pure soluble potassium humate typically measures 65% to 82% true humic acid—never 98%.',
+  },
+  {
+    question: 'Which heavy-metal limits does this COA checker benchmark against?',
+    answer:
+      'It checks Arsenic (≤40 mg/kg), Cadmium (≤1.5 mg/kg), Lead (≤120 mg/kg), and Mercury (≤1.0 mg/kg) on a dry-matter basis against Regulation (EU) 2019/1009 ceilings for CE-marked non-microbial plant biostimulants (PFC 6B).',
+  },
+];
+---
+
+<BaseLayout
+  title="Humic Acid COA Red-Flag Checker (ISO 19822, Sulfur & Heavy-Metal Audit)"
+  description="Free interactive Certificate of Analysis (COA) auditor for farmers, distributors, and B2B importers. Instantly flag sodium lignosulfonate sulfur (>0.75%), NaOH sodium spikes, colorimetric inflation, and heavy-metal breaches."
+  canonicalPath="/tools/coa-red-flag-checker"
+  schemaType="tool"
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <div class="bg-emerald-950 text-white border-b-4 border-amber-500">
+    <div data-pagefind-body class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-10">
+      <nav aria-label="Breadcrumb" class="mb-3 text-xs text-emerald-300 flex items-center gap-1.5">
+        <a href="/" class="hover:text-amber-400">Home</a>
+        <span>/</span>
+        <span class="text-emerald-100">COA Red-Flag Checker</span>
+      </nav>
+      <span class="inline-flex items-center rounded-full bg-amber-500/20 border border-amber-500/40 px-3 py-0.5 text-xs font-semibold text-amber-300 mb-3">
+        Quality &amp; Procurement Audit Tool
+      </span>
+      <h1 class="font-serif text-3xl sm:text-4xl font-bold text-white leading-tight">
+        Humic Acid COA Red-Flag Checker
+      </h1>
+      <p class="mt-3 text-sm sm:text-base text-emerald-100/90 max-w-3xl leading-relaxed">
+        Enter numbers from a supplier's Certificate of Analysis (COA) to instantly detect sodium lignosulfonate adulteration, industrial NaOH sodium substitution, colorimetric inflation, drip-clogging insolubles, and EU FPR 2019/1009 heavy-metal breaches.
+      </p>
+    </div>
+  </div>
+
+  <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-10 space-y-10">
+    <!-- Quick Preset Samples -->
+    <div class="flex flex-wrap items-center gap-2 rounded-2xl bg-white border border-slate-200 p-4 shadow-xs">
+      <span class="text-xs font-bold uppercase tracking-wider text-slate-500 mr-1">Load Example COA:</span>
+      <button type="button" data-preset="clean" class="preset-btn rounded-lg border border-emerald-700/40 bg-emerald-50 hover:bg-emerald-100 px-3 py-1.5 text-xs font-semibold text-emerald-950 cursor-pointer">Clean ISO 19822 K-Humate</button>
+      <button type="button" data-preset="ligno" class="preset-btn rounded-lg border border-red-300 bg-red-50 hover:bg-red-100 px-3 py-1.5 text-xs font-semibold text-red-900 cursor-pointer">Lignosulfonate Spiked</button>
+      <button type="button" data-preset="naoh" class="preset-btn rounded-lg border border-amber-300 bg-amber-50 hover:bg-amber-100 px-3 py-1.5 text-xs font-semibold text-amber-950 cursor-pointer">Industrial NaOH Substitute</button>
+      <button type="button" data-preset="color" class="preset-btn rounded-lg border border-slate-300 bg-slate-50 hover:bg-slate-100 px-3 py-1.5 text-xs font-semibold text-slate-800 cursor-pointer">"98% Humic" Colorimetric</button>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <!-- COA Inputs -->
+      <section aria-label="Supplier COA Values" class="lg:col-span-6 rounded-2xl bg-white border border-slate-200 p-6 shadow-xs space-y-4">
+        <h2 class="font-serif text-xl font-bold text-emerald-950 pb-3 border-b border-slate-200">
+          1. Enter Supplier COA Values
+        </h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label for="coa-product" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">Product Category</label>
+            <select id="coa-product" class="w-full rounded-xl border border-slate-300 bg-slate-50 px-3 py-2 text-sm text-slate-900">
+              <option value="khumate_solid">Soluble K-Humate Powder / Flake</option>
+              <option value="fulvic_solid">Concentrated Fulvic Acid Powder</option>
+              <option value="liquid_humate">Liquid Potassium Humate (10–15%)</option>
+            </select>
+          </div>
+          <div>
+            <label for="coa-method" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">Declared Test Method</label>
+            <select id="coa-method" class="w-full rounded-xl border border-slate-300 bg-slate-50 px-3 py-2 text-sm text-slate-900">
+              <option value="iso19822">ISO 19822:2018 (Lamar / HPTA)</option>
+              <option value="ihss">IHSS Standard Protocol</option>
+              <option value="cdfa">Legacy CDFA (No Ash Correction)</option>
+              <option value="colorimetric">Colorimetric / UV-Vis</option>
+              <option value="unspecified">Unspecified / "Dry Basis" Only</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label for="coa-ha" class="block text-xs font-bold text-slate-700 mb-1">Claimed Humic Acid (%)</label>
+            <input id="coa-ha" type="number" step="0.5" min="0" max="100" value="72" class="w-full rounded-xl border border-slate-300 bg-slate-50 px-3 py-2 text-sm font-medium" />
+          </div>
+          <div>
+            <label for="coa-fa" class="block text-xs font-bold text-slate-700 mb-1">Claimed Fulvic Acid (%)</label>
+            <input id="coa-fa" type="number" step="0.5" min="0" max="100" value="5" class="w-full rounded-xl border border-slate-300 bg-slate-50 px-3 py-2 text-sm font-medium" />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-1">
+          <div>
+            <label for="coa-sulfur" class="block text-xs font-bold text-slate-700 mb-1">Sulfur (% S)</label>
+            <input id="coa-sulfur" type="number" step="0.05" min="0" max="20" value="0.45" class="w-full rounded-xl border border-slate-300 bg-slate-50 px-3 py-2 text-sm font-medium" />
+          </div>
+          <div>
+            <label for="coa-sodium" class="block text-xs font-bold text-slate-700 mb-1">Sodium (% Na)</label>
+            <input id="coa-sodium" type="number" step="0.1" min="0" max="25" value="0.4" class="w-full rounded-xl border border-slate-300 bg-slate-50 px-3 py-2 text-sm font-medium" />
+          </div>
+          <div>
+            <label for="coa-k2o" class="block text-xs font-bold text-slate-700 mb-1">Potassium (% K₂O)</label>
+            <input id="coa-k2o" type="number" step="0.5" min="0" max="30" value="10.5" class="w-full rounded-xl border border-slate-300 bg-slate-50 px-3 py-2 text-sm font-medium" />
+          </div>
+          <div>
+            <label for="coa-wim" class="block text-xs font-bold text-slate-700 mb-1">Insolubles (%)</label>
+            <input id="coa-wim" type="number" step="0.1" min="0" max="50" value="0.8" class="w-full rounded-xl border border-slate-300 bg-slate-50 px-3 py-2 text-sm font-medium" />
+          </div>
+        </div>
+
+        <div class="pt-3 border-t border-slate-200">
+          <div class="text-xs font-bold uppercase tracking-wider text-emerald-900 mb-2">
+            Optional Heavy Metals (mg/kg or ppm — EU FPR 2019/1009 Check)
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <div>
+              <label for="coa-as" class="block text-[11px] font-semibold text-slate-600 mb-1">Arsenic (As)</label>
+              <input id="coa-as" type="number" step="0.5" min="0" value="4" class="w-full rounded-lg border border-slate-300 bg-slate-50 px-2.5 py-1.5 text-sm" />
+            </div>
+            <div>
+              <label for="coa-cd" class="block text-[11px] font-semibold text-slate-600 mb-1">Cadmium (Cd)</label>
+              <input id="coa-cd" type="number" step="0.1" min="0" value="0.3" class="w-full rounded-lg border border-slate-300 bg-slate-50 px-2.5 py-1.5 text-sm" />
+            </div>
+            <div>
+              <label for="coa-pb" class="block text-[11px] font-semibold text-slate-600 mb-1">Lead (Pb)</label>
+              <input id="coa-pb" type="number" step="1" min="0" value="12" class="w-full rounded-lg border border-slate-300 bg-slate-50 px-2.5 py-1.5 text-sm" />
+            </div>
+            <div>
+              <label for="coa-hg" class="block text-[11px] font-semibold text-slate-600 mb-1">Mercury (Hg)</label>
+              <input id="coa-hg" type="number" step="0.1" min="0" value="0.1" class="w-full rounded-lg border border-slate-300 bg-slate-50 px-2.5 py-1.5 text-sm" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Live Audit Output -->
+      <section aria-live="polite" aria-label="COA Audit Report" class="lg:col-span-6 rounded-2xl bg-white border border-slate-200 overflow-hidden shadow-sm">
+        <div id="coa-banner" class="px-6 py-5 bg-emerald-800 text-white transition-colors">
+          <div class="flex items-center justify-between gap-2">
+            <span id="coa-pill" class="inline-flex rounded-full bg-white/20 px-3 py-1 text-xs font-extrabold uppercase tracking-wider">
+              PASS — HIGH CREDIBILITY
+            </span>
+            <span class="text-xs font-semibold text-white/90">
+              Trust Score: <strong id="coa-score" class="text-base">100</strong>/100
+            </span>
+          </div>
+          <h2 id="coa-headline" class="font-serif text-2xl font-bold mt-2 text-white">
+            COA Parameters Align With Authentic Leonardite Humate
+          </h2>
+        </div>
+
+        <div class="p-6 space-y-4">
+          <h3 class="font-sans text-xs font-bold uppercase tracking-wider text-emerald-900">
+            Itemized Analytical Findings
+          </h3>
+          <ul id="coa-flags" class="space-y-2.5 text-sm m-0 p-0 list-none"></ul>
+
+          <div class="pt-4 border-t border-slate-200 flex flex-wrap gap-3">
+            <a href="/quality-and-testing/market-malpractices-and-testing" class="text-xs font-semibold text-emerald-800 hover:text-emerald-950 underline decoration-amber-500 underline-offset-2">
+              Read 7 Market Malpractices Guide &rarr;
+            </a>
+            <a href="/manufacturing/leonardite-procurement-and-coa-audits" class="text-xs font-semibold text-emerald-800 hover:text-emerald-950 underline decoration-amber-500 underline-offset-2">
+              B2B Supplier Audit Playbook &rarr;
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- FAQs -->
+    <section class="rounded-2xl bg-white border border-slate-200 p-6 sm:p-8 shadow-xs">
+      <h2 class="font-serif text-2xl font-bold text-emerald-950 mb-4">COA Verification FAQs</h2>
+      <div class="space-y-4">
+        {faqs.map((faq) => (
+          <div class="rounded-xl bg-slate-50 border border-slate-200 p-4">
+            <h3 class="font-serif text-base font-bold text-emerald-950 mb-1.5">{faq.question}</h3>
+            <p class="text-sm text-slate-700 leading-relaxed m-0">{faq.answer}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  </div>
+
+  <script is:inline>
+    (function () {
+      const ids = ['coa-product', 'coa-method', 'coa-ha', 'coa-fa', 'coa-sulfur', 'coa-sodium', 'coa-k2o', 'coa-wim', 'coa-as', 'coa-cd', 'coa-pb', 'coa-hg'];
+      const els = Object.fromEntries(ids.map((id) => [id, document.getElementById(id)]));
+      const banner = document.getElementById('coa-banner');
+      const pill = document.getElementById('coa-pill');
+      const scoreEl = document.getElementById('coa-score');
+      const headline = document.getElementById('coa-headline');
+      const flagsEl = document.getElementById('coa-flags');
+
+      const PRESETS = {
+        clean: { 'coa-product': 'khumate_solid', 'coa-method': 'iso19822', 'coa-ha': 72, 'coa-fa': 5, 'coa-sulfur': 0.45, 'coa-sodium': 0.4, 'coa-k2o': 10.5, 'coa-wim': 0.8, 'coa-as': 4, 'coa-cd': 0.3, 'coa-pb': 12, 'coa-hg': 0.1 },
+        ligno: { 'coa-product': 'khumate_solid', 'coa-method': 'colorimetric', 'coa-ha': 68, 'coa-fa': 24, 'coa-sulfur': 4.2, 'coa-sodium': 5.8, 'coa-k2o': 3.0, 'coa-wim': 1.2, 'coa-as': 5, 'coa-cd': 0.4, 'coa-pb': 15, 'coa-hg': 0.1 },
+        naoh: { 'coa-product': 'khumate_solid', 'coa-method': 'cdfa', 'coa-ha': 84, 'coa-fa': 3, 'coa-sulfur': 0.55, 'coa-sodium': 7.4, 'coa-k2o': 1.1, 'coa-wim': 2.8, 'coa-as': 8, 'coa-cd': 0.6, 'coa-pb': 20, 'coa-hg': 0.2 },
+        color: { 'coa-product': 'khumate_solid', 'coa-method': 'unspecified', 'coa-ha': 98, 'coa-fa': 15, 'coa-sulfur': 1.4, 'coa-sodium': 1.9, 'coa-k2o': 8.0, 'coa-wim': 4.5, 'coa-as': 10, 'coa-cd': 2.1, 'coa-pb': 35, 'coa-hg': 0.3 },
+      };
+
+      function audit() {
+        const prod = els['coa-product'].value;
+        const method = els['coa-method'].value;
+        const ha = parseFloat(els['coa-ha'].value) || 0;
+        const fa = parseFloat(els['coa-fa'].value) || 0;
+        const s = parseFloat(els['coa-sulfur'].value) || 0;
+        const na = parseFloat(els['coa-sodium'].value) || 0;
+        const k2o = parseFloat(els['coa-k2o'].value) || 0;
+        const wim = parseFloat(els['coa-wim'].value) || 0;
+        const as = parseFloat(els['coa-as'].value) || 0;
+        const cd = parseFloat(els['coa-cd'].value) || 0;
+        const pb = parseFloat(els['coa-pb'].value) || 0;
+        const hg = parseFloat(els['coa-hg'].value) || 0;
+
+        let score = 100;
+        const findings = [];
+
+        function add(sev, title, detail, penalty) {
+          score -= penalty;
+          findings.push({ sev, title, detail });
+        }
+
+        // 1. Test method audit
+        if (method === 'colorimetric') {
+          add('red', 'Colorimetric / UV-Vis Inflation Risk', 'Colorimetric assays count any dark pigment (lignosulfonate, caramel dye, molasses) as humic acid and overstate purity by 2×–5×. Demand ISO 19822:2018.', 30);
+        } else if (method === 'unspecified') {
+          add('red', 'No Recognized Analytical Method Declared', 'COAs omitting ISO 19822 or IHSS cannot be legally audited and often report total dry-weight solubility instead of true ash-free humic acid.', 25);
+        } else if (method === 'cdfa') {
+          add('amber', 'Legacy CDFA Method (Ash Inflation Bias)', 'Pre-2014 CDFA gravimetry omits muffle-furnace ash subtraction (+10% to +25% upward bias) and does not verify DAX-8 hydrophobic fulvic acid.', 12);
+        } else {
+          add('green', 'Standardized Analytical Protocol Verified', 'ISO 19822:2018 / IHSS protocols subtract inorganic mineral ash and separate true hydrophobic fulvic acid on DAX-8 resin.', 0);
+        }
+
+        // 2. Stoichiometric realism check
+        if (prod === 'khumate_solid' && (ha > 85 || ha + fa + k2o > 100)) {
+          add('red', 'Physically Unrealistic Humic % Claim (' + ha + '%)', 'Soluble K-humate requires 8–12% K₂O plus 5–10% moisture. Under ash-free ISO 19822 testing, authentic soluble K-humate peaks around 65–82% HA.', 25);
+        } else if (prod === 'liquid_humate' && ha > 22) {
+          add('red', 'Unrealistic Liquid Humic Concentration (' + ha + '%)', 'Standard stable liquid potassium humate saturates near 12–18% w/v before gelling; higher claims almost always rely on colorimetric inflation.', 20);
+        } else if (prod === 'fulvic_solid' && fa > 85) {
+          add('amber', 'Very High Fulvic Claim — Confirm DAX-8 Resin Testing', 'Above 80% claimed fulvic acid frequently includes acid-soluble molasses, vinasse, or citric acid unless validated by ISO 19822 DAX-8 resin.', 15);
+        }
+
+        // 3. Sulfur / Sodium Lignosulfonate check
+        if (s >= 2.5) {
+          add('red', 'Severe Sulfur Red Flag (' + s + '% S) — Likely Sodium Lignosulfonate', 'Genuine leonardite humate tests <0.75% S. Sulfur >2.5–3.0% is the classic paper-mill sulfite lignosulfonate adulteration signature.', 35);
+        } else if (s > 0.75) {
+          add('amber', 'Elevated Sulfur (' + s + '% S > 0.75% Benchmark)', 'Exceeds typical leonardite sulfur baseline (<0.75%). Screen for partial lignosulfonate blending or sulfated mineral additives.', 15);
+        } else {
+          add('green', 'Clean Elemental Sulfur (' + s + '% S ≤ 0.75%)', 'Consistent with authentic geological leonardite; rules out major sulfite lignosulfonate spiking.', 0);
+        }
+
+        // 4. Sodium / KOH vs NaOH check
+        if (prod === 'khumate_solid') {
+          if (na > 2.5 || (na > 1.5 && k2o < 5)) {
+            add('red', 'High Sodium / Low Potassium — Likely NaOH Sodium Humate', 'Na = ' + na + '% with K₂O = ' + k2o + '% indicates industrial caustic soda (NaOH) extraction. Repeated application disperses soil clays and raises sodicity.', 30);
+          } else if (na > 1.5) {
+            add('amber', 'Moderately Elevated Sodium (' + na + '% Na)', 'Verify KOH-only extraction; high-grade agricultural potassium humate generally keeps Na below 1.0–1.5%.', 10);
+          } else if (k2o < 6) {
+            add('amber', 'Low Potassium Counterion (' + k2o + '% K₂O)', 'Water-soluble KOH-extracted K-humate typically supplies 8–12% K₂O; lower values suggest raw unextracted lignite or non-KOH alkali.', 10);
+          } else {
+            add('green', 'Clean KOH Extraction Signature (K₂O ' + k2o + '%, Na ' + na + '%)', 'Confirms potassium-based extraction safe for irrigated soils.', 0);
+          }
+        }
+
+        // 5. Water Insolubles
+        if (wim > 3.0) {
+          add('red', 'High Water-Insoluble Matter (' + wim + '%) — Drip Clogging Hazard', 'Inadequate centrifugation leaves mineral grit and humin that plug 120-mesh drip filters. Unsuitable for fertigation or foliar tanks.', 15);
+        } else if (wim > 1.5) {
+          add('amber', 'Moderate Insolubles (' + wim + '%)', 'Acceptable for soil broadcast; pre-screen through 120-mesh nylon before drip injection.', 6);
+        }
+
+        // 6. EU FPR 2019/1009 Heavy Metals
+        const hmBreaches = [];
+        if (as > 40) hmBreaches.push('As ' + as + ' > 40 ppm');
+        if (cd > 1.5) hmBreaches.push('Cd ' + cd + ' > 1.5 ppm');
+        if (pb > 120) hmBreaches.push('Pb ' + pb + ' > 120 ppm');
+        if (hg > 1.0) hmBreaches.push('Hg ' + hg + ' > 1.0 ppm');
+        if (hmBreaches.length) {
+          add('red', 'EU FPR 2019/1009 Heavy-Metal Ceiling Exceeded', 'Breached limits: ' + hmBreaches.join(', ') + '. Reject lot for EU CE-marked biostimulant or certified organic use.', 30);
+        } else {
+          add('green', 'Heavy Metals Within EU FPR 2019/1009 Limits', 'As, Cd, Pb, and Hg all sit below strict EU PFC 6(B) biostimulant ceilings.', 0);
+        }
+
+        score = Math.max(0, Math.min(100, score));
+        scoreEl.textContent = String(score);
+
+        const hasRed = findings.some((f) => f.sev === 'red');
+        const hasAmber = findings.some((f) => f.sev === 'amber');
+
+        if (score < 60 || hasRed) {
+          banner.className = 'px-6 py-5 bg-red-700 text-white transition-colors';
+          pill.textContent = 'RED — CRITICAL COA RED FLAGS';
+          headline.textContent = 'Do Not Approve Without Independent ISO 19822 Lab Re-Test';
+        } else if (score < 85 || hasAmber) {
+          banner.className = 'px-6 py-5 bg-amber-600 text-white transition-colors';
+          pill.textContent = 'AMBER — CAUTION / VERIFY DETAILS';
+          headline.textContent = 'Minor Warnings Detected — Request Clarifying ICP-OES / ISO 19822 Data';
+        } else {
+          banner.className = 'px-6 py-5 bg-emerald-800 text-white transition-colors';
+          pill.textContent = 'GREEN — HIGH CREDIBILITY COA';
+          headline.textContent = 'Parameters Align With Authentic Leonardite Humate';
+        }
+
+        const styles = {
+          red: 'border-red-200 bg-red-50 text-red-950',
+          amber: 'border-amber-200 bg-amber-50 text-amber-950',
+          green: 'border-emerald-200 bg-emerald-50 text-emerald-950',
+        };
+        const badges = {
+          red: '<span class="inline-block rounded bg-red-700 text-white text-[10px] font-bold uppercase px-1.5 py-0.5 mr-1.5">RED FLAG</span>',
+          amber: '<span class="inline-block rounded bg-amber-600 text-white text-[10px] font-bold uppercase px-1.5 py-0.5 mr-1.5">CAUTION</span>',
+          green: '<span class="inline-block rounded bg-emerald-800 text-white text-[10px] font-bold uppercase px-1.5 py-0.5 mr-1.5">PASS</span>',
+        };
+
+        flagsEl.innerHTML = findings
+          .map(
+            (f) =>
+              '<li class="rounded-xl border p-3.5 ' +
+              styles[f.sev] +
+              '"><div class="font-bold text-xs sm:text-sm">' +
+              badges[f.sev] +
+              f.title +
+              '</div><p class="mt-1 text-xs leading-relaxed opacity-90 m-0">' +
+              f.detail +
+              '</p></li>'
+          )
+          .join('');
+      }
+
+      Object.values(els).forEach((el) => {
+        el.addEventListener('input', audit);
+        el.addEventListener('change', audit);
+      });
+
+      document.querySelectorAll('.preset-btn').forEach((btn) => {
+        btn.addEventListener('click', function () {
+          const p = PRESETS[btn.getAttribute('data-preset')];
+          Object.entries(p).forEach(([k, v]) => {
+            els[k].value = v;
+          });
+          audit();
+        });
+      });
+
+      audit();
+    })();
+  </script>
+</BaseLayout>

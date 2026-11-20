@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CanonicalAnswer from '../components/CanonicalAnswer.astro';
+
+const siteUrl = 'https://humic.blog';
+const breadcrumbs = [
+  { name: 'Home', url: siteUrl },
+  { name: 'About & Editorial Standards', url: `${siteUrl}/about` },
+];
+---
+
+<BaseLayout
+  title="About Humic.blog & Vendor-Neutral Editorial Standards"
+  description="Learn about Humic.blog's independent editorial charter, technical review board, zero-sponsorship policy, and legally compliant agronomic standards for humic and fulvic substances."
+  canonicalPath="/about"
+  schemaType="about"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="bg-emerald-950 text-white border-b-4 border-amber-500">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+      <nav aria-label="Breadcrumb" class="mb-3 text-xs text-emerald-300 flex items-center gap-1.5">
+        <a href="/" class="hover:text-amber-400">Home</a>
+        <span>/</span>
+        <span class="text-emerald-100">About &amp; Editorial Standards</span>
+      </nav>
+      <span class="inline-flex items-center rounded-full bg-amber-500/20 border border-amber-500/40 px-3 py-0.5 text-xs font-semibold text-amber-300 mb-3">
+        E-E-A-T Governance Charter
+      </span>
+      <h1 class="font-serif text-3xl sm:text-4xl font-bold text-white leading-tight">
+        About Humic.blog &amp; Editorial Independence
+      </h1>
+      <p class="mt-3 text-sm sm:text-base text-emerald-100/90 leading-relaxed">
+        Why we built a strictly vendor-neutral, peer-reviewed soil chemistry and biostimulant formulation encyclopedia for both farmers and manufacturers.
+      </p>
+    </div>
+  </div>
+
+  <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-10">
+    <article data-pagefind-body class="rounded-2xl bg-white border border-slate-200 p-6 sm:p-10 shadow-xs space-y-8">
+      <CanonicalAnswer
+        answer="Humic.blog is an independent, non-commercial educational encyclopedia covering humic substances, soil colloid chemistry, ISO 19822 analytical verification, field agronomy, and B2B biostimulant formulation engineering. Every guide is reviewed against peer-reviewed journals and international regulatory standards without vendor sponsorships, product endorsements, or unverified pesticidal and medicinal claims."
+      />
+
+      <div class="prose prose-slate max-w-none prose-headings:font-serif prose-headings:text-emerald-950">
+        <h2>Why Independent Humic Science Matters</h2>
+        <p>
+          Online literature surrounding humic acid, fulvic acid, and potassium humate has historically been dominated by commercial product brochures—many citing inflated colorimetric percentages, unsubstantiated yield miracles, or chemically inaccurate mixing instructions. Both progressive farmers trying to prevent drip-emitter clogging and biostimulant formulators trying to solve shelf-life gelation deserve transparent, vendor-neutral technical guidance grounded in peer-reviewed soil chemistry.
+        </p>
+
+        <h2 id="editorial-review">Technical Review &amp; Authorship Standards</h2>
+        <p>
+          All cornerstone articles, field protocols, and interactive calculators published on Humic.blog are authored and technically verified by the <strong>Humic.blog Soil Science &amp; Agronomy Technical Review Chair</strong> and Editorial Board. Our review workflow enforces four non-negotiable criteria prior to publication:
+        </p>
+        <ol>
+          <li><strong>Primary Peer-Reviewed &amp; Standard Grounding:</strong> Claims regarding cation exchange capacity, supramolecular structure, redox electron shuttling, root H⁺-ATPase activation, and analytical quantification must trace directly to published peer-reviewed soil science journals, IHSS reference documentation, or ISO 19822:2018.</li>
+          <li><strong>Strict Vendor Neutrality:</strong> Humic.blog does not accept paid brand placements, affiliate commissions, or sponsored product reviews. Raw material and extraction comparisons (e.g., leonardite vs. lignite, KOH vs. NaOH, enzymatic vs. acid hydrolysis) evaluate chemistry strictly on objective agronomic and formulation performance.</li>
+          <li><strong>Legally Compliant Agronomic Scope:</strong> In full alignment with US EPA (FIFRA), EU FPR 2019/1009, and India FCO Schedule VI boundaries, Humic.blog never publishes pesticidal, fungicidal, nematicidal, or human/veterinary medicinal claims. Discussion remains strictly within documented soil conditioning, nutrient use efficiency, abiotic stress tolerance, and liquid formulation chemistry.</li>
+          <li><strong>Transparent Uncertainty &amp; Hormetic Limits:</strong> Where peer-reviewed meta-analyses demonstrate variable field responses (such as high-organic-matter soils showing modest marginal response compared with degraded sandy soils, or hormetic overdosing penalties), we state those boundaries plainly.</li>
+        </ol>
+
+        <h2>Two Audiences, One Scientific Standard</h2>
+        <ul>
+          <li><strong>Farmers, Crop Advisors &amp; Field Agronomists:</strong> Practical water-hardness screening, 3-minute on-farm adulteration checks, realistic urea/DAP nutrient use efficiency math, crop phenology calendars, and zero-dependency dosage and tank-mix calculators.</li>
+          <li><strong>Biostimulant Manufacturers &amp; Importers (B2B):</strong> Vendor-neutral liquid formulation engineering, pH conflict resolution between potassium humate and acid-stable potassium fulvate, microbial gas-buildup prevention, container-level leonardite COA auditing, and global export registration playbooks.</li>
+        </ul>
+
+        <h2>Corrections &amp; Scientific Updates</h2>
+        <p>
+          Analytical standards and agricultural regulations evolve continuously (such as CEN harmonized standards under EU FPR 2019/1009 and Schedule VI updates under India's FCO). Every article displays explicit publication and last-updated dates and is re-audited whenever international testing or regulatory benchmarks change. For our full analytical hierarchy, see our <a href="/methodology">Testing &amp; Citation Methodology</a>.
+        </p>
+      </div>
+    </article>
+  </div>
+</BaseLayout>

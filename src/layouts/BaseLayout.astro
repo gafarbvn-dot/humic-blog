@@ -4,19 +4,22 @@ import SchemaMarkup, {
   type BreadcrumbItem,
   type CitationItem,
   type FaqItem,
+  type HowToData,
 } from '../components/SchemaMarkup.astro';
 
 export interface Props {
   title: string;
   description: string;
   canonicalPath?: string;
-  schemaType?: 'website' | 'article' | 'tool' | 'glossary';
+  ogImage?: string;
+  schemaType?: 'website' | 'article' | 'tool' | 'glossary' | 'collection' | 'about';
   pillar?: string;
   pubDate?: Date;
   updatedDate?: Date;
   breadcrumbs?: BreadcrumbItem[];
   faqs?: FaqItem[];
   citations?: CitationItem[];
+  howTo?: HowToData;
   extraSchemaNodes?: Record<string, unknown>[];
 }
 
@@ -24,6 +27,7 @@ const {
   title,
   description,
   canonicalPath,
+  ogImage,
   schemaType = 'website',
   pillar,
   pubDate,
@@ -31,6 +35,7 @@ const {
   breadcrumbs = [],
   faqs = [],
   citations = [],
+  howTo,
   extraSchemaNodes = [],
 } = Astro.props;
 
@@ -39,12 +44,14 @@ const rawPath = canonicalPath ?? Astro.url.pathname;
 const normalizedPath = rawPath === '/' ? '' : rawPath.replace(/\/+$/, '');
 const canonicalUrl = normalizedPath ? `${siteOrigin}${normalizedPath}` : siteOrigin;
 const fullTitle = title.includes('Humic.blog') ? title : `${title} | Humic.blog`;
+const resolvedOgImage = ogImage ?? `${siteOrigin}/og-default.svg`;
 
 const navLinks = [
-  { href: '/#encyclopedia', label: 'Encyclopedia' },
-  { href: '/tools/dosage-calculator', label: 'Dosage Calculator' },
-  { href: '/tools/tank-mix-checker', label: 'Tank-Mix Checker' },
-  { href: '/glossary', label: 'A–Z Glossary' },
+  { href: '/#encyclopedia', label: 'Pillars' },
+  { href: '/manufacturing', label: 'For Manufacturers' },
+  { href: '/tools/dosage-calculator', label: 'Tools' },
+  { href: '/glossary', label: 'Glossary' },
+  { href: '/about', label: 'Editorial' },
 ];
 ---
 
@@ -65,6 +72,9 @@ const navLinks = [
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={resolvedOgImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     {pubDate && <meta property="article:published_time" content={pubDate.toISOString()} />}
     {(updatedDate || pubDate) && schemaType === 'article' && (
       <meta property="article:modified_time" content={(updatedDate ?? pubDate)!.toISOString()} />
@@ -74,6 +84,7 @@ const navLinks = [
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={resolvedOgImage} />
 
     <!-- Structured Data (@graph JSON-LD) -->
     <SchemaMarkup
@@ -81,12 +92,14 @@ const navLinks = [
       title={title}
       description={description}
       canonicalUrl={canonicalUrl}
+      imageUrl={resolvedOgImage}
       pillar={pillar}
       pubDate={pubDate}
       updatedDate={updatedDate}
       breadcrumbs={breadcrumbs}
       faqs={faqs}
       citations={citations}
+      howTo={howTo}
       extraNodes={extraSchemaNodes}
     />
   </head>
@@ -94,8 +107,8 @@ const navLinks = [
     <!-- Top Header -->
     <header class="sticky top-0 z-40 bg-emerald-950 text-white border-b border-emerald-900/80 shadow-sm">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="flex h-16 items-center justify-between">
-          <a href="/" class="flex items-center gap-2.5 group focus:outline-none">
+        <div class="flex h-16 items-center justify-between gap-3">
+          <a href="/" class="flex items-center gap-2.5 group focus:outline-none shrink-0">
             <img src="/favicon.svg" alt="" width="30" height="30" class="rounded-md" />
             <div class="flex flex-col leading-none">
               <span class="font-serif text-lg font-bold tracking-tight text-white group-hover:text-amber-400 transition-colors">
@@ -112,12 +125,13 @@ const navLinks = [
             {navLinks.map((item) => {
               const isActive =
                 item.href !== '/#encyclopedia' &&
-                normalizedPath === item.href;
+                (normalizedPath === item.href ||
+                  (item.href === '/tools/dosage-calculator' && normalizedPath.startsWith('/tools')));
               return (
                 <a
                   href={item.href}
                   class:list={[
-                    'px-3.5 py-2 rounded-lg text-sm font-medium transition-colors',
+                    'px-3 py-2 rounded-lg text-sm font-medium transition-colors',
                     isActive
                       ? 'bg-emerald-900 text-amber-400'
                       : 'text-emerald-100 hover:bg-emerald-900/70 hover:text-white',
@@ -129,19 +143,34 @@ const navLinks = [
             })}
           </nav>
 
-          <!-- Mobile Toggle -->
-          <button
-            id="mobile-nav-toggle"
-            type="button"
-            aria-expanded="false"
-            aria-controls="mobile-nav-menu"
-            aria-label="Toggle navigation menu"
-            class="md:hidden inline-flex items-center justify-center rounded-lg p-2 text-emerald-100 hover:bg-emerald-900 hover:text-white focus:outline-none focus:ring-2 focus:ring-amber-500"
-          >
-            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          </button>
+          <!-- Search Trigger + Mobile Toggle -->
+          <div class="flex items-center gap-2">
+            <button
+              id="open-search-btn"
+              type="button"
+              aria-label="Search encyclopedia"
+              class="inline-flex items-center gap-2 rounded-lg bg-emerald-900/90 hover:bg-emerald-800 border border-emerald-700/80 px-3 py-1.5 text-xs font-medium text-emerald-100 transition-colors cursor-pointer"
+            >
+              <svg class="h-4 w-4 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 105.5 5.5a7.5 7.5 0 0011.15 11.15z" />
+              </svg>
+              <span class="hidden sm:inline">Search</span>
+              <kbd class="hidden lg:inline-block rounded bg-emerald-950 px-1.5 py-0.5 text-[10px] font-mono text-emerald-300 border border-emerald-800">/</kbd>
+            </button>
+
+            <button
+              id="mobile-nav-toggle"
+              type="button"
+              aria-expanded="false"
+              aria-controls="mobile-nav-menu"
+              aria-label="Toggle navigation menu"
+              class="md:hidden inline-flex items-center justify-center rounded-lg p-2 text-emerald-100 hover:bg-emerald-900 hover:text-white focus:outline-none focus:ring-2 focus:ring-amber-500"
+            >
+              <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -151,16 +180,54 @@ const navLinks = [
         aria-label="Mobile Navigation"
         class="hidden md:hidden border-t border-emerald-900 bg-emerald-950 px-4 py-3 space-y-1"
       >
-        {navLinks.map((item) => (
-          <a
-            href={item.href}
-            class="block rounded-lg px-3 py-2 text-sm font-medium text-emerald-100 hover:bg-emerald-900 hover:text-amber-400"
-          >
-            {item.label}
-          </a>
-        ))}
+        <a href="/#encyclopedia" class="block rounded-lg px-3 py-2 text-sm font-medium text-emerald-100 hover:bg-emerald-900 hover:text-amber-400">Knowledge Pillars</a>
+        <a href="/manufacturing" class="block rounded-lg px-3 py-2 text-sm font-medium text-emerald-100 hover:bg-emerald-900 hover:text-amber-400">For Manufacturers (B2B)</a>
+        <a href="/problem-soils" class="block rounded-lg px-3 py-2 text-sm font-medium text-emerald-100 hover:bg-emerald-900 hover:text-amber-400">Problem Soils</a>
+        <a href="/tools/dosage-calculator" class="block rounded-lg px-3 py-2 text-sm font-medium text-emerald-100 hover:bg-emerald-900 hover:text-amber-400">Dosage Calculator</a>
+        <a href="/tools/tank-mix-checker" class="block rounded-lg px-3 py-2 text-sm font-medium text-emerald-100 hover:bg-emerald-900 hover:text-amber-400">Tank-Mix Checker</a>
+        <a href="/tools/coa-red-flag-checker" class="block rounded-lg px-3 py-2 text-sm font-medium text-emerald-100 hover:bg-emerald-900 hover:text-amber-400">COA Red-Flag Checker</a>
+        <a href="/tools/formulation-ph-estimator" class="block rounded-lg px-3 py-2 text-sm font-medium text-emerald-100 hover:bg-emerald-900 hover:text-amber-400">Blend pH Estimator</a>
+        <a href="/glossary" class="block rounded-lg px-3 py-2 text-sm font-medium text-emerald-100 hover:bg-emerald-900 hover:text-amber-400">A–Z Glossary</a>
+        <a href="/about" class="block rounded-lg px-3 py-2 text-sm font-medium text-emerald-100 hover:bg-emerald-900 hover:text-amber-400">About &amp; Editorial Policy</a>
       </nav>
     </header>
+
+    <!-- Pagefind Static Search Modal -->
+    <div
+      id="search-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Search Humic.blog"
+      class="hidden fixed inset-0 z-50 bg-slate-950/65 backdrop-blur-xs p-4 sm:p-8 overflow-y-auto"
+    >
+      <div class="mx-auto max-w-2xl rounded-2xl bg-white border border-slate-200 shadow-2xl overflow-hidden mt-8">
+        <div class="flex items-center gap-3 px-4 py-3.5 bg-emerald-950 text-white border-b border-emerald-900">
+          <svg class="h-5 w-5 text-amber-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 105.5 5.5a7.5 7.5 0 0011.15 11.15z" />
+          </svg>
+          <input
+            id="pagefind-input"
+            type="search"
+            autocomplete="off"
+            placeholder="Search calcium nitrate, ISO 19822, lignosulfonate, calcareous, bottle swelling..."
+            class="w-full bg-transparent text-sm sm:text-base text-white placeholder:text-emerald-300/75 focus:outline-none"
+          />
+          <button
+            id="close-search-btn"
+            type="button"
+            aria-label="Close search"
+            class="rounded-lg bg-emerald-900 hover:bg-emerald-800 px-2.5 py-1 text-xs font-semibold text-emerald-200 cursor-pointer"
+          >
+            Esc
+          </button>
+        </div>
+        <div id="pagefind-results" class="max-h-[65vh] overflow-y-auto divide-y divide-slate-100 p-2">
+          <div class="p-6 text-center text-xs text-slate-500">
+            Type any agronomic, analytical, or formulation term to search all guides, tools, and glossary definitions instantaneously.
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- Main Content -->
     <main class="flex-1">
@@ -171,43 +238,56 @@ const navLinks = [
     <footer class="bg-emerald-950 text-emerald-100 border-t-4 border-amber-500 mt-16">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
         <div class="grid grid-cols-1 md:grid-cols-12 gap-8 pb-10 border-b border-emerald-900">
-          <div class="md:col-span-5 space-y-3">
+          <div class="md:col-span-4 space-y-3">
             <a href="/" class="inline-flex items-center gap-2 font-serif text-xl font-bold text-white">
               Humic<span class="text-amber-500">.blog</span>
             </a>
-            <p class="text-sm text-emerald-200/90 leading-relaxed max-w-md">
-              An independent, vendor-neutral educational encyclopedia synthesizing peer-reviewed soil chemistry, IHSS and ISO 19822 analytical protocols, and global agronomic standards for humic and fulvic substances.
+            <p class="text-sm text-emerald-200/90 leading-relaxed">
+              An independent, vendor-neutral educational encyclopedia serving farmers, agronomists, researchers, and biostimulant manufacturers worldwide.
             </p>
-            <p class="text-xs text-emerald-300/80 leading-relaxed max-w-md">
-              Editorial Policy: Humic.blog accepts no product sponsorships and makes no pesticidal, fungicidal, or medicinal claims. Content focuses strictly on soil conditioning, nutrient use efficiency, and abiotic stress physiology.
+            <p class="text-xs text-emerald-300/80 leading-relaxed">
+              Editorial Independence: Zero product sponsorships, zero pesticidal or medicinal claims. All protocols align with IHSS and ISO 19822:2018 standards.
             </p>
           </div>
 
-          <div class="md:col-span-4 space-y-2.5">
+          <div class="md:col-span-3 space-y-2.5">
             <h3 class="font-sans text-xs font-bold uppercase tracking-wider text-amber-400">
-              Cornerstone Guides
+              Knowledge Pillars
             </h3>
             <ul class="space-y-1.5 text-sm">
-              <li><a href="/origins/formation-and-shocking-facts" class="hover:text-amber-400 transition-colors">Formation &amp; Soil Science Facts</a></li>
-              <li><a href="/raw-materials/raw-materials-and-extraction" class="hover:text-amber-400 transition-colors">Raw Materials &amp; Alkaline Extraction</a></li>
-              <li><a href="/quality-and-testing/market-malpractices-and-testing" class="hover:text-amber-400 transition-colors">Market Malpractices &amp; ISO 19822 Testing</a></li>
-              <li><a href="/agronomy/complete-application-and-tank-mix-guide" class="hover:text-amber-400 transition-colors">Application &amp; Tank-Mix Guide</a></li>
-              <li><a href="/agronomy/crop-calendar-and-precautions" class="hover:text-amber-400 transition-colors">Crop Calendar &amp; Field Precautions</a></li>
-              <li><a href="/synergies/humic-seaweed-amino-synergies" class="hover:text-amber-400 transition-colors">Humic, Seaweed &amp; L-Amino Synergies</a></li>
-              <li><a href="/regulations/global-organic-laws-and-standards" class="hover:text-amber-400 transition-colors">Global Organic Laws &amp; Standards</a></li>
-              <li><a href="/soil-and-sustainability/sustainability-biodiversity-food-security" class="hover:text-amber-400 transition-colors">Sustainability, Biodiversity &amp; Food Security</a></li>
+              <li><a href="/origins" class="hover:text-amber-400 transition-colors">Origins &amp; Chemistry</a></li>
+              <li><a href="/raw-materials" class="hover:text-amber-400 transition-colors">Raw Materials &amp; Extraction</a></li>
+              <li><a href="/quality-and-testing" class="hover:text-amber-400 transition-colors">Quality &amp; Testing</a></li>
+              <li><a href="/agronomy" class="hover:text-amber-400 transition-colors">Agronomy &amp; Application</a></li>
+              <li><a href="/synergies" class="hover:text-amber-400 transition-colors">Biostimulant Synergies</a></li>
+              <li><a href="/manufacturing" class="hover:text-amber-400 transition-colors">Formulation &amp; Manufacturing (B2B)</a></li>
+              <li><a href="/problem-soils" class="hover:text-amber-400 transition-colors">Problem Soils &amp; Climate</a></li>
+              <li><a href="/regulations" class="hover:text-amber-400 transition-colors">Regulations &amp; Organic Standards</a></li>
+              <li><a href="/soil-and-sustainability" class="hover:text-amber-400 transition-colors">Soil Health &amp; Sustainability</a></li>
             </ul>
           </div>
 
           <div class="md:col-span-3 space-y-2.5">
             <h3 class="font-sans text-xs font-bold uppercase tracking-wider text-amber-400">
-              Tools &amp; Machine Index
+              Interactive Tools &amp; Reference
             </h3>
             <ul class="space-y-1.5 text-sm">
               <li><a href="/tools/dosage-calculator" class="hover:text-amber-400 transition-colors">Humate &amp; Fulvic Dosage Calculator</a></li>
               <li><a href="/tools/tank-mix-checker" class="hover:text-amber-400 transition-colors">Tank-Mix Compatibility Checker</a></li>
+              <li><a href="/tools/coa-red-flag-checker" class="hover:text-amber-400 transition-colors">COA Red-Flag Checker</a></li>
+              <li><a href="/tools/formulation-ph-estimator" class="hover:text-amber-400 transition-colors">Manufacturer Blend pH Estimator</a></li>
               <li><a href="/glossary" class="hover:text-amber-400 transition-colors">A–Z Humic Science Glossary</a></li>
-              <li><a href="/llms.txt" class="hover:text-amber-400 transition-colors">AI / LLM Directory (llms.txt)</a></li>
+            </ul>
+          </div>
+
+          <div class="md:col-span-2 space-y-2.5">
+            <h3 class="font-sans text-xs font-bold uppercase tracking-wider text-amber-400">
+              Governance &amp; Crawlers
+            </h3>
+            <ul class="space-y-1.5 text-sm">
+              <li><a href="/about" class="hover:text-amber-400 transition-colors">About &amp; Editorial Policy</a></li>
+              <li><a href="/methodology" class="hover:text-amber-400 transition-colors">Testing Methodology</a></li>
+              <li><a href="/llms.txt" class="hover:text-amber-400 transition-colors">AI Directory (llms.txt)</a></li>
               <li><a href="/sitemap-index.xml" class="hover:text-amber-400 transition-colors">XML Sitemap</a></li>
             </ul>
           </div>
@@ -215,21 +295,122 @@ const navLinks = [
 
         <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-emerald-300/80">
           <p>&copy; {new Date().getFullYear()} Humic.blog. Open Educational Soil Science Resource.</p>
-          <p>Aligned with IHSS &amp; ISO 19822 Analytical Standards.</p>
+          <p>Aligned with IHSS &amp; ISO 19822:2018 Analytical Standards.</p>
         </div>
       </div>
     </footer>
 
     <script is:inline>
       (function () {
+        // Mobile menu
         const btn = document.getElementById('mobile-nav-toggle');
         const menu = document.getElementById('mobile-nav-menu');
-        if (!btn || !menu) return;
-        btn.addEventListener('click', function () {
-          const isOpen = !menu.classList.contains('hidden');
-          menu.classList.toggle('hidden');
-          btn.setAttribute('aria-expanded', String(!isOpen));
+        if (btn && menu) {
+          btn.addEventListener('click', function () {
+            const isOpen = !menu.classList.contains('hidden');
+            menu.classList.toggle('hidden');
+            btn.setAttribute('aria-expanded', String(!isOpen));
+          });
+        }
+
+        // Lazy Pagefind static search modal
+        const openBtn = document.getElementById('open-search-btn');
+        const closeBtn = document.getElementById('close-search-btn');
+        const modal = document.getElementById('search-modal');
+        const input = document.getElementById('pagefind-input');
+        const resultsEl = document.getElementById('pagefind-results');
+        let pf = null;
+
+        async function loadPagefind() {
+          if (pf) return pf;
+          try {
+            pf = await import('/pagefind/pagefind.js');
+            await pf.init();
+            return pf;
+          } catch (e) {
+            return null;
+          }
+        }
+
+        function openSearch() {
+          if (!modal || !input) return;
+          modal.classList.remove('hidden');
+          input.focus();
+          loadPagefind();
+        }
+
+        function closeSearch() {
+          if (!modal) return;
+          modal.classList.add('hidden');
+        }
+
+        if (openBtn) openBtn.addEventListener('click', openSearch);
+        if (closeBtn) closeBtn.addEventListener('click', closeSearch);
+        if (modal) {
+          modal.addEventListener('click', function (e) {
+            if (e.target === modal) closeSearch();
+          });
+        }
+
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape') closeSearch();
+          if (
+            e.key === '/' &&
+            document.activeElement &&
+            !['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName)
+          ) {
+            e.preventDefault();
+            openSearch();
+          }
         });
+
+        let timer = null;
+        if (input && resultsEl) {
+          input.addEventListener('input', function () {
+            clearTimeout(timer);
+            const q = input.value.trim();
+            if (!q) {
+              resultsEl.innerHTML =
+                '<div class="p-6 text-center text-xs text-slate-500">Type any agronomic, analytical, or formulation term to search all guides, tools, and glossary definitions instantaneously.</div>';
+              return;
+            }
+            timer = setTimeout(async function () {
+              const engine = await loadPagefind();
+              if (!engine) {
+                resultsEl.innerHTML =
+                  '<div class="p-6 text-center text-xs text-amber-800">Search index loads after production build (Pagefind).</div>';
+                return;
+              }
+              const search = await engine.search(q);
+              const top = await Promise.all(search.results.slice(0, 8).map((r) => r.data()));
+              if (!top.length) {
+                resultsEl.innerHTML =
+                  '<div class="p-6 text-center text-sm text-slate-500">No matches found for "' +
+                  q.replace(/</g, '&lt;') +
+                  '".</div>';
+                return;
+              }
+              resultsEl.innerHTML = top
+                .map(function (item) {
+                  const cleanUrl = item.url.replace(/\/$/, '') || '/';
+                  const title = (item.meta && item.meta.title ? item.meta.title : cleanUrl).replace(' | Humic.blog', '');
+                  return (
+                    '<a href="' +
+                    cleanUrl +
+                    '" class="block rounded-xl p-3.5 hover:bg-emerald-50 transition-colors">' +
+                    '<div class="font-serif text-sm font-bold text-emerald-950">' +
+                    title +
+                    '</div>' +
+                    '<p class="mt-1 text-xs text-slate-600 leading-relaxed line-clamp-2">' +
+                    item.excerpt +
+                    '</p>' +
+                    '</a>'
+                  );
+                })
+                .join('');
+            }, 140);
+          });
+        }
       })();
     </script>
   </body>

@@ -1,0 +1,93 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CanonicalAnswer from '../components/CanonicalAnswer.astro';
+
+const siteUrl = 'https://humic.blog';
+const breadcrumbs = [
+  { name: 'Home', url: siteUrl },
+  { name: 'Testing & Citation Methodology', url: `${siteUrl}/methodology` },
+];
+---
+
+<BaseLayout
+  title="Testing, Analytical Standards & Citation Methodology"
+  description="How Humic.blog validates ISO 19822 analytical numbers, calculator dosage formulas, tank-mix precipitation chemistry, and peer-reviewed scientific citations."
+  canonicalPath="/methodology"
+  schemaType="about"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="bg-emerald-950 text-white border-b-4 border-amber-500">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+      <nav aria-label="Breadcrumb" class="mb-3 text-xs text-emerald-300 flex items-center gap-1.5">
+        <a href="/" class="hover:text-amber-400">Home</a>
+        <span>/</span>
+        <span class="text-emerald-100">Testing &amp; Citation Methodology</span>
+      </nav>
+      <span class="inline-flex items-center rounded-full bg-amber-500/20 border border-amber-500/40 px-3 py-0.5 text-xs font-semibold text-amber-300 mb-3">
+        Analytical Verification Framework
+      </span>
+      <h1 class="font-serif text-3xl sm:text-4xl font-bold text-white leading-tight">
+        Testing, Standards &amp; Citation Methodology
+      </h1>
+      <p class="mt-3 text-sm sm:text-base text-emerald-100/90 leading-relaxed">
+        The scientific hierarchy behind every table, calculator formula, COA threshold, and peer-reviewed reference across Humic.blog.
+      </p>
+    </div>
+  </div>
+
+  <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-10">
+    <article data-pagefind-body class="rounded-2xl bg-white border border-slate-200 p-6 sm:p-10 shadow-xs space-y-8">
+      <CanonicalAnswer
+        answer="Humic.blog anchors all analytical purity claims, dosage calculators, and compatibility matrices to a strict four-tier evidence hierarchy: international analytical standards (ISO 19822:2018 and IHSS), statutory regulatory frameworks (EU FPR 2019/1009, USDA NOP, AAPFCO, India FCO), peer-reviewed soil and plant science journals, and conservative agronomic safety margins."
+      />
+
+      <div class="prose prose-slate max-w-none prose-headings:font-serif prose-headings:text-emerald-950">
+        <h2>Four-Tier Evidence &amp; Citation Hierarchy</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Tier</th>
+              <th>Source Category</th>
+              <th>Primary Authorities Referenced</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Tier 1</strong></td>
+              <td>International Analytical &amp; Reference Standards</td>
+              <td>ISO 19822:2018 (Lamar / HPTA Method), IHSS Reference Isolation Protocols, AOAC Official Validation Studies</td>
+            </tr>
+            <tr>
+              <td><strong>Tier 2</strong></td>
+              <td>Statutory Agricultural &amp; Organic Regulations</td>
+              <td>Regulation (EU) 2019/1009, Regulation (EU) 2018/848 &amp; (EU) 2021/1165, USDA NOP (7 CFR Part 205), AAPFCO / CDFA, India FCO 1985 Schedule VI</td>
+            </tr>
+            <tr>
+              <td><strong>Tier 3</strong></td>
+              <td>Peer-Reviewed Academic Literature</td>
+              <td><em>Soil Science</em>, <em>Advances in Agronomy</em>, <em>Scientia Horticulturae</em>, <em>Nature</em>, <em>Journal of Environmental Quality</em>, <em>Frontiers in Plant Science</em>, <em>Soil Biology &amp; Biochemistry</em></td>
+            </tr>
+            <tr>
+              <td><strong>Tier 4</strong></td>
+              <td>University Extension &amp; Engineering Manuals</td>
+              <td>Irrigation Training &amp; Research Center (Cal Poly) Fertigation Standards, FAO Soil Resources Reports, ICAR / State Agricultural University Manuals</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2>How Our 4 Interactive Utilities Are Calibrated</h2>
+        <ul>
+          <li><strong><a href="/tools/dosage-calculator">Dosage Calculator</a>:</strong> Baseline per-hectare and per-acre ceilings align with hormetic dose-response meta-analyses (Rose et al., 2014) and conservative cuticular/drip safety thresholds (≤0.15% w/v foliar K-humate; 1.0–2.5 kg/ha split drip rates).</li>
+          <li><strong><a href="/tools/tank-mix-checker">Tank-Mix Compatibility Checker</a>:</strong> Models colloidal charge destabilization from divalent cation bridging (`Ca²⁺`, `Mg²⁺`) and low-pH carboxylate protonation (`pH &lt; 4.5–5.0`), explicitly warning users whenever carrier water hardness exceeds 250 ppm CaCO₃.</li>
+          <li><strong><a href="/tools/coa-red-flag-checker">COA Red-Flag Checker</a>:</strong> Benchmarks Certificates of Analysis against ISO 19822 stoichiometry (flagging physically unrealistic &gt;85% soluble K-humate claims), elemental sulfur signatures (&gt;0.75% caution / &gt;2.5% sodium lignosulfonate signature), `NaOH` sodium substitution (&gt;1.5% Na), and EU FPR 2019/1009 heavy-metal ceilings.</li>
+          <li><strong><a href="/tools/formulation-ph-estimator">Manufacturer Blend pH &amp; Compatibility Estimator</a>:</strong> Estimates buffered liquid blend pH across potassium humate, potassium fulvate, alkaline vs. cold-pressed kelp, enzymatic vs. acid-hydrolyzed amino acids, and micronutrient salts, highlighting microbial gas-buildup and preservative pH-mismatch risks.</li>
+        </ul>
+
+        <h2>Machine-Readable &amp; AI Citation Transparency</h2>
+        <p>
+          Every page on Humic.blog embeds unified <code>@graph</code> JSON-LD structured data (including <code>Organization</code>, <code>Person</code> technical reviewer attribution, <code>Article</code>, <code>BreadcrumbList</code>, conditional <code>FAQPage</code> and <code>HowTo</code> schemas, and <code>DefinedTermSet</code> on our glossary). Our <a href="/llms.txt"><code>/llms.txt</code> directory</a> is regenerated dynamically on every build so search engines and AI research systems always cite exact, current URLs and canonical summaries.
+        </p>
+      </div>
+    </article>
+  </div>
+</BaseLayout>

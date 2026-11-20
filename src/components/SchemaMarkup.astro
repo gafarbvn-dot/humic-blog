@@ -15,17 +15,26 @@ export interface CitationItem {
   url?: string;
 }
 
+export interface HowToData {
+  name: string;
+  description: string;
+  totalTime?: string;
+  steps: Array<{ name: string; text: string }>;
+}
+
 export interface Props {
-  type?: 'website' | 'article' | 'tool' | 'glossary';
+  type?: 'website' | 'article' | 'tool' | 'glossary' | 'collection' | 'about';
   title: string;
   description: string;
   canonicalUrl: string;
+  imageUrl?: string;
   pillar?: string;
   pubDate?: Date;
   updatedDate?: Date;
   breadcrumbs?: BreadcrumbItem[];
   faqs?: FaqItem[];
   citations?: CitationItem[];
+  howTo?: HowToData;
   extraNodes?: Record<string, unknown>[];
 }
 
@@ -34,12 +43,14 @@ const {
   title,
   description,
   canonicalUrl,
+  imageUrl,
   pillar,
   pubDate,
   updatedDate,
   breadcrumbs = [],
   faqs = [],
   citations = [],
+  howTo,
   extraNodes = [],
 } = Astro.props;
 
@@ -51,12 +62,28 @@ const organizationNode = {
   name: 'Humic.blog',
   url: siteUrl,
   description:
-    'A vendor-neutral, peer-reviewed educational encyclopedia dedicated to humic substances, soil chemistry, ISO 19822 analytical testing, and sustainable agronomy.',
+    'A vendor-neutral, peer-reviewed educational encyclopedia dedicated to humic substances, soil chemistry, ISO 19822 analytical testing, biostimulant formulation engineering, and sustainable agronomy.',
   logo: {
     '@type': 'ImageObject',
     url: `${siteUrl}/favicon.svg`,
   },
   sameAs: ['https://github.com/gafarbvn-dot/humic-blog'],
+};
+
+const reviewerNode = {
+  '@type': 'Person',
+  '@id': `${siteUrl}/#technical-reviewer`,
+  name: 'Humic.blog Soil Science & Agronomy Technical Review Chair',
+  jobTitle: 'Technical Soil-Science Editor & Agronomy Reviewer',
+  url: `${siteUrl}/about#editorial-review`,
+  worksFor: { '@id': `${siteUrl}/#organization` },
+  knowsAbout: [
+    'Humic Substances',
+    'ISO 19822 Analytical Chemistry',
+    'Soil Colloid & Cation Exchange Chemistry',
+    'Biostimulant Formulation Engineering',
+    'Sustainable Agronomy',
+  ],
 };
 
 const websiteNode = {
@@ -71,6 +98,7 @@ const websiteNode = {
 const graph: Record<string, unknown>[] = [organizationNode, websiteNode];
 
 if (type === 'article') {
+  graph.push(reviewerNode);
   const articleNode: Record<string, unknown> = {
     '@type': 'Article',
     '@id': `${canonicalUrl}#article`,
@@ -86,11 +114,15 @@ if (type === 'article') {
       name: 'Humic.blog Editorial Board',
       '@id': `${siteUrl}/#organization`,
     },
+    reviewedBy: { '@id': `${siteUrl}/#technical-reviewer` },
     publisher: { '@id': `${siteUrl}/#organization` },
     inLanguage: 'en',
     isAccessibleForFree: true,
   };
 
+  if (imageUrl) {
+    articleNode.image = imageUrl;
+  }
   if (pillar) {
     articleNode.articleSection = pillar;
   }
@@ -122,6 +154,42 @@ if (type === 'article') {
       priceCurrency: 'USD',
     },
     publisher: { '@id': `${siteUrl}/#organization` },
+  });
+} else if (type === 'collection') {
+  graph.push({
+    '@type': 'CollectionPage',
+    '@id': `${canonicalUrl}#collection`,
+    name: title,
+    description,
+    url: canonicalUrl,
+    isPartOf: { '@id': `${siteUrl}/#website` },
+    publisher: { '@id': `${siteUrl}/#organization` },
+  });
+} else if (type === 'about') {
+  graph.push(reviewerNode);
+  graph.push({
+    '@type': 'AboutPage',
+    '@id': `${canonicalUrl}#about`,
+    name: title,
+    description,
+    url: canonicalUrl,
+    mainEntity: { '@id': `${siteUrl}/#organization` },
+  });
+}
+
+if (howTo && howTo.steps.length > 0) {
+  graph.push({
+    '@type': 'HowTo',
+    '@id': `${canonicalUrl}#howto`,
+    name: howTo.name,
+    description: howTo.description,
+    ...(howTo.totalTime ? { totalTime: howTo.totalTime } : {}),
+    step: howTo.steps.map((s, index) => ({
+      '@type': 'HowToStep',
+      position: index + 1,
+      name: s.name,
+      text: s.text,
+    })),
   });
 }
 

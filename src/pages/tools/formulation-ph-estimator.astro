@@ -1,0 +1,376 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const siteUrl = 'https://humic.blog';
+const breadcrumbs = [
+  { name: 'Home', url: siteUrl },
+  { name: 'Manufacturer Blend pH & Compatibility Estimator', url: `${siteUrl}/tools/formulation-ph-estimator` },
+];
+
+const faqs = [
+  {
+    question: 'Why do liquid Humic + Seaweed + L-Amino Acid bottles swell in warehouse storage?',
+    answer:
+      'Blending carbohydrate-rich seaweed extracts and protein-derived L-amino acids creates an ideal microbial nutrient broth. Traditional acidic food preservatives like sodium benzoate and potassium sorbate lose over 95% of their antimicrobial activity above pH 6.0—allowing anaerobic bacteria to ferment sugars and peptides into CO₂ and H₂S gas inside alkaline potassium humate bottles.',
+  },
+  {
+    question: 'When should a manufacturer switch from Potassium Humate to acid-stable Potassium Fulvate?',
+    answer:
+      'Switch whenever your target liquid formula must sit below pH 6.5 (for example, when combining cold-pressed seaweed, acidic protein hydrolysates, phosphoric acid, or unchelated sulfate micronutrients) or contains divalent calcium/magnesium salts. Potassium humate precipitates below pH 4.5–5.0, whereas true fulvate stays stable down to pH 1–2.',
+  },
+  {
+    question: 'Can I simply add extra KOH to force an acidic micronutrient + humate blend back to pH 9?',
+    answer:
+      'Adding excess KOH prevents humic acid precipitation, but above pH 7.5–8.0 unchelated iron, zinc, manganese, and copper salts rapidly hydrolyze into insoluble metal hydroxides (rusty/grey sludge). In high-pH potassium humate blends, micronutrients must be fully chelated (EDTA/EDDHA/DTPA) rather than raw sulfates.',
+  },
+];
+---
+
+<BaseLayout
+  title="Manufacturer Blend pH & Compatibility Estimator (B2B Liquid Biostimulants)"
+  description="B2B formulation simulator for humic, seaweed, and L-amino acid biostimulant manufacturers. Estimate liquid blend pH, precipitation/gelation risk, bottle-swelling gas risk, and when to switch to Potassium Fulvate."
+  canonicalPath="/tools/formulation-ph-estimator"
+  schemaType="tool"
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <div class="bg-emerald-950 text-white border-b-4 border-amber-500">
+    <div data-pagefind-body class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-10">
+      <nav aria-label="Breadcrumb" class="mb-3 text-xs text-emerald-300 flex items-center gap-1.5">
+        <a href="/" class="hover:text-amber-400">Home</a>
+        <span>/</span>
+        <span class="text-emerald-100">Manufacturer Blend pH Estimator</span>
+      </nav>
+      <span class="inline-flex items-center rounded-full bg-amber-500/20 border border-amber-500/40 px-3 py-0.5 text-xs font-semibold text-amber-300 mb-3">
+        B2B Formulation Engineering Tool
+      </span>
+      <h1 class="font-serif text-3xl sm:text-4xl font-bold text-white leading-tight">
+        Manufacturer Blend pH &amp; Stability Estimator
+      </h1>
+      <p class="mt-3 text-sm sm:text-base text-emerald-100/90 max-w-3xl leading-relaxed">
+        Simulate liquid concentrate stability before committing to pilot reactor batches. Evaluate estimated final pH, acid precipitation/gelation hazards, metal hydroxide crash, and microbial bottle-swelling risk.
+      </p>
+    </div>
+  </div>
+
+  <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-10 space-y-10">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <!-- Formulation Controls -->
+      <section aria-label="Liquid Concentrate Formula Inputs" class="lg:col-span-6 rounded-2xl bg-white border border-slate-200 p-6 shadow-xs space-y-5">
+        <h2 class="font-serif text-xl font-bold text-emerald-950 pb-3 border-b border-slate-200">
+          1. Configure Concentrate Formula (% w/v)
+        </h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div class="sm:col-span-2">
+            <label for="f-humic" class="block text-xs font-bold text-slate-700 mb-1">Base Humic / Fulvic Fraction</label>
+            <select id="f-humic" class="w-full rounded-xl border border-slate-300 bg-slate-50 px-3 py-2 text-sm">
+              <option value="khumate">Potassium Humate (pH ~9.8)</option>
+              <option value="kfulvate">Acid-Stable Potassium Fulvate (pH ~5.8)</option>
+              <option value="fulvic">Purified DAX-8 Fulvic Acid (pH ~3.8)</option>
+            </select>
+          </div>
+          <div>
+            <label for="f-humic-pct" class="block text-xs font-bold text-slate-700 mb-1">% w/v</label>
+            <input id="f-humic-pct" type="number" min="1" max="25" step="1" value="10" class="w-full rounded-xl border border-slate-300 bg-slate-50 px-3 py-2 text-sm font-medium" />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div class="sm:col-span-2">
+            <label for="f-seaweed" class="block text-xs font-bold text-slate-700 mb-1">Seaweed Extract (A. nodosum)</label>
+            <select id="f-seaweed" class="w-full rounded-xl border border-slate-300 bg-slate-50 px-3 py-2 text-sm">
+              <option value="none">None (0%)</option>
+              <option value="alkaline" selected>Alkaline-Extracted Kelp (pH ~9.0)</option>
+              <option value="cold_acid">Cold-Pressed / Acid-Stabilized Kelp (pH ~4.4)</option>
+            </select>
+          </div>
+          <div>
+            <label for="f-seaweed-pct" class="block text-xs font-bold text-slate-700 mb-1">% w/v</label>
+            <input id="f-seaweed-pct" type="number" min="0" max="20" step="1" value="6" class="w-full rounded-xl border border-slate-300 bg-slate-50 px-3 py-2 text-sm font-medium" />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div class="sm:col-span-2">
+            <label for="f-amino" class="block text-xs font-bold text-slate-700 mb-1">L-Amino Acid / Protein Hydrolysate</label>
+            <select id="f-amino" class="w-full rounded-xl border border-slate-300 bg-slate-50 px-3 py-2 text-sm">
+              <option value="none">None (0%)</option>
+              <option value="enzymatic" selected>Enzymatic Plant L-Amino (pH ~6.2)</option>
+              <option value="acid_hyd">Acid-Hydrolyzed Protein (pH ~4.0, High Salt)</option>
+            </select>
+          </div>
+          <div>
+            <label for="f-amino-pct" class="block text-xs font-bold text-slate-700 mb-1">% w/v</label>
+            <input id="f-amino-pct" type="number" min="0" max="25" step="1" value="8" class="w-full rounded-xl border border-slate-300 bg-slate-50 px-3 py-2 text-sm font-medium" />
+          </div>
+        </div>
+
+        <div>
+          <label for="f-micro" class="block text-xs font-bold text-slate-700 mb-1">Secondary / Micronutrient Additive</label>
+          <select id="f-micro" class="w-full rounded-xl border border-slate-300 bg-slate-50 px-3 py-2 text-sm">
+            <option value="none">None (Pure Organic Biostimulant)</option>
+            <option value="edta">EDTA / EDDHA Chelated Fe-Zn-Mn (pH ~6.5)</option>
+            <option value="sulfates">Unchelated Metal Sulfates — FeSO₄ / ZnSO₄ / MgSO₄ (pH ~3.6)</option>
+            <option value="calcium">Calcium Nitrate / Soluble Ca²⁺ Salt (pH ~5.5)</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="f-preservative" class="block text-xs font-bold text-slate-700 mb-1">Preservation / Microbial Control System</label>
+          <select id="f-preservative" class="w-full rounded-xl border border-slate-300 bg-slate-50 px-3 py-2 text-sm">
+            <option value="none">No Preservative (Unstabilized)</option>
+            <option value="sorbate_benzoate">Potassium Sorbate / Sodium Benzoate (Active only pH &lt; 5.5)</option>
+            <option value="alkaline_broad">Alkaline-Active Preservative / Sterile Filtration + Low Water Activity</option>
+          </select>
+        </div>
+      </section>
+
+      <!-- Live Formulation Diagnosis -->
+      <section aria-live="polite" aria-label="Formulation Stability Diagnosis" class="lg:col-span-6 rounded-2xl bg-white border border-slate-200 overflow-hidden shadow-sm">
+        <div id="f-banner" class="px-6 py-5 bg-emerald-800 text-white transition-colors">
+          <div class="flex items-center justify-between gap-2">
+            <span id="f-pill" class="inline-flex rounded-full bg-white/20 px-3 py-1 text-xs font-extrabold uppercase tracking-wider">
+              STABLE COLLOIDAL WINDOW
+            </span>
+            <span class="text-xs font-semibold text-white/95">
+              Est. Blend pH: <strong id="f-ph" class="text-lg">8.2</strong>
+            </span>
+          </div>
+          <h2 id="f-headline" class="font-serif text-2xl font-bold mt-2 text-white">
+            —
+          </h2>
+        </div>
+
+        <div class="p-6 space-y-4">
+          <div class="grid grid-cols-3 gap-2.5 text-center">
+            <div class="rounded-xl bg-slate-50 border border-slate-200 p-3">
+              <div class="text-[10px] font-bold uppercase tracking-wider text-slate-500">Total Solids</div>
+              <div id="f-solids" class="font-serif text-lg font-bold text-emerald-950 mt-0.5">—</div>
+            </div>
+            <div class="rounded-xl bg-slate-50 border border-slate-200 p-3">
+              <div class="text-[10px] font-bold uppercase tracking-wider text-slate-500">Precip. Risk</div>
+              <div id="f-precip" class="font-serif text-lg font-bold mt-0.5">—</div>
+            </div>
+            <div class="rounded-xl bg-slate-50 border border-slate-200 p-3">
+              <div class="text-[10px] font-bold uppercase tracking-wider text-slate-500">Gas / Swelling</div>
+              <div id="f-gas" class="font-serif text-lg font-bold mt-0.5">—</div>
+            </div>
+          </div>
+
+          <ul id="f-notes" class="space-y-2.5 text-sm m-0 p-0 list-none"></ul>
+
+          <div class="pt-4 border-t border-slate-200 flex flex-wrap gap-3">
+            <a href="/manufacturing/solving-the-ph-conflict-humate-vs-fulvate" class="text-xs font-semibold text-emerald-800 hover:text-emerald-950 underline decoration-amber-500 underline-offset-2">
+              Read pH Conflict Playbook &rarr;
+            </a>
+            <a href="/manufacturing/liquid-formulation-stability-and-shelf-life" class="text-xs font-semibold text-emerald-800 hover:text-emerald-950 underline decoration-amber-500 underline-offset-2">
+              Shelf-Life &amp; Bottle Swelling Guide &rarr;
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- FAQs -->
+    <section class="rounded-2xl bg-white border border-slate-200 p-6 sm:p-8 shadow-xs">
+      <h2 class="font-serif text-2xl font-bold text-emerald-950 mb-4">Formulation Engineering FAQs</h2>
+      <div class="space-y-4">
+        {faqs.map((faq) => (
+          <div class="rounded-xl bg-slate-50 border border-slate-200 p-4">
+            <h3 class="font-serif text-base font-bold text-emerald-950 mb-1.5">{faq.question}</h3>
+            <p class="text-sm text-slate-700 leading-relaxed m-0">{faq.answer}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  </div>
+
+  <script is:inline>
+    (function () {
+      const elHumic = document.getElementById('f-humic');
+      const elHumicPct = document.getElementById('f-humic-pct');
+      const elSeaweed = document.getElementById('f-seaweed');
+      const elSeaweedPct = document.getElementById('f-seaweed-pct');
+      const elAmino = document.getElementById('f-amino');
+      const elAminoPct = document.getElementById('f-amino-pct');
+      const elMicro = document.getElementById('f-micro');
+      const elPres = document.getElementById('f-preservative');
+
+      const banner = document.getElementById('f-banner');
+      const pill = document.getElementById('f-pill');
+      const phOut = document.getElementById('f-ph');
+      const headline = document.getElementById('f-headline');
+      const solidsOut = document.getElementById('f-solids');
+      const precipOut = document.getElementById('f-precip');
+      const gasOut = document.getElementById('f-gas');
+      const notesOut = document.getElementById('f-notes');
+
+      function estimate() {
+        const hType = elHumic.value;
+        const hPct = Math.max(0, parseFloat(elHumicPct.value) || 0);
+        const sType = elSeaweed.value;
+        const sPct = sType === 'none' ? 0 : Math.max(0, parseFloat(elSeaweedPct.value) || 0);
+        const aType = elAmino.value;
+        const aPct = aType === 'none' ? 0 : Math.max(0, parseFloat(elAminoPct.value) || 0);
+        const micro = elMicro.value;
+        const pres = elPres.value;
+
+        // Weighted buffer pH model (heuristic engineering estimate)
+        const hPh = hType === 'khumate' ? 9.8 : hType === 'kfulvate' ? 5.8 : 3.8;
+        const hBuf = hType === 'khumate' ? 1.5 : 1.1;
+        const sPh = sType === 'alkaline' ? 9.0 : 4.4;
+        const aPh = aType === 'enzymatic' ? 6.2 : 4.0;
+        const aBuf = aType === 'acid_hyd' ? 1.6 : 1.0;
+
+        let num = hPh * hPct * hBuf + sPh * sPct * 1.0 + aPh * aPct * aBuf;
+        let den = hPct * hBuf + sPct * 1.0 + aPct * aBuf;
+
+        if (micro === 'edta') { num += 6.5 * 3; den += 3; }
+        if (micro === 'sulfates') { num += 3.6 * 6; den += 6; }
+        if (micro === 'calcium') { num += 5.5 * 5; den += 5; }
+
+        const estPh = den > 0 ? num / den : 7.0;
+        const totalSolids = hPct + sPct + aPct + (micro === 'none' ? 0 : 4);
+
+        const notes = [];
+        let precipLevel = 'Low';
+        let gasLevel = 'Low';
+        let overall = 'green';
+
+        function push(sev, title, text) {
+          notes.push({ sev, title, text });
+          if (sev === 'red') overall = 'red';
+          else if (sev === 'amber' && overall !== 'red') overall = 'amber';
+        }
+
+        // Precipitation & gelation checks
+        if (hType === 'khumate' && (micro === 'calcium' || micro === 'sulfates')) {
+          precipLevel = 'SEVERE';
+          push(
+            'red',
+            'Immediate Divalent Cation / Metal Precipitation Crash',
+            'Potassium Humate cannot be co-formulated with Calcium salts or unchelated Fe/Zn/Mg sulfates in concentrated liquid bottles. Divalent cations cross-link humate into black sludge, and high pH precipitates metal hydroxides. Switch base to Acid-Stable Potassium Fulvate or use EDTA-chelated micros.'
+          );
+        } else if (hType === 'khumate' && estPh < 6.0) {
+          precipLevel = 'SEVERE';
+          push(
+            'red',
+            'Acid Precipitation Zone Reached (Est. pH ' + estPh.toFixed(1) + ')',
+            'Potassium Humate destabilizes below pH 6.0 and precipitates rapidly below pH 4.5–5.0. Either buffer upward to pH 7.5–8.5 with dilute KOH (using neutral enzymatic amino + alkaline kelp) OR switch base to Acid-Stable Potassium Fulvate.'
+          );
+        } else if (hType === 'khumate' && estPh < 7.0) {
+          precipLevel = 'Moderate';
+          push(
+            'amber',
+            'Borderline pH Margin for Potassium Humate (Est. pH ' + estPh.toFixed(1) + ')',
+            'Temperature swings or gradual CO₂ absorption in storage can drift pH down toward 5.5 and cause delayed thickening/gelation. Maintain a safety margin ≥ pH 7.5 with KOH or transition to Potassium Fulvate.'
+          );
+        } else {
+          push(
+            'green',
+            'Colloidal pH Window Compatible (Est. pH ' + estPh.toFixed(1) + ')',
+            hType === 'khumate'
+              ? 'Alkaline-neutral pH preserves carboxylate electrostatic repulsion in potassium humate.'
+              : 'Fulvate/Fulvic base remains fully soluble across acidic and neutral formulation windows.'
+          );
+        }
+
+        // High solids / viscosity gelation check
+        if (hType === 'khumate' && totalSolids > 24) {
+          if (precipLevel === 'Low') precipLevel = 'Moderate';
+          push(
+            'amber',
+            'High Total Dissolved Solids (' + totalSolids.toFixed(0) + '% w/v) — Viscosity / Gelation Risk',
+            'Combining >12% K-humate with high kelp alginates and amino salts raises ionic strength ("salting-out"), causing thixotropic gelling during cold-weather transit. Validate with a 14-day 54 °C and 4 °C freeze-thaw stability test.'
+          );
+        }
+
+        // Acid-hydrolyzed salt warning
+        if (aType === 'acid_hyd' && hType === 'khumate') {
+          push(
+            'amber',
+            'High Chloride / Sodium Load From Acid-Hydrolyzed Protein',
+            'Acid-hydrolyzed amino concentrates carry heavy NaCl/NH₄Cl salt loads that compress the electrical double layer around potassium humate colloids and accelerate settling. Enzymatic plant L-amino acids dramatically improve shelf stability.'
+          );
+        }
+
+        // Microbial gas / bottle swelling check
+        const hasMicrobialFood = sPct > 0 || aPct > 0;
+        if (hasMicrobialFood) {
+          if (pres === 'none') {
+            gasLevel = 'HIGH';
+            push(
+              'red',
+              'High Bottle-Swelling Risk (Unpreserved Kelp / Amino Blend)',
+              'Seaweed polysaccharides and L-amino acids ferment rapidly in warm warehouses, generating CO₂/H₂S gas that bloats HDPE jugs. Implement validated broad-spectrum preservation, sanitized reactor CIP, and vented induction-seal liners.'
+            );
+          } else if (pres === 'sorbate_benzoate' && estPh > 5.8) {
+            gasLevel = 'HIGH';
+            push(
+              'red',
+              'Preservative pH Mismatch — Sorbate/Benzoate Inactive at pH ' + estPh.toFixed(1),
+              'Potassium sorbate and sodium benzoate only inhibit microbes in their undissociated acid form (pH < 5.5). Above pH 6.0 they are >95% ionized and fail to stop bottle swelling. Either drop formula pH to 4.5–5.0 using Potassium Fulvate, or adopt an alkaline-active preservation & sterile-filtration protocol.'
+            );
+          } else {
+            gasLevel = 'Low';
+            push(
+              'green',
+              'Microbial Preservation Matches Formula pH',
+              'Preservation strategy is aligned with estimated pH. Still run 14-day 54 °C accelerated aging and vented-cap testing on every new raw-material lot.'
+            );
+          }
+        } else {
+          gasLevel = 'Low';
+          push('green', 'Low Fermentation Risk', 'Pure humic/fulvic concentrates without added sugars, kelp polysaccharides, or amino nitrogen resist microbial gas generation.');
+        }
+
+        phOut.textContent = estPh.toFixed(1);
+        solidsOut.textContent = totalSolids.toFixed(0) + '%';
+        precipOut.textContent = precipLevel;
+        precipOut.className = 'font-serif text-lg font-bold mt-0.5 ' + (precipLevel === 'SEVERE' ? 'text-red-700' : precipLevel === 'Moderate' ? 'text-amber-600' : 'text-emerald-800');
+        gasOut.textContent = gasLevel;
+        gasOut.className = 'font-serif text-lg font-bold mt-0.5 ' + (gasLevel === 'HIGH' ? 'text-red-700' : 'text-emerald-800');
+
+        if (overall === 'red') {
+          banner.className = 'px-6 py-5 bg-red-700 text-white transition-colors';
+          pill.textContent = 'RED — FORMULATION FAILURE RISK';
+          headline.textContent = 'Reformulate Before Pilot Production';
+        } else if (overall === 'amber') {
+          banner.className = 'px-6 py-5 bg-amber-600 text-white transition-colors';
+          pill.textContent = 'AMBER — CONDITIONAL STABILITY';
+          headline.textContent = 'Buffer Carefully & Run 54 °C Accelerated Aging';
+        } else {
+          banner.className = 'px-6 py-5 bg-emerald-800 text-white transition-colors';
+          pill.textContent = 'GREEN — STABLE FORMULATION WINDOW';
+          headline.textContent = 'Strong Baseline Stability for Pilot Trial';
+        }
+
+        const styles = {
+          red: 'border-red-200 bg-red-50 text-red-950',
+          amber: 'border-amber-200 bg-amber-50 text-amber-950',
+          green: 'border-emerald-200 bg-emerald-50 text-emerald-950',
+        };
+        notesOut.innerHTML = notes
+          .map(
+            (n) =>
+              '<li class="rounded-xl border p-3.5 ' +
+              styles[n.sev] +
+              '"><div class="font-bold text-xs sm:text-sm">' +
+              n.title +
+              '</div><p class="mt-1 text-xs leading-relaxed opacity-90 m-0">' +
+              n.text +
+              '</p></li>'
+          )
+          .join('');
+      }
+
+      [elHumic, elHumicPct, elSeaweed, elSeaweedPct, elAmino, elAminoPct, elMicro, elPres].forEach((el) => {
+        el.addEventListener('input', estimate);
+        el.addEventListener('change', estimate);
+      });
+
+      estimate();
+    })();
+  </script>
+</BaseLayout>

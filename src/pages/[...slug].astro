@@ -27,12 +27,14 @@ const readingMinutes = Math.max(4, Math.ceil(words / 220));
   canonicalAnswer={entry.data.canonicalAnswer}
   pillar={entry.data.pillar}
   isPillarPage={entry.data.isPillarPage}
+  audience={entry.data.audience}
   pubDate={entry.data.pubDate}
   updatedDate={entry.data.updatedDate}
   slug={entry.slug}
   headings={headings}
   faqs={entry.data.faqs}
   citations={entry.data.citations}
+  howTo={entry.data.howTo}
   readingMinutes={readingMinutes}
 >
   <Content />

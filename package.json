@@ -5,7 +5,7 @@
   "description": "Humic.blog — A vendor-neutral, authoritative educational encyclopedia on humic substances.",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro build && npx pagefind --site dist",
     "preview": "astro preview",
     "astro": "astro",
     "check": "astro check"
@@ -20,6 +20,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.4",
+    "pagefind": "^1.6.0",
     "typescript": "^5.8.3"
   }
 }

@@ -1,19 +1,12 @@
 import { defineCollection, z } from 'astro:content';
+import { PILLARS } from '../lib/pillars';
 
-export const PILLARS = [
-  'Origins & Chemistry',
-  'Raw Materials & Extraction',
-  'Quality & Testing',
-  'Agronomy & Application',
-  'Biostimulant Synergies',
-  'Regulations & Organic Standards',
-  'Soil Health & Sustainability',
-] as const;
+export { PILLARS };
 
 const articles = defineCollection({
   type: 'content',
   schema: z.object({
-    title: z.string().min(10).max(120),
+    title: z.string().min(10).max(125),
     description: z.string().min(50).max(220),
     canonicalAnswer: z
       .string()
@@ -28,8 +21,26 @@ const articles = defineCollection({
       ),
     pillar: z.enum(PILLARS),
     isPillarPage: z.boolean().default(false),
+    audience: z
+      .enum(['Farmers & Agronomists', 'Biostimulant Manufacturers', 'All Audiences'])
+      .default('All Audiences'),
     pubDate: z.coerce.date(),
     updatedDate: z.coerce.date().optional(),
+    howTo: z
+      .object({
+        name: z.string().min(5),
+        description: z.string().min(20),
+        totalTime: z.string().optional(),
+        steps: z
+          .array(
+            z.object({
+              name: z.string().min(3),
+              text: z.string().min(15),
+            })
+          )
+          .min(2),
+      })
+      .optional(),
     faqs: z
       .array(
         z.object({

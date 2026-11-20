@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#022c22"/>
+      <stop offset="100%" stop-color="#064e3b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="0" y="614" width="1200" height="16" fill="#f59e0b"/>
+  <!-- Subtle molecular hexagon watermark -->
+  <g opacity="0.12" stroke="#f59e0b" stroke-width="3" fill="none">
+    <polygon points="980,140 1075,195 1075,305 980,360 885,305 885,195"/>
+    <polygon points="1075,305 1170,360 1170,470 1075,525 980,470 980,360"/>
+    <polygon points="885,305 980,360 980,470 885,525 790,470 790,360"/>
+  </g>
+  <!-- Brand mark -->
+  <rect x="80" y="76" width="52" height="52" rx="12" fill="#065f46" stroke="#f59e0b" stroke-width="2.5"/>
+  <polygon points="106,86 122,95 122,113 106,122 90,113 90,95" stroke="#f59e0b" stroke-width="2.5" fill="none"/>
+  <circle cx="106" cy="104" r="4" fill="#f59e0b"/>
+  <text x="150" y="112" font-family="Georgia, serif" font-size="34" font-weight="bold" fill="#ffffff">Humic<tspan fill="#f59e0b">.blog</tspan></text>
+  <!-- Pill badge -->
+  <rect x="80" y="168" width="465" height="38" rx="19" fill="#065f46" stroke="#34d399" stroke-opacity="0.45"/>
+  <text x="102" y="193" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="700" fill="#fbbf24" letter-spacing="1.2">INDEPENDENT &bull; IHSS &amp; ISO 19822 ALIGNED</text>
+  <!-- Headline -->
+  <text x="80" y="290" font-family="Georgia, serif" font-size="58" font-weight="bold" fill="#ffffff">The Global Encyclopedia</text>
+  <text x="80" y="362" font-family="Georgia, serif" font-size="58" font-weight="bold" fill="#fbbf24">of Humic Substances</text>
+  <!-- Subtitle -->
+  <text x="80" y="432" font-family="system-ui, -apple-system, sans-serif" font-size="24" fill="#d1fae5">Peer-reviewed soil chemistry, ISO 19822 quality audits, field calculators,</text>
+  <text x="80" y="468" font-family="system-ui, -apple-system, sans-serif" font-size="24" fill="#d1fae5">and B2B biostimulant formulation science — completely vendor-neutral.</text>
+  <!-- Footer strip -->
+  <text x="80" y="560" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="600" fill="#a7f3d0">https://humic.blog  &bull;  Farmers &bull; Agronomists &bull; Biostimulant Manufacturers</text>
+</svg>
