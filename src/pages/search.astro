@@ -1,0 +1,111 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const siteUrl = 'https://humic.blog';
+const breadcrumbs = [
+  { name: 'Home', url: siteUrl },
+  { name: 'Search Encyclopedia', url: `${siteUrl}/search` },
+];
+---
+
+<BaseLayout
+  title="Search Humic.blog — Instant Full-Text Soil Science Search"
+  description="Search every peer-reviewed guide, crop calendar, B2B formulation protocol, interactive calculator, and IHSS/ISO 19822 glossary definition on Humic.blog instantaneously with Pagefind."
+  canonicalPath="/search"
+  schemaType="website"
+  breadcrumbs={breadcrumbs}
+>
+  <link slot="head" rel="stylesheet" href="/pagefind/pagefind-ui.css" />
+
+  <div class="bg-emerald-950 text-white border-b-4 border-amber-500">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-10">
+      <nav aria-label="Breadcrumb" class="mb-3 text-xs text-emerald-300 flex items-center gap-1.5">
+        <a href="/" class="hover:text-amber-400">Home</a>
+        <span>/</span>
+        <span class="text-emerald-100">Search</span>
+      </nav>
+      <span class="inline-flex items-center rounded-full bg-amber-500/20 border border-amber-500/40 px-3 py-0.5 text-xs font-semibold text-amber-300 mb-3">
+        Pagefind Instant Static Search
+      </span>
+      <h1 class="font-serif text-3xl sm:text-4xl font-bold text-white leading-tight">
+        Search the Humic Encyclopedia
+      </h1>
+      <p class="mt-3 text-sm sm:text-base text-emerald-100/90 leading-relaxed">
+        Try searching for <strong class="text-amber-300">calcium nitrate</strong>, <strong class="text-amber-300">ISO 19822</strong>, <strong class="text-amber-300">lignosulfonate</strong>, <strong class="text-amber-300">sugarcane</strong>, <strong class="text-amber-300">bottle swelling</strong>, or <strong class="text-amber-300">calcareous</strong>.
+      </p>
+    </div>
+  </div>
+
+  <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-10 space-y-8">
+    <section class="rounded-2xl bg-white border border-slate-200 p-6 sm:p-8 shadow-xs">
+      <link rel="stylesheet" href="/pagefind/pagefind-ui.css" />
+      <div id="pagefind-ui-container"></div>
+      <noscript>
+        <p class="text-sm text-slate-600">
+          JavaScript is required for instant client-side search. Browse our <a href="/#encyclopedia" class="text-emerald-800 underline">Encyclopedia Pillars</a> or <a href="/glossary" class="text-emerald-800 underline">A–Z Glossary</a> directly.
+        </p>
+      </noscript>
+    </section>
+
+    <section class="rounded-2xl bg-slate-100 border border-slate-200 p-6">
+      <h2 class="font-serif text-lg font-bold text-emerald-950 mb-3">Popular Technical Topics</h2>
+      <div class="flex flex-wrap gap-2">
+        {['calcium nitrate', 'ISO 19822', 'lignosulfonate', 'bottle swelling', 'hard water', 'sugarcane', 'mango citrus', 'tomato pepper', 'potassium fulvate', 'calcareous'].map((q) => (
+          <button
+            type="button"
+            data-quick-query={q}
+            class="quick-search-chip rounded-lg bg-white border border-slate-300 hover:border-emerald-800 hover:bg-emerald-50 px-3 py-1.5 text-xs font-semibold text-emerald-950 transition-colors cursor-pointer"
+          >
+            {q}
+          </button>
+        ))}
+      </div>
+    </section>
+  </div>
+
+  <style is:global>
+    :root {
+      --pagefind-ui-scale: 0.95;
+      --pagefind-ui-primary: #065f46;
+      --pagefind-ui-text: #0f172a;
+      --pagefind-ui-background: #ffffff;
+      --pagefind-ui-border: #cbd5e1;
+      --pagefind-ui-tag: #ecfdf5;
+      --pagefind-ui-border-width: 1px;
+      --pagefind-ui-border-radius: 12px;
+      --pagefind-ui-font: ui-sans-serif, system-ui, -apple-system, sans-serif;
+    }
+  </style>
+
+  <script is:inline src="/pagefind/pagefind-ui.js"></script>
+  <script is:inline>
+    window.addEventListener('DOMContentLoaded', function () {
+      if (typeof PagefindUI === 'undefined') {
+        var el = document.getElementById('pagefind-ui-container');
+        if (el) {
+          el.innerHTML = '<p class="text-sm text-amber-800">Search index is generated during production builds (npm run build).</p>';
+        }
+        return;
+      }
+      var ui = new PagefindUI({
+        element: '#pagefind-ui-container',
+        showSubResults: true,
+        showImages: false,
+        excerptLength: 28,
+      });
+
+      var params = new URLSearchParams(window.location.search);
+      var initialQ = params.get('q');
+      if (initialQ) {
+        ui.triggerSearch(initialQ);
+      }
+
+      document.querySelectorAll('.quick-search-chip').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var q = btn.getAttribute('data-quick-query');
+          if (q) ui.triggerSearch(q);
+        });
+      });
+    });
+  </script>
+</BaseLayout>

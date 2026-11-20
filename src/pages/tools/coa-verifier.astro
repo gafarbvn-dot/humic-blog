@@ -1,0 +1,442 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const siteUrl = 'https://humic.blog';
+const breadcrumbs = [
+  { name: 'Home', url: siteUrl },
+  { name: 'Humic COA Red-Flag Checker', url: `${siteUrl}/tools/coa-verifier` },
+];
+
+const faqs = [
+  {
+    question: 'Why does Sulfur > 0.75% trigger a Red Flag on a Potassium Humate COA?',
+    answer:
+      'Authentic leonardite-derived potassium humate typically tests between 0.2% and 0.65% elemental sulfur. Total sulfur above 0.75%—and especially 2.5% to 6.0%—is a primary chemical indicator of adulteration with paper-mill sodium lignosulfonate, which carries covalently bound sulfonate groups.',
+  },
+  {
+    question: 'Why does Sodium (Na) > 1.5% flag Red on a product sold as Potassium Humate?',
+    answer:
+      'Agricultural potassium humate is extracted using potassium hydroxide (KOH) and keeps residual sodium below 1.0%–1.5%. Elevated sodium (>1.5%–8% Na) indicates industrial caustic soda (NaOH) extraction (sodium humate) or sodium lignosulfonate spiking, both of which disperse soil clays and elevate sodicity in irrigated fields.',
+  },
+  {
+    question: 'Why is Claimed Humic Acid > 85% via Colorimetric or Unspecified methods flagged Amber?',
+    answer:
+      'Soluble potassium humate inherently contains 8%–12% potassium counterions plus 5%–10% moisture. Under ash-free ISO 19822 (Lamar) gravimetric testing, pure soluble potassium humate typically measures 65%–82%. Claims above 85% via colorimetric or unspecified assays almost always reflect optical-density inflation or unsubtracted ash.',
+  },
+  {
+    question: 'Why does Water-Insoluble Matter > 2% matter for drip fertigation?',
+    answer:
+      'Micro-irrigation drip emitters contain turbulent flow labyrinths narrower than 0.6–1.0 mm. Humate powders with >2% water-insoluble mineral ash or unextracted humin rapidly overload 120-mesh filters and clog emitters, though they remain usable for dry soil broadcasting.',
+  },
+];
+---
+
+<BaseLayout
+  title="Humic COA Red-Flag Checker & Verifier (ISO 19822, Sulfur, Sodium & Solubility)"
+  description="Instant Certificate of Analysis (COA) diagnostic tool for farmers, formulators, and importers. Check Claimed Humic %, Test Method, Sulfur (>0.75%), Sodium (>1.5%), and Water Insolubles (>2%)."
+  canonicalPath="/tools/coa-verifier"
+  schemaType="tool"
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+>
+  <div class="bg-emerald-950 text-white border-b-4 border-amber-500">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-10">
+      <nav aria-label="Breadcrumb" class="mb-3 text-xs text-emerald-300 flex items-center gap-1.5">
+        <a href="/" class="hover:text-amber-400">Home</a>
+        <span>/</span>
+        <span class="text-emerald-100">Humic COA Verifier</span>
+      </nav>
+      <span class="inline-flex items-center rounded-full bg-amber-500/20 border border-amber-500/40 px-3 py-0.5 text-xs font-semibold text-amber-300 mb-3">
+        Certificate of Analysis (COA) Diagnostic
+      </span>
+      <h1 class="font-serif text-3xl sm:text-4xl font-bold text-white leading-tight">
+        Humic COA Red-Flag Checker
+      </h1>
+      <p class="mt-3 text-sm sm:text-base text-emerald-100/90 max-w-3xl leading-relaxed">
+        Input lab numbers from a supplier's Certificate of Analysis to screen instantaneously for sodium lignosulfonate adulteration, NaOH sodium-humate substitution, colorimetric inflation, and drip-emitter clogging risk.
+      </p>
+    </div>
+  </div>
+
+  <div data-pagefind-body class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-10 space-y-10">
+    <!-- Quick Scenario Presets -->
+    <div class="flex flex-wrap items-center gap-2 rounded-2xl bg-white border border-slate-200 p-4 shadow-xs">
+      <span class="text-xs font-bold uppercase tracking-wider text-slate-500 mr-1">Test Sample COA:</span>
+      <button type="button" data-sample="clean" class="coa-sample-btn rounded-lg border border-emerald-700/40 bg-emerald-50 hover:bg-emerald-100 px-3 py-1.5 text-xs font-semibold text-emerald-950 cursor-pointer">High-Purity ISO 19822</button>
+      <button type="button" data-sample="ligno" class="coa-sample-btn rounded-lg border border-red-300 bg-red-50 hover:bg-red-100 px-3 py-1.5 text-xs font-semibold text-red-900 cursor-pointer">Lignosulfonate Spike (S &gt; 0.75%)</button>
+      <button type="button" data-sample="sodium" class="coa-sample-btn rounded-lg border border-red-300 bg-red-50 hover:bg-red-100 px-3 py-1.5 text-xs font-semibold text-red-900 cursor-pointer">NaOH Sodium Humate (Na &gt; 1.5%)</button>
+      <button type="button" data-sample="inflated" class="coa-sample-btn rounded-lg border border-amber-300 bg-amber-50 hover:bg-amber-100 px-3 py-1.5 text-xs font-semibold text-amber-950 cursor-pointer">Colorimetric "98%" + High Insolubles</button>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <!-- Inputs -->
+      <section aria-label="COA Input Parameters" class="lg:col-span-6 rounded-2xl bg-white border border-slate-200 p-6 sm:p-7 shadow-xs space-y-5">
+        <h2 class="font-serif text-xl font-bold text-emerald-950 pb-3 border-b border-slate-200">
+          1. Supplier Certificate of Analysis (COA) Inputs
+        </h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label for="v-ha" class="block text-sm font-semibold text-slate-800 mb-1.5">
+              Claimed Humic Acid (%)
+            </label>
+            <input
+              id="v-ha"
+              type="number"
+              min="0"
+              max="100"
+              step="0.5"
+              value="72"
+              class="w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 py-2.5 text-sm font-medium text-slate-900 focus:border-emerald-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-800/20"
+            />
+          </div>
+
+          <div>
+            <label for="v-method" class="block text-sm font-semibold text-slate-800 mb-1.5">
+              Declared Testing Method
+            </label>
+            <select
+              id="v-method"
+              class="w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 py-2.5 text-sm text-slate-900 focus:border-emerald-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-800/20"
+            >
+              <option value="ISO 19822">ISO 19822 (Lamar / HPTA)</option>
+              <option value="CDFA">CDFA (Legacy Gravimetric)</option>
+              <option value="Colorimetric">Colorimetric / UV-Vis</option>
+              <option value="Unspecified">Unspecified / Not Listed</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div>
+            <label for="v-sulfur" class="block text-sm font-semibold text-slate-800 mb-1.5">
+              Sulfur (% S) <span class="text-xs font-normal text-slate-500">(optional)</span>
+            </label>
+            <input
+              id="v-sulfur"
+              type="number"
+              min="0"
+              max="20"
+              step="0.05"
+              value="0.45"
+              placeholder="e.g. 0.45"
+              class="w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 py-2.5 text-sm font-medium text-slate-900 focus:border-emerald-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-800/20"
+            />
+          </div>
+
+          <div>
+            <label for="v-sodium" class="block text-sm font-semibold text-slate-800 mb-1.5">
+              Sodium (% Na)
+            </label>
+            <input
+              id="v-sodium"
+              type="number"
+              min="0"
+              max="25"
+              step="0.1"
+              value="0.5"
+              class="w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 py-2.5 text-sm font-medium text-slate-900 focus:border-emerald-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-800/20"
+            />
+          </div>
+
+          <div>
+            <label for="v-wim" class="block text-sm font-semibold text-slate-800 mb-1.5">
+              Water Insoluble (%)
+            </label>
+            <input
+              id="v-wim"
+              type="number"
+              min="0"
+              max="50"
+              step="0.1"
+              value="1.0"
+              class="w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 py-2.5 text-sm font-medium text-slate-900 focus:border-emerald-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-800/20"
+            />
+          </div>
+        </div>
+
+        <p class="text-xs text-slate-500 leading-relaxed m-0">
+          Leave <strong>Sulfur (%)</strong> blank if your supplier omitted elemental sulfur from the COA—note that omitting sulfur is itself worth querying on high-volume orders. Need EU FPR heavy-metal auditing too? Open our extended <a href="/tools/coa-red-flag-checker" class="text-emerald-800 underline">Full ICP-OES &amp; Heavy-Metal Auditor</a>.
+        </p>
+      </section>
+
+      <!-- Diagnostic Verdict -->
+      <section aria-live="polite" aria-label="COA Diagnostic Verdict" class="lg:col-span-6 rounded-2xl bg-white border border-slate-200 overflow-hidden shadow-sm">
+        <div id="v-banner" class="px-6 py-5 bg-emerald-800 text-white transition-colors">
+          <div class="flex items-center justify-between gap-2">
+            <span id="v-pill" class="inline-flex rounded-full bg-white/20 px-3 py-1 text-xs font-extrabold uppercase tracking-wider">
+              GREEN — VERIFIED ALIGNMENT
+            </span>
+            <span id="v-method-badge" class="text-xs font-medium text-white/90">
+              Method: ISO 19822
+            </span>
+          </div>
+          <h2 id="v-headline" class="font-serif text-2xl font-bold mt-2 text-white">
+            Parameters Align With High-Purity Potassium Humate
+          </h2>
+        </div>
+
+        <div class="p-6 space-y-4">
+          <h3 class="font-sans text-xs font-bold uppercase tracking-wider text-emerald-900">
+            Diagnostic Rule Breakdown
+          </h3>
+          <ul id="v-flags" class="space-y-2.5 text-sm m-0 p-0 list-none"></ul>
+
+          <div class="pt-4 border-t border-slate-200 flex flex-wrap gap-3">
+            <a href="/quality-and-testing/market-malpractices-and-testing" class="text-xs font-semibold text-emerald-800 hover:text-emerald-950 underline decoration-amber-500 underline-offset-2">
+              7 Market Malpractices &amp; ISO 19822 &rarr;
+            </a>
+            <a href="/quality-and-testing/farm-level-adulteration-tests" class="text-xs font-semibold text-emerald-800 hover:text-emerald-950 underline decoration-amber-500 underline-offset-2">
+              3-Minute Farm Purity Test &rarr;
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Threshold Reference Table -->
+    <section class="rounded-2xl bg-white border border-slate-200 p-6 sm:p-8 shadow-xs">
+      <h2 class="font-serif text-2xl font-bold text-emerald-950 mb-3">
+        Potassium Humate COA Diagnostic Thresholds
+      </h2>
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse text-sm">
+          <thead>
+            <tr class="bg-emerald-950 text-white">
+              <th class="py-3 px-4 font-semibold border-b-2 border-amber-500">COA Parameter</th>
+              <th class="py-3 px-4 font-semibold border-b-2 border-amber-500">Green (Clean)</th>
+              <th class="py-3 px-4 font-semibold border-b-2 border-amber-500">Amber (Caution)</th>
+              <th class="py-3 px-4 font-semibold border-b-2 border-amber-500">Red (Adulteration / Risk)</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200">
+            <tr>
+              <td class="py-3 px-4 font-semibold">Sulfur (% S)</td>
+              <td class="py-3 px-4 text-emerald-900">≤ 0.75%</td>
+              <td class="py-3 px-4 text-amber-900">Omitted on COA</td>
+              <td class="py-3 px-4 text-red-800 font-semibold">&gt; 0.75% (Sodium Lignosulfonate indicator)</td>
+            </tr>
+            <tr class="bg-slate-50">
+              <td class="py-3 px-4 font-semibold">Sodium (% Na)</td>
+              <td class="py-3 px-4 text-emerald-900">≤ 1.5%</td>
+              <td class="py-3 px-4 text-amber-900">—</td>
+              <td class="py-3 px-4 text-red-800 font-semibold">&gt; 1.5% (NaOH Sodium Humate indicator)</td>
+            </tr>
+            <tr>
+              <td class="py-3 px-4 font-semibold">Claimed Humic % &amp; Method</td>
+              <td class="py-3 px-4 text-emerald-900">65–82% via ISO 19822</td>
+              <td class="py-3 px-4 text-amber-900 font-semibold">&gt; 85% via Colorimetric / Unspecified (inflation)</td>
+              <td class="py-3 px-4 text-red-800">Physically impossible claims (&gt;90% soluble HA)</td>
+            </tr>
+            <tr class="bg-slate-50">
+              <td class="py-3 px-4 font-semibold">Water Insoluble (%)</td>
+              <td class="py-3 px-4 text-emerald-900">≤ 2.0% (drip safe)</td>
+              <td class="py-3 px-4 text-amber-900 font-semibold">&gt; 2.0% (emitter clogging hazard)</td>
+              <td class="py-3 px-4 text-red-800">&gt; 10% (raw lignite / uncentrifuged grit)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- FAQs -->
+    <section class="rounded-2xl bg-white border border-slate-200 p-6 sm:p-8 shadow-xs">
+      <h2 class="font-serif text-2xl font-bold text-emerald-950 mb-4">COA Checker FAQs</h2>
+      <div class="space-y-4">
+        {faqs.map((faq) => (
+          <div class="rounded-xl bg-slate-50 border border-slate-200 p-4">
+            <h3 class="font-serif text-base font-bold text-emerald-950 mb-1.5">{faq.question}</h3>
+            <p class="text-sm text-slate-700 leading-relaxed m-0">{faq.answer}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  </div>
+
+  <script is:inline>
+    (function () {
+      const elHa = document.getElementById('v-ha');
+      const elMethod = document.getElementById('v-method');
+      const elSulfur = document.getElementById('v-sulfur');
+      const elSodium = document.getElementById('v-sodium');
+      const elWim = document.getElementById('v-wim');
+
+      const banner = document.getElementById('v-banner');
+      const pill = document.getElementById('v-pill');
+      const methodBadge = document.getElementById('v-method-badge');
+      const headline = document.getElementById('v-headline');
+      const flagsEl = document.getElementById('v-flags');
+
+      const SAMPLES = {
+        clean: { ha: 72, method: 'ISO 19822', sulfur: '0.45', sodium: 0.5, wim: 1.0 },
+        ligno: { ha: 78, method: 'Colorimetric', sulfur: '3.8', sodium: 4.5, wim: 1.5 },
+        sodium: { ha: 75, method: 'CDFA', sulfur: '0.55', sodium: 6.8, wim: 1.8 },
+        inflated: { ha: 98, method: 'Colorimetric', sulfur: '', sodium: 0.9, wim: 4.2 },
+      };
+
+      function evaluate() {
+        const ha = parseFloat(elHa.value) || 0;
+        const method = elMethod.value;
+        const sulfurRaw = elSulfur.value.trim();
+        const sulfur = sulfurRaw === '' ? null : parseFloat(sulfurRaw);
+        const sodium = parseFloat(elSodium.value) || 0;
+        const wim = parseFloat(elWim.value) || 0;
+
+        const flags = [];
+        let worst = 'green';
+
+        function add(sev, label, msg) {
+          flags.push({ sev, label, msg });
+          if (sev === 'red') worst = 'red';
+          else if (sev === 'amber' && worst !== 'red') worst = 'amber';
+        }
+
+        // Rule 1: Sulfur > 0.75% -> RED
+        if (sulfur !== null && !isNaN(sulfur)) {
+          if (sulfur > 0.75) {
+            add(
+              'red',
+              'RED FLAG — Elevated Elemental Sulfur (' + sulfur + '% S > 0.75%)',
+              'Strong indicator of Sodium Lignosulfonate (sulfite paper-mill byproduct) adulteration. Genuine leonardite potassium humate typically contains <0.75% sulfur. Reject until verified by ISO 19822 DAX-8 testing.'
+            );
+          } else {
+            add(
+              'green',
+              'Sulfur Within Leonardite Baseline (' + sulfur + '% S ≤ 0.75%)',
+              'Consistent with authentic oxidized leonardite; rules out major sulfite lignosulfonate spiking.'
+            );
+          }
+        } else {
+          add(
+            'amber',
+            'Sulfur Not Provided on COA',
+            'Elemental sulfur was left blank. Request an ICP-OES elemental breakdown confirming Sulfur ≤ 0.75% before approving bulk orders.'
+          );
+        }
+
+        // Rule 2: Sodium > 1.5% -> RED
+        if (sodium > 1.5) {
+          add(
+            'red',
+            'RED FLAG — High Sodium (' + sodium + '% Na > 1.5%)',
+            'Strong indicator of NaOH extraction (industrial Sodium Humate) or sodium lignosulfonate blending on a product sold as Potassium Humate. High sodium disperses soil clays, seals infiltration pores, and raises sodicity.'
+          );
+        } else {
+          add(
+            'green',
+            'Low Sodium Confirmed (' + sodium + '% Na ≤ 1.5%)',
+            'Aligns with clean potassium hydroxide (KOH) extraction safe for irrigated soils.'
+          );
+        }
+
+        // Rule 3: Claimed Humic % > 85% via Colorimetric or Unspecified -> AMBER
+        if (ha > 85 && (method === 'Colorimetric' || method === 'Unspecified')) {
+          add(
+            'amber',
+            'AMBER — Likely Method Inflation (' + ha + '% via ' + method + ')',
+            'Colorimetric and unspecified assays frequently inflate reported humic content by 2×–5× through dyes, ash, or total dry-solubility counting. Pure soluble potassium humate typically measures 65%–82% ash-free under ISO 19822; demand an ISO 19822 re-test.'
+          );
+        } else if (method === 'Colorimetric' || method === 'Unspecified') {
+          add(
+            'amber',
+            'AMBER — Non-Standard Testing Method (' + method + ')',
+            'Verify this lot under ISO 19822:2018 (Lamar) to remove ash and non-humic chromophore interference.'
+          );
+        } else if (method === 'CDFA') {
+          add(
+            'amber',
+            'AMBER — Legacy CDFA Gravimetric Method',
+            'Legacy CDFA testing omits muffle-furnace ash subtraction (+10–25% upward bias) and does not separate DAX-8 fulvic acid. ISO 19822 is recommended for modern compliance.'
+          );
+        } else if (ha > 85) {
+          add(
+            'amber',
+            'AMBER — Unusually High Claimed Humic % (' + ha + '%)',
+            'Verify whether 85%+ is reported on a moisture- and ash-free organic basis rather than as-received soluble potassium humate (which typically includes 8–12% K₂O + 8–10% moisture).'
+          );
+        } else {
+          add(
+            'green',
+            'Analytical Method & Concentration Aligned (' + ha + '% via ISO 19822)',
+            'Consistent with ash-free, high-purity soluble potassium humate specifications.'
+          );
+        }
+
+        // Rule 4: Water Insolubles > 2% -> AMBER
+        if (wim > 2.0) {
+          add(
+            'amber',
+            'AMBER — Drip / Fertigation Clogging Risk (' + wim + '% Insolubles > 2%)',
+            'Water-insoluble mineral ash or humin above 2% can rapidly foul 120-mesh filters and clog drip emitters. Suitable for dry soil broadcast, or require centrifugation <1.5% WIM for drip/foliar use.'
+          );
+        } else {
+          add(
+            'green',
+            'Drip-Grade Water Solubility (' + wim + '% Insolubles ≤ 2%)',
+            'Low insoluble grit; safe for pre-screened 120-mesh drip fertigation and foliar tanks.'
+          );
+        }
+
+        methodBadge.textContent = 'Method: ' + method;
+
+        if (worst === 'red') {
+          banner.className = 'px-6 py-5 bg-red-700 text-white transition-colors';
+          pill.textContent = 'RED — ADULTERATION OR NaOH RISK';
+          headline.textContent = 'Critical COA Red Flags Detected — Request Independent Lab Re-Test';
+        } else if (worst === 'amber') {
+          banner.className = 'px-6 py-5 bg-amber-600 text-white transition-colors';
+          pill.textContent = 'AMBER — CAUTION / VERIFY ISO 19822';
+          headline.textContent = 'Potential Method Inflation or Solubility Caution';
+        } else {
+          banner.className = 'px-6 py-5 bg-emerald-800 text-white transition-colors';
+          pill.textContent = 'GREEN — HIGH-PURITY ALIGNMENT';
+          headline.textContent = 'Parameters Align With High-Purity Ash-Free Potassium Humate';
+        }
+
+        const boxStyle = {
+          red: 'border-red-200 bg-red-50 text-red-950',
+          amber: 'border-amber-200 bg-amber-50 text-amber-950',
+          green: 'border-emerald-200 bg-emerald-50 text-emerald-950',
+        };
+        const badgeHtml = {
+          red: '<span class="inline-block rounded bg-red-700 text-white text-[10px] font-bold uppercase px-1.5 py-0.5 mr-1.5">RED</span>',
+          amber: '<span class="inline-block rounded bg-amber-600 text-white text-[10px] font-bold uppercase px-1.5 py-0.5 mr-1.5">AMBER</span>',
+          green: '<span class="inline-block rounded bg-emerald-800 text-white text-[10px] font-bold uppercase px-1.5 py-0.5 mr-1.5">GREEN</span>',
+        };
+
+        flagsEl.innerHTML = flags
+          .map(
+            (f) =>
+              '<li class="rounded-xl border p-3.5 ' +
+              boxStyle[f.sev] +
+              '"><div class="font-bold text-xs sm:text-sm">' +
+              badgeHtml[f.sev] +
+              f.label +
+              '</div><p class="mt-1 text-xs leading-relaxed opacity-90 m-0">' +
+              f.msg +
+              '</p></li>'
+          )
+          .join('');
+      }
+
+      [elHa, elMethod, elSulfur, elSodium, elWim].forEach(function (el) {
+        el.addEventListener('input', evaluate);
+        el.addEventListener('change', evaluate);
+      });
+
+      document.querySelectorAll('.coa-sample-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          const s = SAMPLES[btn.getAttribute('data-sample')];
+          elHa.value = s.ha;
+          elMethod.value = s.method;
+          elSulfur.value = s.sulfur;
+          elSodium.value = s.sodium;
+          elWim.value = s.wim;
+          evaluate();
+        });
+      });
+
+      evaluate();
+    })();
+  </script>
+</BaseLayout>

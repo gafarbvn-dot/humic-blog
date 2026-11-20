@@ -12,11 +12,13 @@ export const PILLARS = [
   'Raw Materials & Extraction',
   'Quality & Testing',
   'Agronomy & Application',
+  'Crops & Field Guides',
   'Biostimulant Synergies',
   'Formulation & Manufacturing',
   'Problem Soils & Climate',
   'Regulations & Organic Standards',
   'Soil Health & Sustainability',
+  'Home Gardening & Horticulture',
 ] as const;
 
 export type PillarName = (typeof PILLARS)[number];
@@ -63,19 +65,29 @@ export const PILLAR_LIST: PillarDefinition[] = [
       'Agronomy & Application provides field-tested protocols for applying potassium humate and fulvic acid across soil, drip fertigation, foliar, and seed treatments, addressing hard borewell water precipitation (>250 ppm CaCO₃), phenological crop timing, hormetic dose ceilings, and transparent urea/DAP nutrient use efficiency math.',
   },
   {
+    slug: 'crops',
+    name: 'Crops & Field Guides',
+    code: 'PILLAR 05',
+    audience: 'Farmers & Agronomists',
+    subtitle:
+      'Crop-specific humic and fulvic schedules for sugarcane, tropical and temperate fruit orchards (mango, citrus, grapes, pomegranate), and high-value vegetables (tomato, chili, onion, potato).',
+    canonicalSummary:
+      'Crops & Field Guides delivers stage-by-stage humic and fulvic fertilization calendars tailored to specific crop physiologies—from sugarcane tillering and ratoon rejuvenation to orchard pre-flowering root flushes and vegetable transplant establishment, calcium mobility, and uniform tuber and bulb sizing.',
+  },
+  {
     slug: 'synergies',
     name: 'Biostimulant Synergies',
-    code: 'PILLAR 05',
+    code: 'PILLAR 06',
     audience: 'All Audiences',
     subtitle:
-      'Multi-pathway physiological synergies uniting humic substances, Ascophyllum nodosum kelp extracts, and enzymatic L-amino acids under safe pH mixing rules.',
+      'Multi-pathway physiological synergies and liquid formulation engineering uniting humic substances, Ascophyllum nodosum kelp extracts, and enzymatic L-amino acids.',
     canonicalSummary:
-      'Biostimulant Synergies explains how pairing leonardite humic substances with cold-water Ascophyllum nodosum seaweed extracts and enzymatic L-amino acids activates complementary rhizosphere, osmoprotective, and metabolic pathways—while enforcing strict tank-mix dilution order and pH >= 6.0 stability rules.',
+      'Biostimulant Synergies explains how pairing leonardite humic substances with cold-water Ascophyllum nodosum seaweed extracts and enzymatic L-amino acids activates complementary rhizosphere, osmoprotective, and metabolic pathways—covering both farm tank mixing and industrial liquid concentrate stability.',
   },
   {
     slug: 'manufacturing',
     name: 'Formulation & Manufacturing',
-    code: 'PILLAR 06',
+    code: 'PILLAR 07',
     audience: 'Biostimulant Manufacturers',
     subtitle:
       'Vendor-neutral B2B formulation science: preventing bottle swelling and gelation, solving the humic pH conflict, leonardite procurement audits, and export checklists.',
@@ -85,7 +97,7 @@ export const PILLAR_LIST: PillarDefinition[] = [
   {
     slug: 'problem-soils',
     name: 'Problem Soils & Climate',
-    code: 'PILLAR 07',
+    code: 'PILLAR 08',
     audience: 'Farmers & Agronomists',
     subtitle:
       'Targeted soil-specific remediation guides for high-pH calcareous soils, sodic/saline irrigated belts, and low-organic-matter sandy desert soils.',
@@ -95,7 +107,7 @@ export const PILLAR_LIST: PillarDefinition[] = [
   {
     slug: 'regulations',
     name: 'Regulations & Organic Standards',
-    code: 'PILLAR 08',
+    code: 'PILLAR 09',
     audience: 'All Audiences',
     subtitle:
       'Worldwide agricultural usage laws and certified organic boundaries across USDA NOP/OMRI, EU FPR 2019/1009, EU 2018/848, US AAPFCO/CDFA, and India FCO/NPOP.',
@@ -105,12 +117,22 @@ export const PILLAR_LIST: PillarDefinition[] = [
   {
     slug: 'soil-and-sustainability',
     name: 'Soil Health & Sustainability',
-    code: 'PILLAR 09',
+    code: 'PILLAR 10',
     audience: 'All Audiences',
     subtitle:
       'Improving nitrogen and phosphorus recovery (NUE/PUE), curbing waterway eutrophication, nurturing mycorrhizal biodiversity, and restoring degraded farmland.',
     canonicalSummary:
       'Soil Health & Sustainability examines how humic conditioners strengthen regenerative agriculture by cutting synthetic nitrogen and phosphorus losses, protecting rivers and groundwater from runoff eutrophication, fostering arbuscular mycorrhizal fungi and earthworm habitats, and rebuilding degraded arable land.',
+  },
+  {
+    slug: 'gardening',
+    name: 'Home Gardening & Horticulture',
+    code: 'PILLAR 11',
+    audience: 'All Audiences',
+    subtitle:
+      'Safe small-scale dosing for kitchen gardens, raised beds, container ornamentals, turfgrass, and seedling trays using verified potassium humate and fulvic acid.',
+    canonicalSummary:
+      'Home Gardening & Horticulture translates field-scale humic soil science into safe, non-staining small-batch dilutions for raised vegetable beds, container ornamentals, seedling propagation trays, and compost enrichment—emphasizing strict low-concentration hormetic limits and hard tap-water care.',
   },
 ];
 
