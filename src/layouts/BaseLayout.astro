@@ -84,6 +84,17 @@ const hiSwitchHref = alternateUrls?.hi
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Tag Manager (GTM-TD3Z82T6) -->
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){window.dataLayer.push(arguments);}
+      gtag('js', new Date());
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-TD3Z82T6');
+    </script>
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex, follow" />}
@@ -135,6 +146,8 @@ const hiSwitchHref = alternateUrls?.hi
     />
   </head>
   <body class="min-h-screen flex flex-col bg-slate-50 text-slate-900 antialiased selection:bg-amber-200 selection:text-emerald-950">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TD3Z82T6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- Top Header -->
     <header class="sticky top-0 z-40 bg-emerald-950 text-white border-b border-emerald-900/80 shadow-sm">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
