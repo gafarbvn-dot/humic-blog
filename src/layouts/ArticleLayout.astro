@@ -40,6 +40,12 @@ const {
 } = Astro.props;
 
 const canonicalPath = `/${slug}`;
+const PAIRED_HI: Record<string, string> = {
+  'agronomy/complete-application-and-tank-mix-guide': 'https://humic.blog/hi/humic-acid-kya-hai-aur-upyog',
+  'quality-and-testing/farm-level-adulteration-field-test': 'https://humic.blog/hi/asli-nakli-potassium-humate-ki-pehchan',
+  'crops/humic-acid-for-sugarcane': 'https://humic.blog/hi/ganne-ki-kheti-mein-humic-acid',
+};
+const hiAlt = PAIRED_HI[slug];
 const siteUrl = 'https://humic.blog';
 const pillarDef = PILLAR_BY_NAME[pillar];
 const pillarPath = `/${pillarDef.slug}`;
@@ -65,6 +71,8 @@ const formatDate = (date: Date) =>
   title={title}
   description={description}
   canonicalPath={canonicalPath}
+  lang="en"
+  alternateUrls={hiAlt ? { en: `${siteUrl}${canonicalPath}`, hi: hiAlt, xDefault: `${siteUrl}${canonicalPath}` } : undefined}
   ogImage={`${siteUrl}/og/${slug}.svg`}
   schemaType="article"
   pillar={pillar}

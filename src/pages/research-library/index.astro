@@ -1,0 +1,401 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CanonicalAnswer from '../../components/CanonicalAnswer.astro';
+
+interface ResearchPaper {
+  year: number;
+  authors: string;
+  title: string;
+  source: string;
+  category: 'Chemistry' | 'Agronomy' | 'Biostimulants' | 'Testing' | 'Sustainability';
+  finding: string;
+  url?: string;
+}
+
+const papers: ResearchPaper[] = [
+  {
+    year: 1786,
+    authors: 'Achard, F. K.',
+    title: 'Chemische Untersuchung des Torfs (First Alkaline Extraction of Humic Acid)',
+    source: 'Crell’s Chemische Annalen, 2, 391–403',
+    category: 'Chemistry',
+    finding:
+      'First recorded laboratory extraction of dark organic humus from peat using potassium hydroxide (caustic potash) followed by acid precipitation, establishing operational humic fractionation.',
+  },
+  {
+    year: 1984,
+    authors: 'Shainberg, I., & Letey, J.',
+    title: 'Response of Soils to Sodic and Saline Conditions',
+    source: 'Hilgardia, 52(2), 1–57',
+    category: 'Sustainability',
+    finding:
+      'Foundational soil-physics quantification showing how elevated Exchangeable Sodium Percentage (ESP) disperses clay platelets and collapses hydraulic conductivity—explaining why NaOH sodium humate harms irrigated soils.',
+    url: 'https://doi.org/10.3733/hilg.v52n02p057',
+  },
+  {
+    year: 1994,
+    authors: 'Stevenson, F. J.',
+    title: 'Humus Chemistry: Genesis, Composition, Reactions (2nd Edition)',
+    source: 'John Wiley & Sons, New York',
+    category: 'Chemistry',
+    finding:
+      'Landmark reference monograph detailing carboxyl and phenolic acidity, pH buffering, cation exchange capacity (200–500 meq/100 g), organo-mineral complexes, and polyvalent metal chelation.',
+  },
+  {
+    year: 1996,
+    authors: 'Lovley, D. R., Coates, J. D., Blunt-Harris, E. L., Phillips, E. J. P., & Woodward, J. C.',
+    title: 'Humic Substances as Electron Acceptors for Microbial Respiration',
+    source: 'Nature, 382(6590), 445–448',
+    category: 'Chemistry',
+    finding:
+      'Proved that quinone moieties within humic substances act as reversible biogeochemical electron shuttles between anaerobic soil microorganisms and insoluble Fe(III) mineral oxides.',
+    url: 'https://doi.org/10.1038/382445a0',
+  },
+  {
+    year: 1996,
+    authors: 'Swift, R. S.',
+    title: 'Organic Matter Characterization (IHSS Standard Fractionation Methods)',
+    source: 'Methods of Soil Analysis, Part 3: Chemical Methods, SSSA Book Series, 1011–1069',
+    category: 'Testing',
+    finding:
+      'Codified International Humic Substances Society (IHSS) reference isolation protocols for humic acid, fulvic acid (XAD-8/DAX-8 resin), and humin across soils, peats, and leonardite.',
+    url: 'https://doi.org/10.2136/sssabookser5.3.c35',
+  },
+  {
+    year: 2001,
+    authors: 'Piccolo, A.',
+    title: 'The Supramolecular Structure of Humic Substances',
+    source: 'Soil Science, 166(11), 810–832',
+    category: 'Chemistry',
+    finding:
+      'Overturned the giant covalent polymer model, demonstrating that humic substances are self-assembled supramolecular clusters of small biomolecules (200–2,000 Da) bound by hydrophobic forces and hydrogen bonds.',
+    url: 'https://doi.org/10.1097/00010694-200111000-00007',
+  },
+  {
+    year: 2002,
+    authors: 'Tipping, E.',
+    title: 'Cation Binding by Humic Substances',
+    source: 'Cambridge University Press',
+    category: 'Chemistry',
+    finding:
+      'Quantitative modeling (WHAM) of proton dissociation, Fe/Zn/Cu inner-sphere chelation stability, and divalent Ca²⁺/Mg²⁺ cross-linking coagulation kinetics in natural waters and soils.',
+    url: 'https://doi.org/10.1017/CBO9780511535598',
+  },
+  {
+    year: 2002,
+    authors: 'Canellas, L. P., Olivares, F. L., Okorokova-Façanha, A. L., & Façanha, A. R.',
+    title: 'Humic Acids Isolated from Earthworm Compost Enhance Root Elongation, Lateral Root Emergence, and Plasma Membrane H⁺-ATPase Activity in Maize Roots',
+    source: 'Plant Physiology, 130(4), 1951–1957',
+    category: 'Biostimulants',
+    finding:
+      'Breakthrough molecular proof that humic substances stimulate root plasma-membrane H⁺-ATPase proton pumps and auxin-like signaling, driving lateral root branching and active nutrient symport.',
+    url: 'https://doi.org/10.1104/pp.007088',
+  },
+  {
+    year: 2004,
+    authors: 'Lal, R.',
+    title: 'Soil Carbon Sequestration Impacts on Global Climate Change and Food Security',
+    source: 'Science, 304(5677), 1623–1627',
+    category: 'Sustainability',
+    finding:
+      'Established quantitative links between restoring depleted Soil Organic Carbon (SOC) pools, reversing global land degradation, enhancing crop yields, and long-term global food security.',
+    url: 'https://doi.org/10.1126/science.1097396',
+  },
+  {
+    year: 2004,
+    authors: 'Chen, Y., Clapp, C. E., & Magen, H.',
+    title: 'Mechanisms of Plant Growth Stimulation by Humic Substances: The Role of Organo-Iron Complexes',
+    source: 'Soil Science and Plant Nutrition, 50(7), 1089–1095',
+    category: 'Agronomy',
+    finding:
+      'Demonstrated hormetic concentration thresholds (15–50 ppm fulvic/humic carbon in hydroponics) and highlighted iron complexation as a primary driver of foliar chlorophyll and shoot vigor.',
+    url: 'https://doi.org/10.1080/00380768.2004.10408579',
+  },
+  {
+    year: 2005,
+    authors: 'Gryndler, M., Hršelová, H., Sudová, R., Gryndlerová, H., Řezáčová, V., & Merhautová, V.',
+    title: 'Hyphal Growth and Mycorrhiza Formation by the Arbuscular Mycorrhizal Fungus Glomus claroideum BEG 23 Is Stimulated by Humic Substances',
+    source: 'Mycorrhiza, 15, 341–348',
+    category: 'Sustainability',
+    finding:
+      'Showed that moderate humic concentrations stimulate extraradical mycorrhizal hyphal elongation and root colonization, expanding effective crop foraging volume for immobile phosphorus and water.',
+    url: 'https://doi.org/10.1007/s00572-004-0338-0',
+  },
+  {
+    year: 2009,
+    authors: 'Lamar, R. T., & Talbot, K. H.',
+    title: 'Critical Comparison of Humic Acid Test Methods',
+    source: 'Communications in Soil Science and Plant Analysis, 40(15–16), 2309–2322',
+    category: 'Testing',
+    finding:
+      'Exposed severe inflation errors in legacy colorimetric and un-ashed gravimetric assays and documented how sodium lignosulfonate adulterants distort commercial humic labels.',
+    url: 'https://doi.org/10.1080/00103620903111251',
+  },
+  {
+    year: 2012,
+    authors: 'Erro, J., Urrutia, O., Baigorri, R., Aparicio-Tejo, P., Irigoyen, I., Torino, F., Mandado, M., Yvin, J. C., & García-Mina, J. M.',
+    title: 'Organic Complexed Superphosphates (CSP): Physicochemical Characterization and Agronomical Properties',
+    source: 'Journal of Agricultural and Food Chemistry, 60(8), 2008–2017',
+    category: 'Agronomy',
+    finding:
+      'Demonstrated that co-applying humic substances directly with phosphate fertilizers mitigates rapid mineral P fixation in both acidic (Fe/Al) and calcareous (CaCO₃) soils.',
+    url: 'https://doi.org/10.1021/jf204821j',
+  },
+  {
+    year: 2014,
+    authors: 'Lamar, R. T., Olk, D. C., Mayhew, L., & Bloom, P. R.',
+    title: 'A New Standardized Method for Quantification of Humic and Fulvic Acids in Humic Ores and Commercial Products',
+    source: 'Journal of AOAC International, 97(3), 721–730',
+    category: 'Testing',
+    finding:
+      'Multi-laboratory validation of the HPTA/Lamar method combining ash-free gravimetric humic quantification with DAX-8 resin isolation of hydrophobic fulvic acid—later codified as ISO 19822.',
+    url: 'https://doi.org/10.5740/jaoacint.13-393',
+  },
+  {
+    year: 2014,
+    authors: 'Rose, M. T., Patti, A. F., Little, K. R., Brown, A. L., Jackson, W. R., & Cavagnaro, T. R.',
+    title: 'A Meta-Analysis and Review of Plant-Growth Response to Humic Substances: Practical Implications for Agriculture',
+    source: 'Advances in Agronomy, 124, 37–89',
+    category: 'Agronomy',
+    finding:
+      'Synthesized 81 peer-reviewed trials demonstrating ~20% mean shoot and root dry-weight gains, clear hormetic dose-response limits, and highest relative ROI under abiotic stress and low-OM soils.',
+    url: 'https://doi.org/10.1016/B978-0-12-800138-7.00002-4',
+  },
+  {
+    year: 2015,
+    authors: 'du Jardin, P.',
+    title: 'Plant Biostimulants: Definition, Concept, Main Categories and Regulation',
+    source: 'Scientia Horticulturae, 196, 3–14',
+    category: 'Biostimulants',
+    finding:
+      'Seminal taxonomy defining humic substances, seaweed extracts, and protein hydrolysates as core non-microbial plant biostimulant categories that informed EU FPR 2019/1009.',
+    url: 'https://doi.org/10.1016/j.scienta.2015.09.021',
+  },
+  {
+    year: 2015,
+    authors: 'Lehmann, J., & Kleber, M.',
+    title: 'The Contentious Nature of Soil Organic Matter',
+    source: 'Nature, 528(7580), 60–68',
+    category: 'Sustainability',
+    finding:
+      'Proposed the Soil Continuum Model (SCM), emphasizing progressive organic decomposition and Mineral-Associated Organic Matter (MAOM) protection on clay surfaces.',
+    url: 'https://doi.org/10.1038/nature16069',
+  },
+  {
+    year: 2018,
+    authors: 'International Organization for Standardization (ISO)',
+    title: 'ISO 19822:2018 — Fertilizers and Soil Conditioners: Determination of Humic and Hydrophobic Fulvic Acids Concentrations',
+    source: 'ISO Technical Committee 134 (Fertilizers, Soil Conditioners and Beneficial Substances)',
+    category: 'Testing',
+    finding:
+      'Global gold-standard analytical benchmark adopted by AAPFCO (USA) and recognized across international biostimulant trade to verify ash-free humic acid and DAX-8 hydrophobic fulvic acid.',
+    url: 'https://www.iso.org/standard/66353.html',
+  },
+  {
+    year: 2018,
+    authors: 'Kaya, C., Akram, N. A., Ashraf, M., & Sonmez, O.',
+    title: 'Exogenous Application of Humic Acid Mitigates Salinity Stress in Maize Plants by Improving Key Antioxidant Defense Systems (SOD, CAT, POD)',
+    source: 'Plant Physiology and Biochemistry, 127, 297–306',
+    category: 'Biostimulants',
+    finding:
+      'Documented improved shoot K⁺/Na⁺ homeostasis, proline accumulation, and upregulation of superoxide dismutase (SOD), catalase (CAT), and peroxidase (POD) under salt stress.',
+    url: 'https://doi.org/10.1016/j.plaphy.2018.03.035',
+  },
+  {
+    year: 2019,
+    authors: 'European Parliament & Council / Olk, D. C. et al.',
+    title: 'Regulation (EU) 2019/1009 (EU Fertilising Products Regulation — PFC 6B Plant Biostimulants)',
+    source: 'Official Journal of the European Union, L 170/1',
+    category: 'Testing',
+    finding:
+      'Harmonized European single-market law defining legal claims (nutrient use efficiency, abiotic stress tolerance, quality traits), heavy-metal ceilings, and CEN trial substantiation for humic biostimulants.',
+    url: 'https://eur-lex.europa.eu/eli/reg/2019/1009/oj',
+  },
+];
+
+const sortedPapers = [...papers].sort((a, b) => b.year - a.year);
+const categories = ['All', 'Chemistry', 'Agronomy', 'Biostimulants', 'Testing', 'Sustainability'] as const;
+
+const siteUrl = 'https://humic.blog';
+const libraryUrl = `${siteUrl}/research-library`;
+
+const itemListNode = {
+  '@type': 'ItemList',
+  '@id': `${libraryUrl}#itemlist`,
+  name: 'Curated Peer-Reviewed Humic Science Research Library',
+  numberOfItems: sortedPapers.length,
+  itemListElement: sortedPapers.map((p, idx) => ({
+    '@type': 'ListItem',
+    position: idx + 1,
+    item: {
+      '@type': 'ScholarlyArticle',
+      name: p.title,
+      author: p.authors,
+      datePublished: String(p.year),
+      isPartOf: p.source,
+      ...(p.url ? { url: p.url } : {}),
+    },
+  })),
+};
+
+const breadcrumbs = [
+  { name: 'Home', url: siteUrl },
+  { name: 'Peer-Reviewed Research Library', url: libraryUrl },
+];
+---
+
+<BaseLayout
+  title="Peer-Reviewed Humic Research Library (Landmark Papers & ISO Standards)"
+  description="Curated, filterable index of 20 landmark peer-reviewed studies and international standards in humic science—from Achard (1786) and Piccolo (2001) to ISO 19822:2018 and EU FPR 2019/1009."
+  canonicalPath="/research-library"
+  schemaType="collection"
+  breadcrumbs={breadcrumbs}
+  extraSchemaNodes={[itemListNode]}
+>
+  <div class="bg-emerald-950 text-white border-b-4 border-amber-500">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+      <nav aria-label="Breadcrumb" class="mb-3 text-xs text-emerald-300 flex items-center gap-1.5">
+        <a href="/" class="hover:text-amber-400">Home</a>
+        <span>/</span>
+        <span class="text-emerald-100">Research Library</span>
+      </nav>
+      <span class="inline-flex items-center rounded-full bg-amber-500/20 border border-amber-500/40 px-3 py-0.5 text-xs font-semibold text-amber-300 mb-3">
+        Primary Literature &amp; Standards Index
+      </span>
+      <h1 class="font-serif text-3xl sm:text-4xl font-bold text-white leading-tight">
+        Curated Peer-Reviewed Humic Research Library
+      </h1>
+      <p class="mt-3 text-sm sm:text-base text-emerald-100/90 max-w-3xl leading-relaxed">
+        {sortedPapers.length} foundational journal publications, soil-chemistry monographs, and statutory analytical standards backing every article and calculator on Humic.blog.
+      </p>
+    </div>
+  </div>
+
+  <div data-pagefind-body class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-8 sm:py-10 space-y-8">
+    <div class="rounded-2xl bg-white border border-slate-200 p-6 shadow-xs">
+      <CanonicalAnswer
+        answer="The Humic.blog Research Library indexes 20 milestone peer-reviewed papers and international standards spanning 1786 to 2019—including Stevenson (1994), Lovley (1996), Piccolo (2001), Canellas (2002), Lal (2004), Rose (2014), du Jardin (2015), Lehmann & Kleber (2015), ISO 19822:2018, and EU FPR 2019/1009—organized by discipline with direct DOI links."
+      />
+
+      <!-- Filter Controls -->
+      <div class="mt-6 space-y-4">
+        <div class="flex flex-wrap gap-2" role="tablist" aria-label="Filter papers by scientific category">
+          {categories.map((cat, idx) => (
+            <button
+              type="button"
+              data-cat-btn={cat}
+              class:list={[
+                'res-cat-btn rounded-xl px-3.5 py-2 text-xs font-bold transition-colors cursor-pointer',
+                idx === 0
+                  ? 'bg-emerald-950 text-amber-400 border border-emerald-950'
+                  : 'bg-slate-100 text-slate-700 hover:bg-emerald-50 hover:text-emerald-950 border border-slate-200',
+              ]}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+
+        <div class="flex flex-col sm:flex-row sm:items-center gap-3">
+          <input
+            id="research-search"
+            type="search"
+            placeholder="Filter by author, year, keyword (e.g. Piccolo, ISO 19822, MAOM, H+-ATPase)..."
+            class="flex-1 rounded-xl border border-slate-300 bg-slate-50 px-4 py-2.5 text-sm text-slate-900 focus:border-emerald-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-800/20"
+          />
+          <span id="research-count" class="text-xs font-semibold text-slate-500 whitespace-nowrap">
+            Showing {sortedPapers.length} of {sortedPapers.length} publications
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Publication Cards -->
+    <div id="research-list" class="space-y-4">
+      {sortedPapers.map((p) => (
+        <article
+          data-paper-card
+          data-category={p.category}
+          data-search={`${p.year} ${p.authors} ${p.title} ${p.source} ${p.category} ${p.finding}`.toLowerCase()}
+          class="rounded-2xl bg-white border border-slate-200 p-6 shadow-xs hover:border-emerald-800/40 transition-colors"
+        >
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="inline-flex items-center rounded-md bg-emerald-950 px-2.5 py-0.5 text-xs font-bold text-amber-400">
+                {p.year}
+              </span>
+              <span class="inline-flex items-center rounded-full bg-emerald-950/5 border border-emerald-900/15 px-2.5 py-0.5 text-[11px] font-semibold text-emerald-900">
+                {p.category}
+              </span>
+            </div>
+            {p.url && (
+              <a
+                href={p.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-xs font-bold text-emerald-800 hover:text-emerald-950 underline decoration-amber-500 underline-offset-2"
+              >
+                DOI / Official Standard ↗
+              </a>
+            )}
+          </div>
+
+          <h2 class="font-serif text-lg sm:text-xl font-bold text-emerald-950 leading-snug">
+            {p.title}
+          </h2>
+          <p class="mt-1 text-xs font-medium text-slate-500">
+            <strong class="text-slate-700">{p.authors}</strong> &bull; <em>{p.source}</em>
+          </p>
+          <p class="mt-3 text-sm text-slate-700 leading-relaxed m-0">
+            <strong class="text-emerald-900">Key Finding:</strong> {p.finding}
+          </p>
+        </article>
+      ))}
+    </div>
+
+    <p id="research-empty" class="hidden rounded-2xl bg-white border border-slate-200 p-8 text-center text-sm text-slate-600">
+      No publications matched your filter. Try clearing the search box or choosing "All".
+    </p>
+  </div>
+
+  <script is:inline>
+    (function () {
+      let activeCat = 'All';
+      const catBtns = Array.from(document.querySelectorAll('.res-cat-btn'));
+      const searchInput = document.getElementById('research-search');
+      const cards = Array.from(document.querySelectorAll('[data-paper-card]'));
+      const countEl = document.getElementById('research-count');
+      const emptyEl = document.getElementById('research-empty');
+      const total = cards.length;
+
+      function applyFilter() {
+        const q = (searchInput.value || '').trim().toLowerCase();
+        let shown = 0;
+        cards.forEach(function (card) {
+          const matchCat = activeCat === 'All' || card.getAttribute('data-category') === activeCat;
+          const matchQ = !q || (card.getAttribute('data-search') || '').includes(q);
+          const vis = matchCat && matchQ;
+          card.classList.toggle('hidden', !vis);
+          if (vis) shown++;
+        });
+        countEl.textContent = 'Showing ' + shown + ' of ' + total + ' publications';
+        emptyEl.classList.toggle('hidden', shown > 0);
+      }
+
+      catBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          activeCat = btn.getAttribute('data-cat-btn');
+          catBtns.forEach(function (b) {
+            const isSel = b.getAttribute('data-cat-btn') === activeCat;
+            b.className = isSel
+              ? 'res-cat-btn rounded-xl px-3.5 py-2 text-xs font-bold transition-colors cursor-pointer bg-emerald-950 text-amber-400 border border-emerald-950'
+              : 'res-cat-btn rounded-xl px-3.5 py-2 text-xs font-bold transition-colors cursor-pointer bg-slate-100 text-slate-700 hover:bg-emerald-50 hover:text-emerald-950 border border-slate-200';
+          });
+          applyFilter();
+        });
+      });
+
+      searchInput.addEventListener('input', applyFilter);
+    })();
+  </script>
+</BaseLayout>

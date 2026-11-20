@@ -12,6 +12,8 @@ export interface Props {
   description: string;
   canonicalPath?: string;
   noindex?: boolean;
+  lang?: 'en' | 'hi';
+  alternateUrls?: { en?: string; hi?: string; xDefault?: string };
   ogImage?: string;
   schemaType?: 'website' | 'article' | 'tool' | 'glossary' | 'collection' | 'about';
   pillar?: string;
@@ -29,6 +31,8 @@ const {
   description,
   canonicalPath,
   noindex = false,
+  lang = 'en',
+  alternateUrls,
   ogImage,
   schemaType = 'website',
   pillar,
@@ -48,17 +52,35 @@ const canonicalUrl = normalizedPath ? `${siteOrigin}${normalizedPath}` : siteOri
 const fullTitle = title.includes('Humic.blog') ? title : `${title} | Humic.blog`;
 const resolvedOgImage = ogImage ?? `${siteOrigin}/og-default.svg`;
 
-const navLinks = [
-  { href: '/#encyclopedia', label: 'Pillars' },
-  { href: '/manufacturing', label: 'For Manufacturers' },
-  { href: '/tools/dosage-calculator', label: 'Tools' },
-  { href: '/glossary', label: 'Glossary' },
-  { href: '/about', label: 'Editorial' },
-];
+const navLinks =
+  lang === 'hi'
+    ? [
+        { href: '/hi', label: 'हिन्दी हब' },
+        { href: '/hi/humic-acid-kya-hai-aur-upyog', label: 'उपयोग व मात्रा' },
+        { href: '/hi/asli-nakli-potassium-humate-ki-pehchan', label: '3-मिनट जांच' },
+        { href: '/hi/ganne-ki-kheti-mein-humic-acid', label: 'गन्ना गाइड' },
+        { href: '/tools/dosage-calculator', label: 'कैलकुलेटर' },
+      ]
+    : [
+        { href: '/#encyclopedia', label: 'Pillars' },
+        { href: '/crops', label: 'Crops' },
+        { href: '/manufacturing', label: 'B2B' },
+        { href: '/tools/dosage-calculator', label: 'Tools' },
+        { href: '/research-library', label: 'Research' },
+        { href: '/glossary', label: 'Glossary' },
+        { href: '/about', label: 'About' },
+      ];
+
+const enSwitchHref = alternateUrls?.en
+  ? alternateUrls.en.replace(siteOrigin, '') || '/'
+  : '/';
+const hiSwitchHref = alternateUrls?.hi
+  ? alternateUrls.hi.replace(siteOrigin, '') || '/hi'
+  : '/hi';
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -66,6 +88,11 @@ const navLinks = [
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex, follow" />}
     <link rel="canonical" href={canonicalUrl} />
+    {alternateUrls?.en && <link rel="alternate" hreflang="en" href={alternateUrls.en} />}
+    {alternateUrls?.hi && <link rel="alternate" hreflang="hi" href={alternateUrls.hi} />}
+    {(alternateUrls?.xDefault || alternateUrls?.en) && (
+      <link rel="alternate" hreflang="x-default" href={alternateUrls?.xDefault ?? alternateUrls?.en} />
+    )}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="sitemap" href="/sitemap-index.xml" />
 
@@ -92,6 +119,7 @@ const navLinks = [
     <!-- Structured Data (@graph JSON-LD) -->
     <SchemaMarkup
       type={schemaType}
+      lang={lang}
       title={title}
       description={description}
       canonicalUrl={canonicalUrl}
@@ -146,8 +174,30 @@ const navLinks = [
             })}
           </nav>
 
-          <!-- Search Trigger + Mobile Toggle -->
+          <!-- Language Toggle + Search Trigger + Mobile Toggle -->
           <div class="flex items-center gap-2">
+            <div class="inline-flex items-center rounded-lg bg-emerald-900/90 border border-emerald-700/80 p-0.5 text-[11px] font-bold" aria-label="Language switcher">
+              <a
+                href={enSwitchHref}
+                hreflang="en"
+                class:list={[
+                  'rounded-md px-2 py-1 transition-colors',
+                  lang === 'en' ? 'bg-amber-500 text-emerald-950' : 'text-emerald-200 hover:text-white',
+                ]}
+              >
+                EN
+              </a>
+              <a
+                href={hiSwitchHref}
+                hreflang="hi"
+                class:list={[
+                  'rounded-md px-2 py-1 transition-colors',
+                  lang === 'hi' ? 'bg-amber-500 text-emerald-950' : 'text-emerald-200 hover:text-white',
+                ]}
+              >
+                हिन्दी
+              </a>
+            </div>
             <button
               id="open-search-btn"
               type="button"
@@ -192,7 +242,9 @@ const navLinks = [
         <a href="/crops" class="block rounded-lg px-3 py-2 text-sm font-medium text-emerald-100 hover:bg-emerald-900 hover:text-amber-400">Crop Guides</a>
         <a href="/search" class="block rounded-lg px-3 py-2 text-sm font-medium text-emerald-100 hover:bg-emerald-900 hover:text-amber-400">Search</a>
         <a href="/tools/formulation-ph-estimator" class="block rounded-lg px-3 py-2 text-sm font-medium text-emerald-100 hover:bg-emerald-900 hover:text-amber-400">Blend pH Estimator</a>
+        <a href="/research-library" class="block rounded-lg px-3 py-2 text-sm font-medium text-emerald-100 hover:bg-emerald-900 hover:text-amber-400">Research Library</a>
         <a href="/glossary" class="block rounded-lg px-3 py-2 text-sm font-medium text-emerald-100 hover:bg-emerald-900 hover:text-amber-400">A–Z Glossary</a>
+        <a href="/hi" class="block rounded-lg px-3 py-2 text-sm font-semibold text-amber-300 hover:bg-emerald-900">हिन्दी किसान हब (/hi)</a>
         <a href="/about" class="block rounded-lg px-3 py-2 text-sm font-medium text-emerald-100 hover:bg-emerald-900 hover:text-amber-400">About &amp; Editorial Policy</a>
       </nav>
     </header>
@@ -284,7 +336,9 @@ const navLinks = [
               <li><a href="/tools/coa-verifier" class="hover:text-amber-400 transition-colors">Humic COA Verifier</a></li>
               <li><a href="/tools/coa-red-flag-checker" class="hover:text-amber-400 transition-colors">Full ICP-OES COA Auditor</a></li>
               <li><a href="/tools/formulation-ph-estimator" class="hover:text-amber-400 transition-colors">Manufacturer Blend pH Estimator</a></li>
+              <li><a href="/research-library" class="hover:text-amber-400 transition-colors">Peer-Reviewed Research Library</a></li>
               <li><a href="/glossary" class="hover:text-amber-400 transition-colors">A–Z Humic Science Glossary</a></li>
+              <li><a href="/hi" class="hover:text-amber-400 transition-colors">हिन्दी किसान ज्ञान केंद्र (/hi)</a></li>
               <li><a href="/search" class="hover:text-amber-400 transition-colors">Full-Text Search (Pagefind)</a></li>
             </ul>
           </div>

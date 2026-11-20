@@ -31,6 +31,7 @@ export const GET: APIRoute = async () => {
     `- [Extended ICP-OES & Heavy-Metal COA Auditor](${site}/tools/coa-red-flag-checker): Instant Certificate of Analysis auditor flagging sodium lignosulfonate sulfur (>0.75% S), NaOH sodium spikes, colorimetric assay inflation, ash bias, and EU FPR heavy-metal breaches.`,
     `- [Manufacturer Blend pH & Compatibility Estimator](${site}/tools/formulation-ph-estimator): B2B liquid concentrate simulator estimating blended pH, precipitation/gelation risk, bottle-swelling microbial gas risk, and Humate-to-Fulvate switch thresholds.`,
     `- [Instant Static Search (Pagefind)](${site}/search): Full-text static search across all guides, crop schedules, tools, and glossary definitions.`,
+    `- [Peer-Reviewed Humic Research Library](${site}/research-library): Curated, filterable index of 18 landmark peer-reviewed papers and international analytical/regulatory standards (Achard 1786 to ISO 19822 & EU FPR 2019/1009).`,
     `- [A–Z Humic Science Glossary](${site}/glossary): 18 standardized IHSS and ISO 19822 definitions encoded in DefinedTermSet JSON-LD.`,
     '',
     '## Pillar Hub Pages',
@@ -58,7 +59,15 @@ export const GET: APIRoute = async () => {
     }
   }
 
-  lines.push('');
+  lines.push(
+    '',
+    '## Hindi Farmer Hub (/hi — हिन्दी किसान ज्ञान केंद्र)',
+    `- [हिन्दी किसान ज्ञान केंद्र (Hindi Farmer Hub)](${site}/hi): Natural-Hindi agricultural knowledge hub for Indian farmers covering potassium humate, dosage, farm purity tests, and crop schedules.`,
+    `- [ह्यूमिक एसिड क्या है? खेती में सही उपयोग, मात्रा और सावधानियां](${site}/hi/humic-acid-kya-hai-aur-upyog): Complete Hindi guide to humic acid soil conditioning, drip/soil/foliar dosage, and Calcium Nitrate / acid tank-mix precautions.`,
+    `- [असली और नकली पोटैशियम ह्यूमेट की पहचान: खेत पर 3 मिनट का आसान टेस्ट](${site}/hi/asli-nakli-potassium-humate-ki-pehchan): Practical Hindi 3-minute farm test using cold water, vinegar/lemon, and odor/foam clues to spot coal dust, sodium humate, and lignosulfonate.`,
+    `- [गन्ने की खेती में ह्यूमिक एसिड: जड़ विकास, कल्ले (Tillering) और पेड़ी (Ratoon) प्रबंधन](${site}/hi/ganne-ki-kheti-mein-humic-acid): Stage-by-stage Hindi sugarcane guide from basal DAP/urea co-application and 20–30 day root flush to tillering and ratoon rejuvenation.`,
+    ''
+  );
 
   return new Response(lines.join('\n'), {
     headers: {

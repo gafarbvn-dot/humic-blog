@@ -24,6 +24,7 @@ export interface HowToData {
 
 export interface Props {
   type?: 'website' | 'article' | 'tool' | 'glossary' | 'collection' | 'about';
+  lang?: 'en' | 'hi';
   title: string;
   description: string;
   canonicalUrl: string;
@@ -40,6 +41,7 @@ export interface Props {
 
 const {
   type = 'website',
+  lang = 'en',
   title,
   description,
   canonicalUrl,
@@ -92,7 +94,7 @@ const websiteNode = {
   url: siteUrl,
   name: 'Humic.blog — Encyclopedia of Humic Substances',
   publisher: { '@id': `${siteUrl}/#organization` },
-  inLanguage: 'en',
+  inLanguage: lang,
 };
 
 const graph: Record<string, unknown>[] = [organizationNode, websiteNode];
@@ -116,7 +118,7 @@ if (type === 'article') {
     },
     reviewedBy: { '@id': `${siteUrl}/#technical-reviewer` },
     publisher: { '@id': `${siteUrl}/#organization` },
-    inLanguage: 'en',
+    inLanguage: lang,
     isAccessibleForFree: true,
   };
 

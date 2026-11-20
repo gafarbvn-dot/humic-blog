@@ -1,0 +1,130 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const siteUrl = 'https://humic.blog';
+const breadcrumbs = [
+  { name: 'Home', url: siteUrl },
+  { name: 'हिन्दी किसान ज्ञान केंद्र', url: `${siteUrl}/hi` },
+];
+
+const hindiGuides = [
+  {
+    href: '/hi/humic-acid-kya-hai-aur-upyog',
+    badge: 'बुनियादी कृषि गाइड',
+    title: 'ह्यूमिक एसिड क्या है? खेती में सही उपयोग, मात्रा और सावधानियां',
+    summary:
+      'ह्यूमिक एसिड, फुल्विक एसिड और पोटैशियम ह्यूमेट कैसे मिट्टी की उर्वरा शक्ति व खाद की कार्यक्षमता बढ़ाते हैं—ड्रिप, मिट्टी, स्प्रे और बीज उपचार की सटीक मात्रा व कैल्शियम/एसिड के साथ मिलाने के नियम।',
+  },
+  {
+    href: '/hi/asli-nakli-potassium-humate-ki-pehchan',
+    badge: 'गुणवत्ता एवं मिलावट जांच',
+    title: 'असली और नकली पोटैशियम ह्यूमेट की पहचान: खेत पर 3 मिनट का आसान टेस्ट',
+    summary:
+      'बिना लैब जाए साफ पानी, सफेद सिरका (या नींबू) और गंध-झाग जांच से कोयले के चूरे, कच्चे लिग्नाइट और पेपर-मिल सोडियम लिग्नोसल्फोनेट की मिलावट तुरंत पकड़ें।',
+  },
+  {
+    href: '/hi/ganne-ki-kheti-mein-humic-acid',
+    badge: 'फसल विशेष गाइड • गन्ना',
+    title: 'गन्ने की खेती में ह्यूमिक एसिड: जड़ विकास, कल्ले (Tillering) और पेड़ी (Ratoon) प्रबंधन',
+    summary:
+      'गन्ने की बुवाई (बेसल DAP/यूरिया के साथ), 20–30 दिन पर जड़ विकास, कल्ले फूटने की अवस्था, गन्ने की मोटाई और पेड़ी फसल के पुनर्जीवन की पूरी समय-सारिणी।',
+  },
+];
+---
+
+<BaseLayout
+  title="हिन्दी किसान ज्ञान केंद्र — ह्यूमिक एसिड व मिट्टी विज्ञान विश्वकोश | Humic.blog"
+  description="भारतीय किसानों और कृषि विशेषज्ञों के लिए निष्पक्ष, वैज्ञानिक हिन्दी मार्गदर्शिका: ह्यूमिक एसिड की सही मात्रा, 3-मिनट असली-नकली जांच, टैंक-मिक्स नियम और गन्ने की फसल का पूरा कैलेंडर।"
+  canonicalPath="/hi"
+  lang="hi"
+  alternateUrls={{
+    en: 'https://humic.blog',
+    hi: 'https://humic.blog/hi',
+    xDefault: 'https://humic.blog',
+  }}
+  schemaType="collection"
+  breadcrumbs={breadcrumbs}
+>
+  <section class="bg-emerald-950 text-white border-b-4 border-amber-500">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+      <div class="inline-flex items-center gap-2 rounded-full bg-emerald-900 border border-emerald-700 px-3.5 py-1 text-xs font-semibold text-amber-400 mb-5">
+        <span class="h-2 w-2 rounded-full bg-amber-400" aria-hidden="true"></span>
+        निष्पक्ष कृषि विज्ञान &bull; बिना किसी कंपनी प्रचार के &bull; ISO 19822 आधारित
+      </div>
+
+      <h1 class="font-serif text-3xl sm:text-5xl font-bold text-white leading-tight max-w-4xl">
+        ह्यूमिक एसिड <span class="text-amber-400">हिन्दी किसान ज्ञान केंद्र</span>
+      </h1>
+
+      <p class="mt-4 text-base sm:text-lg text-emerald-100/90 leading-relaxed max-w-3xl">
+        सही मिट्टी विज्ञान, खाद की कार्यक्षमता (यूरिया व डीएपी की बचत), खेत पर असली-नकली पोटैशियम ह्यूमेट की पहचान और फसल-वार सटीक मात्रा—सरल, व्यावहारिक हिन्दी में।
+      </p>
+
+      <div class="mt-7 flex flex-wrap gap-3">
+        <a href="/hi/humic-acid-kya-hai-aur-upyog" class="rounded-xl bg-amber-500 hover:bg-amber-400 px-5 py-3 text-sm font-bold text-emerald-950 transition-colors">
+          ह्यूमिक एसिड सही उपयोग पढ़ें &rarr;
+        </a>
+        <a href="/hi/asli-nakli-potassium-humate-ki-pehchan" class="rounded-xl bg-emerald-900 hover:bg-emerald-800 border border-emerald-700 px-5 py-3 text-sm font-semibold text-white transition-colors">
+          3-मिनट शुद्धता टेस्ट
+        </a>
+        <a href="/tools/dosage-calculator" class="rounded-xl bg-transparent hover:bg-emerald-900/60 border border-emerald-600 px-5 py-3 text-sm font-semibold text-emerald-100 transition-colors">
+          मात्रा कैलकुलेटर (एकड़/हेक्टेयर)
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div data-pagefind-body class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-10 space-y-10">
+    <!-- Guide Cards -->
+    <section class="space-y-5">
+      <div>
+        <span class="text-xs font-bold uppercase tracking-wider text-amber-600">प्रमुख किसान गाइड</span>
+        <h2 class="font-serif text-2xl sm:text-3xl font-bold text-emerald-950 mt-1">
+          व्यावहारिक हिन्दी मार्गदर्शिकाएं
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 gap-5">
+        {hindiGuides.map((g) => (
+          <article class="rounded-2xl bg-white border border-slate-200 hover:border-amber-500 p-6 sm:p-7 shadow-xs transition-colors">
+            <span class="inline-flex items-center rounded-full bg-emerald-950/5 border border-emerald-900/15 px-3 py-0.5 text-xs font-semibold text-emerald-900 mb-2.5">
+              {g.badge}
+            </span>
+            <h3 class="font-serif text-xl sm:text-2xl font-bold text-emerald-950 leading-snug">
+              <a href={g.href} class="hover:text-emerald-700 underline decoration-transparent hover:decoration-amber-500 underline-offset-4">
+                {g.title}
+              </a>
+            </h3>
+            <p class="mt-2.5 text-sm sm:text-base text-slate-700 leading-relaxed">
+              {g.summary}
+            </p>
+            <div class="mt-4">
+              <a href={g.href} class="inline-flex items-center gap-1.5 rounded-lg bg-emerald-900 hover:bg-emerald-950 px-4 py-2 text-xs font-bold text-white transition-colors">
+                पूरी गाइड पढ़ें &rarr;
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- Useful Interactive Calculators Strip -->
+    <section class="rounded-2xl bg-emerald-950 text-white p-6 sm:p-8 space-y-4">
+      <div class="text-xs font-bold uppercase tracking-wider text-amber-400">
+        मुफ्त कृषि कैलकुलेटर व जांच टूल
+      </div>
+      <h2 class="font-serif text-2xl font-bold text-white m-0">
+        दवा या खाद मिलाने से पहले तुरंत जांच करें
+      </h2>
+      <p class="text-sm text-emerald-100/90 leading-relaxed max-w-2xl">
+        हमारे इंटरैक्टिव टूल से अपने एकड़/हेक्टेयर के अनुसार सही मात्रा निकालें, कैल्शियम नाइट्रेट व फास्फोरिक एसिड के साथ टैंक-मिक्स सुरक्षा जांचें, और सप्लायर की लैब रिपोर्ट (COA) की पड़ताल करें।
+      </p>
+      <div class="flex flex-wrap gap-2.5 pt-1">
+        <a href="/tools/dosage-calculator" class="rounded-lg bg-amber-500 hover:bg-amber-400 px-4 py-2.5 text-xs font-bold text-emerald-950">मात्रा कैलकुलेटर &rarr;</a>
+        <a href="/tools/tank-mix-checker" class="rounded-lg bg-emerald-900 hover:bg-emerald-800 border border-emerald-700 px-4 py-2.5 text-xs font-semibold text-white">टैंक-मिक्स जांच &rarr;</a>
+        <a href="/tools/coa-verifier" class="rounded-lg bg-emerald-900 hover:bg-emerald-800 border border-emerald-700 px-4 py-2.5 text-xs font-semibold text-white">COA शुद्धता जांच &rarr;</a>
+        <a href="/" hreflang="en" class="rounded-lg bg-transparent hover:bg-emerald-900 border border-emerald-700 px-4 py-2.5 text-xs font-semibold text-emerald-200">Full English Encyclopedia (29 Guides)</a>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
