@@ -126,3 +126,76 @@
   padding-left: 0;
   padding-right: 1.5rem;
 }
+
+/* Ink-friendly 1-page A4/Letter print styling for Field Cheat Sheets */
+@media print {
+  @page {
+    size: auto;
+    margin: 9mm 11mm;
+  }
+
+  html,
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    font-size: 9.5pt !important;
+    line-height: 1.32 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  body > header,
+  body > footer,
+  #search-modal,
+  .no-print {
+    display: none !important;
+  }
+
+  main {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .print-sheet {
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    background: #ffffff !important;
+  }
+
+  .print-sheet * {
+    color: #000000 !important;
+    box-shadow: none !important;
+  }
+
+  .print-sheet table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    font-size: 8.5pt !important;
+    page-break-inside: auto;
+  }
+
+  .print-sheet th,
+  .print-sheet td {
+    border: 1px solid #334155 !important;
+    padding: 4px 6px !important;
+    background: #ffffff !important;
+  }
+
+  .print-sheet thead th {
+    background: #f1f5f9 !important;
+    font-weight: 700 !important;
+  }
+
+  .print-avoid-break {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .print-only-footer {
+    display: flex !important;
+  }
+}

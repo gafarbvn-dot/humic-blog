@@ -1,0 +1,112 @@
+---
+import FieldSheetLayout from '../../layouts/FieldSheetLayout.astro';
+---
+
+<FieldSheetLayout
+  slug="humic-coa-audit-checklist"
+  sheetNumber="SHEET 04"
+  title="Humic Acid COA Audit Checklist (ISO 19822 Procurement)"
+  subtitle="B2B procurement & QC desk reference for verifying Potassium Humate / Fulvate containers before shipment release."
+  audience="B2B Buyers, Importers & Formulators"
+  description="One-page printable B2B COA audit checklist for Potassium Humate: Pass/Caution/Reject limits for ISO 19822, Sulfur (<0.75%), Sodium (<1.5%), K₂O, Water Insolubles, Mass Balance, and Heavy Metals."
+  relatedToolHref="/tools/coa-verifier"
+  relatedToolLabel="Run Digital COA Verifier"
+>
+  <!-- Threshold Audit Table -->
+  <section class="print-avoid-break">
+    <h2 class="font-serif text-base font-bold text-slate-950 mb-2 border-b border-slate-300 pb-1">
+      1. Container-Level COA Specification &amp; Red-Flag Thresholds (Soluble Potassium Humate)
+    </h2>
+    <table class="w-full border-collapse text-left text-xs border border-slate-300">
+      <thead>
+        <tr class="bg-slate-100 text-slate-950">
+          <th class="border border-slate-300 px-2 py-1.5 font-bold">COA Parameter</th>
+          <th class="border border-slate-300 px-2 py-1.5 font-bold">PASS (Target Spec)</th>
+          <th class="border border-slate-300 px-2 py-1.5 font-bold">CAUTION (Investigate)</th>
+          <th class="border border-slate-300 px-2 py-1.5 font-bold">REJECT (Red Flag)</th>
+          <th class="border border-slate-300 px-2 py-1.5 font-bold">What It Reveals</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="border border-slate-300 px-2 py-1.5 font-bold">Analytical Method</td>
+          <td class="border border-slate-300 px-2 py-1.5 font-semibold">ISO 19822:2018 (HPTA/Lamar)</td>
+          <td class="border border-slate-300 px-2 py-1.5">CDFA Gravimetric (no ash corr.)</td>
+          <td class="border border-slate-300 px-2 py-1.5 font-bold">Colorimetric / Unstated</td>
+          <td class="border border-slate-300 px-2 py-1.5">Colorimetry inflates HA by +15–45% via dyes/ligno</td>
+        </tr>
+        <tr class="bg-slate-50/70">
+          <td class="border border-slate-300 px-2 py-1.5 font-bold">Total Sulfur (S)</td>
+          <td class="border border-slate-300 px-2 py-1.5 font-semibold">&le; 0.60% (Typical Leonardite)</td>
+          <td class="border border-slate-300 px-2 py-1.5">0.61% – 0.75%</td>
+          <td class="border border-slate-300 px-2 py-1.5 font-bold">&gt; 0.75% (esp. 2%–6%)</td>
+          <td class="border border-slate-300 px-2 py-1.5">Strong marker for Sodium Lignosulfonate spiking</td>
+        </tr>
+        <tr>
+          <td class="border border-slate-300 px-2 py-1.5 font-bold">Total Sodium (Na)</td>
+          <td class="border border-slate-300 px-2 py-1.5 font-semibold">&lt; 1.0% (KOH Extraction)</td>
+          <td class="border border-slate-300 px-2 py-1.5">1.0% – 1.5%</td>
+          <td class="border border-slate-300 px-2 py-1.5 font-bold">&gt; 1.5% (esp. 4%–12%)</td>
+          <td class="border border-slate-300 px-2 py-1.5">NaOH Sodium Humate substitution; clay dispersion risk</td>
+        </tr>
+        <tr class="bg-slate-50/70">
+          <td class="border border-slate-300 px-2 py-1.5 font-bold">Soluble Potash (K₂O)</td>
+          <td class="border border-slate-300 px-2 py-1.5 font-semibold">8.0% – 12.0%</td>
+          <td class="border border-slate-300 px-2 py-1.5">6.0% – 7.9% or &gt; 14%</td>
+          <td class="border border-slate-300 px-2 py-1.5 font-bold">&lt; 4.0% (if sold as K-Humate)</td>
+          <td class="border border-slate-300 px-2 py-1.5">Confirms genuine KOH digestion (excess K₂O = KCl spike)</td>
+        </tr>
+        <tr>
+          <td class="border border-slate-300 px-2 py-1.5 font-bold">Water Insolubles (WIM)</td>
+          <td class="border border-slate-300 px-2 py-1.5 font-semibold">&le; 1.5% (Drip / Liquid Grade)</td>
+          <td class="border border-slate-300 px-2 py-1.5">1.6% – 2.5% (Soil only)</td>
+          <td class="border border-slate-300 px-2 py-1.5 font-bold">&gt; 2.5% for drip/liquid use</td>
+          <td class="border border-slate-300 px-2 py-1.5">Poor centrifugation; silica/humin clogs 120-mesh filters</td>
+        </tr>
+        <tr class="bg-slate-50/70">
+          <td class="border border-slate-300 px-2 py-1.5 font-bold">Humic Acid % (As-Rec.)</td>
+          <td class="border border-slate-300 px-2 py-1.5 font-semibold">60% – 75% (Ash-Free ISO)</td>
+          <td class="border border-slate-300 px-2 py-1.5">76% – 84% (Check dry basis)</td>
+          <td class="border border-slate-300 px-2 py-1.5 font-bold">&ge; 85%–98% as-received</td>
+          <td class="border border-slate-300 px-2 py-1.5">Violates mass balance once K₂O + moisture + ash added</td>
+        </tr>
+        <tr>
+          <td class="border border-slate-300 px-2 py-1.5 font-bold">Heavy Metals (EU / OMRI)</td>
+          <td class="border border-slate-300 px-2 py-1.5 font-semibold">As &lt; 20, Cd &lt; 1.5, Pb &lt; 30, Hg &lt; 1 ppm</td>
+          <td class="border border-slate-300 px-2 py-1.5">Near EU FPR 2019/1009 ceilings</td>
+          <td class="border border-slate-300 px-2 py-1.5 font-bold">Exceeds regional limits / omitted</td>
+          <td class="border border-slate-300 px-2 py-1.5">Mandatory for EU CE, OMRI, and export registration</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Mass Balance & Sign-off Checklist -->
+  <div class="print-avoid-break grid grid-cols-1 sm:grid-cols-2 gap-3.5 text-xs">
+    <section class="rounded-xl border border-slate-400 p-3 bg-slate-50/50">
+      <h2 class="font-serif text-sm font-bold text-slate-950 mb-1.5">
+        2. 30-Second Mass-Balance Sanity Check
+      </h2>
+      <p class="m-0 mb-1.5">Add these five COA lines together:</p>
+      <p class="font-mono text-[11px] bg-white border border-slate-300 rounded px-2 py-1 m-0 mb-1.5">
+        HA% + FA% + K₂O% + Moisture% + Ash/Insolubles% &le; 100%
+      </p>
+      <p class="m-0">
+        <strong>Example of Fake COA:</strong> 85% HA + 12% K₂O + 10% Moisture + 10% Ash = <strong>117%</strong> (Physically impossible &mdash; inflated colorimetric or dry-ash-free mixing error).
+      </p>
+    </section>
+
+    <section class="rounded-xl border border-slate-400 p-3">
+      <h2 class="font-serif text-sm font-bold text-slate-950 mb-1.5">
+        3. Pre-Shipment QC Sign-Off Box
+      </h2>
+      <ul class="space-y-1 m-0 pl-0 list-none">
+        <li>&#9744; Third-party ISO/IEC 17025 lab report matches lot/batch #</li>
+        <li>&#9744; ISO 19822 (or DAX-8 Fulvic) method explicitly stated</li>
+        <li>&#9744; Sulfur &lt; 0.75% &amp; Sodium &lt; 1.5% confirmed via ICP-OES</li>
+        <li>&#9744; Retained pre-shipment sample passed 50 g/L jar &amp; acid test</li>
+        <li>&#9744; Heavy metals (As, Cd, Cr VI, Pb, Hg, Ni) within EU/OMRI caps</li>
+      </ul>
+    </section>
+  </div>
+</FieldSheetLayout>

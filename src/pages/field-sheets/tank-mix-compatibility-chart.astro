@@ -1,0 +1,107 @@
+---
+import FieldSheetLayout from '../../layouts/FieldSheetLayout.astro';
+---
+
+<FieldSheetLayout
+  slug="tank-mix-compatibility-chart"
+  sheetNumber="SHEET 01"
+  title="Tank-Mix Compatibility Chart & 1-Liter Jar Test Protocol"
+  subtitle="Pump-house & spray-shed quick reference to prevent drip-emitter clogging, calcium precipitation, and acid flocculation."
+  audience="Farmers, Drip Operators & Spray Crews"
+  description="One-page printable Humic & Fulvic Acid Tank-Mix Do & Don't Matrix comparing Potassium Humate vs. Fulvic Acid across Calcium Nitrate, Acids, Urea/NPK, and Sulfates, plus a 1-Liter Jar Test Protocol."
+  relatedToolHref="/tools/tank-mix-checker"
+  relatedToolLabel="Interactive Tank-Mix Checker"
+>
+  <!-- Matrix Section -->
+  <section class="print-avoid-break">
+    <h2 class="font-serif text-base font-bold text-slate-950 mb-2 border-b border-slate-300 pb-1">
+      1. Tank-Mix Do &amp; Don&rsquo;t Matrix (Stock Tank &amp; Spray Tank)
+    </h2>
+    <table class="w-full border-collapse text-left text-xs border border-slate-300">
+      <thead>
+        <tr class="bg-slate-100 text-slate-950">
+          <th class="border border-slate-300 px-2.5 py-1.5 font-bold">Partner Input</th>
+          <th class="border border-slate-300 px-2.5 py-1.5 font-bold">Potassium Humate (pH 9–10.5)</th>
+          <th class="border border-slate-300 px-2.5 py-1.5 font-bold">Potassium Fulvate (pH 1–14)</th>
+          <th class="border border-slate-300 px-2.5 py-1.5 font-bold">Safe Field Protocol</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="border border-slate-300 px-2.5 py-1.5 font-semibold">Calcium Nitrate / CaCl₂</td>
+          <td class="border border-slate-300 px-2.5 py-1.5 font-bold">DO NOT MIX (Instant Sludge)</td>
+          <td class="border border-slate-300 px-2.5 py-1.5">CAUTION (Dilute Jar Test First)</td>
+          <td class="border border-slate-300 px-2.5 py-1.5">Separate Tank A &amp; B; flush drip lines 15–20 min between cycles</td>
+        </tr>
+        <tr class="bg-slate-50/70">
+          <td class="border border-slate-300 px-2.5 py-1.5 font-semibold">Phosphoric / Nitric / Sulfuric Acid</td>
+          <td class="border border-slate-300 px-2.5 py-1.5 font-bold">DO NOT MIX (Flocculates &lt; pH 4.5)</td>
+          <td class="border border-slate-300 px-2.5 py-1.5 font-semibold">COMPATIBLE (Acid-Stable)</td>
+          <td class="border border-slate-300 px-2.5 py-1.5">Switch to Fulvate for acid-injected lines, or inject Humate unacidified</td>
+        </tr>
+        <tr>
+          <td class="border border-slate-300 px-2.5 py-1.5 font-semibold">Urea, KNO₃, SOP, Diluted MAP</td>
+          <td class="border border-slate-300 px-2.5 py-1.5 font-semibold">COMPATIBLE (If Final pH &gt; 6.0)</td>
+          <td class="border border-slate-300 px-2.5 py-1.5 font-semibold">COMPATIBLE</td>
+          <td class="border border-slate-300 px-2.5 py-1.5">Dissolve mineral NPK first; add pre-diluted humate (&le; 50 g/L) last</td>
+        </tr>
+        <tr class="bg-slate-50/70">
+          <td class="border border-slate-300 px-2.5 py-1.5 font-semibold">MgSO₄ &amp; Unchelated Zn/Fe/Cu Sulfates</td>
+          <td class="border border-slate-300 px-2.5 py-1.5 font-bold">DO NOT MIX IN CONCENTRATE</td>
+          <td class="border border-slate-300 px-2.5 py-1.5 font-semibold">COMPATIBLE (Forms Complexes)</td>
+          <td class="border border-slate-300 px-2.5 py-1.5">Use Fulvate or EDTA/EDDHA chelates when co-applying trace metals</td>
+        </tr>
+        <tr>
+          <td class="border border-slate-300 px-2.5 py-1.5 font-semibold">Alkaline Seaweed Extract (Ascophyllum)</td>
+          <td class="border border-slate-300 px-2.5 py-1.5 font-semibold">COMPATIBLE (High Synergy)</td>
+          <td class="border border-slate-300 px-2.5 py-1.5 font-semibold">COMPATIBLE</td>
+          <td class="border border-slate-300 px-2.5 py-1.5">Ideal root-flush and abiotic-stress biostimulant pairing</td>
+        </tr>
+        <tr class="bg-slate-50/70">
+          <td class="border border-slate-300 px-2.5 py-1.5 font-semibold">Enzymatic L-Amino Acids (pH 4.5–6.0)</td>
+          <td class="border border-slate-300 px-2.5 py-1.5">CAUTION (Verify Final pH &gt; 6.0)</td>
+          <td class="border border-slate-300 px-2.5 py-1.5 font-semibold">COMPATIBLE (Best Foliar Mix)</td>
+          <td class="border border-slate-300 px-2.5 py-1.5">Prefer Fulvic Acid for foliar amino sprays; keep Humate neutral/alkaline</td>
+        </tr>
+        <tr>
+          <td class="border border-slate-300 px-2.5 py-1.5 font-semibold">Hard Borewell Water (&gt; 300 ppm CaCO₃)</td>
+          <td class="border border-slate-300 px-2.5 py-1.5 font-bold">HIGH CLOG RISK (Ca²⁺ Bridging)</td>
+          <td class="border border-slate-300 px-2.5 py-1.5 font-semibold">COMPATIBLE (Calcium-Tolerant)</td>
+          <td class="border border-slate-300 px-2.5 py-1.5">Pre-test water; switch to Fulvate or add citrate chelant before drip</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 1-Liter Jar Test Protocol -->
+  <section class="print-avoid-break rounded-xl border border-slate-400 p-3.5 bg-slate-50/50">
+    <h2 class="font-serif text-base font-bold text-slate-950 mb-2">
+      2. Mandatory 1-Liter Jar Test Protocol (Before Filling Any 1,000 L Tank)
+    </h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+      <div class="space-y-1.5">
+        <p class="m-0"><strong>Step 1 — Use Real Farm Water:</strong> Fill a clean, clear 1-liter jar with 800 ml of the <em>exact</em> borewell or canal water used in the drip head or sprayer.</p>
+        <p class="m-0"><strong>Step 2 — Add in Tank Order:</strong> Dissolve partner NPK/fertilizers first at exact proportional field rate, stir 30 sec, then add pre-diluted Humate/Fulvate last.</p>
+      </div>
+      <div class="space-y-1.5">
+        <p class="m-0"><strong>Step 3 — Top Up &amp; Rest 30 Minutes:</strong> Top up to 1,000 ml, invert gently 5 times, and let stand undisturbed for 30 minutes under shade.</p>
+        <p class="m-0"><strong>Step 4 — Inspect Bottom &amp; Filter:</strong> <strong>PASS:</strong> Uniform tea/coffee liquid, zero clumps. <strong>FAIL:</strong> Black curds, cottage-cheese sludge, gel, or gritty sediment = DO NOT INJECT.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Golden Drip Rules -->
+  <section class="print-avoid-break">
+    <h2 class="font-serif text-base font-bold text-slate-950 mb-1.5 border-b border-slate-300 pb-1">
+      3. Five Non-Negotiable Drip-Line Rules
+    </h2>
+    <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-1 list-disc pl-4 text-xs m-0">
+      <li><strong>Keep stock concentration &le; 50 g/L (5% w/v)</strong> — never dump dry humate into a dry tank.</li>
+      <li><strong>Inject in the final third of irrigation</strong>, followed by 10–15 min clean water flush.</li>
+      <li><strong>Check 120-mesh (130 µm) disc filters</strong> before and after first humate injection.</li>
+      <li><strong>Never mix alkaline humate with acidifying agents</strong> (citric, phosphoric, sulfuric acid).</li>
+      <li><strong>Always confirm KOH Potassium Humate</strong> (Na &lt; 1.5%) &mdash; never NaOH Sodium Humate.</li>
+      <li><strong>When in doubt with hard/acid water, switch to Fulvate</strong> (0.5–1.5 kg/ha).</li>
+    </ul>
+  </section>
+</FieldSheetLayout>

@@ -1,0 +1,108 @@
+---
+import FieldSheetLayout from '../../layouts/FieldSheetLayout.astro';
+---
+
+<FieldSheetLayout
+  slug="3-minute-farm-adulteration-test"
+  sheetNumber="SHEET 02"
+  title="3-Minute Farm Adulteration Field Test (No Lab Required)"
+  subtitle="Rapid on-farm screening using clean water and white vinegar to spot coal dust, sodium lignosulfonate, and molasses."
+  audience="Farmers, Agronomists & Agri-Dealers"
+  description="One-page printable 3-minute farm adulteration test for Potassium Humate: clean water solubility, white vinegar acid precipitation, foam/odor check, diagnostic table, and NaOH sodium humate caveat."
+  relatedToolHref="/tools/coa-verifier"
+  relatedToolLabel="Open COA Red-Flag Verifier"
+>
+  <!-- Equipment Box -->
+  <section class="print-avoid-break rounded-xl border border-slate-400 p-3 bg-slate-50/50">
+    <div class="font-bold text-xs uppercase tracking-wider text-slate-800 mb-1">Required Supplies (Zero Lab Equipment)</div>
+    <p class="m-0 text-xs">
+      (1) Two clear glass tumblers or transparent bottles &bull; (2) <strong>Clean low-mineral water</strong> (RO/bottled drinking water or rainwater &mdash; <em>never hard borewell water</em>) &bull; (3) 3 tablespoons of plain white vinegar (~5% acetic acid, pH ~2.5) or lemon juice &bull; (4) 1/2 teaspoon of the product sample.
+    </p>
+  </section>
+
+  <!-- 3-Step Protocol -->
+  <section class="print-avoid-break space-y-2.5">
+    <h2 class="font-serif text-base font-bold text-slate-950 border-b border-slate-300 pb-1">
+      1. Step-by-Step 3-Minute Screening Protocol
+    </h2>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+      <div class="rounded-lg border border-slate-300 p-3">
+        <div class="font-bold text-slate-950 mb-1">Minute 1: Clean Water Test</div>
+        <p class="m-0">Add 1/2 tsp sample to 200 ml clean room-temp water; stir 30 sec and rest 60 sec. Genuine drip-grade Potassium Humate (&ge; 98% soluble) dissolves cleanly with minimal residue. Gritty black sand at the bottom or floating shiny flakes = <strong>raw coal/lignite dust or poor centrifugation</strong>.</p>
+      </div>
+      <div class="rounded-lg border border-slate-300 p-3">
+        <div class="font-bold text-slate-950 mb-1">Minute 2: Vinegar Acid Test</div>
+        <p class="m-0">Pour 3 tbsp white vinegar into the dark solution; stir briefly and wait 60 sec. By IHSS definition, real humic acid <strong>must precipitate below pH 4.5</strong> into visible dark curds/flocs settling downward with lighter liquid above. If it stays completely smooth black liquid = <strong>lignosulfonate, molasses, or dye</strong>.</p>
+      </div>
+      <div class="rounded-lg border border-slate-300 p-3">
+        <div class="font-bold text-slate-950 mb-1">Minute 3: Warm Foam &amp; Odor</div>
+        <p class="m-0">Shake a small sample with warm water in a capped bottle for 10 sec and smell immediately. Real leonardite has a faint earthy/mineral scent and thin bubbles that vanish in seconds. Thick soapy foam lasting minutes + sweet cooked-wood/vanilla/paper odor = <strong>sodium lignosulfonate</strong>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Diagnostic Verdict Table -->
+  <section class="print-avoid-break">
+    <h2 class="font-serif text-base font-bold text-slate-950 mb-2 border-b border-slate-300 pb-1">
+      2. Field Result Interpretation Matrix
+    </h2>
+    <table class="w-full border-collapse text-left text-xs border border-slate-300">
+      <thead>
+        <tr class="bg-slate-100 text-slate-950">
+          <th class="border border-slate-300 px-2.5 py-1.5 font-bold">Observed Material</th>
+          <th class="border border-slate-300 px-2.5 py-1.5 font-bold">Water Solubility</th>
+          <th class="border border-slate-300 px-2.5 py-1.5 font-bold">Vinegar (pH &lt; 3)</th>
+          <th class="border border-slate-300 px-2.5 py-1.5 font-bold">Foam &amp; Odor</th>
+          <th class="border border-slate-300 px-2.5 py-1.5 font-bold">Agronomic Verdict</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="border border-slate-300 px-2.5 py-1.5 font-bold">Genuine Potassium Humate (KOH)</td>
+          <td class="border border-slate-300 px-2.5 py-1.5">Dissolves cleanly (&ge;98%)</td>
+          <td class="border border-slate-300 px-2.5 py-1.5 font-semibold">Flocculates &amp; settles</td>
+          <td class="border border-slate-300 px-2.5 py-1.5">Minimal foam; earthy</td>
+          <td class="border border-slate-300 px-2.5 py-1.5 font-semibold">PASS (Verify Na &lt; 1.5% on COA)</td>
+        </tr>
+        <tr class="bg-slate-50/70">
+          <td class="border border-slate-300 px-2.5 py-1.5 font-semibold">True Fulvic Acid / Fulvate</td>
+          <td class="border border-slate-300 px-2.5 py-1.5">100% clear golden-amber</td>
+          <td class="border border-slate-300 px-2.5 py-1.5">Stays clear amber (no curds)</td>
+          <td class="border border-slate-300 px-2.5 py-1.5">None; mild organic</td>
+          <td class="border border-slate-300 px-2.5 py-1.5 font-semibold">PASS (Amber/honey, never jet black)</td>
+        </tr>
+        <tr>
+          <td class="border border-slate-300 px-2.5 py-1.5 font-semibold">Raw Coal / Lignite Powder</td>
+          <td class="border border-slate-300 px-2.5 py-1.5">Heavy gritty sink / float</td>
+          <td class="border border-slate-300 px-2.5 py-1.5">No reaction (already solid)</td>
+          <td class="border border-slate-300 px-2.5 py-1.5">Dusty coal smell</td>
+          <td class="border border-slate-300 px-2.5 py-1.5 font-bold">REJECT (Clogs drip; unextracted)</td>
+        </tr>
+        <tr class="bg-slate-50/70">
+          <td class="border border-slate-300 px-2.5 py-1.5 font-semibold">Sodium Lignosulfonate (Paper Waste)</td>
+          <td class="border border-slate-300 px-2.5 py-1.5">Instant dark brown/black</td>
+          <td class="border border-slate-300 px-2.5 py-1.5 font-bold">NO flocculation (stays liquid)</td>
+          <td class="border border-slate-300 px-2.5 py-1.5">Thick soapy foam; wood/vanilla</td>
+          <td class="border border-slate-300 px-2.5 py-1.5 font-bold">REJECT (High Sulfur 4–8% &amp; Na)</td>
+        </tr>
+        <tr>
+          <td class="border border-slate-300 px-2.5 py-1.5 font-semibold">Molasses / Black Dye Blend</td>
+          <td class="border border-slate-300 px-2.5 py-1.5">Sticky / syrupy dark</td>
+          <td class="border border-slate-300 px-2.5 py-1.5 font-bold">NO flocculation</td>
+          <td class="border border-slate-300 px-2.5 py-1.5">Sweet burnt-sugar smell</td>
+          <td class="border border-slate-300 px-2.5 py-1.5 font-bold">REJECT (Zero humic conditioning)</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Critical Sodium Humate Warning -->
+  <section class="print-avoid-break rounded-xl border-2 border-slate-900 p-3">
+    <div class="font-bold text-xs uppercase tracking-wider text-slate-950 mb-1">
+      CRITICAL LIMITATION: Field Tests CANNOT Distinguish Sodium Humate (NaOH) from Potassium Humate (KOH)
+    </div>
+    <p class="m-0 text-xs">
+      Both KOH Potassium Humate and cheap NaOH Sodium Humate dissolve cleanly in water and precipitate identically in vinegar. To protect clay and irrigated soils from sodium dispersion, always request a lab Certificate of Analysis (ISO 19822) verifying: <strong>Sodium (Na) &lt; 1.5%</strong>, <strong>Soluble Potash (K₂O) 8–12%</strong>, and <strong>Sulfur (S) &lt; 0.75%</strong>.
+    </p>
+  </section>
+</FieldSheetLayout>

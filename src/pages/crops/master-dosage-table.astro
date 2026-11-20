@@ -1,0 +1,728 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CanonicalAnswer from '../../components/CanonicalAnswer.astro';
+
+const siteUrl = 'https://humic.blog';
+const canonicalPath = '/crops/master-dosage-table';
+const fullUrl = `${siteUrl}${canonicalPath}`;
+
+const canonicalAnswer =
+  'Standard agricultural dosing for ISO 19822-verified potassium humate (70–80% humic substances) ranges from 2–6 kg/ha for basal soil application and 1–2.5 kg/ha per split drip fertigation pulse across cereals, vegetables, orchards, and plantation crops. For foliar sprays, acidic fertigation, or hard calcareous water, use acid-soluble potassium fulvate at 0.5–1.5 g/L to prevent precipitation.';
+
+interface CropRow {
+  crop: string;
+  category:
+    | 'Row Crops & Cereals'
+    | 'Orchards & Fruits'
+    | 'Vegetables'
+    | 'Cash & Plantation Crops'
+    | 'Protected & Hydroponics';
+  soilHa: string;
+  soilAcre: string;
+  dripHa: string;
+  dripAcre: string;
+  foliar: string;
+  timing: string;
+}
+
+const crops: CropRow[] = [
+  // Row Crops & Cereals (6)
+  {
+    crop: 'Wheat',
+    category: 'Row Crops & Cereals',
+    soilHa: '2.5–4.0 kg/ha',
+    soilAcre: '1.0–1.6 kg/ac',
+    dripHa: '1.0–1.5 kg/ha',
+    dripAcre: '0.4–0.6 kg/ac',
+    foliar: '0.8–1.0 g/L (Fulvate)',
+    timing: 'Seed coat (2–3 g/kg), crown root initiation (21 DAS), flag leaf boot stage',
+  },
+  {
+    crop: 'Rice / Paddy',
+    category: 'Row Crops & Cereals',
+    soilHa: '2.5–5.0 kg/ha',
+    soilAcre: '1.0–2.0 kg/ac',
+    dripHa: '1.0–1.5 kg/ha (drench)',
+    dripAcre: '0.4–0.6 kg/ac (drench)',
+    foliar: '0.8–1.2 g/L (Fulvate)',
+    timing: 'Seedling root dip (2 g/L), basal puddling (7–10 DAT), active tillering (25–30 DAT)',
+  },
+  {
+    crop: 'Maize / Corn',
+    category: 'Row Crops & Cereals',
+    soilHa: '3.0–5.0 kg/ha',
+    soilAcre: '1.2–2.0 kg/ac',
+    dripHa: '1.2–2.0 kg/ha',
+    dripAcre: '0.5–0.8 kg/ac',
+    foliar: '1.0 g/L (Fulvate)',
+    timing: 'In-furrow starter with MAP/DAP, V4–V6 knee-high stage, pre-tasseling',
+  },
+  {
+    crop: 'Cotton',
+    category: 'Row Crops & Cereals',
+    soilHa: '3.0–5.0 kg/ha',
+    soilAcre: '1.2–2.0 kg/ac',
+    dripHa: '1.2–2.0 kg/ha',
+    dripAcre: '0.5–0.8 kg/ac',
+    foliar: '0.8–1.2 g/L (Fulvate)',
+    timing: 'Pre-sowing basal, square initiation (35–45 DAS), peak boll development',
+  },
+  {
+    crop: 'Soybean',
+    category: 'Row Crops & Cereals',
+    soilHa: '2.5–4.0 kg/ha',
+    soilAcre: '1.0–1.6 kg/ac',
+    dripHa: '1.0–1.5 kg/ha',
+    dripAcre: '0.4–0.6 kg/ac',
+    foliar: '0.8–1.0 g/L (Fulvate)',
+    timing: 'Seed treatment (2 g/kg, separate from inoculant slurry), V3–V4 nodulation, R1 bloom',
+  },
+  {
+    crop: 'Groundnut / Peanut',
+    category: 'Row Crops & Cereals',
+    soilHa: '2.5–4.0 kg/ha',
+    soilAcre: '1.0–1.6 kg/ac',
+    dripHa: '1.0–1.5 kg/ha',
+    dripAcre: '0.4–0.6 kg/ac',
+    foliar: '0.8–1.0 g/L (Fulvate)',
+    timing: 'Basal with gypsum/SSP, 25 DAS branching, pegging & pod-filling stage',
+  },
+
+  // Orchards & Fruits (8)
+  {
+    crop: 'Mango',
+    category: 'Orchards & Fruits',
+    soilHa: '5.0–8.0 kg/ha (25–40 g/tree)',
+    soilAcre: '2.0–3.2 kg/ac (25–40 g/tree)',
+    dripHa: '1.5–2.5 kg/ha',
+    dripAcre: '0.6–1.0 kg/ac',
+    foliar: '1.0–1.5 g/L (Fulvate)',
+    timing: 'Post-harvest feeder-root flush, pre-panicle emergence, pea-to-marble fruit set',
+  },
+  {
+    crop: 'Citrus (Orange / Lemon / Lime)',
+    category: 'Orchards & Fruits',
+    soilHa: '5.0–7.5 kg/ha (15–30 g/tree)',
+    soilAcre: '2.0–3.0 kg/ac (15–30 g/tree)',
+    dripHa: '1.5–2.0 kg/ha (Fulvate if pH > 8)',
+    dripAcre: '0.6–0.8 kg/ac (Fulvate if pH > 8)',
+    foliar: '1.0–1.5 g/L (Fulvate + Fe/Zn)',
+    timing: 'Spring & autumn root flushes, petal fall, cell-expansion fruit sizing',
+  },
+  {
+    crop: 'Grapes (Table & Wine)',
+    category: 'Orchards & Fruits',
+    soilHa: '4.0–6.0 kg/ha',
+    soilAcre: '1.6–2.4 kg/ac',
+    dripHa: '1.2–2.0 kg/ha',
+    dripAcre: '0.5–0.8 kg/ac',
+    foliar: '0.8–1.0 g/L (Fulvate)',
+    timing: 'Post-pruning bud-break, pre-bloom, berry-set & veraison root-zone maintenance',
+  },
+  {
+    crop: 'Pomegranate',
+    category: 'Orchards & Fruits',
+    soilHa: '4.0–6.0 kg/ha (10–20 g/tree)',
+    soilAcre: '1.6–2.4 kg/ac (10–20 g/tree)',
+    dripHa: '1.2–2.0 kg/ha',
+    dripAcre: '0.5–0.8 kg/ac',
+    foliar: '0.8–1.2 g/L (Fulvate)',
+    timing: 'Bahar stress release (first irrigation), flowering initiation, aril enlargement',
+  },
+  {
+    crop: 'Banana',
+    category: 'Orchards & Fruits',
+    soilHa: '5.0–8.0 kg/ha',
+    soilAcre: '2.0–3.2 kg/ac',
+    dripHa: '1.5–2.5 kg/ha every 21–30 d',
+    dripAcre: '0.6–1.0 kg/ac every 21–30 d',
+    foliar: '1.0–1.5 g/L (Fulvate)',
+    timing: 'Tissue-culture establishment (15 DAP), vegetative pseudostem growth, shooting & bunch fill',
+  },
+  {
+    crop: 'Avocado',
+    category: 'Orchards & Fruits',
+    soilHa: '4.0–6.0 kg/ha (15–25 g/tree)',
+    soilAcre: '1.6–2.4 kg/ac (15–25 g/tree)',
+    dripHa: '1.5–2.0 kg/ha (KOH only)',
+    dripAcre: '0.6–0.8 kg/ac (KOH only)',
+    foliar: '1.0 g/L (Fulvate)',
+    timing: 'Spring & late-summer feeder-root flushes, fruit set, oil-accumulation stage',
+  },
+  {
+    crop: 'Apple',
+    category: 'Orchards & Fruits',
+    soilHa: '4.0–6.0 kg/ha',
+    soilAcre: '1.6–2.4 kg/ac',
+    dripHa: '1.2–2.0 kg/ha',
+    dripAcre: '0.5–0.8 kg/ac',
+    foliar: '0.8–1.2 g/L (Fulvate)',
+    timing: 'Green tip / early root wake-up, petal fall, post-harvest carbohydrate reserve build',
+  },
+  {
+    crop: 'Strawberry & Berries',
+    category: 'Orchards & Fruits',
+    soilHa: '3.0–5.0 kg/ha',
+    soilAcre: '1.2–2.0 kg/ac',
+    dripHa: '0.5–1.0 kg/ha (Fulvate if acid)',
+    dripAcre: '0.2–0.4 kg/ac (Fulvate if acid)',
+    foliar: '0.5–1.0 g/L (Fulvate)',
+    timing: 'Transplant crown establishment, floral induction, every 14–21 d during harvest',
+  },
+
+  // Vegetables (9)
+  {
+    crop: 'Tomato',
+    category: 'Vegetables',
+    soilHa: '3.0–5.0 kg/ha',
+    soilAcre: '1.2–2.0 kg/ac',
+    dripHa: '1.0–1.5 kg/ha every 14 d',
+    dripAcre: '0.4–0.6 kg/ac every 14 d',
+    foliar: '0.8–1.0 g/L (Fulvate)',
+    timing: 'Transplant drench (7 DAT), first truss bloom, early fruit sizing (separate from CaNO₃)',
+  },
+  {
+    crop: 'Chili / Hot Pepper',
+    category: 'Vegetables',
+    soilHa: '3.0–5.0 kg/ha',
+    soilAcre: '1.2–2.0 kg/ac',
+    dripHa: '1.0–1.5 kg/ha every 14–21 d',
+    dripAcre: '0.4–0.6 kg/ac every 14–21 d',
+    foliar: '0.8–1.0 g/L (Fulvate)',
+    timing: '7–10 DAT root set, branching/pre-flowering, after each major picking flush',
+  },
+  {
+    crop: 'Onion',
+    category: 'Vegetables',
+    soilHa: '3.0–5.0 kg/ha',
+    soilAcre: '1.2–2.0 kg/ac',
+    dripHa: '1.0–1.5 kg/ha',
+    dripAcre: '0.4–0.6 kg/ac',
+    foliar: '0.8–1.0 g/L (Fulvate)',
+    timing: 'Transplant establishment (10 DAT), 30–35 DAT vegetative leaf growth, bulb initiation',
+  },
+  {
+    crop: 'Potato',
+    category: 'Vegetables',
+    soilHa: '4.0–6.0 kg/ha',
+    soilAcre: '1.6–2.4 kg/ac',
+    dripHa: '1.2–2.0 kg/ha',
+    dripAcre: '0.5–0.8 kg/ac',
+    foliar: '1.0 g/L (Fulvate)',
+    timing: 'In-furrow at planting, stolon/tuber initiation (30–35 DAP), early tuber bulking',
+  },
+  {
+    crop: 'Watermelon',
+    category: 'Vegetables',
+    soilHa: '3.0–5.0 kg/ha',
+    soilAcre: '1.2–2.0 kg/ac',
+    dripHa: '1.0–1.5 kg/ha',
+    dripAcre: '0.4–0.6 kg/ac',
+    foliar: '0.8–1.0 g/L (Fulvate)',
+    timing: 'Transplant/emergence drench, vine-running stage, post-pollination fruit sizing',
+  },
+  {
+    crop: 'Cucumber',
+    category: 'Vegetables',
+    soilHa: '3.0–4.5 kg/ha',
+    soilAcre: '1.2–1.8 kg/ac',
+    dripHa: '0.8–1.5 kg/ha every 14 d',
+    dripAcre: '0.3–0.6 kg/ac every 14 d',
+    foliar: '0.6–1.0 g/L (Fulvate)',
+    timing: 'Early vine establishment, onset of flowering, continuous harvest root renewal',
+  },
+  {
+    crop: 'Cabbage / Cole Crops',
+    category: 'Vegetables',
+    soilHa: '3.0–5.0 kg/ha',
+    soilAcre: '1.2–2.0 kg/ac',
+    dripHa: '1.0–1.5 kg/ha',
+    dripAcre: '0.4–0.6 kg/ac',
+    foliar: '0.8–1.0 g/L (Fulvate)',
+    timing: '7 DAT root anchorage, 25 DAT frame-leaf expansion, early head/curd formation',
+  },
+  {
+    crop: 'Garlic',
+    category: 'Vegetables',
+    soilHa: '3.0–5.0 kg/ha',
+    soilAcre: '1.2–2.0 kg/ac',
+    dripHa: '1.0–1.5 kg/ha',
+    dripAcre: '0.4–0.6 kg/ac',
+    foliar: '0.8–1.0 g/L (Fulvate)',
+    timing: 'Clove-planting basal, active vegetative shoot growth, clove differentiation',
+  },
+  {
+    crop: 'Ginger & Turmeric',
+    category: 'Vegetables',
+    soilHa: '4.0–6.0 kg/ha',
+    soilAcre: '1.6–2.4 kg/ac',
+    dripHa: '1.5–2.0 kg/ha every 30 d',
+    dripAcre: '0.6–0.8 kg/ac every 30 d',
+    foliar: '1.0 g/L (Fulvate)',
+    timing: 'Rhizome dip (2 g/L), earthing-up (45 & 90 DAP), rhizome bulking phase',
+  },
+
+  // Cash & Plantation Crops (4)
+  {
+    crop: 'Sugarcane',
+    category: 'Cash & Plantation Crops',
+    soilHa: '5.0–7.5 kg/ha',
+    soilAcre: '2.0–3.0 kg/ac',
+    dripHa: '1.5–2.5 kg/ha',
+    dripAcre: '0.6–1.0 kg/ac',
+    foliar: '1.0–1.5 g/L (Fulvate)',
+    timing: 'Sett-treatment/planting furrow, formative tillering (45–60 DAP), grand growth earthing-up',
+  },
+  {
+    crop: 'Coffee',
+    category: 'Cash & Plantation Crops',
+    soilHa: '4.0–6.0 kg/ha',
+    soilAcre: '1.6–2.4 kg/ac',
+    dripHa: '1.0–2.0 kg/ha (drench)',
+    dripAcre: '0.4–0.8 kg/ac (drench)',
+    foliar: '1.0 g/L (Fulvate)',
+    timing: 'Post-harvest root recovery, pre-blossom rains, berry expansion on acidic soils',
+  },
+  {
+    crop: 'Tea',
+    category: 'Cash & Plantation Crops',
+    soilHa: '4.0–6.0 kg/ha (acid-tolerant)',
+    soilAcre: '1.6–2.4 kg/ac (acid-tolerant)',
+    dripHa: '1.0–1.5 kg/ha (Fulvate)',
+    dripAcre: '0.4–0.6 kg/ac (Fulvate)',
+    foliar: '0.8–1.2 g/L (Fulvate)',
+    timing: 'Post-pruning recovery, spring first-flush initiation, monsoon NPK efficiency support',
+  },
+  {
+    crop: 'Oil Palm',
+    category: 'Cash & Plantation Crops',
+    soilHa: '3.0–5.0 kg/ha (15–30 g/palm)',
+    soilAcre: '1.2–2.0 kg/ac (15–30 g/palm)',
+    dripHa: '1–2 g/L (Nursery polybag)',
+    dripAcre: '1–2 g/L (Nursery polybag)',
+    foliar: 'Not standard (soil/circle focus)',
+    timing: 'Pre/main nursery drench, mature palm weeded circle 2–3x/yr alongside NPK/RP',
+  },
+
+  // Protected & Hydroponics (3)
+  {
+    crop: 'Rose & Floriculture',
+    category: 'Protected & Hydroponics',
+    soilHa: '3.0–5.0 kg/ha (bed prep)',
+    soilAcre: '1.2–2.0 kg/ac (bed prep)',
+    dripHa: '0.5–1.0 kg/ha every 14 d',
+    dripAcre: '0.2–0.4 kg/ac every 14 d',
+    foliar: '0.5–0.8 g/L (Fulvate)',
+    timing: 'Post-flush pinching, stem elongation, winter low-light root-activity maintenance',
+  },
+  {
+    crop: 'Greenhouse Bell Pepper',
+    category: 'Protected & Hydroponics',
+    soilHa: '3.0–4.5 kg/ha (soil beds)',
+    soilAcre: '1.2–1.8 kg/ac (soil beds)',
+    dripHa: '0.5–1.0 kg/ha (Fulvate in coco)',
+    dripAcre: '0.2–0.4 kg/ac (Fulvate in coco)',
+    foliar: '0.6–0.8 g/L (Fulvate)',
+    timing: 'Transplant rooting, fruit-set waves (keep separate from Tank A Calcium Nitrate)',
+  },
+  {
+    crop: 'Hydroponic Lettuce (NFT / DWC)',
+    category: 'Protected & Hydroponics',
+    soilHa: 'N/A (Soilless reservoir)',
+    soilAcre: 'N/A (Soilless reservoir)',
+    dripHa: '15–30 mg/L (ppm) Fulvate',
+    dripAcre: '15–30 mg/L (ppm) Fulvate',
+    foliar: '0.3–0.5 g/L (Fulvate)',
+    timing: 'Reservoir refill at pH 5.6–6.2 (use purified DAX-8 fulvic acid only; avoid crude humate)',
+  },
+];
+
+const categories = [
+  'All',
+  'Row Crops & Cereals',
+  'Orchards & Fruits',
+  'Vegetables',
+  'Cash & Plantation Crops',
+  'Protected & Hydroponics',
+];
+
+const faqs = [
+  {
+    question: 'What purity of potassium humate are these 30-crop dosage rates calculated for?',
+    answer:
+      'All solid soil and drip rates in this master matrix assume a concentrated, water-soluble KOH-extracted Potassium Humate powder or flake containing 70%–80% total humic substances (ISO 19822 verified). If you use a 12%–15% liquid humic concentrate, multiply the solid weight rate by roughly 5x to 6x to deliver an equivalent humic dose.',
+  },
+  {
+    question: 'Why does the foliar column specify Potassium Fulvate instead of Potassium Humate?',
+    answer:
+      'Fulvic acid has a low molecular weight (<2,000 Da) that crosses leaf cuticles efficiently without leaving dark, opaque deposits on foliage or clogging fine spray nozzles. It also remains fully soluble across pH 1–14, preventing tank-mix precipitation with mildly acidic amino acids or micronutrient chelates.',
+  },
+  {
+    question: 'How do I convert Per Hectare rates accurately to Per Acre?',
+    answer:
+      'One hectare equals 2.471 acres. Divide any Per Hectare rate (kg/ha) by 2.471 to get the Per Acre rate (kg/ac)—or click the "Per Acre" toggle above the table to switch all 30 crop rows instantaneously.',
+  },
+  {
+    question: 'Can I apply the full seasonal humic dose in one single drip irrigation event?',
+    answer:
+      'No—especially in sandy or low-organic soils. Splitting potassium humate into 1.0–2.0 kg/ha drip pulses every 14 to 21 days during key physiological windows (root establishment, tillering/branching, pre-flowering) maintains higher rhizosphere bioavailability and reduces leaching.',
+  },
+];
+
+const citations = [
+  {
+    title: 'A Meta-Analysis and Review of Plant-Growth Response to Humic Substances: Practical Implications for Agriculture',
+    source: 'Rose, M. T., Patti, A. F., Little, K. R., Brown, A. L., Jackson, W. R., & Cavagnaro, T. R. (2014). Advances in Agronomy, 124, 37–89',
+    url: 'https://doi.org/10.1016/B978-0-12-800138-7.00002-4',
+  },
+  {
+    title: 'Humic and Fulvic Acids as Biostimulants in Horticulture',
+    source: 'Canellas, L. P., Olivares, F. L., Aguiar, N. O., et al. (2015). Scientia Horticulturae, 196, 15–27',
+    url: 'https://doi.org/10.1016/j.scienta.2015.09.013',
+  },
+  {
+    title: 'Fertilizers and Soil Conditioners — Determination of Humic and Hydrophobic Fulvic Acids (ISO 19822:2018)',
+    source: 'International Organization for Standardization (2018)',
+    url: 'https://www.iso.org/standard/66353.html',
+  },
+];
+
+const breadcrumbs = [
+  { name: 'Home', url: siteUrl },
+  { name: 'Crops & Field Guides', url: `${siteUrl}/crops` },
+  { name: '30-Crop Master Dosage Table', url: fullUrl },
+];
+
+const datasetNode = {
+  '@type': 'Dataset',
+  '@id': `${fullUrl}#dataset`,
+  name: '30-Crop Master Potassium Humate & Fulvic Acid Dosage Matrix',
+  description:
+    'Standardized agronomic application rates (Per Hectare and Per Acre) for ISO 19822-verified Potassium Humate (70–80%) and Potassium Fulvate across 30 major global field, orchard, vegetable, plantation, and hydroponic crops.',
+  url: fullUrl,
+  license: 'https://creativecommons.org/licenses/by/4.0/',
+  isAccessibleForFree: true,
+  inLanguage: 'en',
+  creator: { '@id': `${siteUrl}/#organization` },
+  keywords: [
+    'humic acid dosage per acre',
+    'potassium humate dosage per hectare',
+    'fulvic acid foliar spray rate',
+    'drip fertigation humic rate',
+    'ISO 19822 agronomy',
+  ],
+  variableMeasured: [
+    'Soil / Basal Application Rate (kg/ha and kg/acre)',
+    'Drip Fertigation Application Rate (kg/ha and kg/acre)',
+    'Foliar Spray Concentration (g/L)',
+    'Key Physiological Timing Windows',
+  ],
+};
+---
+
+<BaseLayout
+  title="30-Crop Master Humic & Fulvic Acid Dosage Table (Per Acre & Per Hectare)"
+  description="Interactive 30-crop agronomic dosage matrix for Potassium Humate (70–80%) and Potassium Fulvate: instant search, category filters, Per Acre / Per Hectare toggle, soil, drip, and foliar timing windows."
+  canonicalPath={canonicalPath}
+  schemaType="article"
+  pillar="Crops & Field Guides"
+  pubDate={new Date('2026-11-20')}
+  updatedDate={new Date('2026-11-20')}
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+  citations={citations}
+  extraSchemaNodes={[datasetNode]}
+>
+  <div class="bg-emerald-950 text-white border-b-4 border-amber-500">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+      <nav aria-label="Breadcrumb" class="mb-3 text-xs text-emerald-300 flex items-center gap-1.5">
+        <a href="/" class="hover:text-amber-400">Home</a>
+        <span>/</span>
+        <a href="/crops" class="hover:text-amber-400">Crops &amp; Field Guides</a>
+        <span>/</span>
+        <span class="text-emerald-100">30-Crop Master Dosage Matrix</span>
+      </nav>
+      <div class="flex flex-wrap items-center gap-2 mb-3">
+        <span class="inline-flex items-center rounded-full bg-amber-500/20 border border-amber-500/40 px-3 py-0.5 text-xs font-semibold text-amber-300">
+          30 Global Crops &bull; Open Agronomic Dataset
+        </span>
+        <span class="inline-flex items-center rounded-full bg-emerald-900 border border-emerald-700 px-3 py-0.5 text-xs font-medium text-emerald-100">
+          Calibrated for 70–80% ISO 19822 Potassium Humate
+        </span>
+      </div>
+      <h1 class="font-serif text-3xl sm:text-4xl font-bold text-white leading-tight max-w-4xl">
+        30-Crop Master Humic &amp; Fulvic Acid Dosage Matrix
+      </h1>
+      <p class="mt-3 text-sm sm:text-base text-emerald-100/90 max-w-3xl leading-relaxed">
+        Search and filter field-tested basal, drip fertigation, and foliar spray dosing schedules across 30 major world crops. Toggle instantly between <strong>Per Hectare</strong> and <strong>Per Acre</strong> units, or calculate exact tank volumes in our <a href="/tools/dosage-calculator" class="text-amber-300 underline underline-offset-2 hover:text-amber-200">Dosage Calculator</a>.
+      </p>
+    </div>
+  </div>
+
+  <div data-pagefind-body class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-10 space-y-8">
+    <CanonicalAnswer answer={canonicalAnswer} />
+
+    <!-- Filter, Search & Unit Control Bar -->
+    <section aria-label="Dosage Matrix Controls" class="rounded-2xl bg-white border border-slate-200 p-5 shadow-xs space-y-4">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <!-- Search Input -->
+        <div class="relative flex-1 max-w-md">
+          <label for="crop-search" class="sr-only">Search crop name</label>
+          <input
+            id="crop-search"
+            type="search"
+            placeholder="Search crop (e.g., Sugarcane, Mango, Tomato, Oil Palm)..."
+            class="w-full rounded-xl border border-slate-300 bg-slate-50 px-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-emerald-800 focus:bg-white focus:outline-none"
+          />
+        </div>
+
+        <!-- Unit Toggle -->
+        <div class="flex items-center gap-2 shrink-0">
+          <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Area Unit:</span>
+          <div class="inline-flex rounded-xl border border-slate-300 bg-slate-100 p-1" role="group" aria-label="Area Unit Toggle">
+            <button
+              type="button"
+              data-unit="ha"
+              class="unit-btn rounded-lg px-3.5 py-1.5 text-xs font-bold bg-emerald-950 text-white shadow-xs transition-colors cursor-pointer"
+            >
+              Per Hectare
+            </button>
+            <button
+              type="button"
+              data-unit="acre"
+              class="unit-btn rounded-lg px-3.5 py-1.5 text-xs font-bold text-slate-700 hover:text-emerald-950 transition-colors cursor-pointer"
+            >
+              Per Acre
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Category Filter Pills -->
+      <div class="flex flex-wrap items-center gap-2 pt-1" role="group" aria-label="Crop Category Filters">
+        {categories.map((cat, idx) => (
+          <button
+            type="button"
+            data-cat={cat}
+            class:list={[
+              'cat-btn rounded-full px-3.5 py-1.5 text-xs font-semibold border transition-colors cursor-pointer',
+              idx === 0
+                ? 'bg-emerald-950 text-amber-300 border-emerald-950'
+                : 'bg-white text-slate-700 border-slate-300 hover:border-emerald-800 hover:text-emerald-950',
+            ]}
+          >
+            {cat}
+          </button>
+        ))}
+        <span id="crop-count-label" class="ml-auto text-xs font-semibold text-slate-500">
+          Showing 30 of 30 crops
+        </span>
+      </div>
+    </section>
+
+    <!-- 30-Crop Responsive Data Table -->
+    <section aria-label="30-Crop Master Dosage Table" class="rounded-2xl bg-white border border-slate-200 shadow-xs overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse text-sm">
+          <thead>
+            <tr class="bg-emerald-950 text-white border-b-2 border-amber-500">
+              <th class="px-4 py-3.5 font-semibold whitespace-nowrap">Crop &amp; Category</th>
+              <th class="px-4 py-3.5 font-semibold whitespace-nowrap">
+                Soil / Basal Rate <span class="unit-header-tag text-amber-300 font-normal">(Per Hectare)</span>
+              </th>
+              <th class="px-4 py-3.5 font-semibold whitespace-nowrap">
+                Drip Fertigation <span class="unit-header-tag text-amber-300 font-normal">(Per Hectare)</span>
+              </th>
+              <th class="px-4 py-3.5 font-semibold whitespace-nowrap">Foliar Spray (g/L)</th>
+              <th class="px-4 py-3.5 font-semibold">Key Physiological Timing Windows</th>
+            </tr>
+          </thead>
+          <tbody id="crop-table-body" class="divide-y divide-slate-200">
+            {crops.map((row) => (
+              <tr
+                class="crop-row hover:bg-emerald-50/60 transition-colors"
+                data-crop={row.crop.toLowerCase()}
+                data-category={row.category}
+              >
+                <td class="px-4 py-3.5 align-top">
+                  <div class="font-bold text-emerald-950">{row.crop}</div>
+                  <span class="mt-1 inline-block rounded-full bg-slate-100 border border-slate-200 px-2 py-0.5 text-[10px] font-semibold text-slate-600">
+                    {row.category}
+                  </span>
+                </td>
+                <td
+                  class="px-4 py-3.5 align-top font-semibold text-slate-900 whitespace-nowrap cell-soil"
+                  data-ha={row.soilHa}
+                  data-acre={row.soilAcre}
+                >
+                  {row.soilHa}
+                </td>
+                <td
+                  class="px-4 py-3.5 align-top font-semibold text-emerald-900 whitespace-nowrap cell-drip"
+                  data-ha={row.dripHa}
+                  data-acre={row.dripAcre}
+                >
+                  {row.dripHa}
+                </td>
+                <td class="px-4 py-3.5 align-top text-slate-800 whitespace-nowrap">{row.foliar}</td>
+                <td class="px-4 py-3.5 align-top text-slate-700 leading-relaxed min-w-[240px]">{row.timing}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div id="crop-empty-state" class="hidden p-8 text-center text-sm text-slate-600">
+        No crops match your current search or category filter. Clear the search box or select <strong>All</strong>.
+      </div>
+    </section>
+
+    <!-- Cross-Links CTA Strip -->
+    <section class="rounded-2xl bg-emerald-950 text-white p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-5">
+      <div class="space-y-1.5 max-w-2xl">
+        <div class="text-xs font-bold uppercase tracking-wider text-amber-400">Next Step: Exact Tank Volumes &amp; Printable Charts</div>
+        <h2 class="font-serif text-xl sm:text-2xl font-bold text-white m-0">
+          Need Custom Acreage Math or 1-Page Field Reference Sheets?
+        </h2>
+        <p class="text-sm text-emerald-100/90 m-0">
+          Convert these rates for liquid concentrates (12–15% HA) in our Dosage Calculator, check tank-mix safety with Calcium Nitrate, or print ink-friendly 1-page cheat sheets for your farm crew.
+        </p>
+      </div>
+      <div class="flex flex-wrap gap-2.5 shrink-0">
+        <a href="/tools/dosage-calculator" class="rounded-lg bg-amber-500 hover:bg-amber-400 px-4 py-2.5 text-xs font-bold text-emerald-950 transition-colors">
+          Dosage Calculator &rarr;
+        </a>
+        <a href="/tools/tank-mix-checker" class="rounded-lg bg-emerald-900 hover:bg-emerald-800 border border-emerald-700 px-4 py-2.5 text-xs font-semibold text-white transition-colors">
+          Tank-Mix Checker &rarr;
+        </a>
+        <a href="/field-sheets" class="rounded-lg bg-white/10 hover:bg-white/20 border border-white/20 px-4 py-2.5 text-xs font-semibold text-white transition-colors">
+          Printable Field Sheets &rarr;
+        </a>
+      </div>
+    </section>
+
+    <!-- FAQs -->
+    <section class="rounded-2xl bg-white border border-slate-200 p-6 sm:p-8 shadow-xs">
+      <h2 class="font-serif text-2xl font-bold text-emerald-950 mb-4">Dosage Matrix FAQs</h2>
+      <div class="space-y-4">
+        {faqs.map((faq) => (
+          <details class="rounded-xl border border-slate-200 p-4 open:bg-slate-50">
+            <summary class="font-semibold text-slate-900 cursor-pointer text-sm sm:text-base">{faq.question}</summary>
+            <p class="mt-2.5 text-sm text-slate-700 leading-relaxed">{faq.answer}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <!-- Scientific References -->
+    <section class="rounded-2xl bg-white border border-slate-200 p-6 sm:p-8 shadow-xs">
+      <h2 class="font-serif text-xl font-bold text-emerald-950 mb-3">Scientific References &amp; Standards</h2>
+      <ul class="space-y-2.5 text-sm text-slate-700">
+        {citations.map((c) => (
+          <li class="leading-relaxed">
+            <strong class="text-slate-900">{c.title}.</strong> {c.source}.{' '}
+            {c.url && (
+              <a href={c.url} target="_blank" rel="noopener noreferrer" class="text-emerald-800 underline decoration-amber-500 underline-offset-2 font-medium">
+                Source / DOI &#8599;
+              </a>
+            )}
+          </li>
+        ))}
+      </ul>
+    </section>
+  </div>
+
+  <script is:inline>
+    (function () {
+      var searchInput = document.getElementById('crop-search');
+      var catBtns = Array.prototype.slice.call(document.querySelectorAll('.cat-btn'));
+      var unitBtns = Array.prototype.slice.call(document.querySelectorAll('.unit-btn'));
+      var rows = Array.prototype.slice.call(document.querySelectorAll('.crop-row'));
+      var countLabel = document.getElementById('crop-count-label');
+      var emptyState = document.getElementById('crop-empty-state');
+      var unitHeaderTags = Array.prototype.slice.call(document.querySelectorAll('.unit-header-tag'));
+
+      var activeCat = 'All';
+      var activeUnit = 'ha';
+      var searchTimer = null;
+
+      function pushTrack(detail) {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: 'humic_tool_interaction',
+          tool_name: 'master_dosage_table',
+          action_detail: detail,
+        });
+      }
+
+      function render() {
+        var q = (searchInput.value || '').trim().toLowerCase();
+        var visible = 0;
+
+        rows.forEach(function (tr) {
+          var cropName = tr.getAttribute('data-crop') || '';
+          var cat = tr.getAttribute('data-category') || '';
+          var matchesCat = activeCat === 'All' || cat === activeCat;
+          var matchesQuery = !q || cropName.indexOf(q) !== -1 || cat.toLowerCase().indexOf(q) !== -1;
+
+          if (matchesCat && matchesQuery) {
+            tr.classList.remove('hidden');
+            visible++;
+          } else {
+            tr.classList.add('hidden');
+          }
+
+          var soilCell = tr.querySelector('.cell-soil');
+          var dripCell = tr.querySelector('.cell-drip');
+          if (soilCell) soilCell.textContent = soilCell.getAttribute('data-' + activeUnit);
+          if (dripCell) dripCell.textContent = dripCell.getAttribute('data-' + activeUnit);
+        });
+
+        unitHeaderTags.forEach(function (el) {
+          el.textContent = activeUnit === 'ha' ? '(Per Hectare)' : '(Per Acre)';
+        });
+
+        countLabel.textContent = 'Showing ' + visible + ' of ' + rows.length + ' crops';
+        if (visible === 0) emptyState.classList.remove('hidden');
+        else emptyState.classList.add('hidden');
+      }
+
+      catBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          activeCat = btn.getAttribute('data-cat') || 'All';
+          catBtns.forEach(function (b) {
+            var isAct = b === btn;
+            b.className = isAct
+              ? 'cat-btn rounded-full px-3.5 py-1.5 text-xs font-semibold border transition-colors cursor-pointer bg-emerald-950 text-amber-300 border-emerald-950'
+              : 'cat-btn rounded-full px-3.5 py-1.5 text-xs font-semibold border transition-colors cursor-pointer bg-white text-slate-700 border-slate-300 hover:border-emerald-800 hover:text-emerald-950';
+          });
+          render();
+          pushTrack('category:' + activeCat + '|unit:' + activeUnit);
+        });
+      });
+
+      unitBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          activeUnit = btn.getAttribute('data-unit') || 'ha';
+          unitBtns.forEach(function (b) {
+            var isAct = b === btn;
+            b.className = isAct
+              ? 'unit-btn rounded-lg px-3.5 py-1.5 text-xs font-bold bg-emerald-950 text-white shadow-xs transition-colors cursor-pointer'
+              : 'unit-btn rounded-lg px-3.5 py-1.5 text-xs font-bold text-slate-700 hover:text-emerald-950 transition-colors cursor-pointer';
+          });
+          render();
+          pushTrack('unit:' + activeUnit + '|category:' + activeCat);
+        });
+      });
+
+      searchInput.addEventListener('input', function () {
+        render();
+        clearTimeout(searchTimer);
+        searchTimer = setTimeout(function () {
+          if (searchInput.value.trim()) {
+            pushTrack('search:' + searchInput.value.trim().slice(0, 30));
+          }
+        }, 500);
+      });
+    })();
+  </script>
+</BaseLayout>
